@@ -6,7 +6,7 @@ javascript:(function() {
     d.style.transform = 'translate(-50%,-50%)';
     d.style.width = '600px';
     d.style.height = '375px';
-    d.style.background = '#2C2A2A';
+    d.style.background = 'linear-gradient(135deg, #2C2A2A, #171212)';
     d.style.borderRadius = '20px';
     d.style.boxShadow = '0 0 100px #038FF9';
     d.style.display = 'flex';
@@ -70,7 +70,7 @@ javascript:(function() {
     content.style.fontSize = '24px';
     
     var title = document.createElement('div');
-    title.innerText = 'Page 1';
+    title.innerText = 'Welcome to ZephWare!';
     title.style.marginBottom = '20px';
     content.appendChild(title);
     
