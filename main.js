@@ -1,4 +1,4 @@
-javascript: (function() {
+javascript:(function() {
     var guiWidth = 600,
         guiHeight = 375,
         borderRadius = 20,
@@ -21,7 +21,7 @@ javascript: (function() {
     guiDiv.style.zIndex = 9999;
     guiDiv.style.background = 'linear-gradient(135deg, #2C2A2A, #171212)';
     guiDiv.style.textAlign = 'center';
-    guiDiv.style.fontFamily = 'Verdana,sans-serif';
+    guiDiv.style.fontFamily = 'Verdana, sans-serif';
 
     var title = document.createElement('div');
     title.style.position = 'absolute';
@@ -75,10 +75,10 @@ javascript: (function() {
     function checkPassword() {
         var enteredPassword = inputBox.value;
         if (adminPasswords.includes(enteredPassword) || ownerpassword.includes(enteredPassword)) {
-            guiDiv.style.display = 'none';
+            closePanel();
             loadZephPanel('admin');
         } else if (userPasswords.includes(enteredPassword)) {
-            guiDiv.style.display = 'none';
+            closePanel();
             loadZephPanel('user');
         } else {
             alert('Incorrect password! Please try again.');
@@ -86,30 +86,26 @@ javascript: (function() {
     }
 
     function loadZephPanel(type) {
-        if (type === 'admin') {
-            fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/panel.js')
-                .then(response => response.text())
-                .then(scriptContent => {
-                    var scriptElement = document.createElement('script');
-                    scriptElement.innerHTML = scriptContent;
-                    document.body.appendChild(scriptElement);
-                })
-                .catch(error => {
-                    console.error('Error fetching admin panel code:', error);
-                    alert('Failed to load the admin panel. Please try again later.');
-                });
-        } else if (type === 'user') {
-            fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/upanel.js')
-                .then(response => response.text())
-                .then(scriptContent => {
-                    var scriptElement = document.createElement('script');
-                    scriptElement.innerHTML = scriptContent;
-                    document.body.appendChild(scriptElement);
-                })
-                .catch(error => {
-                    console.error('Error fetching panel code:', error);
-                    alert('Failed to load the panel. Please try again later.');
-                });
+        var url = type === 'admin'
+            ? 'https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/panel.js'
+            : 'https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/upanel.js';
+
+        fetch(url)
+            .then(response => response.text())
+            .then(scriptContent => {
+                var scriptElement = document.createElement('script');
+                scriptElement.innerHTML = scriptContent;
+                document.body.appendChild(scriptElement);
+            })
+            .catch(error => {
+                console.error('Error fetching panel code:', error);
+                alert('Failed to load the panel. Please try again later.');
+            });
+    }
+
+    function closePanel() {
+        if (guiDiv.parentNode) {
+            guiDiv.parentNode.removeChild(guiDiv);
         }
     }
 
