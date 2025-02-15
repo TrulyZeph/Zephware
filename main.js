@@ -4,9 +4,9 @@ javascript:(function() {
         borderRadius = 20,
         guiDiv = document.createElement('div');
 
-    var ownerpassword = ['Y0Z3ph8R'];
-    var adminPasswords = ['b3tac4', 'usinz3phw@re', 'z#phw@re@adm1n'];
-    var userPasswords = ['firstzephwarepass', 'zephwarev1', 'wowitfinallydropped'];
+    var ownerpassword = ['juulisbuzzin'];
+    var adminPasswords = ['imatotallycooladmin'];
+    var userPasswords = ['1+1=2'];
     var panelVisible = true;
 
     guiDiv.style.position = 'fixed';
@@ -81,7 +81,7 @@ javascript:(function() {
             closePanel();
             loadZephPanel('user');
         } else {
-            alert('Incorrect password! Please try again.');
+            alert('learn to type or stop tryna guess the password, I change it all the time.');
         }
     }
 
