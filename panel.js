@@ -1,4 +1,4 @@
-javascript: (function() {
+javascript:(function() {
     var guiWidth = 600,
         guiHeight = 375,
         borderRadius = 20,
@@ -16,7 +16,7 @@ javascript: (function() {
     guiDiv.style.zIndex = 9999;
     guiDiv.style.background = 'linear-gradient(135deg, #2C2A2A, #171212)';
     guiDiv.style.textAlign = 'center';
-    guiDiv.style.fontFamily = 'Verdana,sans-serif';
+    guiDiv.style.fontFamily = 'Verdana, sans-serif';
 
     var d = document.createElement('div');
     d.style.position = 'fixed';
@@ -93,14 +93,27 @@ javascript: (function() {
     title.style.marginBottom = '20px';
     content.appendChild(title);
 
-    function loadPage(p, text) {
+    function loadPage(text) {
         title.innerText = text;
+        content.innerHTML = ''; // Clear previous content
+        content.appendChild(title);
+
+        if (text === "Blooket") {
+            addBlooketLaunchButton();
+        }
     }
 
-    var buttons = ["Blooket", "Gimkit", "Games", "Unblocker", "Extras"];
-    for (let i = 0; i < buttons.length; i++) {
+    var sections = [
+        { name: "Blooket", action: () => loadPage("Blooket") },
+        { name: "Gimkit", action: () => loadPage("Gimkit") },
+        { name: "Games", action: () => loadPage("Games") },
+        { name: "Unblocker", action: () => loadPage("Unblocker") },
+        { name: "Extras", action: () => loadPage("Extras") }
+    ];
+
+    sections.forEach((section, index) => {
         let btn = document.createElement('button');
-        btn.innerText = buttons[i];
+        btn.innerText = section.name;
         btn.style.width = '100px';
         btn.style.height = '50px';
         btn.style.margin = '10px';
@@ -114,11 +127,43 @@ javascript: (function() {
         btn.style.fontWeight = 'bold';
         btn.style.position = 'absolute';
         btn.style.left = '20px';
-        btn.style.top = (60 + i * 65) + 'px';
-        btn.onclick = function() {
-            loadPage(i + 1, buttons[i]);
-        };
+        btn.style.top = (60 + index * 65) + 'px';
+        btn.onclick = section.action;
         sidebar.appendChild(btn);
+    });
+
+    function addBlooketLaunchButton() {
+        var launchButton = document.createElement('button');
+        launchButton.innerText = 'Launch';
+        launchButton.style.width = '100px';
+        launchButton.style.height = '50px';
+        launchButton.style.margin = '10px';
+        launchButton.style.padding = '10px';
+        launchButton.style.background = 'linear-gradient(45deg,#038FF9,#00C5FF)';
+        launchButton.style.color = '#07D5F9';
+        launchButton.style.border = 'none';
+        launchButton.style.borderRadius = '10px';
+        launchButton.style.cursor = 'pointer';
+        launchButton.style.fontFamily = 'Verdana';
+        launchButton.style.fontWeight = 'bold';
+        launchButton.style.marginTop = '10px';
+
+        launchButton.onclick = function() {
+            d.remove(); // Close Zephware panel
+            fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/blooket-exploits.js')
+                .then(response => response.text())
+                .then(scriptContent => {
+                    var scriptElement = document.createElement('script');
+                    scriptElement.innerHTML = scriptContent;
+                    document.body.appendChild(scriptElement);
+                })
+                .catch(error => {
+                    console.error('Error loading Blooket exploits:', error);
+                    alert('Failed to load the Blooket exploits. Please try again later.');
+                });
+        };
+
+        content.appendChild(launchButton);
     }
 
     titleBarContainer.appendChild(titleBar);
