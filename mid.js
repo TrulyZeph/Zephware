@@ -577,6 +577,26 @@ if (console.log(""), document.querySelector("script[src*='bfs/index.js']") && !w
                         })()
                     }
                 }, {
+                    name: "Every Answer Correct",
+                    description: "Sets every answer to be correct",
+                    run: function() {
+                        let {
+                            stateNode: e
+                        } = Object.values(function e(t = document.querySelector("body>div")) {
+                            return Object.values(t)[1]?.children?.[0]?._owner.stateNode ? t : e(t.querySelector(":scope>div"))
+                        }())[1].children[0]._owner;
+                        e.freeQuestions = e.freeQuestions?.map?.(e => ({
+                            ...e,
+                            correctAnswers: e.answers
+                        })), e.questions = e.questions?.map?.(e => ({
+                            ...e,
+                            correctAnswers: e.answers
+                        })), e.props.client.questions = e.props.client.questions.map(e => ({
+                            ...e,
+                            correctAnswers: e.answers
+                        }))
+                    }
+                }, {
                     name: "Change Blook Ingame",
                     description: "Changes your blook",
                     run: function() {
@@ -1268,6 +1288,28 @@ if (console.log(""), document.querySelector("script[src*='bfs/index.js']") && !w
                                 abilities: Object.fromEntries(Object.entries(t.state.abilities).map(e => [e[0], 5]))
                             })
                         }
+                    }
+                }, {
+                    name: "Set Cash",
+                    description: "Sets cafe cash",
+                    run: function() {
+                        let e = document.createElement("iframe");
+                        document.body.append(e), window.prompt = e.contentWindow.prompt.bind(window), e.remove();
+                        let t = Number(parseInt(prompt("How much cash would you like?"))),
+                            {
+                                stateNode: o
+                            } = Object.values(function e(t = document.querySelector("body>div")) {
+                                return Object.values(t)[1]?.children?.[0]?._owner.stateNode ? t : e(t.querySelector(":scope>div"))
+                            }())[1].children[0]._owner;
+                        o.setState({
+                            cafeCash: t
+                        }), o.props.liveGameController.setVal({
+                            path: `c/${o.props.client.name}`,
+                            val: {
+                                b: o.props.client.blook,
+                                ca: t
+                            }
+                        })
                     }
                 }, {
                     name: "Stock Food",
@@ -3211,6 +3253,7 @@ if (console.log(""), document.querySelector("script[src*='bfs/index.js']") && !w
                             }(prompt("What fish would you like to catch next (case sensitive)?"))
                     }
                 }, {
+                }],
                 flappy: [{
                     name: "Toggle Ghost",
                     description: "Lets you go through the pipes",
@@ -3440,7 +3483,54 @@ if (console.log(""), document.querySelector("script[src*='bfs/index.js']") && !w
                             cheat();
                         })();
                     }
-                },
+                }, {
+                    name: "Set Player's Gold",
+                    description: "Sets a player's gold to any amount.",
+                    run: function() {
+                        (async () => {
+                            const stateNode = Object.values(document.querySelector('#app>div>div'))[1].children[0]._owner.stateNode;
+                            let i = document.createElement('iframe');
+                            document.body.append(i);
+                            const alert = i.contentWindow.alert.bind(window);
+                            const prompt = i.contentWindow.prompt.bind(window);
+                            i.remove();
+
+                            const db = await stateNode.props.liveGameController.getDatabaseVal("c");
+                            const players = Object.keys(db);
+
+                            function search(q) {
+                                const res = players.filter(e => e?.toLowerCase()?.includes(q.toLowerCase()));
+                                if (res.length > 1) {
+                                    alert(`${res.length} players were found!`);
+                                    return;
+                                }
+                                if (res.length < 1) {
+                                    alert("No players were found!");
+                                    return;
+                                }
+                                return res[0];
+                            }
+
+                            const result = search(prompt("Enter player name or part of it here (not case sensitive):"));
+                            if (!result) {
+                                return;
+                            }
+
+                            const amount = prompt(`Enter the amount you would like to set the player to:`);
+                            if (!amount || amount.length < 1) {
+                                alert("You must enter an amount.");
+                                return;
+                            }
+
+                            stateNode.props.liveGameController.setVal({
+                                path: `c/${stateNode.props.client.name}/tat`,
+                                val: `${result}:swap:${amount}`
+                            });
+
+                            alert(`Set ${result}'s gold to ${amount}!`);
+                        })();
+                    }
+                }, {
                     name: "Reset All Players' Gold",
                     description: "Set's everyone else's gold to 0",
                     run: function() {
