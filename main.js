@@ -4,9 +4,7 @@ javascript:(function() {
         borderRadius = 20,
         guiDiv = document.createElement('div');
 
-    var ownerpassword = ['juulisbuzzin'];
-    var adminPasswords = ['imatotallycooladmin'];
-    var userPasswords = ['1+1=2'];
+    var password = 'password';
     var panelVisible = true;
 
     guiDiv.style.position = 'fixed';
@@ -62,33 +60,27 @@ javascript:(function() {
         inputBox.style.color = '#0766FF';
     });
 
-    var description1 = document.createElement('div');
-    description1.style.position = 'absolute';
-    description1.style.left = '50%';
-    description1.style.top = '220px';
-    description1.style.transform = 'translateX(-50%)';
-    description1.style.fontSize = '11px';
-    description1.style.fontWeight = 'bold';
-    description1.style.color = '#3D3636';
-    description1.innerText = 'ZephWare requires a password to hide from GoGuardian';
+    var description = document.createElement('div');
+    description.style.position = 'absolute';
+    description.style.left = '50%';
+    description.style.top = '220px';
+    description.style.transform = 'translateX(-50%)';
+    description.style.fontSize = '11px';
+    description.style.fontWeight = 'bold';
+    description.style.color = '#3D3636';
+    description.innerText = 'ZephWare requires a password to hide from GoGuardian';
 
     function checkPassword() {
-        var enteredPassword = inputBox.value;
-        if (adminPasswords.includes(enteredPassword) || ownerpassword.includes(enteredPassword)) {
+        if (inputBox.value === password) {
             closePanel();
-            loadZephPanel('admin');
-        } else if (userPasswords.includes(enteredPassword)) {
-            closePanel();
-            loadZephPanel('user');
+            loadZephPanel();
         } else {
-            alert('learn to type or stop tryna guess the password, I change it all the time.');
+            alert('Wrong password. Try again.');
         }
     }
 
-    function loadZephPanel(type) {
-        var url = type === 'admin'
-            ? 'https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/panel.js'
-            : 'https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/upanel.js';
+    function loadZephPanel() {
+        var url = 'https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/games.js';
 
         fetch(url)
             .then(response => response.text())
@@ -126,7 +118,6 @@ javascript:(function() {
 
     guiDiv.appendChild(title);
     guiDiv.appendChild(inputBox);
-    guiDiv.appendChild(description1);
-
+    guiDiv.appendChild(description);
     document.body.appendChild(guiDiv);
 })();
