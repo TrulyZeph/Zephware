@@ -63,5 +63,30 @@
         "label": "Cluster Rush",
         "image": "https://raw.githubusercontent.com/OutRed/outred-assets-cdn.outred.org/main/cluster-rush/splash.png",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/cluster-rush/index.html"
+    },
+    {
+        "label": "Pokemon Ruby",
+        "image": "https://d3rtzzzsiu7gdr.cloudfront.net/files/pokemon-ruby/splash.webp",
+        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/pokemon-ruby/index.html"
+    },
+    {
+        "label": "Territorial",
+        "image": "https://d3rtzzzsiu7gdr.cloudfront.net/files/territorialio/splash.webp",
+        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/territorialio/build/index.html"
+    },
+    {
+        "label": "Basketball Random",
+        "image": "https://tse3.mm.bing.net/th/id/OIP.Mnn3DuxS17bBpOcgIf6bSQHaHa?w=185&h=186&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/basketrandom/index.html"
+    },
+    {
+        "label": "Soccer Random",
+        "image": "https://d3rtzzzsiu7gdr.cloudfront.net/assets/gmsimgs/soccerrandom.png",
+        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/soccerrandom/index.htmll"
+    },
+    {
+        "label": "Volleyball Random",
+        "image": "https://d3rtzzzsiu7gdr.cloudfront.net/assets/gmsimgs/volleyrandom.jpeg",
+        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/volleyrandom/index.html"
     }
 ]
