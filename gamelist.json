@@ -63,30 +63,5 @@
         "label": "Cluster Rush",
         "image": "https://raw.githubusercontent.com/OutRed/outred-assets-cdn.outred.org/main/cluster-rush/splash.png",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/cluster-rush/index.html"
-    },
-    {
-        "label": "Papa's Hot Doggeria",
-        "image": "https://d3rtzzzsiu7gdr.cloudfront.net/files/papas-doggeria/image.png",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/papas-doggeria/index.html"
-    },
-    {
-        "label": "Papa's Pizzaria",
-        "image": "https://raw.githubusercontent.com/OutRed/outred-assets-cdn.outred.org/main/cluster-rush/splash.png",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/cluster-rush/index.html"
-    },
-    {
-        "label": "Papa's Freezeria",
-        "image": "https://raw.githubusercontent.com/OutRed/outred-assets-cdn.outred.org/main/cluster-rush/splash.png",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/cluster-rush/index.html"
-    },
-    {
-        "label": "Papa's Pancakeria",
-        "image": "https://raw.githubusercontent.com/OutRed/outred-assets-cdn.outred.org/main/cluster-rush/splash.png",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/cluster-rush/index.html"
-    },
-    {
-        "label": "Papa's Scooperia",
-        "image": "https://raw.githubusercontent.com/OutRed/outred-assets-cdn.outred.org/main/cluster-rush/splash.png",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/cluster-rush/index.html"
     }
 ]
