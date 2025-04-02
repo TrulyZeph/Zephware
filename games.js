@@ -95,8 +95,8 @@ javascript:(function() {
 
               iframe = document.createElement('iframe');
               iframe.src = config.url;
-              iframe.style.width = '800px';
-              iframe.style.height = '600px';
+              iframe.style.width = '1000px';
+              iframe.style.height = '800px';
               iframe.style.border = 'none';
               iframe.style.borderRadius = '15px';
               iframe.style.display = 'block';
