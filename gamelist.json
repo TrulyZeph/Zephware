@@ -81,8 +81,8 @@
     },
     {
         "label": "Soccer Random",
-        "image": "https://d3rtzzzsiu7gdr.cloudfront.net/assets/tombmask/splash.webp",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/tombmask/game/index.html"
+        "image": "https://d3rtzzzsiu7gdr.cloudfront.net/assets/gmsimgs/soccerrandom.png",
+        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/soccerrandom/index.htmll"
     },
     {
         "label": "Volleyball Random",
@@ -91,7 +91,7 @@
     },
     {
         "label": "Tomb of the Mask",
-        "image": "https://d3rtzzzsiu7gdr.cloudfront.net/assets/gmsimgs/soccerrandom.png",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/soccerrandom/index.htmll"
+        "image": "https://d3rtzzzsiu7gdr.cloudfront.net/assets/tombmask/splash.webp",
+        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/tombmask/game/index.html"
     }
 ]
