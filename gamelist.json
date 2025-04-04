@@ -22,27 +22,27 @@
     {
         "label": "GunSpin",
         "image": "https://d3rtzzzsiu7gdr.cloudfront.net/files/gunspin/splash.png",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/polytrack/index.html"
+        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/gunspinupdate/index.html"
     },
     {
-        "label": "BasketBallBros",
+        "label": "Basketball Bros",
         "image": "https://d3rtzzzsiu7gdr.cloudfront.net/files/basket-bros/splash.jpeg",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/basket-bros/index.html"
+        "url": "https://abinbins.github.io/a7/basket-bros/"
     },
     {
-        "label": "PaperIo 2",
+        "label": "Paper.io 2",
         "image": "https://d3rtzzzsiu7gdr.cloudfront.net/files/paperio2/game/splash.avif",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/paperio2/index.html"
+        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/paperio2/game/index.html"
     },
     {
         "label": "OVO 3",
         "image": "https://d3rtzzzsiu7gdr.cloudfront.net/files/ovo3/game/splash.avif",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/ovo3/index.html"
+        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/ovo3/game/index.html"
     },
     {
-        "label": "Stick War",
+        "label": "Stick Duel Battle",
         "image": "https://d3rtzzzsiu7gdr.cloudfront.net/assets/gmsimgs/infinityduel.jpeg",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/infinityduel/index.html#google_vignette"
+        "url": "https://www.yoosfuhl.com/game/stickduelbattle/index.html"
     },
     {
         "label": "Boxing Random",
@@ -52,11 +52,11 @@
     {
         "label": "Stick Man Hook",
         "image": "https://d3rtzzzsiu7gdr.cloudfront.net/files/stickmanhook/unnamed.jpg",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/stickmanhook/index.html"
+        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/stickmanhook/game/index.html"
     },
     {
         "label": "Retro Bowl",
-        "image": "https://en.wikipedia.org/wiki/Retro_Bowl#/media/File:Retro_Bowl_cover.png",
+        "image": "https://upload.wikimedia.org/wikipedia/en/b/bf/Retro_Bowl_cover.png",
         "url": "https://www.yoosfuhl.com/game/retrobowlcollege"
     },
     {
@@ -82,7 +82,7 @@
     {
         "label": "Soccer Random",
         "image": "https://d3rtzzzsiu7gdr.cloudfront.net/assets/gmsimgs/soccerrandom.png",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/soccerrandom/index.htmll"
+        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/soccerrandom/index.html"
     },
     {
         "label": "Volleyball Random",
