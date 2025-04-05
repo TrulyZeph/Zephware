@@ -98,6 +98,31 @@
         "label": "Tennis Masters",
         "image": "https://www.yoosfuhl.com/wp-content/uploads/2024/11/Tennis-Masters-game-300x158.jpg",
         "url": "https://www.yoosfuhl.com/game/tennismasters/index.html"
+    },
+    {
+        "label": "Johnny Upgrade",
+        "image": "https://www.yoosfuhl.com/wp-content/uploads/2024/09/Johnny-Upgrade-game-300x158.jpg",
+        "url": "https://www.yoosfuhl.com/game/johnnyupgrade/index.html"
+    },
+    {
+        "label": "Penalty Kick Online",
+        "image": "https://www.yoosfuhl.com/wp-content/uploads/2024/06/Penalty-Kick-Online-YoosFuhl-300x157.jpg",
+        "url": "https://www.yoosfuhl.com/game/penaltykick/index.html"
+    },
+    {
+        "label": "Tiny Fishing",
+        "image": "https://www.yoosfuhl.com/wp-content/uploads/2024/05/Tiny-Fishing-Game-YoosFuhl-300x157.jpg",
+        "url": "https://www.yoosfuhl.com/game/tinyfishing/index.html"
+    },
+    {
+        "label": "Drift Boss",
+        "image": "https://www.yoosfuhl.com/wp-content/uploads/2024/05/Drift-Boss-Game-YoosFuhl-300x157.jpg",
+        "url": "https://www.yoosfuhl.com/game/driftboss/index.html"
+    },
+    {
+        "label": "Drive Mad",
+        "image": "https://www.yoosfuhl.com/wp-content/uploads/2024/04/Drive-Mad-Game-YoosFuhl-300x157.jpg",
+        "url": "https://www.yoosfuhl.com/game/drivemad/index.html"
     }
 ]
 
