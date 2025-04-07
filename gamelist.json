@@ -128,7 +128,835 @@
         "label": "Demolition Derby Crash Racing",
         "image": "https://th.bing.com/th/id/OIP.LYRsYZHqUXOlvTKlQ-bPSAHaHa?rs=1&pid=ImgDetMain",
         "url": "https://www.yoosfuhl.com/game/demolitionderby"
-    }
+    },
+    {
+		"label": "Demolition Derby",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/demolitionderby"
+	},
+	{
+		"label": "Sprinter",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/sprinter"
+	},
+	{
+		"label": "Fnaf",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/fnaf"
+	},
+	{
+		"label": "Dominoes",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/dominoes"
+	},
+	{
+		"label": "Sweet Memory",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/sweetmemory"
+	},
+	{
+		"label": "Bigshot Boxing",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/bigshotboxing"
+	},
+	{
+		"label": "Squid Survival Game",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/squidsurvivalgame"
+	},
+	{
+		"label": "Granny",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/granny"
+	},
+	{
+		"label": "Temple Run 2",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/templerun2"
+	},
+	{
+		"label": "Sprunki Incredibox",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/sprunkiincredibox"
+	},
+	{
+		"label": "Level Devil",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/leveldevil"
+	},
+	{
+		"label": "Earn to Die2",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/earntodie2"
+	},
+	{
+		"label": "Block Puzzle",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/blockpuzzle"
+	},
+	{
+		"label": "Idle Ants",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/idleants"
+	},
+	{
+		"label": "Dark Room",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/darkroom"
+	},
+	{
+		"label": "Drift Hunters",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/drifthunters"
+	},
+	{
+		"label": "Draw The Rest",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/drawtherest"
+	},
+	{
+		"label": "Cluster Rush",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/clusterrush"
+	},
+	{
+		"label": "Free Kick Training",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/freekicktraining"
+	},
+	{
+		"label": "Deadly Descent",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/deadlydescent"
+	},
+	{
+		"label": "Escape Road",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/escaperoad"
+	},
+	{
+		"label": "FNF Shaggy",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/fnfshaggy"
+	},
+	{
+		"label": "Tiny Truck Racing",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/tinytruckracing"
+	},
+	{
+		"label": "Happy Room",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/happyroom"
+	},
+	{
+		"label": "Slope 2",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/slope2"
+	},
+	{
+		"label": "Super Hot",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/superhot"
+	},
+	{
+		"label": "Angry Sharks",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/angrysharks"
+	},
+	{
+		"label": "Gladihoppers",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/gladihoppers"
+	},
+	{
+		"label": "Ballistic Chicken",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/ballisticchicken"
+	},
+	{
+		"label": "Creative Kill Chamber",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/creativekillchamber"
+	},
+	{
+		"label": "Cubefield",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/cubefield"
+	},
+	{
+		"label": "Fancy Pants",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/fancypants"
+	},
+	{
+		"label": "Mini Putt",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/miniputt"
+	},
+	{
+		"label": "Deal or No Deal",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/dealornodeal"
+	},
+	{
+		"label": "Taxi Drift",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/taxidrift"
+	},
+	{
+		"label": "Gimme the Airpod",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/gimmetheairpod"
+	},
+	{
+		"label": "Slime Rush TD",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/slimerushtd"
+	},
+	{
+		"label": "Tube Jumpers",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/tubejumpers"
+	},
+	{
+		"label": "Learn to Fly 3",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/learntofly3"
+	},
+	{
+		"label": "Block Blast",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/blockblast"
+	},
+	{
+		"label": "Noob Steve Parkour",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/noobsteveparkour"
+	},
+	{
+		"label": "Stick Rpg Complete",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/stickrpgcomplete"
+	},
+	{
+		"label": "Backrooms",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/backrooms"
+	},
+	{
+		"label": "Champion Archer",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/championarcher"
+	},
+	{
+		"label": "Tanuki Sunset",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/tanukisunset"
+	},
+	{
+		"label": "Merge Round Racers",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/mergeroundracers"
+	},
+	{
+		"label": "Adventure Capitalist",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/adventurecapitalist"
+	},
+	{
+		"label": "Turbomotoracer",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/turbomotoracer"
+	},
+	{
+		"label": "Run",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/run"
+	},
+	{
+		"label": "Baconmaydie",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/baconmaydie"
+	},
+	{
+		"label": "Ngon",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/ngon"
+	},
+	{
+		"label": "Aquaparkslides",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/aquaparkslides"
+	},
+	{
+		"label": "Trafficjam3d",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/trafficjam3d"
+	},
+	{
+		"label": "Paperio2",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/paperio2"
+	},
+	{
+		"label": "Senyaandoscar2",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/senyaandoscar2"
+	},
+	{
+		"label": "Johnnyupgrade",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/johnnyupgrade"
+	},
+	{
+		"label": "Getawayshootout",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/getawayshootout"
+	},
+	{
+		"label": "Adventuredrivers",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/adventuredrivers"
+	},
+	{
+		"label": "Ducklife4",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/ducklife4"
+	},
+	{
+		"label": "Carssimulator",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/carssimulator"
+	},
+	{
+		"label": "Fnf",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/fnf"
+	},
+	{
+		"label": "Riddleschool3",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/riddleschool3"
+	},
+	{
+		"label": "Theimpossiblequiz2",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/theimpossiblequiz2"
+	},
+	{
+		"label": "Flappybird",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/flappybird"
+	},
+	{
+		"label": "Papaspancakeria",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papaspancakeria"
+	},
+	{
+		"label": "Snowrider3d",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/snowrider3d"
+	},
+	{
+		"label": "Bobtherobber2",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/bobtherobber2"
+	},
+	{
+		"label": "Basketandball",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/basketandball"
+	},
+	{
+		"label": "Bitlife",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/bitlife"
+	},
+	{
+		"label": "Wheely2",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/wheely2"
+	},
+	{
+		"label": "Wheely",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/wheely"
+	},
+	{
+		"label": "Riddleschool2",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/riddleschool2"
+	},
+	{
+		"label": "Snakeio",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/snakeio"
+	},
+	{
+		"label": "Stickslasher",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/stickslasher"
+	},
+	{
+		"label": "Spaceiskey",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/spaceiskey"
+	},
+	{
+		"label": "Blockysnakes",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/blockysnakes"
+	},
+	{
+		"label": "Riddleschool",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/riddleschool"
+	},
+	{
+		"label": "Slicemaster",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/slicemaster"
+	},
+	{
+		"label": "Shortride",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/shortride"
+	},
+	{
+		"label": "Braintesttrickypuzzles",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/braintesttrickypuzzles"
+	},
+	{
+		"label": "Gunmayhemredux",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/gunmayhemredux"
+	},
+	{
+		"label": "Vex6",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/vex6"
+	},
+	{
+		"label": "Tennisgame",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/tennisgame"
+	},
+	{
+		"label": "Houseofhazards",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/houseofhazards"
+	},
+	{
+		"label": "Ovo2",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/ovo2"
+	},
+	{
+		"label": "Basketrandom",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/basketrandom"
+	},
+	{
+		"label": "Fireboyandwatergirl1",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/fireboyandwatergirl1"
+	},
+	{
+		"label": "Vex5",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/vex5"
+	},
+	{
+		"label": "Gunspin",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/gunspin"
+	},
+	{
+		"label": "Jellytruck",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/jellytruck"
+	},
+	{
+		"label": "Obbyrobbyonlyup",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/obbyrobbyonlyup"
+	},
+	{
+		"label": "Awesometanks",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/awesometanks"
+	},
+	{
+		"label": "Bouncybasketball",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/bouncybasketball"
+	},
+	{
+		"label": "3dbowling",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/3dbowling"
+	},
+	{
+		"label": "Gunmayhem",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/gunmayhem"
+	},
+	{
+		"label": "Theimpossiblequiz",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/theimpossiblequiz"
+	},
+	{
+		"label": "Stairrace3d",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/stairrace3d"
+	},
+	{
+		"label": "Swingo",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/swingo"
+	},
+	{
+		"label": "Monstertracks",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/monstertracks"
+	},
+	{
+		"label": "Dreadheadparkour",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/dreadheadparkour"
+	},
+	{
+		"label": "Smashkarts",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/smashkarts"
+	},
+	{
+		"label": "Clickerheroes",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/clickerheroes"
+	},
+	{
+		"label": "Amongussp",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/amongussp"
+	},
+	{
+		"label": "Savethedoge",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/savethedoge"
+	},
+	{
+		"label": "Doodlejump",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/doodlejump"
+	},
+	{
+		"label": "Learntofly2",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/learntofly2"
+	},
+	{
+		"label": "2048icecream",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/2048icecream"
+	},
+	{
+		"label": "Vex4",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/vex4"
+	},
+	{
+		"label": "Papastacomia",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papastacomia"
+	},
+	{
+		"label": "Papaspastaria",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papaspastaria"
+	},
+	{
+		"label": "Learntofly",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/learntofly"
+	},
+	{
+		"label": "Papaswingeria",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papaswingeria"
+	},
+	{
+		"label": "Papashotdoggeria",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papashotdoggeria"
+	},
+	{
+		"label": "Liquidsort",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/liquidsort"
+	},
+	{
+		"label": "Papasdonuteria",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papasdonuteria"
+	},
+	{
+		"label": "Motox3mspookyland",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/motox3mspookyland"
+	},
+	{
+		"label": "Papasburgeria",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papasburgeria"
+	},
+	{
+		"label": "Papasbakeria",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papasbakeria"
+	},
+	{
+		"label": "Motox3mpoolparty",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/motox3mpoolparty"
+	},
+	{
+		"label": "Vex3",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/vex3"
+	},
+	{
+		"label": "Papalouie",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papalouie"
+	},
+	{
+		"label": "Jacksmith",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/jacksmith"
+	},
+	{
+		"label": "Papasscooperia",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papasscooperia"
+	},
+	{
+		"label": "Penaltykickonline",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/penaltykickonline"
+	},
+	{
+		"label": "Ducklife",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/ducklife"
+	},
+	{
+		"label": "Bloonstd4",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/bloonstd4"
+	},
+	{
+		"label": "Papasfreezeria",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papasfreezeria"
+	},
+	{
+		"label": "Motox3mwinter",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/motox3mwinter"
+	},
+	{
+		"label": "Motox3m2",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/motox3m2"
+	},
+	{
+		"label": "Eggycar",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/eggycar"
+	},
+	{
+		"label": "Papascupcakeria",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papascupcakeria"
+	},
+	{
+		"label": "Bubbleshooter",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/bubbleshooter"
+	},
+	{
+		"label": "Papaspizzeria",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/papaspizzeria"
+	},
+	{
+		"label": "Motox3m",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/motox3m"
+	},
+	{
+		"label": "Wheeliebike",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/wheeliebike"
+	},
+	{
+		"label": "Ovogame",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/ovogame"
+	},
+	{
+		"label": "Ludogame",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/ludogame"
+	},
+	{
+		"label": "Dogelover",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/dogelover"
+	},
+	{
+		"label": "Sokoban",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/sokoban"
+	},
+	{
+		"label": "Idlebreakout",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/idlebreakout"
+	},
+	{
+		"label": "Chesspursuit",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/chesspursuit"
+	},
+	{
+		"label": "Coreball",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/coreball"
+	},
+	{
+		"label": "Tinyfishing",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/tinyfishing"
+	},
+	{
+		"label": "Driftboss",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/driftboss"
+	},
+	{
+		"label": "3dtrexgame",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/3dtrexgame"
+	},
+	{
+		"label": "Drivemad",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/drivemad"
+	},
+	{
+		"label": "Fallbeans",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/fallbeans"
+	},
+	{
+		"label": "Run3",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/run3"
+	},
+	{
+		"label": "Spacebarclicker",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/spacebarclicker"
+	},
+	{
+		"label": "2048taylorswift",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/2048taylorswift"
+	},
+	{
+		"label": "3ddinogame",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/3ddinogame"
+	},
+	{
+		"label": "Doge 2048",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/doge2048"
+	},
+	{
+		"label": "Watermelon Game",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/watermelongame"
+	},
+	{
+		"label": "Snake Game",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/snakegame"
+	},
+	{
+		"label": "Cookie Clicker",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/cookieclicker"
+	},
+	{
+		"label": "Sliding Puzzle Truck",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/slidingpuzzletruck"
+	},
+	{
+		"label": "2048 Cupcakes",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/2048cupcakes"
+	},
+	{
+		"label": "Connect4",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/connect4"
+	},
+	{
+		"label": "Chess",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/chess"
+	},
+	{
+		"label": "2048 Circle",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/2048circle"
+	},
+	{
+		"label": "Solitaire",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/solitaire"
+	},
+	{
+		"label": "Wordle",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/wordle"
+	},
+	{
+		"label": "Free Cell",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/freecell"
+	},
+	{
+		"label": "Color Lines",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/colorlines"
+	},
+	{
+		"label": "Couch 2048",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/couch2048"
+	},
+	{
+		"label": "2048",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"url": "https://www.yoosfuhl.com/game/2048"
+	}
 ]
-
-
