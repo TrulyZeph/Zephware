@@ -131,8 +131,8 @@
 	},
 	{
         	"label": "Tap Tap Shots",
-        	"image": "https://th.bing.com/th/id/OIP.LYRsYZHqUXOlvTKlQ-bPSAHaHa?rs=1&pid=ImgDetMain",
-        	"url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/TapTapShots.webp"
+        	"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/TapTapShots.web",
+        	"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/q/1/tap-tap-shots/index.html"
 	},
 	{
 		"label": "Sprinter",
