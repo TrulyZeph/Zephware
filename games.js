@@ -47,7 +47,6 @@ javascript:(function() {
       panelElement.style.width = '600px';
       panelElement.style.height = '400px';
       panelElement.style.overflowY = 'scroll';
-      panelElement.style.overflow = 'hidden';
       panelElement.style.borderRadius = '20px';
       panelElement.style.boxShadow = '0 0 20px #0766FF';
       panelElement.style.zIndex = 9999;
