@@ -13,7 +13,7 @@ javascript:(function () {
                 buttonConfigs = data;
                 createPanel();
                 createChangelogPanel();
-                showChangelog(); // auto show changelog
+                showChangelog();
             })
             .catch(error => {
                 console.error('Error loading game list:', error);
@@ -30,7 +30,7 @@ javascript:(function () {
         container.style.top = '20px';
         container.style.marginLeft = '-20px';
         container.style.width = '100%';
-
+  
         const title = document.createElement('div');
         title.innerText = 'Zephware';
         title.style.padding = '5px 65px';
@@ -41,11 +41,12 @@ javascript:(function () {
         title.style.fontWeight = 'bold';
         title.style.color = '#07D5F9';
         title.style.fontSize = '24px';
-        title.style.textShadow = '0 0 5px #07D5F9, 0 0 10px #07D5F9, 0 0 15px #07D5F9, 0 0 20px #07D5F9';
-
+        title.style.textAlign = 'center';
+        title.style.textShadow = '0 0 5px #07D5F9, 0 0 10px #07D5F9, 0 0 1px #07D5F9, 0 0 2px #07D5F9, 0 0 3px #07D5F9';
+  
         container.appendChild(title);
         return container;
-    }
+     }    
 
     function createPanel() {
         panel = document.createElement('div');
@@ -80,7 +81,6 @@ javascript:(function () {
         const titleBar = createTitleBar();
         panel.appendChild(titleBar);
 
-        // Dropdown Menu
         const dropdownBtn = document.createElement('button');
         dropdownBtn.innerText = '☰';
         dropdownBtn.style.position = 'absolute';
@@ -128,9 +128,8 @@ javascript:(function () {
             showChangelog();
             dropdownMenu.style.display = 'none';
         };
-
-        dropdownMenu.appendChild(settingsBtn);
         dropdownMenu.appendChild(changelogBtn);
+        dropdownMenu.appendChild(settingsBtn);
 
         dropdownBtn.onclick = () => {
             dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'flex' : 'none';
@@ -227,14 +226,12 @@ javascript:(function () {
         }
     }
 
-    function showSettings() {
-        if (settingsPanel) settingsPanel.remove();
-        createBlur();
-
+    function createSettingsPanel() {
         settingsPanel = document.createElement('div');
-        settingsPanel.style.width = '600px';
-        settingsPanel.style.height = '400px';
+        settingsPanel.style.width = '300px';
+        settingsPanel.style.height = '350px';
         settingsPanel.style.overflowY = 'scroll';
+        settingsPanel.style.overflow = 'auto';
         settingsPanel.style.borderRadius = '20px';
         settingsPanel.style.boxShadow = '0 0 20px #0766FF';
         settingsPanel.style.position = 'fixed';
@@ -246,6 +243,23 @@ javascript:(function () {
         settingsPanel.style.color = '#0766FF';
         settingsPanel.style.padding = '20px';
         settingsPanel.style.zIndex = 10000;
+        settingsPanel.className = 'custom-scroll-panel';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerText = '✕';
+        closeBtn.style.position = 'absolute';
+        closeBtn.style.top = '10px';
+        closeBtn.style.right = '15px';
+        closeBtn.style.background = 'transparent';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#0766FF';
+        closeBtn.style.fontSize = '16px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.onclick = () => {
+            settingsPanel.remove();
+            removeBlur();
+        };
+        settingsPanel.appendChild(closeBtn);
 
         const title = document.createElement('div');
         title.innerText = 'Settings';
@@ -257,18 +271,17 @@ javascript:(function () {
 
         const content = document.createElement('div');
         content.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <span style="font-weight: bold; font-size: 16px;">Misc</span>
-                <button onclick="this.closest('div').parentNode.remove(); (${removeBlur.toString()})();" 
-                        style="background: transparent; border: none; color: #07d5f9; font-size: 16px; cursor: pointer;">✕</button>
-            </div>
-            <div style="font-size: 14px; color: #0766FF;">Coming Soon!</div>
-            <p><strong style="font-size: 16px;">Keybinds</strong></p>
-            <p style="color: #0766FF;">Ctrl + E | Hide<br /><br />More Soon...</p>
-            <p><strong style="font-size: 16px;">Credits</strong></p>
-            <p style="color: #0766FF;">Owner: trulyzeph</p>
-            <div style="font-size: 10px; margin-top: 20px;">Zephware 2025 | <span style="font-size: 0.75rem">v0.55</span></div>
-        `;
+  <h3>Misc</h3>
+  <p style="color: #0766FF;">Coming Soon!</p>
+  <h3>Keybinds</h3>
+  <p style="color: #0766FF;">Ctrl + E | Hide<br>More Soon...</p>
+  <h3>Credits</h3>
+  <p style="color: #0766FF;">Owner: trulyzeph</p>
+  <div style="text-align: center; font-size: 10px; margin-top: 60px;">
+    Zephware 2025 | <span style="font-size: 0.75rem;">v0.6</span>
+  </div>
+`;
+
         settingsPanel.appendChild(content);
 
         document.body.appendChild(settingsPanel);
@@ -276,9 +289,10 @@ javascript:(function () {
 
     function createChangelogPanel() {
         changelogPanel = document.createElement('div');
-        changelogPanel.style.width = '600px';
-        changelogPanel.style.height = '400px';
+        changelogPanel.style.width = '300px';
+        changelogPanel.style.height = '350px';
         changelogPanel.style.overflowY = 'scroll';
+        changelogPanel.style.overflow = 'auto';
         changelogPanel.style.borderRadius = '20px';
         changelogPanel.style.boxShadow = '0 0 20px #0766FF';
         changelogPanel.style.position = 'fixed';
@@ -290,9 +304,10 @@ javascript:(function () {
         changelogPanel.style.color = '#0766FF';
         changelogPanel.style.padding = '20px';
         changelogPanel.style.zIndex = 10000;
+        changelogPanel.className = 'custom-scroll-panel';
 
         const title = document.createElement('div');
-        title.innerText = 'Changelog';
+        title.innerText = 'Change Log';
         title.style.textAlign = 'center';
         title.style.fontSize = '24px';
         title.style.fontWeight = 'bold';
@@ -310,17 +325,44 @@ javascript:(function () {
         closeBtn.style.fontSize = '16px';
         closeBtn.style.cursor = 'pointer';
         closeBtn.onclick = () => {
-            changelogPanel.remove();
+            changelogPanel.remove()
             removeBlur();
         };
         changelogPanel.appendChild(closeBtn);
 
         const content = document.createElement('div');
         content.style.marginTop = '20px';
-        content.innerHTML = '<p style="color: #0766FF;">• Initial launch of Zephware panels<br>• Added scrollable settings<br>• Blur effect enabled<br>• Dropdown for settings/changelog</p>';
+        content.innerHTML = `
+  <div style="color: #0766FF;">
+    <h3 style="text-decoration: underline; font-size: 18px;">Version 0.6 Beta</h3>
+    <ul style="margin-left: -15px;">
+      <li>Added Change Log Panel</li>
+      <li>Added Settings Panel</li>
+      <li>Added Search Bar</li>
+      <li>Dropdown for settings/changelog</li>
+      <li>Slight UI Tweak </li>
+      <li>Added Version Counter</li>
+      <li>Added more game images</li>
+    </ul>
+
+    <h3 style="text-decoration: underline; font-size: 18px;">Next Update: (Version 1)</h3>
+    <h4 style="margin-top: -10px;">Official Release!</h4>
+    <ul style="margin-left: -15px;">
+      <li>All game images added</li>
+      <li>All game names fixed</li>
+      <li>more updates, less QOL soon</li>
+    </ul>
+  </div>
+`;
+
         changelogPanel.appendChild(content);
     }
-
+    function showSettings() {
+        if (changelogPanel) changelogPanel.remove();
+        createSettingsPanel();
+        createBlur();
+        document.body.appendChild(settingsPanel);
+    }
     function showChangelog() {
         if (changelogPanel) changelogPanel.remove();
         createChangelogPanel();
