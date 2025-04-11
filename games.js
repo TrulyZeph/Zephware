@@ -81,6 +81,36 @@ javascript:(function () {
         const titleBar = createTitleBar();
         panel.appendChild(titleBar);
 
+        const searchBar = document.createElement('input');
+        searchBar.type = 'text';
+        searchBar.placeholder = 'Search';
+        searchBar.style.width = '70%';
+        searchBar.style.marginTop = '55px';
+        searchBar.style.marginBottom = '-50px';
+        searchBar.style.padding = '10px';
+        searchBar.style.borderRadius = '10px';
+        searchBar.style.border = 'none';
+        searchBar.style.fontSize = '14px';
+        searchBar.style.boxShadow = '0 0 10px #0766FF';
+        searchBar.style.outline = 'none';
+        searchBar.style.background = '#111';
+        searchBar.style.color = '#07D5F9';
+        searchBar.style.display = 'block';
+        searchBar.style.marginLeft = 'auto';
+        searchBar.style.marginRight = 'auto';
+
+        searchBar.addEventListener('input', () => {
+            const query = searchBar.value.toLowerCase();
+            filteredConfigs = buttonConfigs.filter(config =>
+               config.label && config.label.toLowerCase().includes(query)
+            );
+            renderButtons(filteredConfigs);
+         });
+         
+
+        panel.appendChild(searchBar);
+
+
         const dropdownBtn = document.createElement('button');
         dropdownBtn.innerText = '☰';
         dropdownBtn.style.position = 'absolute';
@@ -144,62 +174,68 @@ javascript:(function () {
         container.style.alignItems = 'center';
         container.style.gap = '20px';
         container.style.marginTop = '60px';
+        
+        let filteredConfigs = buttonConfigs.slice();
+        renderButtons(filteredConfigs);
 
-        buttonConfigs.forEach(config => {
-            const button = document.createElement('button');
-            button.style.width = '80px';
-            button.style.height = '100px';
-            button.style.fontSize = '16px';
-            button.style.background = 'linear-gradient(45deg, #038FF9, #00C5FF)';
-            button.style.color = '#07D5F9';
-            button.style.border = 'none';
-            button.style.borderRadius = '15px';
-            button.style.cursor = 'pointer';
-            button.style.padding = '0';
-            button.style.display = 'flex';
-            button.style.flexDirection = 'column';
-            button.style.alignItems = 'center';
-            button.style.justifyContent = 'flex-start';
-
-            const img = document.createElement('img');
-            img.src = config.image;
-            img.style.width = '80px';
-            img.style.height = '80px';
-            img.style.borderTopLeftRadius = '15px';
-            img.style.borderTopRightRadius = '15px';
-            button.appendChild(img);
-
-            const label = document.createElement('div');
-            label.innerText = config.label || '';
-            label.style.fontSize = '10px';
-            label.style.color = '#FFFFFF';
-            label.style.textAlign = 'center';
-            label.style.padding = '2px 4px';
-            label.style.width = '100%';
-            label.style.background = 'rgba(0, 0, 0, 0.4)';
-            label.style.borderBottomLeftRadius = '15px';
-            label.style.borderBottomRightRadius = '15px';
-            button.appendChild(label);
-
-            button.addEventListener('click', () => {
-                panel.remove();
-                dropdownMenu.remove();
-                createBlur();
-
-                iframe = document.createElement('iframe');
-                iframe.src = config.url;
-                iframe.style.width = '1050px';
-                iframe.style.height = '700px';
-                iframe.style.border = 'none';
-                iframe.style.borderRadius = '15px';
-                iframe.style.display = 'block';
-                iframe.style.margin = '20px auto';
-                iframe.style.boxShadow = '0 0 20px #038FF9';
-                document.body.appendChild(iframe);
-            });
-
-            container.appendChild(button);
-        });
+        function renderButtons(configs) {
+           container.innerHTML = '';
+           configs.forEach(config => {
+              const button = document.createElement('button');
+              button.style.width = '80px';
+              button.style.height = '100px';
+              button.style.fontSize = '16px';
+              button.style.background = 'linear-gradient(45deg, #038FF9, #00C5FF)';
+              button.style.color = '#07D5F9';
+              button.style.border = 'none';
+              button.style.borderRadius = '15px';
+              button.style.cursor = 'pointer';
+              button.style.padding = '0';
+              button.style.display = 'flex';
+              button.style.flexDirection = 'column';
+              button.style.alignItems = 'center';
+              button.style.justifyContent = 'flex-start';
+     
+              const img = document.createElement('img');
+              img.src = config.image;
+              img.style.width = '80px';
+              img.style.height = '80px';
+              img.style.borderTopLeftRadius = '15px';
+              img.style.borderTopRightRadius = '15px';
+              button.appendChild(img);
+     
+              const label = document.createElement('div');
+              label.innerText = config.label || '';
+              label.style.fontSize = '10px';
+              label.style.color = '#FFFFFF';
+              label.style.textAlign = 'center';
+              label.style.padding = '2px 4px';
+              label.style.width = '100%';
+              label.style.background = 'rgba(0, 0, 0, 0.4)';
+              label.style.borderBottomLeftRadius = '15px';
+              label.style.borderBottomRightRadius = '15px';
+              button.appendChild(label);
+     
+              button.addEventListener('click', () => {
+                 panel.remove();
+                 dropdownMenu.remove();
+                 createBlur();
+     
+                 iframe = document.createElement('iframe');
+                 iframe.src = config.url;
+                 iframe.style.width = '1050px';
+                 iframe.style.height = '700px';
+                 iframe.style.border = 'none';
+                 iframe.style.borderRadius = '15px';
+                 iframe.style.display = 'block';
+                 iframe.style.margin = '20px auto';
+                 iframe.style.boxShadow = '0 0 20px #038FF9';
+                 document.body.appendChild(iframe);
+              });
+     
+              container.appendChild(button);
+           });
+        }     
 
         panel.appendChild(container);
         document.body.appendChild(panel);
@@ -334,7 +370,7 @@ javascript:(function () {
         content.style.marginTop = '20px';
         content.innerHTML = `
   <div style="color: #0766FF;">
-    <h3 style="text-decoration: underline; font-size: 18px;">Version 0.6 Beta</h3>
+    <h3 style="text-decoration: underline; font-size: 18px;">4/10/25 | Version 0.6 Beta</h3>
     <ul style="margin-left: -15px;">
       <li>Added Change Log Panel</li>
       <li>Added Settings Panel</li>
@@ -344,13 +380,24 @@ javascript:(function () {
       <li>Added Version Counter</li>
       <li>Added more game images</li>
     </ul>
+    
+    <h3 style="text-decoration: underline; font-size: 18px;">Next Update: v0.7 Beta</h3>
+    <ul style="margin-left: -15px;">
+      <li>Hide Panel in Menu</li>
+      <li>Close Panel in Menu</li>
+    </ul>
 
-    <h3 style="text-decoration: underline; font-size: 18px;">Next Update: (Version 1)</h3>
+    <h3 style="text-decoration: underline; font-size: 18px;">Upcoming: (Version 1)</h3>
     <h4 style="margin-top: -10px;">Official Release!</h4>
     <ul style="margin-left: -15px;">
       <li>All game images added</li>
       <li>All game names fixed</li>
-      <li>more updates, less QOL soon</li>
+      <li>and more!</li>
+    </ul>
+
+    <h3 style="text-decoration: underline; font-size: 18px;">Upcoming: v1.1</h3>
+    <ul style="margin-left: -15px;">
+      <li>GUI Update</li>
     </ul>
   </div>
 `;
