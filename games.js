@@ -219,7 +219,6 @@ javascript:(function () {
               button.addEventListener('click', () => {
                  panel.remove();
                  dropdownMenu.remove();
-                 createBlur();
      
                  iframe = document.createElement('iframe');
                  iframe.src = config.url;
