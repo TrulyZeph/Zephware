@@ -1,3 +1,4 @@
+
 javascript:(function () {
     let iframe = null;
     let panel = null;
@@ -32,7 +33,7 @@ javascript:(function () {
         container.style.width = '100%';
   
         const title = document.createElement('div');
-        title.innerText = 'Zephware';
+        title.innerHTML = 'Zephware <sup style="font-size: 0.75rem">v0.6</s>';
         title.style.padding = '5px 65px';
         title.style.background = '#017AD5';
         title.style.borderRadius = '10px';
@@ -55,7 +56,7 @@ javascript:(function () {
         panel.style.overflowY = 'scroll';
         panel.style.borderRadius = '20px';
         panel.style.boxShadow = '0 0 20px #0766FF';
-        panel.style.zIndex = 9999;
+        panel.style.zIndex = 1;
         panel.style.position = 'fixed';
         panel.style.top = '50%';
         panel.style.left = '50%';
@@ -114,9 +115,9 @@ javascript:(function () {
         const dropdownBtn = document.createElement('button');
         dropdownBtn.innerText = '☰';
         dropdownBtn.style.position = 'absolute';
-        dropdownBtn.style.top = '25px';
-        dropdownBtn.style.right = '30px';
-        dropdownBtn.style.fontSize = '20px';
+        dropdownBtn.style.top = '15px';
+        dropdownBtn.style.right = '25px';
+        dropdownBtn.style.fontSize = '30px';
         dropdownBtn.style.background = 'transparent';
         dropdownBtn.style.border = 'none';
         dropdownBtn.style.cursor = 'pointer';
@@ -158,8 +159,39 @@ javascript:(function () {
             showChangelog();
             dropdownMenu.style.display = 'none';
         };
+
+        const hideBtn = document.createElement('button');
+        hideBtn.innerText = 'Hide';
+        hideBtn.style.background = 'transparent';
+        hideBtn.style.color = '#0766FF';
+        hideBtn.style.border = 'none';
+        hideBtn.style.fontSize = '14px';
+        hideBtn.style.cursor = 'pointer';
+        hideBtn.onclick = () => {
+            if (panel) panel.style.display = 'none';
+            if (iframe) iframe.style.display = 'none';
+        };
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerText = 'Close';
+        closeBtn.style.background = 'transparent';
+        closeBtn.style.color = '#ff0000';
+        closeBtn.style.border = 'none';
+        closeBtn.style.fontSize = '14px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.onclick = () => {
+            panel?.remove();
+            iframe?.remove();
+            changelogPanel?.remove();
+            settingsPanel?.remove();
+            dropdownMenu?.remove();
+            removeBlur();
+        };
+
         dropdownMenu.appendChild(changelogBtn);
         dropdownMenu.appendChild(settingsBtn);
+        dropdownMenu.appendChild(hideBtn);
+        dropdownMenu.appendChild(closeBtn);
 
         dropdownBtn.onclick = () => {
             dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'flex' : 'none';
@@ -230,6 +262,8 @@ javascript:(function () {
                  iframe.style.margin = '20px auto';
                  iframe.style.boxShadow = '0 0 20px #038FF9';
                  document.body.appendChild(iframe);
+                 document.body.appendChild(dropdownBtn);
+                 document.body.appendChild(dropdownMenu);
               });
      
               container.appendChild(button);
@@ -249,7 +283,7 @@ javascript:(function () {
             blurLayer.style.width = '100vw';
             blurLayer.style.height = '100vh';
             blurLayer.style.backdropFilter = 'blur(5px)';
-            blurLayer.style.zIndex = 9998;
+            blurLayer.style.zIndex = 3;
             document.body.appendChild(blurLayer);
         }
     }
@@ -277,7 +311,7 @@ javascript:(function () {
         settingsPanel.style.fontFamily = 'Verdana, sans-serif';
         settingsPanel.style.color = '#0766FF';
         settingsPanel.style.padding = '20px';
-        settingsPanel.style.zIndex = 10000;
+        settingsPanel.style.zIndex = 5;
         settingsPanel.className = 'custom-scroll-panel';
 
         const closeBtn = document.createElement('button');
@@ -295,6 +329,11 @@ javascript:(function () {
             removeBlur();
         };
         settingsPanel.appendChild(closeBtn);
+        
+/*
+add return to home
+add json formatting for updates
+*/
 
         const title = document.createElement('div');
         title.innerText = 'Settings';
@@ -306,15 +345,15 @@ javascript:(function () {
 
         const content = document.createElement('div');
         content.innerHTML = `
-  <h3>Misc</h3>
-  <p style="color: #0766FF;">Coming Soon!</p>
-  <h3>Keybinds</h3>
-  <p style="color: #0766FF;">Ctrl + E | Hide<br>More Soon...</p>
-  <h3>Credits</h3>
-  <p style="color: #0766FF;">Owner: trulyzeph</p>
-  <div style="text-align: center; font-size: 10px; margin-top: 60px;">
-    Zephware 2025 | <span style="font-size: 0.75rem;">v0.6</span>
-  </div>
+        <h3>Misc</h3>
+        <p style="color: #0766FF;">Coming Soon!</p>
+        <h3>Keybinds</h3>
+        <p style="color: #0766FF;">Ctrl + E | Hide<br>More Soon...</p>
+        <h3>Credits</h3>
+        <p style="color: #0766FF;">Owner: trulyzeph</p>
+        <div style="text-align: center; font-size: 10px; margin-top: 60px;">
+        Zephware 2025 | <span style="font-size: 0.75rem;">v0.6</span>
+        </div>
 `;
 
         settingsPanel.appendChild(content);
@@ -338,7 +377,7 @@ javascript:(function () {
         changelogPanel.style.fontFamily = 'Verdana, sans-serif';
         changelogPanel.style.color = '#0766FF';
         changelogPanel.style.padding = '20px';
-        changelogPanel.style.zIndex = 10000;
+        changelogPanel.style.zIndex = 5;
         changelogPanel.className = 'custom-scroll-panel';
 
         const title = document.createElement('div');
@@ -363,14 +402,16 @@ javascript:(function () {
             changelogPanel.remove()
             removeBlur();
         };
+
         changelogPanel.appendChild(closeBtn);
 
         const content = document.createElement('div');
         content.style.marginTop = '20px';
         content.innerHTML = `
   <div style="color: #0766FF;">
-    <h3 style="text-decoration: underline; font-size: 18px;">4/10/25 | Version 0.6 Beta</h3>
-    <ul style="margin-left: -15px;">
+    <h3 style="text-decoration: underline; font-size: 18px;">Huge QOL!</h3>
+    <h5 style="margin-top: -10px;">v0.6 Beta: 4/10/25</h5>
+    <ul style="margin-left: -15px; margin-top: -15px;">
       <li>Added Change Log Panel</li>
       <li>Added Settings Panel</li>
       <li>Added Search Bar</li>
