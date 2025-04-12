@@ -1,0 +1,43 @@
+[
+  {
+    "title": "Lots of QOL!",
+    "version": "v0.6",
+    "date": "2025-04-10",
+    "changes": [
+      "Added Change Log Panel",
+      "Added Settings Panel",
+      "Added Search Bar",
+      "Dropdown for settings/changelog",
+      "Slight UI Tweak",
+      "Added Version Counter",
+      "Added more game images"
+    ]
+  },
+  {
+    "title": "Next Update: More QOL!",
+    "version": "v0.7",
+    "date": "N/A",
+    "changes": [
+      "Hide Panel in Menu",
+      "Close Panel in Menu"
+    ]
+  },
+  {
+    "title": "Upcoming: Official Release!",
+    "version": "v1.0",
+    "date": "N/A",
+    "changes": [
+      "All game images added",
+      "All game names fixed",
+      "and more!"
+    ]
+  },
+  {
+    "title": "Upcoming: GUI Update",
+    "version": "v1.1",
+    "date": "N/A",
+    "changes": [
+      "GUI Update"
+    ]
+  }
+]
