@@ -1,4 +1,3 @@
-
 javascript:(function () {
     let iframe = null;
     let panel = null;
@@ -127,7 +126,7 @@ javascript:(function () {
         const dropdownMenu = document.createElement('div');
         dropdownMenu.style.position = 'absolute';
         dropdownMenu.style.top = '50px';
-        dropdownMenu.style.right = '30px';
+        dropdownMenu.style.right = '10px';
         dropdownMenu.style.background = '#1a1a1a';
         dropdownMenu.style.border = '1px solid #0766FF';
         dropdownMenu.style.borderRadius = '8px';
@@ -187,7 +186,18 @@ javascript:(function () {
             dropdownMenu?.remove();
             removeBlur();
         };
-
+        const homeBtn = document.createElement('div');
+        homeBtn.innerText = 'Home';
+        homeBtn.style.background = 'transparent';
+        homeBtn.style.color = '#0766FF';
+        homeBtn.style.border = 'none';
+        homeBtn.style.fontSize = '14px';
+        homeBtn.style.cursor = 'pointer';
+        homeBtn.style.textAlign = 'center';
+        homeBtn.onclick = () => {
+            document.querySelector('.zp-game-panel')?.scrollIntoView({ behavior: 'smooth' });
+        };
+        dropdownMenu.appendChild(homeBtn);
         dropdownMenu.appendChild(changelogBtn);
         dropdownMenu.appendChild(settingsBtn);
         dropdownMenu.appendChild(hideBtn);
@@ -329,11 +339,6 @@ javascript:(function () {
             removeBlur();
         };
         settingsPanel.appendChild(closeBtn);
-        
-/*
-add return to home
-add json formatting for updates
-*/
 
         const title = document.createElement('div');
         title.innerText = 'Settings';
@@ -408,39 +413,47 @@ add json formatting for updates
         const content = document.createElement('div');
         content.style.marginTop = '20px';
         content.innerHTML = `
-  <div style="color: #0766FF;">
-    <h3 style="text-decoration: underline; font-size: 18px;">Huge QOL!</h3>
-    <h5 style="margin-top: -10px;">v0.6 Beta: 4/10/25</h5>
-    <ul style="margin-left: -15px; margin-top: -15px;">
-      <li>Added Change Log Panel</li>
-      <li>Added Settings Panel</li>
-      <li>Added Search Bar</li>
-      <li>Dropdown for settings/changelog</li>
-      <li>Slight UI Tweak </li>
-      <li>Added Version Counter</li>
-      <li>Added more game images</li>
-    </ul>
-    
-    <h3 style="text-decoration: underline; font-size: 18px;">Next Update: v0.7 Beta</h3>
-    <ul style="margin-left: -15px;">
-      <li>Hide Panel in Menu</li>
-      <li>Close Panel in Menu</li>
-    </ul>
-
-    <h3 style="text-decoration: underline; font-size: 18px;">Upcoming: (Version 1)</h3>
-    <h4 style="margin-top: -10px;">Official Release!</h4>
-    <ul style="margin-left: -15px;">
-      <li>All game images added</li>
-      <li>All game names fixed</li>
-      <li>and more!</li>
-    </ul>
-
-    <h3 style="text-decoration: underline; font-size: 18px;">Upcoming: v1.1</h3>
-    <ul style="margin-left: -15px;">
-      <li>GUI Update</li>
-    </ul>
+  <div id="changelog-container"">
   </div>
 `;
+        fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/updates.json')
+          .then(response => response.json())
+          .then(data => renderChangelog(data))
+          .catch(error => console.error('Error fetching changelog data:', error));
+      
+        function renderChangelog(data) {
+          const changelogContainer = document.getElementById('changelog-container');
+      
+          data.forEach(update => {
+            const updateDiv = document.createElement('div');
+            updateDiv.classList.add('update-entry');
+      
+            const title = document.createElement('h3');
+            title.style.textDecoration = 'underline';
+            title.style.fontSize = '18px';
+            title.textContent = update.title;
+      
+            const version = document.createElement('h5');
+            version.style.marginTop = '-10px';
+            version.textContent = `${update.version}: ${update.date}`;
+      
+            const changeList = document.createElement('ul');
+            changeList.style.marginLeft = '-15px';
+            changeList.style.marginTop = '-15px';
+      
+            update.changes.forEach(change => {
+              const listItem = document.createElement('li');
+              listItem.textContent = change;
+              changeList.appendChild(listItem);
+            });
+      
+            updateDiv.appendChild(title);
+            updateDiv.appendChild(version);
+            updateDiv.appendChild(changeList);
+      
+            changelogContainer.appendChild(updateDiv);
+          });
+        }
 
         changelogPanel.appendChild(content);
     }
