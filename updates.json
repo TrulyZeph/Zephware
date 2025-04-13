@@ -5,7 +5,10 @@
     "date": "04/13/2025",
     "changes": [
       "Hide Panel in Menu",
-      "Close Panel in Menu"
+      "Close Panel in Menu",
+      "Home Button in Menu",
+      "Fixed Blur Glitch",
+      "Made Changelog More Managable"
     ]
   },
   {
