@@ -365,7 +365,7 @@
 		"url": "https://www.yoosfuhl.com/game/adventurecapitalist"
 	},
 	{
-		"label": "Turbomotoracer",
+		"label": "Turbo Moto Racer",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/turbomotoracer"
 	},
@@ -785,17 +785,17 @@
 		"url": "https://www.yoosfuhl.com/game/wheeliebike"
 	},
 	{
-		"label": "Ovo",
+		"label": "OvO",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/ovogame"
 	},
 	{
-		"label": "Ludogame",
+		"label": "Ludo",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/ludogame"
 	},
 	{
-		"label": "Dogelover",
+		"label": "Doge Lover",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/dogelover"
 	},
@@ -805,62 +805,57 @@
 		"url": "https://www.yoosfuhl.com/game/sokoban"
 	},
 	{
-		"label": "Idlebreakout",
+		"label": "Idle Breakout",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/idlebreakout"
 	},
 	{
-		"label": "Chesspursuit",
+		"label": "Chess Pursuit",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/chesspursuit"
 	},
 	{
-		"label": "Coreball",
+		"label": "Core Ball",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/coreball"
 	},
 	{
-		"label": "Tinyfishing",
+		"label": "Tiny Fishing",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/tinyfishing"
 	},
 	{
-		"label": "Driftboss",
+		"label": "Drift Boss",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/driftboss"
 	},
 	{
-		"label": "3dtrexgame",
+		"label": "3D T-Rex Game",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/3dtrexgame"
 	},
 	{
-		"label": "Drivemad",
-		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
-		"url": "https://www.yoosfuhl.com/game/drivemad"
-	},
-	{
-		"label": "Fallbeans",
+		"label": "Fall Beans",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/fallbeans"
 	},
 	{
-		"label": "Run3",
+		"label": "Run 3",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/run3"
 	},
 	{
-		"label": "Spacebarclicker",
+		"label": "Spacebar Clicker",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/spacebarclicker"
 	},
 	{
-		"label": "2048taylorswift",
+		"label": "2048 Taylor Swift",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/2048taylorswift"
 	},
 	{
-		"label": "3ddinogame",
+		"label": "3D Dino Game",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
 		"url": "https://www.yoosfuhl.com/game/3ddinogame"
 	},
