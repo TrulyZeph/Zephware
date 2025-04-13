@@ -7,7 +7,7 @@ javascript:(function () {
     let buttonConfigs = [];
 
     function loadGameList() {
-        fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/main/gamelist.json')
+        fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/gamelist.json')
             .then(response => response.json())
             .then(data => {
                 buttonConfigs = data;
@@ -416,7 +416,7 @@ javascript:(function () {
   <div id="changelog-container"">
   </div>
 `;
-        fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/updates.json')
+        fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/data/updates.json')
           .then(response => response.json())
           .then(data => renderChangelog(data))
           .catch(error => console.error('Error fetching changelog data:', error));
