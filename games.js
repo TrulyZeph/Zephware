@@ -5,6 +5,7 @@ javascript:(function () {
     let settingsPanel = null;
     let changelogPanel = null;
     let buttonConfigs = [];
+    const version = 'v0.7'; 
 
     function loadGameList() {
         fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/gamelist.json')
@@ -32,7 +33,7 @@ javascript:(function () {
         container.style.width = '100%';
   
         const title = document.createElement('div');
-        title.innerHTML = 'Zephware <sup style="font-size: 0.75rem">v0.6</s>';
+        title.innerHTML = `Zephware <sup style="font-size: 0.75rem">${version}</sup>`;
         title.style.padding = '5px 65px';
         title.style.background = '#017AD5';
         title.style.borderRadius = '10px';
@@ -357,7 +358,7 @@ javascript:(function () {
         <h3>Credits</h3>
         <p style="color: #0766FF;">Owner: trulyzeph</p>
         <div style="text-align: center; font-size: 10px; margin-top: 60px;">
-        Zephware 2025 | <span style="font-size: 0.75rem;">v0.6</span>
+        Zephware 2025 | <span style="font-size: 0.75rem;">${version}</span>
         </div>
 `;
 
