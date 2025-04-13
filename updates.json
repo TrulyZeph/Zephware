@@ -1,22 +1,8 @@
 [
   {
-    "title": "Lots of QOL!",
-    "version": "v0.6",
-    "date": "2025-04-10",
-    "changes": [
-      "Added Change Log Panel",
-      "Added Settings Panel",
-      "Added Search Bar",
-      "Dropdown for settings/changelog",
-      "Slight UI Tweak",
-      "Added Version Counter",
-      "Added more game images"
-    ]
-  },
-  {
-    "title": "Next Update: More QOL!",
-    "version": "v0.7",
-    "date": "N/A",
+    "title": "More QOL: Menu Update",
+    "version": "v0.7 Beta",
+    "date": "04/13/2025",
     "changes": [
       "Hide Panel in Menu",
       "Close Panel in Menu"
@@ -39,5 +25,19 @@
     "changes": [
       "GUI Update"
     ]
-  }
+  },
+  {
+    "title": "Previous Update: Lots of QOL!",
+    "version": "v0.6 Beta",
+    "date": "04/10/25",
+    "changes": [
+      "Added Change Log Panel",
+      "Added Settings Panel",
+      "Added Search Bar",
+      "Dropdown for settings/changelog",
+      "Slight UI Tweak",
+      "Added Version Counter",
+      "Added more game images"
+    ]
+  },
 ]
