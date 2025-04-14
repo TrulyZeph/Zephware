@@ -1,0 +1,1 @@
+javascript:(function()%7Bfetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/main/fetcherbookmarklet.js').then(response=%3Eresponse.text()).then(scriptText=%3E%7Beval(scriptText);%7D).catch(err=%3Econsole.error('Error%20loading%20script:',err));%7D)();
