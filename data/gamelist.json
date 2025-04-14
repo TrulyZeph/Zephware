@@ -211,32 +211,32 @@
 	},
 	{
 		"label": "Draw The Rest",
-		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/DrawTheRest.webp",
 		"url": "https://www.yoosfuhl.com/game/drawtherest"
 	},
 	{
 		"label": "Free Kick Training",
-		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/FreeKickTraining.jpg",
 		"url": "https://www.yoosfuhl.com/game/freekicktraining"
 	},
 	{
 		"label": "Deadly Descent",
-		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
-		"url": "https://www.yoosfuhl.com/game/deadlydescent"
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/DeadlyDescent.png",
+		"url": "https://codelab.situscms.com/game/deadlydecent/index.html"
 	},
 	{
 		"label": "Escape Road",
-		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
-		"url": "https://www.yoosfuhl.com/game/escaperoad"
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/EscapeRoad.jpg",
+		"url": "https://codelab.situscms.com/game/escaperoad/index.html"
 	},
 	{
 		"label": "FNF Shaggy",
-		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
-		"url": "https://www.yoosfuhl.com/game/fnfshaggy"
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/FNFShaggy.jpg",
+		"url": "https://www.yoosfuhl.com/game/fnf/shaggy/index.html"
 	},
 	{
 		"label": "Tiny Truck Racing",
-		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png",
+		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/TinyTruckRacing.jpeg",
 		"url": "https://www.yoosfuhl.com/game/tinytruckracing"
 	},
 	{
