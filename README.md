@@ -1,12 +1,12 @@
 <h1> Zephware </h1>
 Zephware is the ultimate bookmarklet for school with gimkit and blooket cheats along with games and unblockers.
 This project is intended to primarly bypass GoGuardian, if you have another blocker, this might not be functional.
-Note: This Project is Currently in the Making.
+Note: This project is currently in the making.
 
 ## How to Use:
-Step 1. Go to <a href="https://github.com/TrulyZeph/Zephware/blob/main/bookmarklet.js" target="_blank">bookmarklet.js</a>
-Step 2. Copy the code and set it as the url for a bookmark
-Step 3. Run the bookmark ontop of any website.
+<br>Step 1. Go to <a href="https://github.com/TrulyZeph/Zephware/blob/main/bookmarklet.js" target="_blank">bookmarklet.js</a>
+<br>Step 2. Copy the code and set it as the url for a bookmark
+<br>Step 3. Run the bookmark ontop of any website.
 Note: It works best on about:blank but can also be used ontop of Schoology. Note that some websites might have protection against this bookmark, causing it to not work.
 
 ## Tasks
