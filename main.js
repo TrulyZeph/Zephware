@@ -75,7 +75,7 @@ javascript:(function() {
             closePanel();
             loadZephPanel();
         } else {
-            alert('Wrong password. Try again.');
+            alert('haha incorrect noob learn to spell keed');
         }
     }
 
