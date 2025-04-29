@@ -196,7 +196,8 @@ javascript:(function () {
         homeBtn.style.cursor = 'pointer';
         homeBtn.style.textAlign = 'center';
         homeBtn.onclick = () => {
-            document.querySelector('.zp-game-panel')?.scrollIntoView({ behavior: 'smooth' });
+            iframe?.remove();
+            createPanel();
         };
         dropdownMenu.appendChild(homeBtn);
         dropdownMenu.appendChild(changelogBtn);
@@ -402,7 +403,7 @@ javascript:(function () {
         closeBtn.style.background = 'transparent';
         closeBtn.style.border = 'none';
         closeBtn.style.color = '#0766FF';
-        closeBtn.style.fontSize = '16px';
+        closeBtn.style.fontSize = '24px';
         closeBtn.style.cursor = 'pointer';
         closeBtn.onclick = () => {
             changelogPanel.remove()
