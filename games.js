@@ -185,6 +185,7 @@ javascript:(function () {
             changelogPanel?.remove();
             settingsPanel?.remove();
             dropdownMenu?.remove();
+            dropdownBtn?.remove();
             removeBlur();
         };
         const homeBtn = document.createElement('div');
@@ -197,6 +198,8 @@ javascript:(function () {
         homeBtn.style.textAlign = 'center';
         homeBtn.onclick = () => {
             iframe?.remove();
+            dropdownMenu?.remove();
+            dropdownBtn?.remove();
             createPanel();
         };
         dropdownMenu.appendChild(homeBtn);
