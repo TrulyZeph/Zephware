@@ -402,7 +402,7 @@ javascript:(function () {
         closeBtn.innerText = '✕';
         closeBtn.style.position = 'absolute';
         closeBtn.style.top = '10px';
-        closeBtn.style.right = '15px';
+        closeBtn.style.right = '10px';
         closeBtn.style.background = 'transparent';
         closeBtn.style.border = 'none';
         closeBtn.style.color = '#0766FF';
