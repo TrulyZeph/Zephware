@@ -16,10 +16,11 @@
   {
     "title": "Upcoming: Official Release!",
     "version": "v1.0",
-    "date": "???",
+    "date": "5/5/25",
     "changes": [
       "All game images added",
-      "and more!"
+      "HUGE SURPRISE",
+      "and more...?"
     ]
   },
   {
@@ -27,7 +28,26 @@
     "version": "v1.1",
     "date": "???",
     "changes": [
-      "GUI Update"
+      "GUI Rehaul",
+      "Easier Management",
+      "More Organized"
+    ]
+  },
+  {
+    "title": "Upcoming: Crazy QOL + Optimization",
+    "version": "v1.2",
+    "date": "???",
+    "changes": [
+      "Lots of new features",
+      "More optimization"
+    ]
+  },
+  {
+    "title": "Upcoming: More Games! 🗣️🔥",
+    "version": "v1.5",
+    "date": "???",
+    "changes": [
+      "100+ New Games!"
     ]
   },
   {
