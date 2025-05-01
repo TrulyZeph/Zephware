@@ -66,6 +66,7 @@ javascript:(function () {
         panel.style.color = '#07D5F9';
         panel.style.padding = '20px';
         panel.className = 'custom-scroll-panel';
+        panel.id = 'panel';
 
         const style = document.createElement('style');
         style.textContent = `
@@ -198,12 +199,12 @@ javascript:(function () {
         homeBtn.style.cursor = 'pointer';
         homeBtn.style.textAlign = 'center';
         homeBtn.onclick = () => {
-            iframe?.remove();
-            if (!gamePanel) {
+            if (document.getElementById('panel') == null) {
                 createPanel();
+                iframe?.remove();
+                dropdownMenu?.remove();
+                dropdownBtn?.remove();
             }
-            dropdownMenu?.remove();
-            dropdownBtn?.remove();
          };
 
         dropdownMenu.appendChild(homeBtn);
