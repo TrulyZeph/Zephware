@@ -5,7 +5,8 @@ javascript:(function () {
     let settingsPanel = null;
     let changelogPanel = null;
     let buttonConfigs = [];
-    const version = 'v0.7'; 
+    const version = 'v0.7';
+    createChangelogPanel();
 
     function loadGameList() {
         fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/gamelist.json')
@@ -13,7 +14,6 @@ javascript:(function () {
             .then(data => {
                 buttonConfigs = data;
                 createPanel();
-                createChangelogPanel();
                 showChangelog();
             })
             .catch(error => {
