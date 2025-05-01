@@ -170,6 +170,8 @@ javascript:(function () {
         hideBtn.onclick = () => {
             if (panel) panel.style.display = 'none';
             if (iframe) iframe.style.display = 'none';
+            dropdownMenu.style.display = 'none';
+            dropdownBtn.style.display = 'none';
         };
 
         const closeBtn = document.createElement('button');
@@ -185,10 +187,9 @@ javascript:(function () {
             changelogPanel?.remove();
             settingsPanel?.remove();
             dropdownMenu?.remove();
-            dropdownBtn?.remove();
             removeBlur();
         };
-        const homeBtn = document.createElement('div');
+        const homeBtn = document.createElement('button');
         homeBtn.innerText = 'Home';
         homeBtn.style.background = 'transparent';
         homeBtn.style.color = '#0766FF';
@@ -198,10 +199,13 @@ javascript:(function () {
         homeBtn.style.textAlign = 'center';
         homeBtn.onclick = () => {
             iframe?.remove();
+            if (!gamePanel) {
+                createPanel();
+            }
             dropdownMenu?.remove();
             dropdownBtn?.remove();
-            createPanel();
-        };
+         };
+
         dropdownMenu.appendChild(homeBtn);
         dropdownMenu.appendChild(changelogBtn);
         dropdownMenu.appendChild(settingsBtn);
@@ -402,11 +406,11 @@ javascript:(function () {
         closeBtn.innerText = '✕';
         closeBtn.style.position = 'absolute';
         closeBtn.style.top = '10px';
-        closeBtn.style.right = '10px';
+        closeBtn.style.right = '15px';
         closeBtn.style.background = 'transparent';
         closeBtn.style.border = 'none';
         closeBtn.style.color = '#0766FF';
-        closeBtn.style.fontSize = '24px';
+        closeBtn.style.fontSize = '16px';
         closeBtn.style.cursor = 'pointer';
         closeBtn.onclick = () => {
             changelogPanel.remove()
@@ -437,10 +441,12 @@ javascript:(function () {
             title.style.textDecoration = 'underline';
             title.style.fontSize = '18px';
             title.textContent = update.title;
+            title.style.textAlign = 'center';
       
             const version = document.createElement('h5');
             version.style.marginTop = '-10px';
             version.textContent = `${update.version}: ${update.date}`;
+            version.style.textAlign = 'center';
       
             const changeList = document.createElement('ul');
             changeList.style.marginLeft = '-15px';
