@@ -117,7 +117,7 @@ javascript:(function () {
         dropdownBtn.innerText = '☰';
         dropdownBtn.style.position = 'absolute';
         dropdownBtn.style.top = '15px';
-        dropdownBtn.style.right = '25px';
+        dropdownBtn.style.right = '15px';
         dropdownBtn.style.fontSize = '30px';
         dropdownBtn.style.background = 'transparent';
         dropdownBtn.style.border = 'none';
@@ -411,7 +411,7 @@ javascript:(function () {
         closeBtn.style.background = 'transparent';
         closeBtn.style.border = 'none';
         closeBtn.style.color = '#0766FF';
-        closeBtn.style.fontSize = '16px';
+        closeBtn.style.fontSize = '24px';
         closeBtn.style.cursor = 'pointer';
         closeBtn.onclick = () => {
             changelogPanel.remove()
