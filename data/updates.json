@@ -1,32 +1,17 @@
 [
   {
-    "title": "More QOL: Menu Update",
-    "version": "v0.7 Beta",
-    "date": "04/13/2025",
-    "changes": [
-      "Hide Panel in Menu",
-      "Close Panel in Menu",
-      "Home Button in Menu",
-      "Fixed Blur Glitch",
-      "Made Changelog More Managable",
-      "20 New Game Icons",
-      "All Game Names Fixed!"
-    ]
-  },
-  {
-    "title": "Upcoming: Official Release!",
+    "title": "Official Release!",
     "version": "v1.0",
-    "date": "5/5/25",
+    "date": "5/4/25",
     "changes": [
       "All game images added",
-      "HUGE SURPRISE",
-      "and more...?"
+      "Broken games fixed"
     ]
   },
   {
     "title": "Upcoming: GUI Update",
     "version": "v1.1",
-    "date": "???",
+    "date": "5/12/25",
     "changes": [
       "GUI Rehaul",
       "Easier Management",
@@ -48,6 +33,20 @@
     "date": "???",
     "changes": [
       "100+ New Games!"
+    ]
+  },
+  {
+    "title": "More QOL: Menu Update",
+    "version": "v0.7 Beta",
+    "date": "04/13/2025",
+    "changes": [
+      "Hide Panel in Menu",
+      "Close Panel in Menu",
+      "Home Button in Menu",
+      "Fixed Blur Glitch",
+      "Made Changelog More Managable",
+      "20 New Game Icons",
+      "All Game Names Fixed!"
     ]
   },
   {
