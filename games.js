@@ -5,7 +5,7 @@ javascript:(function () {
     let settingsPanel = null;
     let changelogPanel = null;
     let buttonConfigs = [];
-    const version = 'v0.7';
+    const version = 'v1';
     createChangelogPanel();
 
     function loadGameList() {
@@ -502,47 +502,4 @@ add disguise (fake background) -- customizable through settings
 add tab disguise
 add escape button
 add console
-creative kill chamber: https://www.yoosfuhl.com/game/ckc/index.html
-learn to fly 3:
-https://www.yoosfuhl.com/game/learntofly/3/index.html
-stick rpg:
-https://www.yoosfuhl.com/game/stickrpg/1/index.html
-merge round racers
-https://codelab.situscms.com/game/mergeroundracers/index.html
-adventure capitalist
-https://www.yoosfuhl.com/game/adcapitalist/index.html
-bacon may die
-https://codelab.situscms.com/game/baconmaydie/index.html
-ngon
-https://www.yoosfuhl.com/game/n-gon/index.html
-paper io
-https://codelab.situscms.com/game/paperio2/index.html
-Senya and Oscar 2
-https://www.yoosfuhl.com/game/senyaoscar2/index.html
-riddle school 3
-https://www.yoosfuhl.com/game/riddleschool/3/index.html
-the impossible quiz 2
-https://www.yoosfuhl.com/game/impossiblequiz/TheImpossibleQuiz-2.swf
-papas pancakeria
-https://www.yoosfuhl.com/game/papasgames/papaspancakeria.swf
-snowrider 3d
-https://www.yoosfuhl.com/game/snowrider/index.html
-bob the robber 2
-https://www.yoosfuhl.com/game/bobtherobber/2/index.html
-wheely 2
-https://www.yoosfuhl.com/game/wheely/wheely2/index.html
-riddle school 2
-https://www.yoosfuhl.com/game/riddleschool/2/index.html
-riddle school 3
-https://www.yoosfuhl.com/game/riddleschool/3/index.html
-riddle school 1
-https://www.yoosfuhl.com/game/riddleschool/1/index.html
-monster tracks
-https://www.yoosfuhl.com/game/mostertracks/index.html
-3d trex game
-https://www.yoosfuhl.com/game/trexgame/index.html
-3d dino game
-https://www.yoosfuhl.com/game/dinogame/index.html
-FIX SMASH KARTS NAME
-FIX BUBBLE SHOOTER NAME
 */
