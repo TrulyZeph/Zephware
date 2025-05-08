@@ -93,5 +93,10 @@
         	"label": "Tap Tap Shots",
         	"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/TapTapShots.webp",
         	"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/q/1/tap-tap-shots/index.html"
-	}
+	},
+	{
+        	"label": "Snow Rider 3D",
+        	"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/SnowRider3D.png",
+        	"url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/tombmask/game/index.html"
+    	}
 ]
