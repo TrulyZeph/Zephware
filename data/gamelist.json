@@ -98,5 +98,10 @@
         	"label": "Snow Rider 3D",
         	"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/SnowRider3D.png",
         	"url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/tombmask/game/index.html"
+    	},
+	{
+        	"label": "Polytrack",
+        	"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/DealOrNoDeal.jpg",
+        	"url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/projects/deal-or-no-deal/index.html"
     	}
 ]
