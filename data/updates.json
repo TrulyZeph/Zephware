@@ -15,6 +15,7 @@
       "GUI Rehaul",
       "Easier Management",
       "More Organized",
+      "Smoother",
       "All Images Added",
       "Website Version Completion",
       "Website Dropped!"
@@ -25,8 +26,8 @@
     "version": "v1.3",
     "date": "???",
     "changes": [
-      "Lots of new features",
-      "More optimization"
+      "Lots of New Features!",
+      "More Optimization!"
     ]
   },
   {
@@ -74,8 +75,8 @@
       "Broken games fixed",
       "made into a website (wip)"
     ]
-  }
-    {
+  },
+  {
     "title": "Games Removed",
     "version": "v1.05",
     "date": "5/7/25",
