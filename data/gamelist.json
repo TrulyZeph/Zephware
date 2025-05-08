@@ -101,442 +101,442 @@
     	},
 	{
 		"label": "Soccer Random Pro",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/303/soccer-random-pro/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/303/soccer-random-pro/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Papa's Burgeria",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/papas-burgeria/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/papas-burgeria/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/PapasBurgeria.png"
 	},
 	{
 		"label": "Nuts and Bolts",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2025/unity/nuts-and-bolts-puzzle/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2025/unity/nuts-and-bolts-puzzle/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Watermelon Game",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2025/construct/321/watermelon-game/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2025/construct/321/watermelon-game/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/WatermelonGame.jpg"
 	},
 	{
 		"label": "2048",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2025/html/2048/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2025/html/2048/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/2048.jpg"
 	},
 	{
 		"label": "Snake",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/phaser/snake/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/phaser/snake/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/SnakeGame.jpg"
 	},
 	{
 		"label": "Super Car Driving",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity2/super-car-driving/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity2/super-car-driving/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Voxel World",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2025/unity/voxel-world/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2025/unity/voxel-world/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Basketball King",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/316/basketball-king/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/316/basketball-king/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Geometry Escape",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/299/geometry-escape/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/299/geometry-escape/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Bookworm",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/bookworm/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/bookworm/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Block Blast",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity3/block-blast/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity3/block-blast/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/BlockBlast.png"
 	},
 	{
 		"label": "Survival Karts",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity3/survival-karts/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity3/survival-karts/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Cake Match",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity3/cake-match-puzzle/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity3/cake-match-puzzle/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "World's Hardest Game",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/worlds-hardest-game/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/worlds-hardest-game/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Run 1",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/run-1/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/run-1/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Run1.webp"
 	},
 	{
 		"label": "Edelweiss",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/edelweiss/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/edelweiss/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Neighboorhood Defense",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/q2/neighborhood-defense/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/q2/neighborhood-defense/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Penalty King",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/q2/penalty-king/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/q2/penalty-king/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Let's Roll",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/lets-roll/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/lets-roll/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Duck Life Space",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/duck-life-space/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/duck-life-space/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Duck Life Adventure",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/duck-life-adventure/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/duck-life-adventure/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 		{
 		"label": "Duck Life Battle",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/duck-life-battle/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/duck-life-battle/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Gigga.io",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/gigga-io/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/gigga-io/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Highway Traffic",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity/highway-traffic/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity/highway-traffic/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Basketball Stars",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/basketball-stars/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/basketball-stars/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Crazy Karts",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity/crazy-karts/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity/crazy-karts/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Where's My Pizza?",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/wheres-my-pizza/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/wheres-my-pizza/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Love Tester",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2021/3/love-tester/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2021/3/love-tester/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Temu Geometry Dash",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/q2/geometry-dash-freezenova/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/q2/geometry-dash-freezenova/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Drift Hunters 2024",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity/drift-hunters-2024/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity/drift-hunters-2024/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Football Legends",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/football-legends/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/football-legends/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Fancy Pants 2",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/fancy-pants-2/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/fancy-pants-2/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Drift King",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity/drift-king/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity/drift-king/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Duck Life 4",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/duck-life-4/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/duck-life-4/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/DuckLife4.jpg"
 	},
 	{
 		"label": "Archer Hero",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity/archer-hero/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity/archer-hero/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Moto X3M",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/moto-x3m/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/moto-x3m/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/MotoX3M.jpg"
 	},
 	{
 		"label": "Stackball.io",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/stackball-io/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/stackball-io/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Drift Hunters",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity3/drift-hunters/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity3/drift-hunters/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/DriftHunters.png"
 	},
 	{
 		"label": "Real Flight Simulator",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity/real-flight-simulator/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity/real-flight-simulator/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Police Chase Drifter",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2021/3/police-chase-drifter/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2021/3/police-chase-drifter/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Drift Rider",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity3/drift-rider/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity3/drift-rider/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Spacebar Clicker",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/spacebar-clicker/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/spacebar-clicker/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/SpacebarClicker.jpg"
 	},
 	{
 		"label": "Madalin Stunt Cars Pro",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity/madalin-stunt-cars-pro/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity/madalin-stunt-cars-pro/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Stunt Rider",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity/stunt-rider/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity/stunt-rider/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "FNF",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/cube/friday-night-funkin/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/cube/friday-night-funkin/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/FNF.jpg"
 	},
 	{
 		"label": "Geometry Dash (Scratch)",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/scratch/geometry-dash-scratch/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/scratch/geometry-dash-scratch/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Bubble Shooter",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/bubble-shooter/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/bubble-shooter/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/BubbleShooter.jpg"
 	},
 	{
 		"label": "Car Football",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/construct/198/car-football/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/construct/198/car-football/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "We Become What We Behold",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/we-become-what-we-behold/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/we-become-what-we-behold/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Gummy Blocks",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/code/gummy-blocks/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/code/gummy-blocks/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 		{
 		"label": "ClassiCube",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/cube/classicube/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/cube/classicube/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Snow War.io",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/snow-war-io/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/snow-war-io/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "State.io Wars",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/233/state-io-wars/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/233/state-io-wars/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Tennis Masters",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/tennis-masters/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/tennis-masters/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Highway Racer 2",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity2/highway-racer-2/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity2/highway-racer-2/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Drift Hunters Pro",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity/drift-hunters-pro/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity/drift-hunters-pro/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/DriftHunters.png"
 	},
 	{
 		"label": "Edy's Car Simulator",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity/edys-car-simulator/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity/edys-car-simulator/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Moto X3M Winter",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/moto-x3m-winter/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/moto-x3m-winter/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/MotoX3MWinter.jpg"
 	},
 	{
 		"label": "Stunt Simulator",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/stunt-simulator/index2.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/stunt-simulator/index2.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Egg Clicker",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/291/egg-clicker/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/291/egg-clicker/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Bloxorz",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/games4/bloxorz/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/games4/bloxorz/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Moto X3M Pool Party",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/moto-x3m-pool-party/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/moto-x3m-pool-party/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/MotoX3MPoolParty.jpg"
 	},
 	{
 		"label": "Football King",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/226/football-king/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/226/football-king/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Moto X3M Spooky Land",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/moto-x3m-spooky-land/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/moto-x3m-spooky-land/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/MotoX3MSpookyland.png"
 	},
 	{
 		"label": "Learn to Fly 3",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/learn-to-fly-3/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/learn-to-fly-3/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/LearntoFly3.webp"
 	},
 	{
 		"label": "Master Chess",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/code/master-chess/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/code/master-chess/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Police Traffic",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2021/unity/police-traffic/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2021/unity/police-traffic/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Duck Life",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/duck-life/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/duck-life/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/DuckLife.jpg"
 	},
 	{
 		"label": "Learn to Fly Idle",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/learn-to-fly-idle/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/learn-to-fly-idle/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "UNO Online",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity4/uno-online/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity4/uno-online/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Draw the Bridge",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2021/4/draw-the-bridge/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2021/4/draw-the-bridge/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Duck Life 3",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/duck-life-3/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/duck-life-3/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Learn to Fly 2",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/learn-to-fly-2/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/learn-to-fly-2/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Hero Rush Tower Defense",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity/hero-rush-tower-defense/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity/hero-rush-tower-defense/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Slither Snakes",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/slither-snakes/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/slither-snakes/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Solitaire Adventure",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity4/solitaire-adventure/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity4/solitaire-adventure/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Doggo Clicker",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/games4/doggo-clicker/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/games4/doggo-clicker/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "SlidePark.io",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/slidepark-io/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/slidepark-io/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/AquaparkSlides.png"
 	},
 	{
 		"label": "Basketball Slam Dunk",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2021/unity2/basketball-slam-dunk/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2021/unity2/basketball-slam-dunk/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Crazy Car Arena",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity3/crazy-car-arena/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity3/crazy-car-arena/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Motorbike Simulator",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/motorbike-simulator/index2.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/motorbike-simulator/index2.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Vehicles Simulator",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/vehicles-simulator/index2.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/vehicles-simulator/index2.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Penalty Challenge",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/code/penalty-challenge/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/code/penalty-challenge/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Subway Idle 3D",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity4/subway-idle-3d/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity4/subway-idle-3d/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Stunt Simulator Multiplayer",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2021/unity/stunt-simulator-multiplayer/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2021/unity/stunt-simulator-multiplayer/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Fire and Water",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2023/construct/179/fire-and-water/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/construct/179/fire-and-water/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 	{
 		"label": "Basketball.io",
-		"link": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity3/basketball-io/index.html",
+		"url": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity3/basketball-io/index.html",
 		"image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
 	},
 ]
