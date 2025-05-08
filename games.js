@@ -5,7 +5,7 @@ javascript:(function () {
     let settingsPanel = null;
     let changelogPanel = null;
     let buttonConfigs = [];
-    const version = 'v1';
+    const version = 'v1.1';
     createChangelogPanel();
 
     function loadGameList() {
