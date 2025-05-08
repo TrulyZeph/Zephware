@@ -1,17 +1,25 @@
 [
   {
-    "title": "Official Release!",
-    "version": "v1.0",
-    "date": "5/4/25",
+    "title": "Games Removed",
+    "version": "v1.05",
+    "date": "5/7/25",
     "changes": [
-      "All game images added",
-      "Broken games fixed",
-      "made into a website (wip)"
+      "Removed 100+ Games",
+      "they got blocked :(",
+    ]
+  },
+  {
+    "title": "More Games!",
+    "version": "v1.1",
+    "date": "5/12/25",
+    "changes": [
+      "100+ New Games!",
+      "THIS WEEKEND!",
     ]
   },
   {
     "title": "Upcoming: GUI Update",
-    "version": "v1.1",
+    "version": "v1.2",
     "date": "5/12/25",
     "changes": [
       "GUI Rehaul",
@@ -21,7 +29,7 @@
   },
   {
     "title": "Upcoming: Crazy QOL + Optimization",
-    "version": "v1.2",
+    "version": "v1.3",
     "date": "???",
     "changes": [
       "Lots of new features",
@@ -62,6 +70,16 @@
       "Slight UI Tweak",
       "Added Version Counter",
       "Added more game images"
+    ]
+  },
+  {
+    "title": "Official Release!",
+    "version": "v1.0",
+    "date": "5/4/25",
+    "changes": [
+      "All game images added",
+      "Broken games fixed",
+      "made into a website (wip)"
     ]
   }
 ]
