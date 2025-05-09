@@ -117,7 +117,7 @@ javascript:(function () {
         dropdownBtn.innerText = '☰';
         dropdownBtn.style.position = 'absolute';
         dropdownBtn.style.top = '15px';
-        dropdownBtn.style.right = '15px';
+        dropdownBtn.style.left = '15px';
         dropdownBtn.style.fontSize = '30px';
         dropdownBtn.style.background = 'transparent';
         dropdownBtn.style.border = 'none';
@@ -126,18 +126,7 @@ javascript:(function () {
         dropdownBtn.style.textShadow = '0 0 5px #0766FF, 0 0 10px #0766FF, 0 0 1px #0766FF, 0 0 2px #0766FF, 0 0 3px #0766FF';
         dropdownBtn.id = 'dropdownbtn';
 
-        const dropdownMenu = document.createElement('div');
-        dropdownMenu.style.position = 'absolute';
-        dropdownMenu.style.top = '50px';
-        dropdownMenu.style.right = '10px';
-        dropdownMenu.style.background = '#1a1a1a';
-        dropdownMenu.style.border = '1px solid #0766FF';
-        dropdownMenu.style.borderRadius = '8px';
-        dropdownMenu.style.padding = '5px';
-        dropdownMenu.style.display = 'none';
-        dropdownMenu.style.flexDirection = 'column';
-        dropdownMenu.style.boxShadow = '0 0 10px #0766FF';
-        dropdownMenu.id = 'dropdownmenu';
+        const dropdownMenu = createDropdownMenu();
 
         const settingsBtn = document.createElement('button');
         settingsBtn.innerText = 'Settings';
@@ -285,8 +274,6 @@ javascript:(function () {
                  iframe.style.margin = '20px auto';
                  iframe.style.boxShadow = '0 0 20px #038FF9';
                  document.body.appendChild(iframe);
-                 document.body.appendChild(dropdownBtn);
-                 document.body.appendChild(dropdownMenu);
               });
      
               container.appendChild(button);
@@ -377,6 +364,24 @@ javascript:(function () {
         settingsPanel.appendChild(content);
 
         document.body.appendChild(settingsPanel);
+    }
+
+    function createDropdownMenu() {
+        const dropdownMenu = document.createElement('div');
+        dropdownMenu.style.position = 'absolute';
+        dropdownMenu.style.top = '5vh';
+        dropdownMenu.style.left = '15vw';
+        dropdownMenu.style.background = '#1a1a1a';
+        dropdownMenu.style.width = '300px';
+        dropdownMenu.style.height = '350px';
+        dropdownMenu.style.position = 'fixed';
+        dropdownMenu.style.border = '1px solid #0766FF';
+        dropdownMenu.style.borderRadius = '8px';
+        dropdownMenu.style.display = 'none';
+        dropdownMenu.style.flexDirection = 'column';
+        dropdownMenu.style.boxShadow = '0 0 10px #0766FF';
+        dropdownMenu.id = 'dropdownmenu';
+        return dropdownMenu;
     }
 
     function createChangelogPanel() {
@@ -488,13 +493,22 @@ javascript:(function () {
     function toggleFrames(event) {
         if (event.key === 'e' && (event.metaKey || event.ctrlKey)) {
             event.preventDefault();
+
             if (panel) panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
             if (iframe) iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
-            if (iframe) document.getElementById('dropdownbtn').style.display = document.getElementById('dropdownbtn').style.display === 'none' ? 'block' : 'none';
         }
     }
 
+    function toggleMenu(event) {
+    if (event.key === 'm' && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        const dropdownMenu = document.getElementById('dropdownmenu');
+        if (iframe) dropdownMenu.style.display = dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '' ? 'flex' : 'none';
+    }
+}
+
     document.addEventListener('keydown', toggleFrames);
+    document.addEventListener('keydown', toggleMenu);
     loadGameList();
 })();
 /* 
