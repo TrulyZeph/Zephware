@@ -1,10 +1,15 @@
 [
     {
-        "title": "More Games!",
-        "version": "v1.1",
-        "date": "5/8/25",
+        "title": "Stuff",
+        "version": "v1.15",
+        "date": "5/11/25",
         "changes": [
-            "80 New Games!"
+            "version 1.2 will slowly roll out",
+            "one feature at a time",
+            "changed some stuff in code",
+            "menu button is kinda broken rn",
+            "game icons should be out tmrw",
+            "i got busy messin with menu"
         ]
     },
     {
@@ -83,6 +88,14 @@
         "changes": [
             "Removed 100+ Games",
             "they got blocked :("
+        ]
+    },
+    {
+        "title": "More Games!",
+        "version": "v1.1",
+        "date": "5/8/25",
+        "changes": [
+            "80 New Games!"
         ]
     }
 ]
