@@ -5,7 +5,7 @@ javascript:(function () {
     let settingsPanel = null;
     let changelogPanel = null;
     let buttonConfigs = [];
-    const version = 'v1.15';
+    const version = 'v1.1';
     createChangelogPanel();
 
     function loadGameList() {
@@ -15,6 +15,7 @@ javascript:(function () {
                 buttonConfigs = data;
                 createPanel();
                 showChangelog();
+                createDropdownMenu();
             })
             .catch(error => {
                 console.error('Error loading game list:', error);
@@ -128,89 +129,11 @@ javascript:(function () {
 
         const dropdownMenu = createDropdownMenu();
 
-        const settingsBtn = document.createElement('button');
-        settingsBtn.innerText = 'Settings';
-        settingsBtn.style.background = 'transparent';
-        settingsBtn.style.color = '#0766FF';
-        settingsBtn.style.border = 'none';
-        settingsBtn.style.fontSize = '14px';
-        settingsBtn.style.cursor = 'pointer';
-        settingsBtn.onclick = () => {
-            showSettings();
-            dropdownMenu.style.display = 'none';
-        };
-
-        const changelogBtn = document.createElement('button');
-        changelogBtn.innerText = 'Changelog';
-        changelogBtn.style.background = 'transparent';
-        changelogBtn.style.color = '#0766FF';
-        changelogBtn.style.border = 'none';
-        changelogBtn.style.fontSize = '14px';
-        changelogBtn.style.cursor = 'pointer';
-        changelogBtn.onclick = () => {
-            showChangelog();
-            dropdownMenu.style.display = 'none';
-        };
-
-        const hideBtn = document.createElement('button');
-        hideBtn.innerText = 'Hide';
-        hideBtn.style.background = 'transparent';
-        hideBtn.style.color = '#0766FF';
-        hideBtn.style.border = 'none';
-        hideBtn.style.fontSize = '14px';
-        hideBtn.style.cursor = 'pointer';
-        hideBtn.onclick = () => {
-            if (panel) panel.style.display = 'none';
-            if (iframe) iframe.style.display = 'none';
-            dropdownMenu.style.display = 'none';
-            dropdownBtn.style.display = 'none';
-        };
-
-        const closeBtn = document.createElement('button');
-        closeBtn.innerText = 'Close';
-        closeBtn.style.background = 'transparent';
-        closeBtn.style.color = '#ff0000';
-        closeBtn.style.border = 'none';
-        closeBtn.style.fontSize = '14px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.onclick = () => {
-            panel?.remove();
-            iframe?.remove();
-            changelogPanel?.remove();
-            settingsPanel?.remove();
-            dropdownMenu?.remove();
-            dropdownBtn?.remove();
-            removeBlur();
-        };
-        const homeBtn = document.createElement('button');
-        homeBtn.innerText = 'Home';
-        homeBtn.style.background = 'transparent';
-        homeBtn.style.color = '#0766FF';
-        homeBtn.style.border = 'none';
-        homeBtn.style.fontSize = '14px';
-        homeBtn.style.cursor = 'pointer';
-        homeBtn.style.textAlign = 'center';
-        homeBtn.onclick = () => {
-            if (document.getElementById('panel') == null) {
-                createPanel();
-                iframe?.remove();
-                dropdownMenu?.remove();
-                dropdownBtn?.remove();
-            }
-         };
-
-        dropdownMenu.appendChild(homeBtn);
-        dropdownMenu.appendChild(changelogBtn);
-        dropdownMenu.appendChild(settingsBtn);
-        dropdownMenu.appendChild(hideBtn);
-        dropdownMenu.appendChild(closeBtn);
-
         dropdownBtn.onclick = () => {
-            dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'flex' : 'none';
+            dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
         };
 
         panel.appendChild(dropdownBtn);
-        panel.appendChild(dropdownMenu);
         const container = document.createElement('div');
         container.style.display = 'flex';
         container.style.flexWrap = 'wrap';
@@ -367,7 +290,7 @@ javascript:(function () {
     }
 
     function createDropdownMenu() {
-        const dropdownMenu = document.createElement('div');
+        dropdownMenu = document.createElement('div');
         dropdownMenu.style.position = 'absolute';
         dropdownMenu.style.top = '5vh';
         dropdownMenu.style.left = '15vw';
@@ -377,10 +300,87 @@ javascript:(function () {
         dropdownMenu.style.position = 'fixed';
         dropdownMenu.style.border = '1px solid #0766FF';
         dropdownMenu.style.borderRadius = '8px';
-        dropdownMenu.style.display = 'none';
         dropdownMenu.style.flexDirection = 'column';
         dropdownMenu.style.boxShadow = '0 0 10px #0766FF';
         dropdownMenu.id = 'dropdownmenu';
+
+        const settingsBtn = document.createElement('button');
+        settingsBtn.innerText = 'Settings';
+        settingsBtn.style.background = 'transparent';
+        settingsBtn.style.color = '#0766FF';
+        settingsBtn.style.border = 'none';
+        settingsBtn.style.fontSize = '14px';
+        settingsBtn.style.cursor = 'pointer';
+        settingsBtn.onclick = () => {
+            showSettings();
+            dropdownMenu.style.display = 'none';
+        };
+
+        const changelogBtn = document.createElement('button');
+        changelogBtn.innerText = 'Changelog';
+        changelogBtn.style.background = 'transparent';
+        changelogBtn.style.color = '#0766FF';
+        changelogBtn.style.border = 'none';
+        changelogBtn.style.fontSize = '14px';
+        changelogBtn.style.cursor = 'pointer';
+        changelogBtn.onclick = () => {
+            showChangelog();
+            dropdownMenu.style.display = 'none';
+        };
+
+        const hideBtn = document.createElement('button');
+        hideBtn.innerText = 'Hide';
+        hideBtn.style.background = 'transparent';
+        hideBtn.style.color = '#0766FF';
+        hideBtn.style.border = 'none';
+        hideBtn.style.fontSize = '14px';
+        hideBtn.style.cursor = 'pointer';
+        hideBtn.onclick = () => {
+            if (panel) panel.style.display = 'none';
+            if (iframe) iframe.style.display = 'none';
+            dropdownMenu.style.display = 'none';
+            dropdownBtn.style.display = 'none';
+        };
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerText = 'Close';
+        closeBtn.style.background = 'transparent';
+        closeBtn.style.color = '#ff0000';
+        closeBtn.style.border = 'none';
+        closeBtn.style.fontSize = '14px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.onclick = () => {
+            panel?.remove();
+            iframe?.remove();
+            changelogPanel?.remove();
+            settingsPanel?.remove();
+            dropdownMenu?.remove();
+            dropdownBtn?.remove();
+            removeBlur();
+        };
+        const homeBtn = document.createElement('button');
+        homeBtn.innerText = 'Home';
+        homeBtn.style.background = 'transparent';
+        homeBtn.style.color = '#0766FF';
+        homeBtn.style.border = 'none';
+        homeBtn.style.fontSize = '14px';
+        homeBtn.style.cursor = 'pointer';
+        homeBtn.style.textAlign = 'center';
+        homeBtn.onclick = () => {
+            if (document.getElementById('panel') == null) {
+                createPanel();
+                iframe?.remove();
+                dropdownMenu?.remove();
+                dropdownBtn?.remove();
+            }
+         };
+
+        dropdownMenu.appendChild(homeBtn);
+        dropdownMenu.appendChild(changelogBtn);
+        dropdownMenu.appendChild(settingsBtn);
+        dropdownMenu.appendChild(hideBtn);
+        dropdownMenu.appendChild(closeBtn);
+
         return dropdownMenu;
     }
 
@@ -502,7 +502,7 @@ javascript:(function () {
     function toggleMenu(event) {
     if (event.key === 'm' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
-        const dropdownMenu = document.getElementById('dropdownmenu');
+        const dropdownMenu = createDropdownMenu();
         if (iframe) dropdownMenu.style.display = dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '' ? 'flex' : 'none';
     }
 }
