@@ -102,7 +102,7 @@
     {
         "label": "Soccer Random Pro",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/303/soccer-random-pro/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Soccer-Random-Pro.jpg"
     },
     {
         "label": "Papa's Burgeria",
@@ -112,7 +112,7 @@
     {
         "label": "Nuts and Bolts",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2025/unity/nuts-and-bolts-puzzle/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Nuts-and-Bolts-Puzzle.jpg"
     },
     {
         "label": "Watermelon Game",
@@ -127,32 +127,32 @@
     {
         "label": "Snake",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/phaser/snake/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/SnakeGame.jpg"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Snake.jpg"
     },
     {
         "label": "Super Car Driving",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity2/super-car-driving/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Super-Car-Driving.jpg"
     },
     {
         "label": "Voxel World",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2025/unity/voxel-world/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Voxel-World.jpg"
     },
     {
         "label": "Basketball King",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/316/basketball-king/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Basketball-King.jpg"
     },
     {
         "label": "Geometry Escape",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/299/geometry-escape/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Geometry-Escape.jpg"
     },
     {
         "label": "Bookworm",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/bookworm/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Bookworm.jpg"
     },
     {
         "label": "Block Blast",
@@ -162,17 +162,17 @@
     {
         "label": "Survival Karts",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity3/survival-karts/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Survival-Karts.jpg"
     },
     {
         "label": "Cake Match",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity3/cake-match-puzzle/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Cake-Match-Puzzle.jpg"
     },
     {
         "label": "World's Hardest Game",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/worlds-hardest-game/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/worlds-hardest-game.webp"
     },
     {
         "label": "Run 1",
@@ -182,22 +182,22 @@
     {
         "label": "Edelweiss",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/edelweiss/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/edelweiss-adventure-game.webp"
     },
     {
         "label": "Neighboorhood Defense",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/q2/neighborhood-defense/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/neighborhood-defense.webp"
     },
     {
         "label": "Penalty King",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/q2/penalty-king/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/penalty-king.webp"
     },
     {
         "label": "Let's Roll",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/wix/lets-roll/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/lets-roll.webp"
     },
     {
         "label": "Duck Life Space",
