@@ -4,8 +4,9 @@ javascript:(function () {
     let blurLayer = null;
     let settingsPanel = null;
     let changelogPanel = null;
+    let dropdownMenu = null;
     let buttonConfigs = [];
-    const version = 'v1.1';
+    const version = 'v1.15';
     createChangelogPanel();
 
     function loadGameList() {
@@ -127,11 +128,12 @@ javascript:(function () {
         dropdownBtn.style.textShadow = '0 0 5px #0766FF, 0 0 10px #0766FF, 0 0 1px #0766FF, 0 0 2px #0766FF, 0 0 3px #0766FF';
         dropdownBtn.id = 'dropdownbtn';
 
-        const dropdownMenu = createDropdownMenu();
-
         dropdownBtn.onclick = () => {
-            dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+	        if (!dropdownMenu) return;
+	        dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
         };
+
+
 
         panel.appendChild(dropdownBtn);
         const container = document.createElement('div');
@@ -185,7 +187,6 @@ javascript:(function () {
      
               button.addEventListener('click', () => {
                  panel.remove();
-                 dropdownMenu.remove();
      
                  iframe = document.createElement('iframe');
                  iframe.src = config.url;
@@ -289,99 +290,108 @@ javascript:(function () {
         document.body.appendChild(settingsPanel);
     }
 
+
     function createDropdownMenu() {
-        dropdownMenu = document.createElement('div');
-        dropdownMenu.style.position = 'absolute';
-        dropdownMenu.style.top = '5vh';
-        dropdownMenu.style.left = '15vw';
-        dropdownMenu.style.background = '#1a1a1a';
-        dropdownMenu.style.width = '300px';
-        dropdownMenu.style.height = '350px';
-        dropdownMenu.style.position = 'fixed';
-        dropdownMenu.style.border = '1px solid #0766FF';
-        dropdownMenu.style.borderRadius = '8px';
-        dropdownMenu.style.flexDirection = 'column';
-        dropdownMenu.style.boxShadow = '0 0 10px #0766FF';
-        dropdownMenu.id = 'dropdownmenu';
+	if (dropdownMenu) {
+		dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+		return dropdownMenu;
+	}
 
-        const settingsBtn = document.createElement('button');
-        settingsBtn.innerText = 'Settings';
-        settingsBtn.style.background = 'transparent';
-        settingsBtn.style.color = '#0766FF';
-        settingsBtn.style.border = 'none';
-        settingsBtn.style.fontSize = '14px';
-        settingsBtn.style.cursor = 'pointer';
-        settingsBtn.onclick = () => {
-            showSettings();
-            dropdownMenu.style.display = 'none';
-        };
+	dropdownMenu = document.createElement('div');
+	dropdownMenu.style.position = 'fixed';
+	dropdownMenu.style.top = '28vh';
+	dropdownMenu.style.left = '34.4vw';
+	dropdownMenu.style.background = '#1a1a1a';
+	dropdownMenu.style.width = '300px';
+	dropdownMenu.style.height = '350px';
+	dropdownMenu.style.border = '1px solid #0766FF';
+	dropdownMenu.style.borderRadius = '8px';
+	dropdownMenu.style.flexDirection = 'column';
+	dropdownMenu.style.boxShadow = '0 0 10px #0766FF';
+	dropdownMenu.style.display = 'none';
+    dropdownMenu.style.zIndex = '12';
+	dropdownMenu.id = 'dropdownmenu';
+    dropdownMenu.innerHTML = `<p style="color:#0766FF;text-align:center;">it's 1am and i am so done with this because it took me entirely too friggin long to fix this so ill fix this menu and make it look good soon :)</p><br>`;
 
-        const changelogBtn = document.createElement('button');
-        changelogBtn.innerText = 'Changelog';
-        changelogBtn.style.background = 'transparent';
-        changelogBtn.style.color = '#0766FF';
-        changelogBtn.style.border = 'none';
-        changelogBtn.style.fontSize = '14px';
-        changelogBtn.style.cursor = 'pointer';
-        changelogBtn.onclick = () => {
-            showChangelog();
-            dropdownMenu.style.display = 'none';
-        };
+	const settingsBtn = document.createElement('button');
+	settingsBtn.innerText = 'Settings';
+	settingsBtn.style.background = 'transparent';
+	settingsBtn.style.color = '#0766FF';
+	settingsBtn.style.border = 'none';
+	settingsBtn.style.fontSize = '14px';
+	settingsBtn.style.cursor = 'pointer';
+	settingsBtn.onclick = () => {
+		showSettings();
+		dropdownMenu.style.display = 'none';
+	};
 
-        const hideBtn = document.createElement('button');
-        hideBtn.innerText = 'Hide';
-        hideBtn.style.background = 'transparent';
-        hideBtn.style.color = '#0766FF';
-        hideBtn.style.border = 'none';
-        hideBtn.style.fontSize = '14px';
-        hideBtn.style.cursor = 'pointer';
-        hideBtn.onclick = () => {
-            if (panel) panel.style.display = 'none';
-            if (iframe) iframe.style.display = 'none';
-            dropdownMenu.style.display = 'none';
-            dropdownBtn.style.display = 'none';
-        };
+	const changelogBtn = document.createElement('button');
+	changelogBtn.innerText = 'Changelog';
+	changelogBtn.style.background = 'transparent';
+	changelogBtn.style.color = '#0766FF';
+	changelogBtn.style.border = 'none';
+	changelogBtn.style.fontSize = '14px';
+	changelogBtn.style.cursor = 'pointer';
+	changelogBtn.onclick = () => {
+		showChangelog();
+		dropdownMenu.style.display = 'none';
+	};
 
-        const closeBtn = document.createElement('button');
-        closeBtn.innerText = 'Close';
-        closeBtn.style.background = 'transparent';
-        closeBtn.style.color = '#ff0000';
-        closeBtn.style.border = 'none';
-        closeBtn.style.fontSize = '14px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.onclick = () => {
-            panel?.remove();
-            iframe?.remove();
-            changelogPanel?.remove();
-            settingsPanel?.remove();
-            dropdownMenu?.remove();
-            dropdownBtn?.remove();
-            removeBlur();
-        };
-        const homeBtn = document.createElement('button');
-        homeBtn.innerText = 'Home';
-        homeBtn.style.background = 'transparent';
-        homeBtn.style.color = '#0766FF';
-        homeBtn.style.border = 'none';
-        homeBtn.style.fontSize = '14px';
-        homeBtn.style.cursor = 'pointer';
-        homeBtn.style.textAlign = 'center';
-        homeBtn.onclick = () => {
-            if (document.getElementById('panel') == null) {
-                createPanel();
-                iframe?.remove();
-                dropdownMenu?.remove();
-                dropdownBtn?.remove();
-            }
-         };
+	const hideBtn = document.createElement('button');
+	hideBtn.innerText = 'Hide';
+	hideBtn.style.background = 'transparent';
+	hideBtn.style.color = '#0766FF';
+	hideBtn.style.border = 'none';
+	hideBtn.style.fontSize = '14px';
+	hideBtn.style.cursor = 'pointer';
+	hideBtn.onclick = () => {
+		if (panel) panel.style.display = 'none';
+		if (iframe) iframe.style.display = 'none';
+		dropdownMenu.style.display = 'none';
+	};
 
-        dropdownMenu.appendChild(homeBtn);
-        dropdownMenu.appendChild(changelogBtn);
-        dropdownMenu.appendChild(settingsBtn);
-        dropdownMenu.appendChild(hideBtn);
-        dropdownMenu.appendChild(closeBtn);
+	const closeBtn = document.createElement('button');
+	closeBtn.innerText = 'Close';
+	closeBtn.style.background = 'transparent';
+	closeBtn.style.color = '#ff0000';
+	closeBtn.style.border = 'none';
+	closeBtn.style.fontSize = '14px';
+	closeBtn.style.cursor = 'pointer';
+	closeBtn.onclick = () => {
+		panel?.remove();
+		iframe?.remove();
+		changelogPanel?.remove();
+		settingsPanel?.remove();
+		dropdownMenu?.remove();
+		dropdownBtn?.remove();
+		removeBlur();
+	};
 
-        return dropdownMenu;
+	const homeBtn = document.createElement('button');
+	homeBtn.innerText = 'Home';
+	homeBtn.style.background = 'transparent';
+	homeBtn.style.color = '#0766FF';
+	homeBtn.style.border = 'none';
+	homeBtn.style.fontSize = '14px';
+	homeBtn.style.cursor = 'pointer';
+	homeBtn.style.textAlign = 'center';
+	homeBtn.onclick = () => {
+		if (document.getElementById('panel') == null) {
+			createPanel();
+			iframe?.remove();
+			dropdownMenu?.remove();
+			dropdownBtn?.remove();
+		}
+	};
+
+	dropdownMenu.appendChild(homeBtn);
+	dropdownMenu.appendChild(changelogBtn);
+	dropdownMenu.appendChild(settingsBtn);
+	dropdownMenu.appendChild(hideBtn);
+	dropdownMenu.appendChild(closeBtn);
+
+	document.body.appendChild(dropdownMenu);
+	return dropdownMenu;
     }
 
     function createChangelogPanel() {
@@ -502,8 +512,9 @@ javascript:(function () {
     function toggleMenu(event) {
     if (event.key === 'm' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
-        const dropdownMenu = createDropdownMenu();
-        if (iframe) dropdownMenu.style.display = dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '' ? 'flex' : 'none';
+        
+        if (!dropdownMenu) return;
+        if (iframe) dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
     }
 }
 
