@@ -75,7 +75,7 @@ javascript:(function() {
             closePanel();
             loadZephPanel();
         } else {
-            alert('haha incorrect noob learn to spell keed');
+            alert('haha stupid idiot get good you suck try again bozo');
         }
     }
 
