@@ -130,7 +130,7 @@ javascript:(function () {
 
         dropdownBtn.onclick = () => {
 	        if (!dropdownMenu) return;
-	        dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+	        dropdownMenu.style.visibility = dropdownMenu.style.visibility === 'hidden' ? 'visible' : 'hidden';
         };
 
 
@@ -260,6 +260,7 @@ javascript:(function () {
         closeBtn.style.cursor = 'pointer';
         closeBtn.onclick = () => {
             settingsPanel.remove();
+            dropdownMenu.style.visibility = 'hidden';
             removeBlur();
         };
         settingsPanel.appendChild(closeBtn);
@@ -277,7 +278,7 @@ javascript:(function () {
         <h3>Misc</h3>
         <p style="color: #0766FF;">Coming Soon!</p>
         <h3>Keybinds</h3>
-        <p style="color: #0766FF;">Ctrl + E | Hide<br>More Soon...</p>
+        <p style="color: #0766FF;">Ctrl + E | Hide<br>Ctrl + M | Menu<br>More Soon...</p>
         <h3>Credits</h3>
         <p style="color: #0766FF;">Owner: trulyzeph</p>
         <div style="text-align: center; font-size: 10px; margin-top: 60px;">
@@ -293,69 +294,80 @@ javascript:(function () {
 
     function createDropdownMenu() {
 	if (dropdownMenu) {
-		dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+		dropdownMenu.style.visibility = dropdownMenu.style.visibility === 'hidden' ? 'visible' : 'hidden';
 		return dropdownMenu;
 	}
 
 	dropdownMenu = document.createElement('div');
 	dropdownMenu.style.position = 'fixed';
-	dropdownMenu.style.top = '28vh';
-	dropdownMenu.style.left = '34.4vw';
+	dropdownMenu.style.top = '27.5%';
+	dropdownMenu.style.left = '40%';
 	dropdownMenu.style.background = '#1a1a1a';
 	dropdownMenu.style.width = '300px';
 	dropdownMenu.style.height = '350px';
 	dropdownMenu.style.border = '1px solid #0766FF';
 	dropdownMenu.style.borderRadius = '8px';
-	dropdownMenu.style.flexDirection = 'column';
+    dropdownMenu.style.display = 'flex';
+    dropdownMenu.style.flexDirection = 'column';
+    dropdownMenu.style.justifyContent = 'center';
+    dropdownMenu.style.alignItems = 'center';
 	dropdownMenu.style.boxShadow = '0 0 10px #0766FF';
-	dropdownMenu.style.display = 'none';
-    dropdownMenu.style.zIndex = '12';
+	dropdownMenu.style.visibility = 'hidden';
+    dropdownMenu.style.zIndex = '5';
 	dropdownMenu.id = 'dropdownmenu';
-    dropdownMenu.innerHTML = `<p style="color:#0766FF;text-align:center;">it's 1am and i am so done with this because it took me entirely too friggin long to fix this so ill fix this menu and make it look good soon :)</p><br>`;
 
 	const settingsBtn = document.createElement('button');
 	settingsBtn.innerText = 'Settings';
 	settingsBtn.style.background = 'transparent';
+    settingsBtn.style.fontFamily = 'Verdana, sans-serif';
+    settingsBtn.style.fontWeight = 'bold';
 	settingsBtn.style.color = '#0766FF';
 	settingsBtn.style.border = 'none';
-	settingsBtn.style.fontSize = '14px';
+	settingsBtn.style.fontSize = '32px';
 	settingsBtn.style.cursor = 'pointer';
 	settingsBtn.onclick = () => {
 		showSettings();
-		dropdownMenu.style.display = 'none';
+		dropdownMenu.style.visiblity = 'hidden';
 	};
 
 	const changelogBtn = document.createElement('button');
 	changelogBtn.innerText = 'Changelog';
 	changelogBtn.style.background = 'transparent';
+    changelogBtn.style.fontFamily = 'Verdana, sans-serif';
+    changelogBtn.style.fontWeight = 'bold';
 	changelogBtn.style.color = '#0766FF';
 	changelogBtn.style.border = 'none';
-	changelogBtn.style.fontSize = '14px';
+	changelogBtn.style.fontSize = '32px';
 	changelogBtn.style.cursor = 'pointer';
 	changelogBtn.onclick = () => {
 		showChangelog();
-		dropdownMenu.style.display = 'none';
+		dropdownMenu.style.visibility = 'hidden';
 	};
 
 	const hideBtn = document.createElement('button');
 	hideBtn.innerText = 'Hide';
 	hideBtn.style.background = 'transparent';
+    hideBtn.style.fontFamily = 'Verdana, sans-serif';
+    hideBtn.style.fontWeight = 'bold';
 	hideBtn.style.color = '#0766FF';
 	hideBtn.style.border = 'none';
-	hideBtn.style.fontSize = '14px';
+	hideBtn.style.fontSize = '32px';
 	hideBtn.style.cursor = 'pointer';
 	hideBtn.onclick = () => {
 		if (panel) panel.style.display = 'none';
 		if (iframe) iframe.style.display = 'none';
-		dropdownMenu.style.display = 'none';
+		dropdownMenu.style.visibility = 'hidden';
+        removeBlur();
 	};
 
 	const closeBtn = document.createElement('button');
 	closeBtn.innerText = 'Close';
 	closeBtn.style.background = 'transparent';
+    closeBtn.style.fontFamily = 'Verdana, sans-serif';
+    closeBtn.style.fontWeight = 'bold';
 	closeBtn.style.color = '#ff0000';
 	closeBtn.style.border = 'none';
-	closeBtn.style.fontSize = '14px';
+	closeBtn.style.fontSize = '32px';
 	closeBtn.style.cursor = 'pointer';
 	closeBtn.onclick = () => {
 		panel?.remove();
@@ -370,29 +382,65 @@ javascript:(function () {
 	const homeBtn = document.createElement('button');
 	homeBtn.innerText = 'Home';
 	homeBtn.style.background = 'transparent';
+    homeBtn.style.fontFamily = 'Verdana, sans-serif';
+    homeBtn.style.fontWeight = 'bold';
 	homeBtn.style.color = '#0766FF';
 	homeBtn.style.border = 'none';
-	homeBtn.style.fontSize = '14px';
+	homeBtn.style.fontSize = '32px';
 	homeBtn.style.cursor = 'pointer';
 	homeBtn.style.textAlign = 'center';
 	homeBtn.onclick = () => {
 		if (document.getElementById('panel') == null) {
 			createPanel();
 			iframe?.remove();
-			dropdownMenu?.remove();
-			dropdownBtn?.remove();
+            removeBlur();
+            dropdownMenu.style.visibility = 'hidden';
 		}
 	};
 
+	function createSeparator() {
+		const line = document.createElement('div');
+		line.style.height = '2px';
+		line.style.width = '80%';
+		line.style.margin = '10px auto';
+		line.style.background = 'linear-gradient(to right, transparent, #0766FF, transparent)';
+		line.style.animation = 'pulseLine 2.5s ease-in-out infinite';
+		return line;
+	}
+
 	dropdownMenu.appendChild(homeBtn);
+    dropdownMenu.appendChild(createSeparator());
 	dropdownMenu.appendChild(changelogBtn);
+    dropdownMenu.appendChild(createSeparator());
 	dropdownMenu.appendChild(settingsBtn);
-	dropdownMenu.appendChild(hideBtn);
-	dropdownMenu.appendChild(closeBtn);
+	dropdownMenu.appendChild(createSeparator());	
+    dropdownMenu.appendChild(hideBtn);
+	dropdownMenu.appendChild(createSeparator());	
+    dropdownMenu.appendChild(closeBtn);
 
 	document.body.appendChild(dropdownMenu);
 	return dropdownMenu;
     }
+
+	const style = document.createElement('style');
+	style.innerHTML = `
+		@keyframes pulseLine {
+			0% {
+				transform: scaleX(0);
+				opacity: 0.2;
+			}
+			50% {
+				transform: scaleX(1);
+				opacity: 0.6;
+			}
+			100% {
+				transform: scaleX(0);
+				opacity: 0.2;
+			}
+		}
+	`;
+	document.head.appendChild(style);
+
 
     function createChangelogPanel() {
         changelogPanel = document.createElement('div');
@@ -514,7 +562,8 @@ javascript:(function () {
         event.preventDefault();
         
         if (!dropdownMenu) return;
-        if (iframe) dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+        if (iframe) dropdownMenu.style.visibility = dropdownMenu.style.visibility === 'hidden' ? 'visible' : 'hidden';
+        if (iframe) if (!blurLayer) createBlur(); else removeBlur();
     }
 }
 
