@@ -4,11 +4,14 @@
         "version": "v1.15",
         "date": "5/11/25",
         "changes": [
-            "version 1.2 will slowly roll out",
             "Ctrl + M in game to open menu",
             "menu 100% complete",
-            "some new game icons",
-            "100+ new games"
+            "all game icons added",
+            "background added",
+            "new features in settings",
+            "sidebar added",
+            "REPORT PAGE ADDED",
+            "new font"
         ]
     },
     {
