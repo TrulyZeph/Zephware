@@ -338,6 +338,7 @@ javascript:(function () {
                  iframe.style.display = 'block';
                  iframe.style.margin = '20px auto';
                  iframe.style.boxShadow = '0 0 20px #038FF9';
+		 iframe.style.zIndex = '2';
                  document.body.appendChild(iframe);
               });
      
