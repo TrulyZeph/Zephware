@@ -5,7 +5,10 @@ javascript:(function () {
     let settingsPanel = null;
     let changelogPanel = null;
     let dropdownMenu = null;
+    let sidebar = null;
     let buttonConfigs = [];
+    let animatedStyleSheet;
+    let area;
     const version = 'v1.15';
     createChangelogPanel();
 
@@ -20,150 +23,214 @@ javascript:(function () {
             })
             .catch(error => {
                 console.error('Error loading game list:', error);
-                alert('Failed to load the game list.');
+                alert('Error, Try Again.');
             });
     }
 
-    var area = document.createElement('div');
-    area.classList.add('area');
-    area.style.position = 'absolute';
-    area.style.top = '0';
-    area.style.left = '0';
-    area.style.width = '100vw';
-    area.style.height = '100vh';
-    area.style.overflow = 'hidden';
+    const toggle = document.createElement('style');
+    toggle.innerHTML = `
+	.switch {
+		position: relative;
+		display: inline-block;
+		width: 50px;
+		height: 24px;
+	}
 
-    var circles = document.createElement('ul');
-    circles.classList.add('circles');
-    area.appendChild(circles);
+	.switch input {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
 
-    for (var i = 0; i < 10; i++) {
-        var circle = document.createElement('li');
-        circles.appendChild(circle);
-    }
+	.slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #444;
+		transition: .4s;
+		border-radius: 24px;
+		box-shadow: 0 0 5px #0766FF;
+	}
 
-    var styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    styleSheet.innerText = `
-        *
-    
-        .area {
-            background: linear-gradient(135deg, #2C2A2A, #171212);  
-            background: -webkit-linear-gradient(to left, #2600ff, #0011ff);  
-            width: 100%;
-            height: 100vh;
-        }
+	.slider:before {
+		position: absolute;
+		content: "";
+		height: 18px;
+		width: 18px;
+		left: 3px;
+		bottom: 3px;
+		background-color: white;
+		transition: .4s;
+		border-radius: 50%;
+	}
 
-        .circles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
+	.switch input:checked + .slider {
+		background-color: #0766FF;
+	}
 
-        .circles li {
-            position: absolute;
-            display: block;
-            list-style: none;
-            width: 20px;
-            height: 20px;
-            background: rgba(2, 112, 255, 0.2);
-            animation: animate 25s linear infinite;
-            bottom: -150px;
-        }
+	.switch input:checked + .slider:before {
+		transform: translateX(26px);
+	}
+`;
 
-        .circles li:nth-child(1) {
-            left: 25%;
-            width: 80px;
-            height: 80px;
-            animation-delay: 0s;
-        }
+    const sidebarStyle = document.createElement('style');
+    sidebarStyle.innerHTML = `
+	.sidebar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 30%;
+		max-width: 300px;
+		background: linear-gradient(145deg, #001F3F, #000F20);
+		border-right: 2px solid #0766FF;
+		box-shadow: 0 0 20px #0766FF;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		transition: transform 0.4s ease;
+		z-index: 10;
+	}
 
-        .circles li:nth-child(2) {
-            left: 10%;
-            width: 20px;
-            height: 20px;
-            animation-delay: 2s;
-            animation-duration: 12s;
-        }
+	.sidebar-visible {
+		transform: translateX(0);
+	}
 
-        .circles li:nth-child(3) {
-            left: 70%;
-            width: 20px;
-            height: 20px;
-            animation-delay: 4s;
-        }
+	.sidebar-hidden {
+		transform: translateX(-100%);
+	}
 
-        .circles li:nth-child(4) {
-            left: 40%;
-            width: 60px;
-            height: 60px;
-            animation-delay: 0s;
-            animation-duration: 18s;
-        }
+	.sidebar-btn {
+		background: transparent;
+		font-family: Verdana, sans-serif;
+		font-weight: bold;
+		color: #0766FF;
+		border: none;
+		font-size: 28px;
+		cursor: pointer;
+		margin: 8px 0;
+	}
 
-        .circles li:nth-child(5) {
-            left: 65%;
-            width: 20px;
-            height: 20px;
-            animation-delay: 0s;
-        }
+	.sidebar-divider {
+		height: 2px;
+		width: 80%;
+		margin: 10px auto;
+		background: linear-gradient(to right, rgba(7, 102, 255, 0.2) 0%, rgba(7, 102, 255, 1) 50%, rgba(7, 102, 255, 0.2) 100%);
+		background-size: 200% 100%;
+		background-position: 0% 50%;
+		animation: glowFlow 3s linear infinite;
+	}
 
-        .circles li:nth-child(6) {
-            left: 75%;
-            width: 110px;
-            height: 110px;
-            animation-delay: 3s;
-        }
+	@keyframes glowFlow {
+		0% { background-position: 0% 50%; }
+		100% { background-position: 100% 50%; }
+	}
+`;
+document.head.appendChild(sidebarStyle);
 
-        .circles li:nth-child(7) {
-            left: 35%;
-            width: 150px;
-            height: 150px;
-            animation-delay: 7s;
-        }
+var fontLink = document.createElement("link");
+fontLink.href = "https://fonts.googleapis.com/css?family=Exo:400,700&display=swap";
+fontLink.rel = "stylesheet";
+document.head.appendChild(fontLink);
 
-        .circles li:nth-child(8) {
-            left: 50%;
-            width: 25px;
-            height: 25px;
-            animation-delay: 15s;
-            animation-duration: 45s;
-        }
+const fontStyle = document.createElement("style");
+fontStyle.type = "text/css";
+fontStyle.innerText = `
+   * {
+      font-family: 'Exo', sans-serif;
+      font-weight: 700;
+   }
+`;
+document.head.appendChild(fontStyle);
+document.head.appendChild(toggle);
 
-        .circles li:nth-child(9) {
-            left: 20%;
-            width: 15px;
-            height: 15px;
-            animation-delay: 2s;
-            animation-duration: 35s;
-        }
+function enableAnimatedBackground() {
 
-        .circles li:nth-child(10) {
-            left: 85%;
-            width: 150px;
-            height: 150px;
-            animation-delay: 0s;
-            animation-duration: 11s;
-        }
+	animatedStyleSheet = document.createElement("style");
+	animatedStyleSheet.type = "text/css";
+	animatedStyleSheet.innerText = `
+		.area {
+			background: linear-gradient(135deg, #2C2A2A, #171212);
+			width: 100%;
+			height: 100vh;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: -1;
+		}
+		.circles {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		.circles li {
+			position: absolute;
+			display: block;
+			list-style: none;
+			width: 20px;
+			height: 20px;
+			background: rgba(2, 112, 255, 0.2);
+			animation: animate 25s linear infinite;
+			bottom: -150px;
+		}
+		.circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+		.circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+		.circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+		.circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+		.circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+		.circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+		.circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+		.circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+		.circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+		.circles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
 
-        @keyframes animate {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-                border-radius: 0;
-            }
-            100% {
-                transform: translateY(-1000px) rotate(720deg);
-                opacity: 0;
-                border-radius: 50%;
-            }
-        }
-    `;
-    document.head.appendChild(styleSheet);
-    document.body.appendChild(area);
+		@keyframes animate {
+			0% {
+				transform: translateY(0) rotate(0deg);
+				opacity: 1;
+				border-radius: 0;
+			}
+			100% {
+				transform: translateY(-1000px) rotate(720deg);
+				opacity: 0;
+				border-radius: 50%;
+			}
+		}
+	`;
+	document.head.appendChild(animatedStyleSheet);
+
+	area = document.createElement('div');
+	area.className = 'area';
+
+	const circles = document.createElement('ul');
+	circles.className = 'circles';
+
+	for (let i = 0; i < 10; i++) {
+		const li = document.createElement('li');
+		circles.appendChild(li);
+	}
+
+	area.appendChild(circles);
+	document.body.appendChild(area);
+}
+
+function disableAnimatedBackground() {
+	if (animatedStyleSheet) {
+		animatedStyleSheet.remove();
+		animatedStyleSheet = null;
+	}
+	if (area) {
+		area.remove();
+		area = null;
+	}
+}
 
     function createTitleBar() {
         const container = document.createElement('div');
@@ -225,6 +292,9 @@ javascript:(function () {
 
         const titleBar = createTitleBar();
         panel.appendChild(titleBar);
+        if (!sidebar) createSidebar();
+        panel.appendChild(sidebar);
+        toggleSidebar();
 
         const searchBar = document.createElement('input');
         searchBar.type = 'text';
@@ -270,11 +340,13 @@ javascript:(function () {
         dropdownBtn.id = 'dropdownbtn';
 
         dropdownBtn.onclick = () => {
-	        if (!dropdownMenu) return;
-	        dropdownMenu.style.visibility = dropdownMenu.style.visibility === 'hidden' ? 'visible' : 'hidden';
+	        if (!sidebar) {
+		        createSidebar();
+	        } else {
+		        const isHidden = sidebar.classList.contains('sidebar-hidden');
+		        toggleSidebar(isHidden);
+	        }
         };
-
-
 
         panel.appendChild(dropdownBtn);
         const container = document.createElement('div');
@@ -338,7 +410,7 @@ javascript:(function () {
                  iframe.style.display = 'block';
                  iframe.style.margin = '20px auto';
                  iframe.style.boxShadow = '0 0 20px #038FF9';
-		 iframe.style.zIndex = '2';
+                 iframe.style.zIndex = 2;
                  document.body.appendChild(iframe);
               });
      
@@ -359,7 +431,7 @@ javascript:(function () {
             blurLayer.style.width = '100vw';
             blurLayer.style.height = '100vh';
             blurLayer.style.backdropFilter = 'blur(5px)';
-            blurLayer.style.zIndex = 3;
+            blurLayer.style.zIndex = '3';
             document.body.appendChild(blurLayer);
         }
     }
@@ -402,7 +474,6 @@ javascript:(function () {
         closeBtn.style.cursor = 'pointer';
         closeBtn.onclick = () => {
             settingsPanel.remove();
-            dropdownMenu.style.visibility = 'hidden';
             removeBlur();
         };
         settingsPanel.appendChild(closeBtn);
@@ -418,7 +489,7 @@ javascript:(function () {
         const content = document.createElement('div');
         content.innerHTML = `
         <h3>Misc</h3>
-        <p style="color: #0766FF;">Coming Soon!</p>
+        <div id="misc-section"></div>
         <h3>Keybinds</h3>
         <p style="color: #0766FF;">Ctrl + E | Hide<br>Ctrl + M | Menu<br>More Soon...</p>
         <h3>Credits</h3>
@@ -429,6 +500,43 @@ javascript:(function () {
 `;
 
         settingsPanel.appendChild(content);
+        const miscSection = content.querySelector('#misc-section');
+
+
+        const toggleContainer = document.createElement('div');
+        toggleContainer.style.display = 'flex';
+        toggleContainer.style.alignItems = 'center';
+        toggleContainer.style.justifyContent = 'space-between';
+        toggleContainer.style.margin = '10px 0';
+
+        const toggleLabel = document.createElement('span');
+        toggleLabel.innerText = 'Enable Background';
+        toggleLabel.style.fontSize = '16px';
+        toggleLabel.style.color = '#0766FF';
+
+        const toggleSwitch = document.createElement('label');
+        toggleSwitch.className = 'switch';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+
+        const slider = document.createElement('span');
+        slider.className = 'slider';
+
+        checkbox.onchange = () => {
+        	if (checkbox.checked) {
+        enableAnimatedBackground()
+	        } else {
+        disableAnimatedBackground()
+	        }
+        };
+
+toggleSwitch.appendChild(checkbox);
+toggleSwitch.appendChild(slider);
+toggleContainer.appendChild(toggleLabel);
+toggleContainer.appendChild(toggleSwitch);
+miscSection.appendChild(toggleContainer);
+
 
         document.body.appendChild(settingsPanel);
     }
@@ -442,8 +550,8 @@ javascript:(function () {
 
 	dropdownMenu = document.createElement('div');
 	dropdownMenu.style.position = 'fixed';
-	dropdownMenu.style.top = '27.5%';
-	dropdownMenu.style.left = '40%';
+	dropdownMenu.style.top = '30%';
+	dropdownMenu.style.left = '42%';
 	dropdownMenu.style.background = '#1a1a1a';
 	dropdownMenu.style.width = '300px';
 	dropdownMenu.style.height = '350px';
@@ -469,7 +577,7 @@ javascript:(function () {
 	settingsBtn.style.cursor = 'pointer';
 	settingsBtn.onclick = () => {
 		showSettings();
-		dropdownMenu.style.visiblity = 'hidden';
+		dropdownMenu.style.visibility = 'hidden';
 	};
 
 	const changelogBtn = document.createElement('button');
@@ -503,7 +611,7 @@ javascript:(function () {
 	};
 
 	const closeBtn = document.createElement('button');
-	closeBtn.innerText = 'Close';
+	closeBtn.innerText = 'Exit';
 	closeBtn.style.background = 'transparent';
     closeBtn.style.fontFamily = 'Verdana, sans-serif';
     closeBtn.style.fontWeight = 'bold';
@@ -542,12 +650,13 @@ javascript:(function () {
 
 	function createSeparator() {
 		const line = document.createElement('div');
-		line.style.height = '2px';
-		line.style.width = '80%';
-		line.style.margin = '10px auto';
-		line.style.background = 'linear-gradient(to right, transparent, #0766FF, transparent)';
-		line.style.animation = 'pulseLine 2.5s ease-in-out infinite';
-		return line;
+    	line.style.height = '2px';
+	    line.style.width = '80%';
+    	line.style.margin = '10px auto';
+	    line.style.background = 'linear-gradient(to right, transparent, #0766FF, transparent)';
+    	line.style.backgroundSize = '200% auto';
+    	line.style.animation = 'moveGradient 3s linear infinite';
+	    return line;
 	}
 
 	dropdownMenu.appendChild(homeBtn);
@@ -583,6 +692,93 @@ javascript:(function () {
 	`;
 	document.head.appendChild(style);
 
+    function createSidebar() {
+	if (sidebar) {
+		const isHidden = sidebar.classList.contains('sidebar-hidden');
+		sidebar.classList.toggle('sidebar-hidden', !isHidden);
+		sidebar.classList.toggle('sidebar-visible', isHidden);
+		isHidden ? createBlur() : removeBlur();
+		return sidebar;
+	}
+
+	sidebar = document.createElement('div');
+	sidebar.id = 'sidebar';
+	sidebar.className = 'sidebar sidebar-visible';
+    sidebar.style.zIndex = '5';
+
+	const randomBtn = document.createElement('button');
+	randomBtn.innerText = 'Random';
+	randomBtn.className = 'sidebar-btn';
+	randomBtn.onclick = () => {
+		const randomGame = games[Math.floor(Math.random() * games.length)];
+		iframe?.remove();
+		createIframe(randomGame.url);
+		toggleSidebar(false);
+	};
+
+	const changelogBtn = document.createElement('button');
+	changelogBtn.innerText = 'Changelog';
+	changelogBtn.className = 'sidebar-btn';
+	changelogBtn.onclick = () => {
+		showChangelog();
+		toggleSidebar(false);
+	};
+
+	const settingsBtn = document.createElement('button');
+	settingsBtn.innerText = 'Settings';
+	settingsBtn.className = 'sidebar-btn';
+	settingsBtn.onclick = () => {
+		showSettings();
+		toggleSidebar(false);
+	};
+
+	const closeBtn = document.createElement('button');
+	closeBtn.innerText = 'Close';
+	closeBtn.className = 'sidebar-btn';
+	closeBtn.onclick = () => toggleSidebar(false);
+
+	const exitBtn = document.createElement('button');
+	exitBtn.innerText = 'Exit';
+	exitBtn.className = 'sidebar-btn';
+	exitBtn.style.color = '#FF0000';
+	exitBtn.onclick = () => {
+		panel?.remove();
+		iframe?.remove();
+		changelogPanel?.remove();
+		settingsPanel?.remove();
+		sidebar?.remove();
+		dropdownBtn?.remove();
+		removeBlur();
+	};
+
+	function createDivider() {
+		const divider = document.createElement('div');
+		divider.className = 'sidebar-divider';
+		return divider;
+	}
+
+	sidebar.appendChild(randomBtn);
+	sidebar.appendChild(createDivider());
+	sidebar.appendChild(changelogBtn);
+	sidebar.appendChild(createDivider());
+	sidebar.appendChild(settingsBtn);
+	sidebar.appendChild(createDivider());
+	sidebar.appendChild(closeBtn);
+	sidebar.appendChild(createDivider());
+	sidebar.appendChild(exitBtn);
+
+	document.body.appendChild(sidebar);
+	createBlur();
+	return sidebar;
+    }
+
+    function toggleSidebar(show) {
+	    if (!sidebar) return;
+	    sidebar.classList.toggle('sidebar-visible', show);
+	    sidebar.classList.toggle('sidebar-hidden', !show);
+	    show ? createBlur() : removeBlur();
+    }
+
 
     function createChangelogPanel() {
         changelogPanel = document.createElement('div');
@@ -592,7 +788,7 @@ javascript:(function () {
         changelogPanel.style.overflow = 'auto';
         changelogPanel.style.borderRadius = '20px';
         changelogPanel.style.boxShadow = '0 0 20px #0766FF';
-        changelogPanel.style.position = 'fixed';
+        changelogPanel.style.position = 'absolute';
         changelogPanel.style.top = '50%';
         changelogPanel.style.left = '50%';
         changelogPanel.style.transform = 'translate(-50%, -50%)';
@@ -677,6 +873,7 @@ javascript:(function () {
 
         changelogPanel.appendChild(content);
     }
+
     function showSettings() {
         if (changelogPanel) changelogPanel.remove();
         createSettingsPanel();
