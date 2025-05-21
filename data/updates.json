@@ -1,8 +1,8 @@
 [
     {
-        "title": "Stuff",
-        "version": "v1.15",
-        "date": "5/11/25",
+        "title": "Lots of QOL, UI, and Optimization",
+        "version": "v1.5",
+        "date": "5/21/25",
         "changes": [
             "Ctrl + M in game to open menu",
             "menu 100% complete",
@@ -10,37 +10,16 @@
             "background added",
             "background toggle in settings",
             "new features in settings",
-            "sidebar added (broken ik)",
+            "sidebar added",
             "REPORT PAGE ADDED (in sidebar)",
-            "new font"
-        ]
-    },
-    {
-        "title": "Upcoming: GUI Update",
-        "version": "v1.2",
-        "date": "Before 5/19/25",
-        "changes": [
-            "GUI Rehaul",
-            "Easier Management",
-            "More Organized",
-            "Smoother",
-            "All Images Added",
-            "Website Version Completion",
-            "Website Dropped!"
-        ]
-    },
-    {
-        "title": "Upcoming: Crazy QOL + Optimization",
-        "version": "v1.3",
-        "date": "???",
-        "changes": [
-            "Lots of New Features!",
-            "More Optimization!"
+            "new font",
+            "formatting fixed",
+            "a little more features to go"
         ]
     },
     {
         "title": "Upcoming: More Games! 🗣️🔥",
-        "version": "v1.5",
+        "version": "v1.6",
         "date": "???",
         "changes": [
             "100+ New Games!"
