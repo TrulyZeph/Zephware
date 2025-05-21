@@ -423,25 +423,56 @@ function disableAnimatedBackground() {
     }
 
     function createBlur() {
-        if (!blurLayer) {
-            blurLayer = document.createElement('div');
-            blurLayer.style.position = 'fixed';
-            blurLayer.style.top = 0;
-            blurLayer.style.left = 0;
-            blurLayer.style.width = '100vw';
-            blurLayer.style.height = '100vh';
-            blurLayer.style.backdropFilter = 'blur(5px)';
-            blurLayer.style.zIndex = '3';
-            document.body.appendChild(blurLayer);
-        }
+	    if (blurLayer) return;
+
+	    blurLayer = document.createElement('div');
+    	blurLayer.style.position = 'fixed';
+	    blurLayer.style.top = 0;
+    	blurLayer.style.left = 0;
+	    blurLayer.style.width = '100vw';
+    	blurLayer.style.height = '100vh';
+    	blurLayer.style.backdropFilter = 'blur(10px)';
+    	blurLayer.style.zIndex = '4';
+	    blurLayer.style.pointerEvents = 'none';
+	    blurLayer.id = 'blur-layer';
+
+	    document.body.appendChild(blurLayer);
     }
 
+
     function removeBlur() {
-        if (blurLayer) {
-            blurLayer.remove();
-            blurLayer = null;
-        }
+	    if (blurLayer) {
+		blurLayer.remove();
+		blurLayer = null;
+	    }
     }
+
+    function createBlurForSidebar() {
+		if (blurLayer) return;
+
+		blurLayer = document.createElement('div');
+		blurLayer.id = 'blur-layer';
+		blurLayer.style.position = 'absolute';
+		blurLayer.style.inset = '0';
+		blurLayer.style.backdropFilter = 'blur(12px)';
+		blurLayer.style.zIndex = '1';
+		blurLayer.style.pointerEvents = 'none';
+
+		const sidebar = document.getElementById('sidebar');
+		if (sidebar && panel.contains(sidebar)) {
+				panel.insertBefore(blurLayer, sidebar);
+		} else {
+				panel.appendChild(blurLayer);
+		}
+}
+
+function removeBlurForSidebar() {
+		if (blurLayer && blurLayer.parentNode) {
+				blurLayer.remove();
+				blurLayer = null;
+		}
+}
+
 
     function createSettingsPanel() {
         settingsPanel = document.createElement('div');
@@ -461,6 +492,7 @@ function disableAnimatedBackground() {
         settingsPanel.style.padding = '20px';
         settingsPanel.style.zIndex = 5;
         settingsPanel.className = 'custom-scroll-panel';
+        if (settingsPanel) settingsPanel.remove();
 
         const closeBtn = document.createElement('button');
         closeBtn.innerText = '✕';
@@ -531,11 +563,11 @@ function disableAnimatedBackground() {
 	        }
         };
 
-toggleSwitch.appendChild(checkbox);
-toggleSwitch.appendChild(slider);
-toggleContainer.appendChild(toggleLabel);
-toggleContainer.appendChild(toggleSwitch);
-miscSection.appendChild(toggleContainer);
+    toggleSwitch.appendChild(checkbox);
+    toggleSwitch.appendChild(slider);
+    toggleContainer.appendChild(toggleLabel);
+    toggleContainer.appendChild(toggleSwitch);
+    miscSection.appendChild(toggleContainer);
 
 
         document.body.appendChild(settingsPanel);
@@ -710,10 +742,9 @@ miscSection.appendChild(toggleContainer);
 	randomBtn.innerText = 'Random';
 	randomBtn.className = 'sidebar-btn';
 	randomBtn.onclick = () => {
-		const randomGame = games[Math.floor(Math.random() * games.length)];
-		iframe?.remove();
+		const randomGame = buttonConfigs[Math.floor(Math.random() * buttonConfigs.length)];
+        if (panel) panel.remove();
 		createIframe(randomGame.url);
-		toggleSidebar(false);
 	};
 
 	const changelogBtn = document.createElement('button');
@@ -732,6 +763,13 @@ miscSection.appendChild(toggleContainer);
 		toggleSidebar(false);
 	};
 
+    const formsBtn = document.createElement('button');
+    formsBtn.innerText = 'Forms';
+    formsBtn.className = 'sidebar-btn';
+    formsBtn.onclick = () => {
+        window.open('https://forms.gle/h5DHdt5EnsT3bwqP7', '_blank');
+    }
+
 	const closeBtn = document.createElement('button');
 	closeBtn.innerText = 'Close';
 	closeBtn.className = 'sidebar-btn';
@@ -748,7 +786,7 @@ miscSection.appendChild(toggleContainer);
 		settingsPanel?.remove();
 		sidebar?.remove();
 		dropdownBtn?.remove();
-		removeBlur();
+		removeBlurForSidebar();
 	};
 
 	function createDivider() {
@@ -763,22 +801,31 @@ miscSection.appendChild(toggleContainer);
 	sidebar.appendChild(createDivider());
 	sidebar.appendChild(settingsBtn);
 	sidebar.appendChild(createDivider());
+	sidebar.appendChild(formsBtn);
+    sidebar.appendChild(createDivider());
 	sidebar.appendChild(closeBtn);
 	sidebar.appendChild(createDivider());
 	sidebar.appendChild(exitBtn);
 
 	document.body.appendChild(sidebar);
-	createBlur();
+	createBlurForSidebar();
 	return sidebar;
     }
 
     function toggleSidebar(show) {
 	    if (!sidebar) return;
-	    sidebar.classList.toggle('sidebar-visible', show);
-	    sidebar.classList.toggle('sidebar-hidden', !show);
-	    show ? createBlur() : removeBlur();
-    }
 
+    	const shouldShow = typeof show === 'boolean' ? show : !sidebar.classList.contains('sidebar-visible');
+
+	    sidebar.classList.toggle('sidebar-visible', shouldShow);
+    	sidebar.classList.toggle('sidebar-hidden', !shouldShow);
+
+	    if (shouldShow) {
+    		createBlurForSidebar();
+	    } else {
+		    removeBlurForSidebar();
+	    }
+    }
 
     function createChangelogPanel() {
         changelogPanel = document.createElement('div');
@@ -826,10 +873,8 @@ miscSection.appendChild(toggleContainer);
 
         const content = document.createElement('div');
         content.style.marginTop = '20px';
-        content.innerHTML = `
-  <div id="changelog-container"">
-  </div>
-`;
+        content.innerHTML = `<div id="changelog-container"></div>`;
+
         fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/data/updates.json')
           .then(response => response.json())
           .then(data => renderChangelog(data))
@@ -878,7 +923,6 @@ miscSection.appendChild(toggleContainer);
         if (changelogPanel) changelogPanel.remove();
         createSettingsPanel();
         createBlur();
-        document.body.appendChild(settingsPanel);
     }
     function showChangelog() {
         if (changelogPanel) changelogPanel.remove();
