@@ -244,11 +244,13 @@ javascript:(function(){
   inputArea.appendChild(button);
 
 button.addEventListener('click', () => {
-  if (select.value.toLowerCase() === 'games') {
+  const val = select.value.toLowerCase();
+  if (val === 'games' || val === 'unblockers') {
     document.head.innerHTML = '';
     document.body.innerHTML = '';
 
-    fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/games.js')
+    const file = val === 'games' ? 'games.js' : 'proxies.js';
+    fetch(`https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/${file}`)
       .then(response => response.text())
       .then(scriptContent => {
         const script = document.createElement('script');
@@ -256,7 +258,7 @@ button.addEventListener('click', () => {
         document.body.appendChild(script);
       })
       .catch(error => {
-        console.error('Failed to load Games.', error);
+        console.error(`Failed to load ${file}.`, error);
         alert('Failed, Try Again.');
       });
   }
@@ -276,3 +278,4 @@ button.addEventListener('click', () => {
 
   document.body.appendChild(inputArea);
 })();
+/* Password Protection for Hacks */
