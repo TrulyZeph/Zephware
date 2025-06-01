@@ -20,6 +20,7 @@ javascript:(function () {
                 createPanel();
                 showChangelog();
                 createDropdownMenu();
+                enableAnimatedBackground();
             })
             .catch(error => {
                 console.error('Error loading game list:', error);
@@ -115,27 +116,20 @@ javascript:(function () {
 		margin: 8px 0;
 	}
 
-    .sidebar-divider {
-      height: 2px;
-      width: 80%;
-      margin: 10px auto;
-      background: linear-gradient(to right, rgba(7, 102, 255, 0.2) 0%, rgba(7, 102, 255, 1) 50%, rgba(7, 102, 255, 0.2) 100%);
-      background-size: 200% 100%;
-      background-position: 0% 50%;
-      animation: glowFlow 3s linear infinite;
-    }
+	.sidebar-divider {
+		height: 2px;
+		width: 80%;
+		margin: 10px auto;
+		background: linear-gradient(to right, rgba(7, 102, 255, 0.2) 0%, rgba(7, 102, 255, 1) 50%, rgba(7, 102, 255, 0.2) 100%);
+		background-size: 200% 100%;
+		background-position: 0% 50%;
+		animation: glowFlow 3s linear infinite;
+	}
 
-    @keyframes glowFlow {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-    100% {
-        background-position: 0% 50%;
-        }
-    }
+	@keyframes glowFlow {
+		0% { background-position: 0% 50%; }
+		100% { background-position: 100% 50%; }
+	}
 `;
 document.head.appendChild(sidebarStyle);
 
@@ -352,7 +346,6 @@ function disableAnimatedBackground() {
 	        } else {
 		        const isHidden = sidebar.classList.contains('sidebar-hidden');
 		        toggleSidebar(isHidden);
-                panel.style.overflowY = 'hidden';
 	        }
         };
 
@@ -571,6 +564,8 @@ function removeBlurForSidebar() {
 	        }
         };
 
+        checkbox.checked = true;
+
     toggleSwitch.appendChild(checkbox);
     toggleSwitch.appendChild(slider);
     toggleContainer.appendChild(toggleLabel);
@@ -781,10 +776,7 @@ function removeBlurForSidebar() {
 	const closeBtn = document.createElement('button');
 	closeBtn.innerText = 'Close';
 	closeBtn.className = 'sidebar-btn';
-	closeBtn.onclick = () => {
-        toggleSidebar(false);
-        panel.style.overflowY = 'scroll';
-    };
+	closeBtn.onclick = () => toggleSidebar(false);
 
 	const exitBtn = document.createElement('button');
 	exitBtn.innerText = 'Exit';
