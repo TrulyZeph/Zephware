@@ -66,7 +66,7 @@ javascript:(function(){
     
     .description {
       position: fixed;
-      top: 19.5em;  /* a bit below the header */
+      top: 19.5em;
       left: 0;
       width: 100%;
       text-align: center;
@@ -81,7 +81,7 @@ javascript:(function(){
 
     .input-area {
       position: fixed;
-      top: 26em;  /* below desc */
+      top: 26em;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -109,10 +109,9 @@ javascript:(function(){
       border: none;
       border-radius: 5px;
       outline: none;
-      box-shadow: 0 0 5pxrgba(0, 0, 0, 0.6);
-      background-color:rgb(42, 42, 42); /* changed to gray */
+      background-color:rgb(42, 42, 42);
       cursor: pointer;
-      width: 180px; /* made shorter */
+      width: 180px;
     }
 
     .input-area button {
@@ -125,8 +124,7 @@ javascript:(function(){
       color: white;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 0 10px #01AEFD99;
-      transition: none; /* removed hover effect */
+      transition: none;
     }
 
     @media (max-width:50em){
@@ -141,7 +139,7 @@ javascript:(function(){
       }
       .input-area select, .input-area button {
         font-size: 3.5vw;
-        width: auto; /* let it scale on small screens */
+        width: auto;
       }
     }
   `;
@@ -193,7 +191,6 @@ javascript:(function(){
     g.appendChild(use);
   }
   svg.appendChild(g);
-
   document.body.appendChild(svg);
 
   const coverBox = document.createElement('div');
@@ -206,7 +203,6 @@ javascript:(function(){
   coverBox.style.zIndex = '5';
   document.body.appendChild(coverBox);
 
-
   const content = document.createElement('div');
   content.className = 'content';
   document.body.appendChild(content);
@@ -215,7 +211,7 @@ javascript:(function(){
   header.className = 'header';
   header.textContent = 'Zephware';
   document.body.appendChild(header);
-  
+
   const description = document.createElement('div');
   description.className = 'description';
   description.textContent = 'The Ultimate Bookmarklet';
@@ -230,7 +226,7 @@ javascript:(function(){
   inputArea.appendChild(labelText);
 
   const select = document.createElement('select');
-  const options = ['Games', 'Unblockers', 'Blooket Hacks (WIP)', 'Gimkit Hacks (WIP)'];
+  const options = ['Games', 'Unblockers', 'Soundboard', 'Blooket Hacks', 'Gimkit Hacks'];
   options.forEach(opt => {
     const option = document.createElement('option');
     option.value = opt.toLowerCase();
@@ -243,39 +239,58 @@ javascript:(function(){
   button.textContent = 'Go';
   inputArea.appendChild(button);
 
-button.addEventListener('click', () => {
-  const val = select.value.toLowerCase();
-  if (val === 'games' || val === 'unblockers') {
-    document.head.innerHTML = '';
-    document.body.innerHTML = '';
-
-    const file = val === 'games' ? 'games.js' : 'proxies.js';
-    fetch(`https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/${file}`)
-      .then(response => response.text())
-      .then(scriptContent => {
-        const script = document.createElement('script');
-        script.innerHTML = scriptContent;
-        document.body.appendChild(script);
-      })
-      .catch(error => {
-        console.error(`Failed to load ${file}.`, error);
-        alert('Failed, Try Again.');
-      });
-  }
-});
-    select.onchange = () => {
-        if (select.value === 'blooket hacks (wip)') {
+  function setButtonStatus(status) {
+    const gradientWIP = 'linear-gradient(to bottom, #002D62, #001B44)';
+    const gradientOpen = 'linear-gradient(to bottom, #01AEFD, #015AFD)';
+    const gradientLocked = 'linear-gradient(to bottom, #555, #222)';
+    switch (status.toLowerCase()) {
+      case 'wip':
         button.textContent = 'WIP';
         button.disabled = true;
-        } else if (select.value === 'gimkit hacks (wip)') {
-        button.textContent = 'WIP';
+        button.style.background = gradientWIP;
+        break;
+      case 'locked':
+        button.textContent = 'Locked';
         button.disabled = true;
-        } else {
+        button.style.background = gradientLocked;
+        break;
+      case 'open':
+      default:
         button.textContent = 'Go';
         button.disabled = false;
-        }
-    };
+        button.style.background = gradientOpen;
+        break;
+    }
+  }
+
+  button.addEventListener('click', () => {
+    const val = select.value.toLowerCase();
+    if (val === 'games' || val === 'unblockers') {
+      document.head.innerHTML = '';
+      document.body.innerHTML = '';
+      const file = val === 'games' ? 'games.js' : 'proxies.js';
+      fetch(`https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/${file}`)
+        .then(response => response.text())
+        .then(scriptContent => {
+          const script = document.createElement('script');
+          script.innerHTML = scriptContent;
+          document.body.appendChild(script);
+        })
+        .catch(error => {
+          console.error(`Failed to load ${file}.`, error);
+          alert('Failed, Try Again.');
+        });
+    }
+  });
+
+  select.onchange = () => {
+    const val = select.value;
+    if (val === 'blooket hacks' || val === 'gimkit hacks' || val === 'soundboard') {
+      setButtonStatus('wip');
+    } else {
+      setButtonStatus('open');
+    }
+  };
 
   document.body.appendChild(inputArea);
 })();
-/* Password Protection for Hacks */
