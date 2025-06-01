@@ -197,7 +197,7 @@
       closePanel();
       loadZephPanel();
     } else {
-      alert('oof you tried but you failed');
+      alert('make sure you are in about:blank');
       inputBox.classList.add('input-shake');
       setTimeout(() => inputBox.classList.remove('input-shake'), 500);
     }
