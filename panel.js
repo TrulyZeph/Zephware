@@ -29,7 +29,7 @@ javascript:(function(){
       max-height: 100vh;
       margin: 0;
       position: fixed;
-      bottom: 10vh;
+      bottom: 9vh;
       left: 0;
       z-index: 10;
     }
