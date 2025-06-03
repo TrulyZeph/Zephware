@@ -10,6 +10,7 @@ javascript:(function(){
   const style = document.createElement('style');
   style.textContent = `
     ::selection{background-color: salmon; color: white;}
+
     .parallax > use{
       animation:move-forever 12s linear infinite;
     }
@@ -29,7 +30,7 @@ javascript:(function(){
       max-height: 100vh;
       margin: 0;
       position: fixed;
-      bottom: 9vh;
+      bottom: 10vh;
       left: 0;
       z-index: 10;
     }
@@ -265,10 +266,13 @@ javascript:(function(){
 
   button.addEventListener('click', () => {
     const val = select.value.toLowerCase();
-    if (val === 'games' || val === 'unblockers') {
+    if (val === 'games' || val === 'unblockers' || val === 'soundboard') {
       document.head.innerHTML = '';
       document.body.innerHTML = '';
-      const file = val === 'games' ? 'games.js' : 'proxies.js';
+      let file;
+      if (val === 'games') file = 'games.js';
+      else if (val === 'unblockers') file = 'proxies.js';
+      else if (val === 'soundboard') file = 'library.js';
       fetch(`https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/${file}`)
         .then(response => response.text())
         .then(scriptContent => {
@@ -285,7 +289,7 @@ javascript:(function(){
 
   select.onchange = () => {
     const val = select.value;
-    if (val === 'blooket hacks' || val === 'gimkit hacks' || val === 'soundboard') {
+    if (val === 'blooket hacks' || val === 'gimkit hacks') {
       setButtonStatus('wip');
     } else {
       setButtonStatus('open');
