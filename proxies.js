@@ -8,8 +8,8 @@
   }
 
   const dogeLinks = [
-    "kahoot.albert.ixl.masteryconnect.104.243.38.142.backname.io",
-    "renrendane.laviewddns.com"
+    "https://kahoot.albert.ixl.masteryconnect.104.243.38.142.backname.io",
+    "https://renrendane.laviewddns.com"
   ];
 
   const spaceLinks = [
@@ -102,7 +102,7 @@
   header.appendChild(title);
 
   const dropdown = document.createElement('select');
-  const options = ['doge', 'Space'];
+  const options = ['Doge', 'Space'];
   options.forEach(name => {
     const option = document.createElement('option');
     option.value = name.toLowerCase();
