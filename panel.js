@@ -199,7 +199,7 @@ javascript:(function(){
   coverBox.style.left = '0';
   coverBox.style.right = '0';
   coverBox.style.bottom = '0';
-  coverBox.style.height = '10vh';
+  coverBox.style.height = '11vh';
   coverBox.style.backgroundColor = '#298ee0';
   coverBox.style.zIndex = '5';
   document.body.appendChild(coverBox);
