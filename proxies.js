@@ -7,18 +7,8 @@
     document.head.appendChild(link);
   }
 
-  const rammerheadLinks = [
-    "https://promathquiz100.lasersoft.net.au/",
-    "https://rammerheadismid.joaopedroreis.com/",
-    "https://app.edu.iownyour.org/",
-    "https://cheifsarebad.zenrelax.ro/",
-    "https://richscholar.jake.eu/",
-    "https://historyaboutthe.us.to/",
-    "https://hr3u4t.d-n-s.name/",
-    "https://skibidi-toilet.sweatshopp.us/",
-    "https://notsigma.thehomeserver.net/",
-    "https://igottridentrodinfischtrust.myjamesonline.net/",
-    "https://gogo11.ddo.jp/"
+  const dogeLinks = [
+    "kahoot.albert.ixl.masteryconnect.104.243.38.142.backname.io"
   ];
 
   const spaceLinks = [
@@ -111,7 +101,7 @@
   header.appendChild(title);
 
   const dropdown = document.createElement('select');
-  const options = ['Rammerhead', 'Space'];
+  const options = ['doge', 'Space'];
   options.forEach(name => {
     const option = document.createElement('option');
     option.value = name.toLowerCase();
@@ -124,7 +114,7 @@
 
   button.onclick = () => {
     const selectedVal = dropdown.value;
-    const links = selectedVal === 'rammerhead' ? rammerheadLinks : spaceLinks;
+    const links = selectedVal === 'doge' ? dogeLinks : spaceLinks;
     const selectedLink = links[Math.floor(Math.random() * links.length)];
 
     document.head.innerHTML = '';
