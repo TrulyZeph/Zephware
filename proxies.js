@@ -8,7 +8,8 @@
   }
 
   const dogeLinks = [
-    "kahoot.albert.ixl.masteryconnect.104.243.38.142.backname.io"
+    "kahoot.albert.ixl.masteryconnect.104.243.38.142.backname.io",
+    "renrendane.laviewddns.com"
   ];
 
   const spaceLinks = [
