@@ -297,4 +297,56 @@ javascript:(function(){
   };
 
   document.body.appendChild(inputArea);
+    const overlay = document.createElement('div');
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.background = 'rgba(0, 0, 0, 0.8)';
+  overlay.style.display = 'flex';
+  overlay.style.alignItems = 'center';
+  overlay.style.justifyContent = 'center';
+  overlay.style.flexDirection = 'column';
+  overlay.style.zIndex = '999';
+
+  const popup = document.createElement('div');
+  popup.style.background = '#111';
+  popup.style.border = '2px solid #01AEFD';
+  popup.style.borderRadius = '10px';
+  popup.style.padding = '2em 3em';
+  popup.style.textAlign = 'center';
+  popup.style.fontFamily = "'Fredoka', sans-serif";
+  popup.style.color = '#fff';
+  popup.style.boxShadow = '0 0 15px #01AEFD';
+
+  const popupTitle = document.createElement('div');
+  popupTitle.textContent = 'News: Blooket Hacks';
+  popupTitle.style.fontSize = '2em';
+  popupTitle.style.marginBottom = '0.5em';
+  popupTitle.style.background = 'linear-gradient(to bottom, #01AEFD, #015AFD)';
+  popupTitle.style.webkitBackgroundClip = 'text';
+  popupTitle.style.webkitTextFillColor = 'transparent';
+
+  const popupText = document.createElement('div');
+  popupText.textContent = 'Blooket Hacks are set to release tomorrow! If you wish to access them earlier they will be available by 3:00pm today the latest as I am wrapping up some stuff before I release.';
+  popupText.style.fontSize = '1.2em';
+
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = 'Close';
+  closeBtn.style.marginTop = '1.5em';
+  closeBtn.style.padding = '0.5em 1em';
+  closeBtn.style.fontSize = '1em';
+  closeBtn.style.border = 'none';
+  closeBtn.style.borderRadius = '5px';
+  closeBtn.style.background = 'linear-gradient(to bottom, #01AEFD, #015AFD)';
+  closeBtn.style.color = '#fff';
+  closeBtn.style.cursor = 'pointer';
+  closeBtn.onclick = () => overlay.remove();
+
+  popup.appendChild(popupTitle);
+  popup.appendChild(popupText);
+  popup.appendChild(closeBtn);
+  overlay.appendChild(popup);
+  document.body.appendChild(overlay);
 })();
