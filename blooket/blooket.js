@@ -1,195 +1,3 @@
-(async () => {
-    if (String(window.fetch.call).includes("native")) {
-        var e = window.fetch.call;
-        window.fetch.call = function() {
-            if (!arguments[1].includes("s.blooket.com/rc")) return e.apply(this, arguments);
-            console.log("You tried to get caught cheating!")
-        }
-    } else;
-    if (document.querySelector("script[src*='bfs/index.js']") && !window.clearId) {
-        for (var t = document.createElement("iframe"), o = (document.body.appendChild(t), window.clearId = window.setInterval(() => {}, 0)); o--;) t.contentWindow.clearInterval.call(window, o);
-        t.remove()
-    } {
-        var t, o = document.createElement("iframe"),
-            o = (document.body.append(o), window.alert = o.contentWindow.alert.bind(window), window.prompt = o.contentWindow.prompt.bind(window), window.confirm = o.contentWindow.confirm.bind(window), o.remove(), (e, t = {}) => Object.entries(t).forEach(([t, o]) => e.style[t] = o));
-        (t = document.createElement("style")).innerHTML = "details > summary { cursor: pointer; transition: 0.15s; list-style: none; } details > summary:hover { color: hsl(0, 0%, 50%) } details > summary::-webkit-details-marker { display: none; } details summary ~ * { animation: sweep .5s ease-in-out; } @keyframes sweep { 0%    {opacity: 0; transform: translateY(-10px)} 100%  {opacity: 1; transform: translateY(0)} } .cheat { border: none; background: hsl(0, 0%, 20%); padding: 5px; margin: 3px; width: 60%; color: hsl(0, 0%, 100%); transition: 0.2s; border-radius: 5px; cursor: pointer; } .cheat:hover { background: hsl(0, 0%, 30%); }";
-        let a = document.createElement("div");
-        [...document.querySelectorAll("#JODMOBILE")].forEach(e => e.remove()), a.id = "JODMOBILE", a.appendChild(t), o(a, {
-            width: "400px",
-            background: "hsl(0, 0%, 10%)",
-            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.95)), url(https://ac.blooket.com/dashboard/65a43218fd1cabe52bdf1cda34613e9e.png)",
-            borderRadius: "10px",
-            position: "absolute",
-            textAlign: "center",
-            fontFamily: "Nunito",
-            color: "white",
-            overflow: "hidden",
-            top: "50px",
-            left: "50px"
-        });
-        var r, n, i = 0,
-            s = 0,
-            t = (a.onpointerdown = (e = window.event) => {
-                e.preventDefault(), i = e.clientX, s = e.clientY, document.onpointerup = () => {
-                    document.onpointerup = null, document.onpointermove = null
-                }, document.onpointermove = e => {
-                    (e = e || window.event).preventDefault(), r = i - e.clientX, n = s - e.clientY, i = e.clientX, s = e.clientY, a.style.top = a.offsetTop - n + "px", a.style.left = a.offsetLeft - r + "px"
-                }
-            }, document.createElement("div")),
-            l = (a.appendChild(t), o(t, {
-                width: "100%",
-                height: "35px",
-                paddingTop: "2px",
-                fontSize: "1.5rem",
-                textAlign: "center"
-            }), t.innerHTML = 'Blooket Cheats Plus <span style="font-size: 0.75rem">v15.30.00</span>', document.createElement("button")),
-            l = (t.appendChild(l), o(l, {
-                background: "red",
-                height: "45px",
-                width: "45px",
-                border: "none",
-                cursor: "pointer",
-                position: "absolute",
-                top: "-10px",
-                right: "-10px",
-                fontSize: "1.5rem",
-                borderRadius: "10px",
-                fontFamily: "Nunito",
-                fontWeight: "bolder",
-                paddingTop: "10px",
-                paddingRight: "15px"
-            }), l.innerText = "X", l.onclick = () => {
-                $(), a.remove(), removeEventListener("keypress", f)
-            }, document.createElement("button"));
-        t.appendChild(l), o(l, {
-            background: "#444444",
-            height: "45px",
-            width: "45px",
-            border: "none",
-            cursor: "pointer",
-            position: "absolute",
-            top: "-10px",
-            left: "-10px",
-            fontSize: "1.5rem",
-            borderRadius: "10px",
-            fontFamily: "Nunito",
-            fontWeight: "bolder",
-            paddingTop: "10px",
-            paddingLeft: "15px"
-        }), l.innerText = "-", l.onclick = () => c.hidden = !c.hidden;
-        let c = document.createElement("div"),
-            d = (t = document.createElement("div"), c.appendChild(t), a.appendChild(c), t.innerHTML = `<span id="curPageEl">${_(!0)?"Current gamemode: "+_(!0):"No game detected"}</span><br><span>(Press E to hide)</span><br>`, t.style.display = "block", t.style.margin = "10px", document.body.append(a), o = document.createElement("div"), c.appendChild(o), o.style.fontSize = "0.9rem", o.style.paddingBottom = "5px", {
-                global: [{
-                }]
-            });
-        var u = document.createElement("details");
-        for (let p of (u.innerHTML = '<summary style="padding: 10px; font-size: 1.5em; font-weight: bolder">Global</summary>', d.global)) {
-            let m = v(p.name);
-            m.style.backgroundColor = "toggle" == p.type ? p.enabled ? "#47A547" : "#A02626" : "hsl(0, 0%, 20%)", m.onclick = () => {
-                try {
-                    p.run()
-                } finally {
-                    m.style.backgroundColor = "toggle" == p.type ? p.enabled ? "#47A547" : "#A02626" : "hsl(0, 0%, 20%)"
-                }
-            }, u.appendChild(m)
-        }
-        u.open = !1, u.style.paddingBottom = "10px", t.appendChild(u);
-        let h = document.createElement("div");
-        t.appendChild(h), console.log(d);
-        let y = e => {
-            if (e && d[e])
-                for (let t of d[e]) {
-                    let o = v(t.name);
-                    o.style.backgroundColor = "toggle" == t.type ? t.enabled ? "#47A547" : "#A02626" : "hsl(0, 0%, 20%)", o.onclick = () => {
-                        try {
-                            t.run()
-                        } finally {
-                            o.style.backgroundColor = "toggle" == t.type ? t.enabled ? "#47A547" : "#A02626" : "hsl(0, 0%, 20%)"
-                        }
-                    }, h.appendChild(o), h.appendChild(document.createElement("br"))
-                }
-        };
-        setTimeout(() => y(_()), 50);
-        var $ = function(e) {
-            let t = window.location.pathname,
-                o = setInterval(() => {
-                    window.location.pathname != t && e(t = window.location.pathname)
-                }, 50);
-            return () => clearInterval(o)
-        }(e => {
-            var t = _();
-            curPageEl.innerText = _(!0) ? "Current gamemode: " + _(!0) : "No game detected", h.innerHTML = "", y(t)
-        });
-
-        function v(e) {
-            var t = document.createElement("button");
-            return t.classList.add("cheat"), t.innerText = e, t
-        }
-
-        function _(e) {
-            switch (window.location.pathname) {
-                case "/play/racing":
-                    return e ? "Racing" : "racing";
-                case "/play/pirate":
-                    return e ? "Pirate's Voyage" : "voyage";
-                case "/play/factory":
-                    return e ? "Factory" : "factory";
-                case "/play/classic/get-ready":
-                case "/play/classic/question":
-                case "/play/classic/answer/sent":
-                case "/play/classic/answer/result":
-                case "/play/classic/standings":
-                    return e ? "Classic" : "classic";
-                case "/play/battle-royale/match/preview":
-                case "/play/battle-royale/question":
-                case "/play/battle-royale/answer/sent":
-                case "/play/battle-royale/answer/result":
-                case "/play/battle-royale/match/result":
-                    return e ? "Battle Royale" : "royale";
-                case "/play/toy":
-                    return e ? "Santa's Workshop" : "workshop";
-                case "/play/gold":
-                    return e ? "Gold Quest" : "gold";
-                case "/play/brawl":
-                    return e ? "Monster Brawl" : "brawl";
-                case "/play/hack":
-                    return e ? "Crypto Hack" : "hack";
-                case "/play/fishing":
-                    return e ? "Fishing Frenzy" : "fishing";
-                case "/play/rush":
-                    return e ? "Blook Rush" : "rush";
-                case "/play/dino":
-                    return e ? "Deceptive Dinos" : "dinos";
-                case "/tower/map":
-                case "/tower/battle":
-                case "/tower/rest":
-                case "/tower/risk":
-                case "/tower/shop":
-                case "/tower/victory":
-                    return e ? "Tower of Doom" : "doom";
-                case "/cafe":
-                case "/cafe/shop":
-                    return e ? "Cafe" : "cafe";
-                case "/defense":
-                    return e ? "Tower Defense" : "defense";
-                case "/play/defense2":
-                    return e ? "Tower Defense 2" : "defense2";
-                case "/kingdom":
-                    return e ? "Crazy Kingdom" : "kingdom";
-                case "/play/lobby":
-                    return e ? "Lobby" : "flappy";
-                default:
-                    return !1
-            }
-        }
-
-        function f(e) {
-            "KeyE" == e.code && (a.hidden = !a.hidden)
-        }
-        addEventListener("keypress", f)
-    }
-})();
-
 if (!document.getElementById('fredoka-font-link')) {
     const link = document.createElement('link');
     link.id = 'fredoka-font-link';
@@ -324,7 +132,7 @@ panel.innerHTML = `
         <button class="wp-sidebar-btn active" data-tab="favorites">Favorites</button>
         <button class="wp-sidebar-btn" data-tab="autodetect">Auto Detection</button>
         <div class="wp-divider"></div>
-        <button class="wp-sidebar-btn" data-tab="racing">Global</button>
+        <button class="wp-sidebar-btn" data-tab="global">Global</button>
         <button class="wp-sidebar-btn" data-tab="racing">Racing</button>
         <button class="wp-sidebar-btn" data-tab="voyage">Pirate's Voyage</button>
         <button class="wp-sidebar-btn" data-tab="factory">Factory</button>
@@ -348,10 +156,10 @@ panel.innerHTML = `
             <button id="wp-sidebar-toggle">☰</button>
             <button id="wp-hide-btn" title="Hide">-</button>
             <button id="wp-close-btn" title="Close">×</button>
-            Blooket Panel
+            Zephware
         </div>
         <div class="wp-divider"></div>
-        <div id="wp-content">Welcome! Select a section.</div>
+        <div id="wp-content">Welcome to the Zephware Blooket Hacks. Select a section to get started. Press 'E' to hide.</div>
     </div>
 `;
 document.body.appendChild(panel);
@@ -380,7 +188,7 @@ const hacks = {
         name: "Auto Answer (Toggle)",
                     description: "Toggles auto answer on",
                     type: "toggle",
-                    enabled: (!1),
+                    enabled: (o.innerHTML = !1),
                     data: null,
                     run: function() {
                         this.enabled ? (this.enabled = !1, clearInterval(this.data), this.data = null) : (this.enabled = !0, this.data = setInterval(() => {
@@ -1229,7 +1037,7 @@ const hacks = {
                     run: function(e) {
                         let t = document.createElement("iframe");
                         if (document.body.append(t), window.alert = t.contentWindow.alert.bind(window), window.prompt = t.contentWindow.prompt.bind(window), t.remove(), "/host/settings" == location.pathname) {
-                            let o = ["Racing", "Factory", "Cafe", "Defense2", "Defense", "Royale", "Gold", "Candy", "Brawl", "Hack", "Pirate", "Fish", "Dino", "Toy", "Rush"],
+                            let o = ["Racing", "Classic", "Factory", "Cafe", "Defense2", "Defense", "Royale", "Gold", "Candy", "Brawl", "Hack", "Pirate", "Fish", "Dino", "Toy", "Rush"],
                                 a = prompt(`Which gamemode do you want to switch to? (Case sensitive) ${o.slice(0,o.length-1).join(", ")} or ${o[o.length-1]}`);
                             if (o.includes(a)) {
                                 let {
@@ -4328,16 +4136,20 @@ function createHackButton(hack, mode) {
     btn.textContent = hack.name;
     btn.style.position = 'relative';
     if (hack.type === 'toggle') {
-        const toggle = document.createElement('input');
-        toggle.type = 'checkbox';
-        toggle.checked = !!hack.enabled;
-        toggle.style.marginRight = '8px';
-        toggle.onclick = (e) => {
-            e.stopPropagation();
+        function updateBtnStyle() {
+            if (hack.enabled) {
+                btn.style.backgroundColor = '#01AEFD';
+                btn.style.color = '#fff';
+            } else {
+                btn.style.backgroundColor = 'rgb(56, 56, 56)';
+                btn.style.color = '#fff';
+            }
+        }
+        btn.onclick = (e) => {
             hack.run.call(hack);
-            toggle.checked = !!hack.enabled;
+            updateBtnStyle();
         };
-        btn.prepend(toggle);
+        updateBtnStyle();
     } else {
         btn.onclick = hack.run;
     }
