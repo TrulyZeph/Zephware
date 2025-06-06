@@ -329,7 +329,7 @@ javascript:(function(){
   popupTitle.style.webkitTextFillColor = 'transparent';
 
   const popupText = document.createElement('div');
-  popupText.textContent = 'Blooket Hacks are set to release tomorrow! They will be out before 12:00pm on June 6th.';
+  popupText.textContent = 'im awake guys ill drop them at like 7:00';
   popupText.style.fontSize = '1.2em';
 
   const closeBtn = document.createElement('button');
