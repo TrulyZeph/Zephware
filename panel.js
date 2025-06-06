@@ -143,6 +143,45 @@ javascript:(function(){
         width: auto;
       }
     }
+    #zw-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #zw-overlay-box {
+      background: rgba(17, 17, 17, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 520px;
+      width: 90%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+    #zw-overlay-box h1 {
+      font-size: 24px;
+      color: #01AEFD;
+      margin-bottom: 16px;
+    }
+    #zw-overlay-box p {
+      color: white;
+      margin-bottom: 24px;
+    }
+    #zw-overlay-box button {
+      font-size: 16px;
+      font-family: 'Fredoka', sans-serif;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #01AEFD;
+      color: white;
+      cursor: pointer;
+    }
   `;
   document.head.appendChild(style);
 
@@ -240,10 +279,82 @@ javascript:(function(){
   button.textContent = 'Go';
   inputArea.appendChild(button);
 
+  let lockedTabs = { 'blooket hacks': true };
+
+  function showPasswordOverlay(onSuccess) {
+    const old = document.getElementById('zw-overlay');
+    if (old) old.remove();
+    const overlay = document.createElement('div');
+    overlay.id = 'zw-overlay';
+    overlay.style.zIndex = '99999';
+    overlay.style.fontFamily = "'Fredoka', sans-serif";
+    overlay.innerHTML = `
+      <div id="zw-overlay-box" style="font-family:'Fredoka',sans-serif;">
+        <h1>Password Required</h1>
+        <p>Enter the password to access this section.</p>
+        <input id="zw-password-input" type="password" placeholder="Password" style="font-size:16px;padding:8px 12px;border-radius:8px;border:1px solid #444;width:80%;margin-bottom:16px;outline:none;font-family:'Fredoka',sans-serif;" />
+        <br>
+        <button id="zw-password-submit" style="font-family:'Fredoka',sans-serif;">Submit</button>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    const input = overlay.querySelector('#zw-password-input');
+    const submit = overlay.querySelector('#zw-password-submit');
+    input.focus();
+    function unlock() {
+      overlay.remove();
+      onSuccess();
+    }
+    submit.onclick = unlock;
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') unlock();
+    });
+  }
+
+  function showInstructionsOverlay() {
+    const old = document.getElementById('zw-overlay');
+    if (old) old.remove();
+    const overlay = document.createElement('div');
+    overlay.id = 'zw-overlay';
+    overlay.style.zIndex = '99999';
+    overlay.style.fontFamily = "'Fredoka', sans-serif";
+    overlay.innerHTML = `
+      <div id="zw-overlay-box" style="font-family:'Fredoka',sans-serif;">
+        <h1>Instructions</h1>
+        <ol id="zw-instructions-list" style="text-align:center;margin:0 0 24px 0;padding-left:0;font-size:16px;list-style-position:inside;color:#fff;">
+          <li style="margin:8px 0;">Create a bookmark</li>
+          <li style="margin:8px 0;">Copy the code by clicking the copy button</li>
+          <li style="margin:8px 0;">Set the code as the url for the bookmark</li>
+          <li style="margin:8px 0;">Hit save</li>
+          <li style="margin:8px 0;">Try it out!</li>
+        </ol>
+        <div style="display:flex;justify-content:center;gap:12px;align-items:center;">
+          <button id="zw-copy-btn" style="font-family:'Fredoka',sans-serif;min-width:80px;">Copy</button>
+          <button id="zw-instructions-close" style="font-family:'Fredoka',sans-serif;min-width:80px;">Close</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    const copyBtn = overlay.querySelector('#zw-copy-btn');
+    copyBtn.onclick = async () => {
+      const originalText = copyBtn.textContent;
+      try {
+        const resp = await fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/blooket/blooket.js');
+        const text = await resp.text();
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => { copyBtn.textContent = originalText; }, 3000);
+      } catch (e) {
+        copyBtn.textContent = 'Failed!';
+        setTimeout(() => { copyBtn.textContent = originalText; }, 3000);
+      }
+    };
+    overlay.querySelector('#zw-instructions-close').onclick = () => overlay.remove();
+  }
+
   function setButtonStatus(status) {
-    const gradientWIP = 'linear-gradient(to bottom, #002D62, #001B44)';
     const gradientOpen = 'linear-gradient(to bottom, #01AEFD, #015AFD)';
-    const gradientLocked = 'linear-gradient(to bottom, #555, #222)';
+    const gradientWIP = 'linear-gradient(to bottom, #002D62, #001B44)';
     switch (status.toLowerCase()) {
       case 'wip':
         button.textContent = 'WIP';
@@ -251,9 +362,9 @@ javascript:(function(){
         button.style.background = gradientWIP;
         break;
       case 'locked':
-        button.textContent = 'Locked';
-        button.disabled = true;
-        button.style.background = gradientLocked;
+        button.textContent = 'Go';
+        button.disabled = false;
+        button.style.background = gradientOpen;
         break;
       case 'open':
       default:
@@ -266,6 +377,10 @@ javascript:(function(){
 
   button.addEventListener('click', () => {
     const val = select.value.toLowerCase();
+    if (lockedTabs[val]) {
+      showPasswordOverlay(() => showInstructionsOverlay());
+      return;
+    }
     if (val === 'games' || val === 'unblockers' || val === 'soundboard') {
       document.head.innerHTML = '';
       document.body.innerHTML = '';
@@ -288,8 +403,10 @@ javascript:(function(){
   });
 
   select.onchange = () => {
-    const val = select.value;
-    if (val === 'blooket hacks' || val === 'gimkit hacks') {
+    const val = select.value.toLowerCase();
+    if (lockedTabs[val]) {
+      setButtonStatus('locked');
+    } else if (val === 'blooket hacks' || val === 'gimkit hacks') {
       setButtonStatus('wip');
     } else {
       setButtonStatus('open');
@@ -297,56 +414,21 @@ javascript:(function(){
   };
 
   document.body.appendChild(inputArea);
-    const overlay = document.createElement('div');
-  overlay.style.position = 'fixed';
-  overlay.style.top = '0';
-  overlay.style.left = '0';
-  overlay.style.width = '100%';
-  overlay.style.height = '100%';
-  overlay.style.background = 'rgba(0, 0, 0, 0.8)';
-  overlay.style.display = 'flex';
-  overlay.style.alignItems = 'center';
-  overlay.style.justifyContent = 'center';
-  overlay.style.flexDirection = 'column';
-  overlay.style.zIndex = '999';
+})();
 
-  const popup = document.createElement('div');
-  popup.style.background = '#111';
-  popup.style.border = '2px solid #01AEFD';
-  popup.style.borderRadius = '10px';
-  popup.style.padding = '2em 3em';
-  popup.style.textAlign = 'center';
-  popup.style.fontFamily = "'Fredoka', sans-serif";
-  popup.style.color = '#fff';
-  popup.style.boxShadow = '0 0 15px #01AEFD';
-
-  const popupTitle = document.createElement('div');
-  popupTitle.textContent = 'News: Blooket Hacks';
-  popupTitle.style.fontSize = '2em';
-  popupTitle.style.marginBottom = '0.5em';
-  popupTitle.style.background = 'linear-gradient(to bottom, #01AEFD, #015AFD)';
-  popupTitle.style.webkitBackgroundClip = 'text';
-  popupTitle.style.webkitTextFillColor = 'transparent';
-
-  const popupText = document.createElement('div');
-  popupText.textContent = 'im awake guys ill drop them at like 7:00';
-  popupText.style.fontSize = '1.2em';
-
-  const closeBtn = document.createElement('button');
-  closeBtn.textContent = 'Close';
-  closeBtn.style.marginTop = '1.5em';
-  closeBtn.style.padding = '0.5em 1em';
-  closeBtn.style.fontSize = '1em';
-  closeBtn.style.border = 'none';
-  closeBtn.style.borderRadius = '5px';
-  closeBtn.style.background = 'linear-gradient(to bottom, #01AEFD, #015AFD)';
-  closeBtn.style.color = '#fff';
-  closeBtn.style.cursor = 'pointer';
-  closeBtn.onclick = () => overlay.remove();
-
-  popup.appendChild(popupTitle);
-  popup.appendChild(popupText);
-  popup.appendChild(closeBtn);
-  overlay.appendChild(popup);
-  document.body.appendChild(overlay);
+(function() {
+  const style = document.createElement('style');
+  style.textContent = `
+    body, #zw-overlay, #zw-overlay *, .header, .description, .input-area, .input-area *, .content, .label-text, select, button {
+      font-family: 'Fredoka', sans-serif !important;
+    }
+    #zw-overlay {
+      z-index: 99999 !important;
+      font-family: 'Fredoka', sans-serif !important;
+    }
+    #zw-overlay-box {
+      font-family: 'Fredoka', sans-serif !important;
+    }
+  `;
+  document.head.appendChild(style);
 })();
