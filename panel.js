@@ -295,15 +295,23 @@ javascript:(function(){
         <input id="zw-password-input" type="password" placeholder="Password" style="font-size:16px;padding:8px 12px;border-radius:8px;border:1px solid #444;width:80%;margin-bottom:16px;outline:none;font-family:'Fredoka',sans-serif;" />
         <br>
         <button id="zw-password-submit" style="font-family:'Fredoka',sans-serif;">Submit</button>
+        <div id="zw-password-error" style="color:#ff5555;margin-top:10px;display:none;">Incorrect password.</div>
       </div>
     `;
     document.body.appendChild(overlay);
     const input = overlay.querySelector('#zw-password-input');
     const submit = overlay.querySelector('#zw-password-submit');
+    const error = overlay.querySelector('#zw-password-error');
     input.focus();
     function unlock() {
-      overlay.remove();
-      onSuccess();
+      if (input.value === "happysummer") {
+        overlay.remove();
+        onSuccess();
+      } else {
+        error.style.display = 'block';
+        input.value = '';
+        input.focus();
+      }
     }
     submit.onclick = unlock;
     input.addEventListener('keydown', e => {
@@ -323,33 +331,47 @@ javascript:(function(){
         <h1>Instructions</h1>
         <ol id="zw-instructions-list" style="text-align:center;margin:0 0 24px 0;padding-left:0;font-size:16px;list-style-position:inside;color:#fff;">
           <li style="margin:8px 0;">Create a bookmark</li>
-          <li style="margin:8px 0;">Copy the code by clicking the copy button</li>
+          <li style="margin:8px 0;">Click the "Copy" button below</li>
+          <li style="margin:8px 0;">Copy the code to your clipboard</li>
           <li style="margin:8px 0;">Set the code as the url for the bookmark</li>
           <li style="margin:8px 0;">Hit save</li>
           <li style="margin:8px 0;">Try it out!</li>
         </ol>
         <div style="display:flex;justify-content:center;gap:12px;align-items:center;">
-          <button id="zw-copy-btn" style="font-family:'Fredoka',sans-serif;min-width:80px;">Copy</button>
+          <button id="zw-highlight-btn" style="font-family:'Fredoka',sans-serif;min-width:80px;">Copy</button>
           <button id="zw-instructions-close" style="font-family:'Fredoka',sans-serif;min-width:80px;">Close</button>
         </div>
       </div>
     `;
     document.body.appendChild(overlay);
-    const copyBtn = overlay.querySelector('#zw-copy-btn');
-    copyBtn.onclick = async () => {
-      const originalText = copyBtn.textContent;
-      try {
-        const resp = await fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/blooket/min.js');
-        const text = await resp.text();
-        await navigator.clipboard.writeText(text);
-        copyBtn.textContent = 'Copied!';
-        setTimeout(() => { copyBtn.textContent = originalText; }, 3000);
-      } catch (e) {
-        copyBtn.textContent = 'Failed!';
-        setTimeout(() => { copyBtn.textContent = originalText; }, 3000);
-      }
+
+    fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/blooket/min.js')
+      .then(res => res.text())
+      .then(code => {
+        const pre = document.createElement('pre');
+        pre.textContent = code;
+        pre.style.position = 'fixed';
+        pre.style.opacity = '0';
+        pre.style.pointerEvents = 'none';
+        pre.style.userSelect = 'text';
+        pre.style.zIndex = '-1';
+        pre.id = 'zw-invisible-code';
+        document.body.appendChild(pre);
+
+        overlay.querySelector('#zw-highlight-btn').onclick = () => {
+          const range = document.createRange();
+          range.selectNodeContents(pre);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+        };
+      });
+
+    overlay.querySelector('#zw-instructions-close').onclick = () => {
+      overlay.remove();
+      const pre = document.getElementById('zw-invisible-code');
+      if (pre) pre.remove();
     };
-    overlay.querySelector('#zw-instructions-close').onclick = () => overlay.remove();
   }
 
   function setButtonStatus(status) {
