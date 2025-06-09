@@ -339,7 +339,7 @@ javascript:(function(){
     copyBtn.onclick = async () => {
       const originalText = copyBtn.textContent;
       try {
-        const resp = await fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/blooket/blooket.js');
+        const resp = await fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/blooket/min.js');
         const text = await resp.text();
         await navigator.clipboard.writeText(text);
         copyBtn.textContent = 'Copied!';
