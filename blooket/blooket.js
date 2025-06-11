@@ -169,7 +169,84 @@ const content = panel.querySelector("#wp-content");
 
 const hideBtn = panel.querySelector('#wp-hide-btn');
 hideBtn.onclick = () => {
-    panel.style.display = panel.style.display === 'none' ? '' : 'none';
+    if (panel.style.display !== 'none') {
+        panel.style.display = 'none';
+
+        let miniBar = document.createElement('div');
+        miniBar.id = 'wp-mini-bar';
+        miniBar.style.position = 'fixed';
+        miniBar.style.top = '40px';
+        miniBar.style.left = '40px';
+        miniBar.style.zIndex = '10001';
+        miniBar.style.background = '#222';
+        miniBar.style.borderRadius = '10px';
+        miniBar.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+        miniBar.style.display = 'flex';
+        miniBar.style.alignItems = 'center';
+        miniBar.style.gap = '8px';
+        miniBar.style.padding = '6px 12px';
+        miniBar.style.cursor = 'move';
+        miniBar.style.userSelect = 'none';
+
+        const miniHide = document.createElement('button');
+        miniHide.textContent = '-';
+        miniHide.title = 'Show Panel';
+        miniHide.style.background = '#444';
+        miniHide.style.color = '#fff';
+        miniHide.style.border = 'none';
+        miniHide.style.borderRadius = '8px';
+        miniHide.style.fontSize = '20px';
+        miniHide.style.width = '36px';
+        miniHide.style.height = '36px';
+        miniHide.style.cursor = 'pointer';
+        miniHide.style.fontWeight = 'bold';
+
+        const miniClose = document.createElement('button');
+        miniClose.textContent = '×';
+        miniClose.title = 'Close';
+        miniClose.style.background = '#e74c3c';
+        miniClose.style.color = '#fff';
+        miniClose.style.border = 'none';
+        miniClose.style.borderRadius = '8px';
+        miniClose.style.fontSize = '20px';
+        miniClose.style.width = '36px';
+        miniClose.style.height = '36px';
+        miniClose.style.cursor = 'pointer';
+        miniClose.style.fontWeight = 'bold';
+
+        miniHide.onclick = () => {
+            panel.style.display = '';
+            miniBar.remove();
+        };
+
+        miniClose.onclick = () => {
+            panel.remove();
+            miniBar.remove();
+            removeEventListener("keypress", f);
+        };
+
+        let isDragging = false, offsetX = 0, offsetY = 0;
+        miniBar.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            offsetX = e.clientX - miniBar.getBoundingClientRect().left;
+            offsetY = e.clientY - miniBar.getBoundingClientRect().top;
+            document.body.style.userSelect = 'none';
+        });
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                miniBar.style.left = (e.clientX - offsetX) + 'px';
+                miniBar.style.top = (e.clientY - offsetY) + 'px';
+            }
+        });
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+            document.body.style.userSelect = '';
+        });
+
+        miniBar.appendChild(miniHide);
+        miniBar.appendChild(miniClose);
+        document.body.appendChild(miniBar);
+    }
 };
 const closeBtn = panel.querySelector('#wp-close-btn');
 closeBtn.onclick = () => {
