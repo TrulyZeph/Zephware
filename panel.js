@@ -308,10 +308,11 @@ javascript:(function(){
       { src: "https://placehold.co/560x160/222/fff.png?text=Coming+Soon", alt: "Coming Soon" }
     ],
     changes: [
-      { text: "More Games!", desc: "All Game Icons Fixed + More Games" },
+      { text: "More Games!", desc: "UI Rework, All Game Icons Fixed, More Games" },
       { text: "New Core: Learning Tools", desc: "IXL Hacks, AI, Study Helper, Marker Tool, Ect." },
       { text: "More & Fixed Unblockers", desc: "More Unblockers, Unblocked, Fast, Working" },
       { text: "Zephware Website", desc: "You can access Zephware via website" },
+      { text: "Gimkit Hacks", desc: "Finally Released" },
       { text: "Student Library", desc: "???" }
     ]
   }
