@@ -279,6 +279,302 @@ javascript:(function(){
   button.textContent = 'Go';
   inputArea.appendChild(button);
 
+  const newsPages = [
+  {
+    title: "What's New?",
+    desc: "v1.0.3",
+    images: [
+      { src: "https://wallpaperaccess.com/full/7225605.jpg", alt: "Update GIF" }
+    ],
+    changes: [
+      { text: "Blooket Hacks Update!", desc: "More friendly for those whose keyboard doesn't work" },
+      { text: "Added News Panel", desc: "This helps you know what was added and what's coming next" },
+    ]
+  },
+  {
+    title: "What'd I Miss?",
+    desc: "v1.0.2",
+    images: [
+      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/updates/ZephwareBlooket.png", alt: "Previous Update" }
+    ],
+    changes: [
+      { text: "Blooket Hacks Have Released!", desc: "" },
+    ]
+  },
+  {
+    title: "What's Next?",
+    desc: "v1.0.4 : Releasing 1st Day of 25-26 School Year",
+    images: [
+      { src: "https://placehold.co/560x160/222/fff.png?text=Coming+Soon", alt: "Coming Soon" }
+    ],
+    changes: [
+      { text: "More Games!", desc: "All Game Icons Fixed + More Games" },
+      { text: "New Core: Learning Tools", desc: "IXL Hacks, AI, Study Helper, Marker Tool, Ect." },
+      { text: "More & Fixed Unblockers", desc: "More Unblockers, Unblocked, Fast, Working" },
+      { text: "Zephware Website", desc: "You can access Zephware via website" },
+      { text: "Student Library", desc: "???" }
+    ]
+  }
+];
+
+showNewsPanel();
+
+function showNewsPanel() {
+  let pageIdx = 0;
+  let imgIdx = 0;
+
+  const old = document.getElementById('zw-news-overlay');
+  if (old) old.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'zw-news-overlay';
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100vw';
+  overlay.style.height = '100vh';
+  overlay.style.background = 'rgba(0,0,0,0.75)';
+  overlay.style.zIndex = '100000';
+  overlay.style.display = 'flex';
+  overlay.style.justifyContent = 'center';
+  overlay.style.alignItems = 'center';
+  overlay.style.fontFamily = "'Fredoka', sans-serif";
+
+  const panel = document.createElement('div');
+  panel.style.width = '600px';
+  panel.style.height = '400px';
+  panel.style.background = 'rgba(17,17,17,0.97)';
+  panel.style.borderRadius = '24px';
+  panel.style.boxShadow = '0 8px 32px rgba(0,0,0,0.4)';
+  panel.style.display = 'flex';
+  panel.style.flexDirection = 'column';
+  panel.style.alignItems = 'center';
+  panel.style.position = 'relative';
+  panel.style.padding = '32px 24px 24px 24px';
+  panel.style.textAlign = 'center';
+  panel.style.overflow = 'hidden';
+
+  const panelContent = document.createElement('div');
+  panelContent.style.flex = '1';
+  panelContent.style.overflowY = 'auto';
+  panelContent.style.width = '100%';
+  panelContent.style.display = 'flex';
+  panelContent.style.flexDirection = 'column';
+  panelContent.style.alignItems = 'center';
+  panelContent.style.scrollbarWidth = 'none';
+  panelContent.style.msOverflowStyle = 'none';
+  panelContent.style.overflowX = 'hidden';
+  panelContent.classList.add('zw-hide-scrollbar');
+
+  const navRow = document.createElement('div');
+  navRow.style.display = 'flex';
+  navRow.style.alignItems = 'center';
+  navRow.style.justifyContent = 'center';
+  navRow.style.width = '100%';
+  navRow.style.marginBottom = '12px';
+
+  const leftArrow = document.createElement('span');
+  leftArrow.textContent = '<';
+  leftArrow.style.fontSize = '2em';
+  leftArrow.style.cursor = 'pointer';
+  leftArrow.style.userSelect = 'none';
+  leftArrow.style.marginRight = '8px';
+  leftArrow.style.color = '#01AEFD';
+  leftArrow.title = 'Previous';
+
+  const rightArrow = document.createElement('span');
+  rightArrow.textContent = '>';
+  rightArrow.style.fontSize = '2em';
+  rightArrow.style.cursor = 'pointer';
+  rightArrow.style.userSelect = 'none';
+  rightArrow.style.marginLeft = '8px';
+  rightArrow.style.color = '#01AEFD';
+  rightArrow.title = 'Next';
+
+  const title = document.createElement('span');
+  title.style.fontSize = '2em';
+  title.style.fontWeight = 'bold';
+  title.style.color = '#01AEFD';
+  title.style.fontFamily = "'Fredoka', sans-serif";
+  navRow.appendChild(leftArrow);
+  navRow.appendChild(title);
+  navRow.appendChild(rightArrow);
+
+  const pageDesc = document.createElement('div');
+  pageDesc.style.fontSize = '1.05em';
+  pageDesc.style.color = '#aaa';
+  pageDesc.style.margin = '2px 0 10px 0';
+  pageDesc.style.minHeight = '1.2em';
+  pageDesc.style.fontFamily = "'Fredoka', sans-serif";
+
+  const imgWrap = document.createElement('div');
+  imgWrap.style.width = '100%';
+  imgWrap.style.height = '240px';
+  imgWrap.style.display = 'flex';
+  imgWrap.style.justifyContent = 'center';
+  imgWrap.style.alignItems = 'center';
+  imgWrap.style.margin = '0 0 18px 0';
+  imgWrap.style.borderRadius = '32px';
+  imgWrap.style.position = 'relative';
+  imgWrap.style.background = 'rgba(40,40,40,0.18)';
+  imgWrap.style.boxShadow = '0 4px 24px rgba(0,0,0,0.18)';
+  imgWrap.style.padding = '0';
+  imgWrap.style.overflow = 'hidden';
+
+  const img = document.createElement('img');
+  img.style.width = '100%';
+  img.style.height = '100%';
+  img.style.objectFit = 'cover';
+  img.style.borderRadius = '32px';
+  img.style.display = 'block';
+  img.style.margin = '0';
+  img.style.padding = '0';
+  img.draggable = false;
+  imgWrap.appendChild(img);
+
+  let startX = null;
+  imgWrap.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) startX = e.touches[0].clientX;
+  });
+  imgWrap.addEventListener('touchend', e => {
+    if (startX === null) return;
+    const endX = e.changedTouches[0].clientX;
+    const imgs = newsPages[pageIdx].images;
+    if (endX - startX > 40) {
+      imgIdx = (imgIdx - 1 + imgs.length) % imgs.length;
+      render();
+    } else if (startX - endX > 40) {
+      imgIdx = (imgIdx + 1) % imgs.length;
+      render();
+    }
+    startX = null;
+  });
+
+  let dragStartX = null;
+  imgWrap.addEventListener('mousedown', e => {
+    dragStartX = e.clientX;
+    document.body.style.userSelect = 'none';
+  });
+  imgWrap.addEventListener('mouseup', e => {
+    if (dragStartX === null) return;
+    const dragEndX = e.clientX;
+    const imgs = newsPages[pageIdx].images;
+    if (dragEndX - dragStartX > 40) {
+      imgIdx = (imgIdx - 1 + imgs.length) % imgs.length;
+      render();
+    } else if (dragStartX - dragEndX > 40) {
+      imgIdx = (imgIdx + 1) % imgs.length;
+      render();
+    }
+    dragStartX = null;
+    document.body.style.userSelect = '';
+  });
+
+  const changesList = document.createElement('ul');
+  changesList.style.listStyle = 'none';
+  changesList.style.padding = '0';
+  changesList.style.margin = '0';
+  changesList.style.width = '100%';
+  changesList.style.textAlign = 'left';
+  changesList.style.marginTop = '18px';
+  changesList.style.color = '#fff';
+  changesList.style.fontSize = '1.18em';
+  changesList.style.fontFamily = "'Fredoka', sans-serif";
+
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = '×';
+  closeBtn.title = 'Close';
+  closeBtn.style.position = 'absolute';
+  closeBtn.style.top = '18px';
+  closeBtn.style.right = '24px';
+  closeBtn.style.background = '#e74c3c';
+  closeBtn.style.color = '#fff';
+  closeBtn.style.border = 'none';
+  closeBtn.style.borderRadius = '8px';
+  closeBtn.style.fontSize = '20px';
+  closeBtn.style.width = '36px';
+  closeBtn.style.height = '36px';
+  closeBtn.style.cursor = 'pointer';
+  closeBtn.style.fontWeight = 'bold';
+  closeBtn.style.zIndex = '2';
+
+  closeBtn.onclick = () => {
+    overlay.remove();
+    document.body.appendChild(inputArea);
+  };
+
+  function render() {
+    title.textContent = newsPages[pageIdx].title;
+    if (newsPages[pageIdx].desc && newsPages[pageIdx].desc.trim()) {
+      pageDesc.textContent = newsPages[pageIdx].desc;
+      pageDesc.style.display = '';
+    } else {
+      pageDesc.textContent = '';
+      pageDesc.style.display = 'none';
+    }
+    const imgs = newsPages[pageIdx].images;
+    imgIdx = (imgIdx + imgs.length) % imgs.length;
+    img.src = imgs[imgIdx].src;
+    img.alt = imgs[imgIdx].alt || '';
+    changesList.innerHTML = '';
+    newsPages[pageIdx].changes.forEach(change => {
+      const li = document.createElement('li');
+      li.style.marginBottom = change.desc ? '10px' : '6px';
+      li.style.display = 'flex';
+      li.style.flexDirection = 'column';
+      li.style.gap = '2px';
+
+      const main = document.createElement('span');
+      main.textContent = '• ' + change.text;
+      main.style.fontWeight = '500';
+      main.style.fontSize = '1.08em';
+      main.style.color = '#fff';
+
+      li.appendChild(main);
+
+      if (change.desc && change.desc.trim()) {
+        const desc = document.createElement('span');
+        desc.textContent = change.desc;
+        desc.style.fontSize = '0.95em';
+        desc.style.color = '#aaa';
+        desc.style.marginLeft = '18px';
+        li.appendChild(desc);
+      }
+      changesList.appendChild(li);
+    });
+  }
+
+  rightArrow.onclick = () => {
+    pageIdx = (pageIdx - 1 + newsPages.length ) % newsPages.length;
+    imgIdx = 0;
+    render();
+  };
+  leftArrow.onclick = () => {
+    pageIdx = (pageIdx + 1) % newsPages.length;
+    imgIdx = 0;
+    render();
+  };
+
+  overlay.tabIndex = 0;
+  overlay.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') leftArrow.onclick();
+    if (e.key === 'ArrowRight') rightArrow.onclick();
+    if (e.key === 'Escape') overlay.remove();
+  });
+
+  panelContent.appendChild(navRow);
+  panelContent.appendChild(pageDesc);
+  panelContent.appendChild(imgWrap);
+  panelContent.appendChild(changesList);
+  panel.appendChild(panelContent);
+  panel.appendChild(closeBtn);
+  overlay.appendChild(panel);
+  document.body.appendChild(overlay);
+
+  render();
+  overlay.focus();
+ }
+
   let lockedTabs = { 'blooket hacks': true };
 
   function showPasswordOverlay(onSuccess) {
@@ -451,6 +747,8 @@ javascript:(function(){
     #zw-overlay-box {
       font-family: 'Fredoka', sans-serif !important;
     }
+    .zw-hide-scrollbar::-webkit-scrollbar { display: none; }
+    .zw-hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   `;
   document.head.appendChild(style);
 })();
