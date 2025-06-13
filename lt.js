@@ -1,27 +1,347 @@
-let answering = false;
-let answerInterval = null;
-
-function cleanResult(num, decimals) {
-    if (typeof num === "number") num = num.toString();
-    if (num.includes('e')) return Number(num).toPrecision(decimals + 1).replace(/\.?0+$/, '');
-    let n = Number(num);
-    if (isNaN(n)) return '';
-    let str = n.toFixed(decimals !== undefined ? decimals : 10);
-    str = str.replace(/(\.\d*?[1-9])0+$/g, '$1').replace(/\.0+$/, '');
-    if (/\.\d{3,}/.test(str)) str = n.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
-    return str;
+javascript:(function(){
+  if (!document.getElementById('fredoka-font-link')) {
+    const link = document.createElement('link');
+    link.id = 'fredoka-font-link';
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Fredoka&display=swap';
+    document.head.appendChild(link);
 }
 
-function countDecimals(numStr) {
-    if (typeof numStr !== "string") numStr = String(numStr);
-    if (numStr.includes('.')) {
-        return numStr.split('.')[1].length;
+(function() {
+  const style = document.createElement('style');
+  style.textContent = `
+    body, #zw-overlay, #zw-overlay *, .header, .description, .input-area, .input-area *, .content, .label-text, select, button {
+      font-family: 'Fredoka', sans-serif !important;
     }
-    return 0;
+    #zw-overlay {
+      z-index: 99999 !important;
+      font-family: 'Fredoka', sans-serif !important;
+    }
+    #zw-overlay-box {
+      font-family: 'Fredoka', sans-serif !important;
+    }
+    .zw-hide-scrollbar::-webkit-scrollbar { display: none; }
+    .zw-hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  `;
+  document.head.appendChild(style);
+})();
+
+const style = document.createElement('style');
+style.textContent = `
+#zw-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #zw-overlay-box {
+      background: rgba(17, 17, 17, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 520px;
+      width: 90%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+    #zw-overlay-box h1 {
+      font-size: 24px;
+      color: #01AEFD;
+      margin-bottom: 16px;
+    }
+    #zw-overlay-box p {
+      color: white;
+      margin-bottom: 24px;
+    }
+    #zw-overlay-box button {
+      font-size: 16px;
+      font-family: 'Fredoka', sans-serif;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #01AEFD;
+      color: white;
+      cursor: pointer;
+    }
+    .input-area {
+      position: fixed;
+      top: 26em;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      color: #000000;
+      gap: 0.5em;
+      z-index: 100;
+    }
+
+    .input-area .label-text {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.4em;
+      color: #ddd;
+      font-weight: 500;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .input-area select {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2em;
+      font-weight: 500;
+      color: #01AEFD;
+      padding: 0.3em 0.6em;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      background-color:rgb(42, 42, 42);
+      cursor: pointer;
+      width: 180px;
+    }
+
+    .input-area button {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2em;
+      padding: 0.4em 1em;
+      border: none;
+      border-radius: 5px;
+      background: linear-gradient(to bottom, #01AEFD, #015AFD);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: none;
+    }
+`;
+})();
+
+function parseNumberSafe(numStr) {
+    if (typeof numStr !== 'string' ) numStr = String(numStr);
+    return parseFloat(numStr.replace(/,/g, ''));
+}
+
+function createAutoAnswerPanel() {
+    if (document.getElementById('auto-answer-panel')) return;
+    const panel = document.createElement('div');
+    panel.id = 'auto-answer-panel';
+    panel.style.position = 'fixed';
+    panel.style.width = '220px';
+    panel.style.background = 'rgba(30,30,30,0.95)';
+    panel.style.color = '#fff';
+    panel.style.border = '1px solid #888';
+    panel.style.borderRadius = '8px';
+    panel.style.zIndex = 9999;
+    panel.style.fontSize = '13px';
+    panel.style.padding = '10px';
+    panel.style.boxShadow = '0 2px 8px #0006';
+    panel.style.cursor = 'move';
+    panel.style.userSelect = 'none';
+    panel.style.display = 'flex';
+    panel.style.flexDirection = 'column';
+    panel.style.gap = '8px';
+
+    let offsetX, offsetY, dragging = false;
+    panel.addEventListener('mousedown', function(e) {
+        if (e.target !== panel && e.target.tagName !== 'H1') return;
+        dragging = true;
+        offsetX = e.clientX - panel.getBoundingClientRect().left;
+        offsetY = e.clientY - panel.getBoundingClientRect().top;
+        panel.style.transition = 'none';
+        document.body.style.userSelect = 'none';
+    });
+    document.addEventListener('mousemove', function(e) {
+        if (!dragging) return;
+        panel.style.left = (e.clientX - offsetX) + 'px';
+        panel.style.top = (e.clientY - offsetY) + 'px';
+        panel.style.right = '';
+    });
+    document.addEventListener('mouseup', function(e) {
+        if (!dragging) return;
+        dragging = false;
+        panel.style.transition = '';
+        document.body.style.userSelect = '';
+    });
+
+    panel.addEventListener('touchstart', function(e) {
+        if (e.target !== panel && e.target.tagName !== 'H1') return;
+        dragging = true;
+        const touch = e.touches[0];
+        offsetX = touch.clientX - panel.getBoundingClientRect().left;
+        offsetY = touch.clientY - panel.getBoundingClientRect().top;
+        panel.style.transition = 'none';
+    }, {passive: false});
+    document.addEventListener('touchmove', function(e) {
+        if (!dragging) return;
+        const touch = e.touches[0];
+        panel.style.left = (touch.clientX - offsetX) + 'px';
+        panel.style.top = (touch.clientY - offsetY) + 'px';
+        panel.style.right = '';
+        e.preventDefault();
+    }, {passive: false});
+    document.addEventListener('touchend', function(e) {
+        if (!dragging) return;
+        dragging = false;
+        panel.style.transition = '';
+    });
+
+    const header = document.createElement('h1');
+    header.textContent = 'Zephware';
+    header.style.color = '#01AEFD';
+    header.style.fontSize = '1.2em';
+    header.style.margin = '0 0 6px 0';
+    header.style.textAlign = 'center';
+    panel.appendChild(header);
+
+    const divider = document.createElement('hr');
+    divider.style.border = '0';
+    divider.style.borderTop = '2px solid #01AEFD';
+    divider.style.borderRadius = '4px';
+    divider.style.margin = '-7.5px 0 10px 0';
+    divider.style.width = '90%';
+    divider.style.alignSelf = 'center';
+    panel.appendChild(divider);
+
+    const inputArea = document.createElement('div');
+    inputArea.className = 'input-area';
+    inputArea.style.position = 'static';
+    inputArea.style.transform = 'none';
+    inputArea.style.display = 'flex';
+    inputArea.style.flexDirection = 'column';
+    inputArea.style.gap = '6px';
+    inputArea.style.alignItems = 'flex-start';
+    inputArea.style.color = '#ddd';
+    inputArea.style.background = 'transparent';
+
+    const delayLabel = document.createElement('label');
+    delayLabel.className = 'label-text';
+    delayLabel.style.fontSize = '1em';
+    delayLabel.style.color = '#ddd';
+    delayLabel.textContent = 'Set Delay (ms):';
+    const delayInput = document.createElement('input');
+    delayInput.type = 'text';
+    delayInput.inputMode = 'numeric';
+    delayInput.pattern = '[0-9]*';
+    delayInput.value = window.autoAnswerDelay || 2000;
+    delayInput.style.width = '80px';
+    delayInput.style.fontSize = '1em';
+    delayInput.style.borderRadius = '5px';
+    delayInput.style.border = 'none';
+    delayInput.style.background = '#222';
+    delayInput.style.color = '#01AEFD';
+    delayInput.style.padding = '2px 8px';
+    delayInput.style.marginLeft = '6px';
+    delayInput.addEventListener('input', function() {
+        delayInput.value = delayInput.value.replace(/[^0-9]/g, '');
+    });
+    delayInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            window.autoAnswerDelay = parseInt(delayInput.value) || 2000;
+            if (window.answering) {
+                clearInterval(window.answerInterval);
+                window.answerInterval = setInterval(answerQuestions, window.autoAnswerDelay);
+            }
+        }
+    });
+    delayLabel.appendChild(delayInput);
+    const accLabel = document.createElement('label');
+    accLabel.className = 'label-text';
+    accLabel.style.fontSize = '1em';
+    accLabel.style.color = '#ddd';
+    accLabel.textContent = 'Set Accuracy (%):';
+    const accInput = document.createElement('input');
+    accInput.type = 'text';
+    accInput.inputMode = 'numeric';
+    accInput.pattern = '[0-9]*';
+    accInput.value = window.autoAnswerAccuracy || 100;
+    accInput.style.width = '60px';
+    accInput.style.fontSize = '1em';
+    accInput.style.borderRadius = '5px';
+    accInput.style.border = 'none';
+    accInput.style.background = '#222';
+    accInput.style.color = '#01AEFD';
+    accInput.style.padding = '2px 8px';
+    accInput.style.marginLeft = '6px';
+    accInput.addEventListener('input', function() {
+        accInput.value = accInput.value.replace(/[^0-9]/g, '');
+    });
+    accInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            window.autoAnswerAccuracy = parseInt(accInput.value) || 100;
+        }
+    });
+    accLabel.appendChild(accInput);
+    inputArea.appendChild(delayLabel);
+    inputArea.appendChild(accLabel);
+
+    const updateBtn = document.createElement('button');
+    updateBtn.textContent = 'Update Delay & Accuracy';
+    updateBtn.style.fontSize = '1em';
+    updateBtn.style.marginTop = '6px';
+    updateBtn.style.background = '#015AFD';
+    updateBtn.style.color = '#fff';
+    updateBtn.style.border = 'none';
+    updateBtn.style.borderRadius = '5px';
+    updateBtn.style.padding = '6px 12px';
+    updateBtn.style.cursor = 'pointer';
+    updateBtn.style.transition = 'background-color 0.2s';
+    updateBtn.style.alignSelf = 'center';
+    updateBtn.addEventListener('click', getInputValues);
+    function getInputValues() {
+        window.autoAnswerDelay = parseInt(delayInput.value);
+        window.autoAnswerAccuracy = parseInt(accInput.value);
+        if (!window.answering) {
+            clearInterval(window.answerInterval);
+            window.answerInterval = setInterval(answerQuestions, window.autoAnswerDelay);
+        }
+    };
+    inputArea.appendChild(updateBtn);
+    panel.appendChild(inputArea);
+
+    const btn = document.createElement('button');
+    btn.id = 'auto-answer-btn';
+    btn.textContent = 'Start Auto Answer';
+    btn.style.fontSize = '16px';
+    btn.style.fontFamily = "'Fredoka',sans-serif";
+    btn.style.padding = '10px 20px';
+    btn.style.border = 'none';
+    btn.style.borderRadius = '10px';
+    btn.style.backgroundColor = '#01AEFD';
+    btn.style.color = 'white';
+    btn.style.cursor = 'pointer';
+    btn.style.marginTop = '10px';
+    btn.style.width = '100%';
+    panel.appendChild(btn);
+    document.body.appendChild(panel);
+    btn.removeEventListener('click', toggleAnswering);
+    btn.addEventListener('click', toggleAnswering);
+}
+
+if (!document.getElementById('auto-answer-panel')) {
+    createAutoAnswerPanel();
+}
+
+window.answering = window.answering || false;
+window.answerInterval = window.answerInterval || null;
+
+function toggleAnswering() {
+    window.answering = !window.answering;
+    const btn = document.getElementById('auto-answer-btn');
+    if (window.answering) {
+        btn.textContent = 'Stop Auto Answer';
+        answerQuestions();
+        let delay = window.autoAnswerDelay || 2000;
+        window.answerInterval = setInterval(answerQuestions, delay);
+    } else {
+        btn.textContent = 'Start Auto Answer';
+        clearInterval(window.answerInterval);
+    }
 }
 
 function answerQuestions() {
-    removeNotes();
+    if (window.autoAnswerAccuracy && window.autoAnswerAccuracy < 100) {
+        if (Math.random() * 100 > window.autoAnswerAccuracy) return;
+    }
     document.querySelectorAll('.math.section').forEach(section => {
         const vertArith = section.querySelector('.vertArith');
         if (vertArith) {
@@ -35,8 +355,8 @@ function answerQuestions() {
             rows[1].querySelectorAll('.expression.number, .txt').forEach(cell => {
                 num2str += cell.textContent.trim();
             });
-            let num1 = parseFloat(num1str);
-            let num2 = parseFloat(num2str);
+            let num1 = parseNumberSafe(num1str);
+            let num2 = parseNumberSafe(num2str);
             let operator = null;
             if (rows[1].querySelector('.xSymbol')) operator = '*';
             else if (rows[1].textContent.includes('+')) operator = '+';
@@ -76,8 +396,8 @@ function answerQuestions() {
         if (divisorCell && dividendCell && answerInput) {
             const divisorStr = divisorCell.textContent.trim();
             const dividendStr = dividendCell.textContent.trim();
-            const divisor = parseFloat(divisorStr);
-            const dividend = parseFloat(dividendStr);
+            const divisor = parseNumberSafe(divisorStr);
+            const dividend = parseNumberSafe(dividendStr);
             if (!isNaN(divisor) && !isNaN(dividend) && divisor !== 0) {
                 const dec1 = countDecimals(divisorStr);
                 const dec2 = countDecimals(dividendStr);
@@ -115,8 +435,8 @@ function answerQuestions() {
             }
         });
         if (num1str && num2str && operator) {
-            let num1 = parseFloat(num1str);
-            let num2 = parseFloat(num2str);
+            let num1 = parseNumberSafe(num1str);
+            let num2 = parseNumberSafe(num2str);
             let result;
             switch (operator) {
                 case '*': result = num1 * num2; break;
@@ -151,12 +471,48 @@ function answerQuestions() {
     }
 }
 
+function getOperandValue(bundle) {
+    const expDiv = bundle.querySelector('.expression.wholeExp');
+    if (expDiv) {
+        const baseSpan = expDiv.querySelector('.expression.base .expression.number');
+        const expSpan = expDiv.querySelector('.expression.exponent .expression.number');
+        if (baseSpan && expSpan) {
+            const base = parseNumberSafe(baseSpan.textContent.trim());
+            const exp = parseNumberSafe(expSpan.textContent.trim());
+            return Math.pow(base, exp);
+        }
+    }
+    const numSpan = bundle.querySelector('.expression.number');
+    if (numSpan) return parseNumberSafe(numSpan.textContent.trim());
+    return NaN;
+}
+
+function countDecimals(numStr) {
+    if (typeof numStr !== "string") numStr = String(numStr);
+    if (numStr.includes('.')) {
+        return numStr.split('.')[1].length;
+    }
+    return 0;
+}
+
+function cleanResult(num, decimals) {
+    if (typeof num === "number") num = num.toString();
+    if (num.includes('e')) return Number(num).toPrecision(decimals + 1).replace(/\.?0+$/, '');
+    let n = Number(num);
+    if (isNaN(n)) return '';
+    if (Number.isInteger(n)) return n.toString();
+    let str = n.toFixed(decimals !== undefined ? decimals : 10);
+    str = str.replace(/(\.\d*?[1-9])0+$/g, '$1').replace(/\.0+$/, '');
+    if (/\.\d{3,}/.test(str)) str = n.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
+    return str;
+}
+
 function processHorizontalBinary() {
     document.querySelectorAll('.math.section').forEach(section => {
         const bundles = section.querySelectorAll('.bundle');
         if (bundles.length === 3) {
-            const num1span = bundles[0].querySelector('.expression.number');
-            const num2span = bundles[1].querySelector('.expression.number');
+            let num1 = getOperandValue(bundles[0]);
+            let num2 = getOperandValue(bundles[1]);
             let operator = null;
             if (bundles[0].querySelector('.minusSymbolContainer')) operator = '-';
             else if (bundles[0].querySelector('.plusSymbolContainer')) operator = '+';
@@ -175,9 +531,7 @@ function processHorizontalBinary() {
                 else if (opText.includes('×') || opText.includes('x')) operator = '*';
                 else if (opText.includes('÷') || opText.includes('/')) operator = '/';
             }
-            if (num1span && num2span && operator) {
-                const num1 = parseFloat(num1span.textContent.trim());
-                const num2 = parseFloat(num2span.textContent.trim());
+            if (!isNaN(num1) && !isNaN(num2) && operator) {
                 let result;
                 switch (operator) {
                     case '+': result = num1 + num2; break;
@@ -186,8 +540,8 @@ function processHorizontalBinary() {
                     case '/': result = num2 !== 0 ? num1 / num2 : ''; break;
                     default: result = '';
                 }
-                const dec1 = countDecimals(num1span.textContent.trim());
-                const dec2 = countDecimals(num2span.textContent.trim());
+                const dec1 = countDecimals(String(num1));
+                const dec2 = countDecimals(String(num2));
                 const leastDecimals = Math.max(dec1, dec2, 2);
                 if (typeof result === 'number' && !isNaN(result)) {
                     result = cleanResult(result, leastDecimals);
@@ -203,7 +557,30 @@ function processHorizontalBinary() {
 
 function processSimpleHorizontalEquations() {
     document.querySelectorAll('div.old-space-indent').forEach(div => {
-        const match = div.innerText.match(/([\d.]+)\s*([+\-×x*/÷])\s*([\d.]+)\s*=\s*$/);
+        // Parse text, including negative numbers in <sup class="negative old-negative-sign">–</sup>
+        let text = '';
+        div.childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) text += node.textContent;
+            if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SPAN') {
+                // Check for negative sign in sup
+                const sup = node.querySelector('sup.negative.old-negative-sign');
+                if (sup) {
+                    text += '-';
+                    // Add the number after the negative sign
+                    const num = node.textContent.replace(/[–-]/g, '').replace(/^\s*-?/, '').trim();
+                    text += num;
+                } else {
+                    text += node.textContent;
+                }
+            }
+            if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SUP' && node.classList.contains('negative') && node.classList.contains('old-negative-sign')) {
+                // Standalone negative sup (e.g. <sup>–</sup>3)
+                text += '-';
+            }
+        });
+        text = text.replace(/–/g, '-').replace(/−/g, '-').replace(/\u2212/g, '-').replace(/\s+/g, ' ').trim();
+        // Now match negative numbers too
+        const match = text.match(/(-?\d+(?:\.\d+)?)\s*([+\-×x*/÷])\s*(-?\d+(?:\.\d+)?)\s*=\s*$/);
         if (match) {
             let num1 = parseFloat(match[1]);
             let op = match[2];
@@ -266,47 +643,28 @@ function processComparisonProblems() {
             });
         }
     });
-}
-
-function removeNotes() {
-    const noteSelectors = [
-        '.note',
-        '.notes',
-        '[class*="note"]',
-        '[id*="note"]',
-        '[data-type*="note"]',
-        '[aria-label*="note"]'
-    ];
-    noteSelectors.forEach(sel => {
-        document.querySelectorAll(sel).forEach(el => {
-            el.remove();
-        });
+    // Fraction addition for old-fraction tables
+    document.querySelectorAll('.old-space-indent').forEach(div => {
+        const tds = div.querySelectorAll('td');
+        if (tds.length >= 5) {
+            // Try to find two fractions and an input
+            const frac1Num = tds[0].querySelector('.old-expression');
+            const frac1Den = tds[1].querySelector('.old-expression');
+            const frac2Num = tds[2].querySelector('.old-expression');
+            const frac2Den = tds[3].querySelector('.old-expression');
+            const answerInput = tds[4].querySelector('input.fillIn');
+            if (frac1Num && frac1Den && frac2Num && frac2Den && answerInput) {
+                const n1 = parseInt(frac1Num.textContent.trim());
+                const d1 = parseInt(frac1Den.textContent.trim());
+                const n2 = parseInt(frac2Num.textContent.trim());
+                const d2 = parseInt(frac2Den.textContent.trim());
+                if (!isNaN(n1) && !isNaN(d1) && !isNaN(n2) && !isNaN(d2) && d1 === d2) {
+                    // Same denominator, add numerators
+                    const num = n1 + n2;
+                    const den = d1;
+                    answerInput.value = num + '/' + den;
+                }
+            }
+        }
     });
-}
-
-removeNotes();
-
-function toggleAnswering() {
-    answering = !answering;
-    const btn = document.getElementById('auto-answer-btn');
-    if (answering) {
-        btn.textContent = 'Stop Auto Answer';
-        answerQuestions();
-        answerInterval = setInterval(answerQuestions, 2000);
-    } else {
-        btn.textContent = 'Start Auto Answer';
-        clearInterval(answerInterval);
-    }
-}
-
-if (!document.getElementById('auto-answer-btn')) {
-    const btn = document.createElement('button');
-    btn.id = 'auto-answer-btn';
-    btn.textContent = 'Start Auto Answer';
-    btn.style.position = 'fixed';
-    btn.style.top = '10px';
-    btn.style.right = '10px';
-    btn.style.zIndex = 9999;
-    btn.onclick = toggleAnswering;
-    document.body.appendChild(btn);
 }
