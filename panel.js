@@ -266,7 +266,7 @@ javascript:(function(){
   inputArea.appendChild(labelText);
 
   const select = document.createElement('select');
-  const options = ['Games', 'Unblockers', 'Soundboard', 'Blooket Hacks', 'Gimkit Hacks'];
+  const options = ['Games', 'Unblockers', 'Soundboard', 'Learning Tools', 'Blooket Hacks', 'Gimkit Hacks'];
   options.forEach(opt => {
     const option = document.createElement('option');
     option.value = opt.toLowerCase();
@@ -629,7 +629,7 @@ function showNewsPanel() {
         <ol id="zw-instructions-list" style="text-align:center;margin:0 0 24px 0;padding-left:0;font-size:16px;list-style-position:inside;color:#fff;">
           <li style="margin:8px 0;">Create a bookmark</li>
           <li style="margin:8px 0;">Click the "Copy" button below</li>
-          <li style="margin:8px 0;">Copy the code to your clipboard</li>
+          <li style="margin:8px 0;">Do Cmd + C</li>
           <li style="margin:8px 0;">Set the code as the url for the bookmark</li>
           <li style="margin:8px 0;">Hit save</li>
           <li style="margin:8px 0;">Try it out!</li>
@@ -725,7 +725,7 @@ function showNewsPanel() {
     const val = select.value.toLowerCase();
     if (lockedTabs[val]) {
       setButtonStatus('locked');
-    } else if (val === 'blooket hacks' || val === 'gimkit hacks') {
+    } else if (val === 'gimkit hacks' || val === 'learning tools') {
       setButtonStatus('wip');
     } else {
       setButtonStatus('open');
