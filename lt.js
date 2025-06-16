@@ -557,16 +557,13 @@ function processHorizontalBinary() {
 
 function processSimpleHorizontalEquations() {
     document.querySelectorAll('div.old-space-indent').forEach(div => {
-        // Parse text, including negative numbers in <sup class="negative old-negative-sign">–</sup>
         let text = '';
         div.childNodes.forEach(node => {
             if (node.nodeType === Node.TEXT_NODE) text += node.textContent;
             if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SPAN') {
-                // Check for negative sign in sup
                 const sup = node.querySelector('sup.negative.old-negative-sign');
                 if (sup) {
                     text += '-';
-                    // Add the number after the negative sign
                     const num = node.textContent.replace(/[–-]/g, '').replace(/^\s*-?/, '').trim();
                     text += num;
                 } else {
@@ -574,12 +571,10 @@ function processSimpleHorizontalEquations() {
                 }
             }
             if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SUP' && node.classList.contains('negative') && node.classList.contains('old-negative-sign')) {
-                // Standalone negative sup (e.g. <sup>–</sup>3)
                 text += '-';
             }
         });
         text = text.replace(/–/g, '-').replace(/−/g, '-').replace(/\u2212/g, '-').replace(/\s+/g, ' ').trim();
-        // Now match negative numbers too
         const match = text.match(/(-?\d+(?:\.\d+)?)\s*([+\-×x*/÷])\s*(-?\d+(?:\.\d+)?)\s*=\s*$/);
         if (match) {
             let num1 = parseFloat(match[1]);
@@ -643,11 +638,9 @@ function processComparisonProblems() {
             });
         }
     });
-    // Fraction addition for old-fraction tables
     document.querySelectorAll('.old-space-indent').forEach(div => {
         const tds = div.querySelectorAll('td');
         if (tds.length >= 5) {
-            // Try to find two fractions and an input
             const frac1Num = tds[0].querySelector('.old-expression');
             const frac1Den = tds[1].querySelector('.old-expression');
             const frac2Num = tds[2].querySelector('.old-expression');
@@ -659,7 +652,6 @@ function processComparisonProblems() {
                 const n2 = parseInt(frac2Num.textContent.trim());
                 const d2 = parseInt(frac2Den.textContent.trim());
                 if (!isNaN(n1) && !isNaN(d1) && !isNaN(n2) && !isNaN(d2) && d1 === d2) {
-                    // Same denominator, add numerators
                     const num = n1 + n2;
                     const den = d1;
                     answerInput.value = num + '/' + den;
