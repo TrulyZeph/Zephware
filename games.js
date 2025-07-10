@@ -3,14 +3,10 @@ javascript:(function () {
     let panel = null;
     let blurLayer = null;
     let settingsPanel = null;
-    let changelogPanel = null;
     let dropdownMenu = null;
     let sidebar = null;
     let buttonConfigs = [];
-    let animatedStyleSheet;
-    let area;
     const version = 'v1.15';
-    createChangelogPanel();
 
     function loadGameList() {
         fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/gamelist.json')
@@ -18,15 +14,28 @@ javascript:(function () {
             .then(data => {
                 buttonConfigs = data;
                 createPanel();
-                showChangelog();
                 createDropdownMenu();
-                enableAnimatedBackground();
             })
             .catch(error => {
                 console.error('Error loading game list:', error);
                 alert('Error, Try Again.');
             });
     }
+
+    const fredokaFontLink = document.createElement('link');
+    fredokaFontLink.id = 'fredoka-font-link';
+    fredokaFontLink.rel = 'stylesheet';
+    fredokaFontLink.href = 'https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap';
+    document.head.appendChild(fredokaFontLink);
+
+    const fredokaFontStyle = document.createElement('style');
+    fredokaFontStyle.type = 'text/css';
+    fredokaFontStyle.innerText = `
+       * {
+          font-family: 'Fredoka', sans-serif !important;
+       }
+    `;
+    document.head.appendChild(fredokaFontStyle);
 
     const toggle = document.createElement('style');
     toggle.innerHTML = `
@@ -53,7 +62,7 @@ javascript:(function () {
 		background-color: #444;
 		transition: .4s;
 		border-radius: 24px;
-		box-shadow: 0 0 5px #0766FF;
+		box-shadow: 0 0 5px #01AEFD;
 	}
 
 	.slider:before {
@@ -69,7 +78,7 @@ javascript:(function () {
 	}
 
 	.switch input:checked + .slider {
-		background-color: #0766FF;
+		background-color: #01AEFD;
 	}
 
 	.switch input:checked + .slider:before {
@@ -77,205 +86,79 @@ javascript:(function () {
 	}
 `;
 
-    const sidebarStyle = document.createElement('style');
-    sidebarStyle.innerHTML = `
-	.sidebar {
-		position: fixed;
-		top: 0;
-		left: 0;
-		height: 100%;
-		width: 30%;
-		max-width: 300px;
-		background: linear-gradient(145deg, #001F3F, #000F20);
-		border-right: 2px solid #0766FF;
-		box-shadow: 0 0 20px #0766FF;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		transition: transform 0.4s ease;
-		z-index: 10;
-	}
+const sidebarStyle = document.createElement('style');
+sidebarStyle.innerHTML = `
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 260px;
+  background: #222;
+  border-right: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px 0;
+  z-index: 10;
+}
 
-	.sidebar-visible {
-		transform: translateX(0);
-	}
+.sidebar-btn {
+  background: none;
+  color: #01AEFD;
+  border: none;
+  font-size: 20px;
+  padding: 12px 24px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+}
 
-	.sidebar-hidden {
-		transform: translateX(-100%);
-	}
-
-	.sidebar-btn {
-		background: transparent;
-		font-family: Verdana, sans-serif;
-		font-weight: bold;
-		color: #0766FF;
-		border: none;
-		font-size: 28px;
-		cursor: pointer;
-		margin: 8px 0;
-	}
-
-	.sidebar-divider {
-		height: 2px;
-		width: 80%;
-		margin: 10px auto;
-		background: linear-gradient(to right, rgba(7, 102, 255, 0.2) 0%, rgba(7, 102, 255, 1) 50%, rgba(7, 102, 255, 0.2) 100%);
-		background-size: 200% 100%;
-		background-position: 0% 50%;
-		animation: glowFlow 3s linear infinite;
-	}
-
-	@keyframes glowFlow {
-		0% { background-position: 0% 50%; }
-		100% { background-position: 100% 50%; }
-	}
+.sidebar-btn:hover {
+  background: #333;
+}
 `;
+
 document.head.appendChild(sidebarStyle);
 
-var fontLink = document.createElement("link");
-fontLink.href = "https://fonts.googleapis.com/css?family=Exo:400,700&display=swap";
-fontLink.rel = "stylesheet";
-document.head.appendChild(fontLink);
+    const fontStyle = document.createElement("style");
+    fontStyle.type = "text/css";
+    fontStyle.innerText = `
+       * {
+          font-family: 'Fredoka', sans-serif !important;
+       }
+    `;
+    document.head.appendChild(fontStyle);
+    document.head.appendChild(toggle);
 
-const fontStyle = document.createElement("style");
-fontStyle.type = "text/css";
-fontStyle.innerText = `
-   * {
-      font-family: 'Exo', sans-serif;
-      font-weight: 700;
-   }
-`;
-document.head.appendChild(fontStyle);
-document.head.appendChild(toggle);
-
-function enableAnimatedBackground() {
-
-	animatedStyleSheet = document.createElement("style");
-	animatedStyleSheet.type = "text/css";
-	animatedStyleSheet.innerText = `
-		.area {
-			background: linear-gradient(135deg, #2C2A2A, #171212);
-			width: 100%;
-			height: 100vh;
-			position: fixed;
-			top: 0;
-			left: 0;
-			z-index: -1;
-		}
-		.circles {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			overflow: hidden;
-		}
-		.circles li {
-			position: absolute;
-			display: block;
-			list-style: none;
-			width: 20px;
-			height: 20px;
-			background: rgba(2, 112, 255, 0.2);
-			animation: animate 25s linear infinite;
-			bottom: -150px;
-		}
-		.circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
-		.circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
-		.circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
-		.circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
-		.circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
-		.circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
-		.circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
-		.circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
-		.circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
-		.circles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
-
-		@keyframes animate {
-			0% {
-				transform: translateY(0) rotate(0deg);
-				opacity: 1;
-				border-radius: 0;
-			}
-			100% {
-				transform: translateY(-1000px) rotate(720deg);
-				opacity: 0;
-				border-radius: 50%;
-			}
-		}
-	`;
-	document.head.appendChild(animatedStyleSheet);
-
-	area = document.createElement('div');
-	area.className = 'area';
-
-	const circles = document.createElement('ul');
-	circles.className = 'circles';
-
-	for (let i = 0; i < 10; i++) {
-		const li = document.createElement('li');
-		circles.appendChild(li);
-	}
-
-	area.appendChild(circles);
-	document.body.appendChild(area);
-}
-
-function disableAnimatedBackground() {
-	if (animatedStyleSheet) {
-		animatedStyleSheet.remove();
-		animatedStyleSheet = null;
-	}
-	if (area) {
-		area.remove();
-		area = null;
-	}
-}
-
-    function createTitleBar() {
-        const container = document.createElement('div');
-        container.style.display = 'flex';
-        container.style.justifyContent = 'center';
-        container.style.alignItems = 'center';
-        container.style.position = 'absolute';
-        container.style.top = '20px';
-        container.style.marginLeft = '-20px';
-        container.style.width = '100%';
-  
+    function TitleText() {
         const title = document.createElement('div');
         title.innerHTML = `Zephware <sup style="font-size: 0.75rem">${version}</sup>`;
-        title.style.padding = '5px 65px';
-        title.style.background = '#017AD5';
-        title.style.borderRadius = '10px';
-        title.style.boxShadow = '0 0 25px #038FF9';
-        title.style.fontFamily = 'Verdana';
+        title.style.fontFamily = 'Fredoka';
         title.style.fontWeight = 'bold';
-        title.style.color = '#07D5F9';
-        title.style.fontSize = '24px';
+        title.style.color = '#01AEFD';
+        title.style.fontSize = '32px';
         title.style.textAlign = 'center';
-        title.style.textShadow = '0 0 5px #07D5F9, 0 0 10px #07D5F9, 0 0 1px #07D5F9, 0 0 2px #07D5F9, 0 0 3px #07D5F9';
+        title.style.marginTop = '15px';
   
-        container.appendChild(title);
-        return container;
+        return title;
      }    
 
     function createPanel() {
         panel = document.createElement('div');
-        panel.style.width = '600px';
-        panel.style.height = '400px';
-        panel.style.overflowY = 'scroll';
-        panel.style.borderRadius = '20px';
-        panel.style.boxShadow = '0 0 20px #0766FF';
+        panel.style.width = '100vw';
+        panel.style.height = '100vh';
+        panel.style.overflowY = 'auto';
+        panel.style.borderRadius = '0';
         panel.style.zIndex = 1;
         panel.style.position = 'fixed';
-        panel.style.top = '50%';
-        panel.style.left = '50%';
-        panel.style.transform = 'translate(-50%, -50%)';
-        panel.style.background = 'linear-gradient(135deg, #2C2A2A, #171212)';
-        panel.style.fontFamily = 'Verdana, sans-serif';
-        panel.style.color = '#07D5F9';
-        panel.style.padding = '20px';
+        panel.style.top = '0';
+        panel.style.left = '0';
+        panel.style.transform = 'none';
+        panel.style.background = '#222';
+        panel.style.fontFamily = 'Fredoka, sans-serif';
+        panel.style.color = '#01AEFD';
+        panel.style.padding = '0';
         panel.className = 'custom-scroll-panel';
         panel.id = 'panel';
 
@@ -291,7 +174,7 @@ function disableAnimatedBackground() {
         `;
         document.head.appendChild(style);
 
-        const titleBar = createTitleBar();
+        const titleBar = TitleText();
         panel.appendChild(titleBar);
         if (!sidebar) createSidebar();
         panel.appendChild(sidebar);
@@ -301,16 +184,15 @@ function disableAnimatedBackground() {
         searchBar.type = 'text';
         searchBar.placeholder = 'Search';
         searchBar.style.width = '70%';
-        searchBar.style.marginTop = '55px';
-        searchBar.style.marginBottom = '-50px';
+        searchBar.style.marginTop = '20px';
+        searchBar.style.marginBottom = '-30px';
         searchBar.style.padding = '10px';
         searchBar.style.borderRadius = '10px';
         searchBar.style.border = 'none';
         searchBar.style.fontSize = '14px';
-        searchBar.style.boxShadow = '0 0 10px #0766FF';
         searchBar.style.outline = 'none';
         searchBar.style.background = '#111';
-        searchBar.style.color = '#07D5F9';
+        searchBar.style.color = '#01AEFD';
         searchBar.style.display = 'block';
         searchBar.style.marginLeft = 'auto';
         searchBar.style.marginRight = 'auto';
@@ -328,25 +210,35 @@ function disableAnimatedBackground() {
 
 
         const dropdownBtn = document.createElement('button');
-        dropdownBtn.innerText = '☰';
         dropdownBtn.style.position = 'absolute';
-        dropdownBtn.style.top = '15px';
-        dropdownBtn.style.left = '15px';
-        dropdownBtn.style.fontSize = '30px';
+        dropdownBtn.style.top = '25px';
+        dropdownBtn.style.left = '25px';
+        dropdownBtn.style.width = '30px';
+        dropdownBtn.style.height = '24px';
         dropdownBtn.style.background = 'transparent';
         dropdownBtn.style.border = 'none';
         dropdownBtn.style.cursor = 'pointer';
-        dropdownBtn.style.color = '#0766FF';
-        dropdownBtn.style.textShadow = '0 0 5px #0766FF, 0 0 10px #0766FF, 0 0 1px #0766FF, 0 0 2px #0766FF, 0 0 3px #0766FF';
+        dropdownBtn.style.color = '#01AEFD';
         dropdownBtn.id = 'dropdownbtn';
+        dropdownBtn.style.display = 'flex';
+        dropdownBtn.style.alignItems = 'center';
+        dropdownBtn.style.justifyContent = 'center';
+        dropdownBtn.style.padding = '0';
+
+        const svgIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svgIcon.setAttribute('width', '30');
+        svgIcon.setAttribute('height', '24');
+        svgIcon.setAttribute('viewBox', '0 0 30 24');
+        svgIcon.setAttribute('fill', 'none');
+        svgIcon.innerHTML = `
+          <rect y="0" width="25" height="4" rx="2" fill="currentColor"/>
+          <rect y="10" width="25" height="4" rx="2" fill="currentColor"/>
+          <rect y="20" width="25" height="4" rx="2" fill="currentColor"/>
+        `;
+        dropdownBtn.appendChild(svgIcon);
 
         dropdownBtn.onclick = () => {
-	        if (!sidebar) {
-		        createSidebar();
-	        } else {
-		        const isHidden = sidebar.classList.contains('sidebar-hidden');
-		        toggleSidebar(isHidden);
-	        }
+            showSidebar();
         };
 
         panel.appendChild(dropdownBtn);
@@ -357,6 +249,9 @@ function disableAnimatedBackground() {
         container.style.alignItems = 'center';
         container.style.gap = '20px';
         container.style.marginTop = '60px';
+        container.style.marginBottom = '10px';
+        container.style.marginLeft = '40px';
+        container.style.marginRight = '40px';
         
         let filteredConfigs = buttonConfigs.slice();
         renderButtons(filteredConfigs);
@@ -364,57 +259,90 @@ function disableAnimatedBackground() {
         function renderButtons(configs) {
            container.innerHTML = '';
            configs.forEach(config => {
-              const button = document.createElement('button');
-              button.style.width = '80px';
-              button.style.height = '100px';
-              button.style.fontSize = '16px';
-              button.style.background = 'linear-gradient(45deg, #038FF9, #00C5FF)';
-              button.style.color = '#07D5F9';
-              button.style.border = 'none';
-              button.style.borderRadius = '15px';
-              button.style.cursor = 'pointer';
-              button.style.padding = '0';
-              button.style.display = 'flex';
-              button.style.flexDirection = 'column';
-              button.style.alignItems = 'center';
-              button.style.justifyContent = 'flex-start';
-     
-              const img = document.createElement('img');
-              img.src = config.image;
-              img.style.width = '80px';
-              img.style.height = '80px';
-              img.style.borderTopLeftRadius = '15px';
-              img.style.borderTopRightRadius = '15px';
-              button.appendChild(img);
-     
-              const label = document.createElement('div');
-              label.innerText = config.label || '';
-              label.style.fontSize = '10px';
-              label.style.color = '#FFFFFF';
-              label.style.textAlign = 'center';
-              label.style.padding = '2px 4px';
-              label.style.width = '100%';
-              label.style.background = 'rgba(0, 0, 0, 0.4)';
-              label.style.borderBottomLeftRadius = '15px';
-              label.style.borderBottomRightRadius = '15px';
-              button.appendChild(label);
-     
+               const button = document.createElement('button');
+               let buttonHeight = '120px';
+               const labelText = config.label || '';
+               const labelLength = labelText.length;
+               let labelFontSize = '12px';
+               if (labelLength > 20) {
+                   buttonHeight = '130px';
+                   labelFontSize = '10px';
+               } else if (labelLength > 12) {
+                   labelFontSize = '10px';
+               }
+               button.style.width = '100px';
+               button.style.height = buttonHeight;
+               button.style.fontSize = '16px';
+               button.style.background = 'linear-gradient(45deg, #038FF9, #00C5FF)';
+               button.style.color = '#01AEFD';
+               button.style.border = 'none';
+               button.style.borderRadius = '15px';
+               button.style.cursor = 'pointer';
+               button.style.padding = '0';
+               button.style.display = 'flex';
+               button.style.flexDirection = 'column';
+               button.style.alignItems = 'center';
+               button.style.justifyContent = 'flex-start';
+               button.style.position = 'relative';
+
+               const img = document.createElement('img');
+               img.src = config.image;
+               img.style.width = '100px';
+               img.style.height = '100px';
+               img.style.borderTopLeftRadius = '15px';
+               img.style.borderTopRightRadius = '15px';
+               img.style.marginBottom = '0';
+               img.style.display = 'block';
+               img.style.position = 'relative';
+               button.appendChild(img);
+
+               const label = document.createElement('div');
+               label.innerText = labelText;
+               label.style.fontSize = labelFontSize;
+               label.style.fontWeight = 'bold';
+               label.style.color = '#fff';
+               label.style.textAlign = 'center';
+               label.style.padding = '2px 4px';
+               label.style.marginTop = '0';
+               label.style.borderRadius = '0';
+               label.style.boxShadow = 'none';
+               label.style.alignSelf = 'center';
+               label.style.overflow = 'hidden';
+               label.style.display = 'flex';
+               label.style.alignItems = 'center';
+               label.style.justifyContent = 'center';
+               if (labelLength > 20) {
+                  label.style.whiteSpace = 'normal';
+                  label.style.wordBreak = 'break-word';
+                  label.style.lineHeight = '1.1';
+                  label.style.height = '28px';
+                  label.style.textOverflow = 'clip';
+               } else {
+                  label.style.whiteSpace = 'nowrap';
+                  label.style.textOverflow = 'ellipsis';
+                  label.style.height = '14px';
+               }
+               button.style.position = 'relative';
+               button.appendChild(label);
+
               button.addEventListener('click', () => {
                  panel.remove();
-     
+
                  iframe = document.createElement('iframe');
                  iframe.src = config.url;
-                 iframe.style.width = '1050px';
-                 iframe.style.height = '700px';
+                 iframe.style.width = '100vw';
+                 iframe.style.height = '100vh';
                  iframe.style.border = 'none';
-                 iframe.style.borderRadius = '15px';
+                 iframe.style.borderRadius = '0';
                  iframe.style.display = 'block';
-                 iframe.style.margin = '20px auto';
-                 iframe.style.boxShadow = '0 0 20px #038FF9';
+                 iframe.style.margin = '0';
                  iframe.style.zIndex = 2;
+                 iframe.style.position = 'fixed';
+                 iframe.style.top = '0';
+                 iframe.style.left = '0';
                  document.body.appendChild(iframe);
               });
-     
+
               container.appendChild(button);
            });
         }     
@@ -440,40 +368,12 @@ function disableAnimatedBackground() {
 	    document.body.appendChild(blurLayer);
     }
 
-
     function removeBlur() {
 	    if (blurLayer) {
 		blurLayer.remove();
 		blurLayer = null;
 	    }
     }
-
-    function createBlurForSidebar() {
-		if (blurLayer) return;
-
-		blurLayer = document.createElement('div');
-		blurLayer.id = 'blur-layer';
-		blurLayer.style.position = 'absolute';
-		blurLayer.style.inset = '0';
-		blurLayer.style.backdropFilter = 'blur(12px)';
-		blurLayer.style.zIndex = '1';
-		blurLayer.style.pointerEvents = 'none';
-
-		const sidebar = document.getElementById('sidebar');
-		if (sidebar && panel.contains(sidebar)) {
-				panel.insertBefore(blurLayer, sidebar);
-		} else {
-				panel.appendChild(blurLayer);
-		}
-}
-
-function removeBlurForSidebar() {
-		if (blurLayer && blurLayer.parentNode) {
-				blurLayer.remove();
-				blurLayer = null;
-		}
-}
-
 
     function createSettingsPanel() {
         settingsPanel = document.createElement('div');
@@ -482,14 +382,13 @@ function removeBlurForSidebar() {
         settingsPanel.style.overflowY = 'scroll';
         settingsPanel.style.overflow = 'auto';
         settingsPanel.style.borderRadius = '20px';
-        settingsPanel.style.boxShadow = '0 0 20px #0766FF';
         settingsPanel.style.position = 'fixed';
         settingsPanel.style.top = '50%';
         settingsPanel.style.left = '50%';
         settingsPanel.style.transform = 'translate(-50%, -50%)';
-        settingsPanel.style.background = 'linear-gradient(135deg, #2C2A2A, #171212)';
-        settingsPanel.style.fontFamily = 'Verdana, sans-serif';
-        settingsPanel.style.color = '#0766FF';
+        settingsPanel.style.background = 'rgba(17, 17, 17, 0.95)';
+        settingsPanel.style.fontFamily = 'Fredoka, sans-serif';
+        settingsPanel.style.color = '#01AEFD';
         settingsPanel.style.padding = '20px';
         settingsPanel.style.zIndex = 5;
         settingsPanel.className = 'custom-scroll-panel';
@@ -502,7 +401,7 @@ function removeBlurForSidebar() {
         closeBtn.style.right = '15px';
         closeBtn.style.background = 'transparent';
         closeBtn.style.border = 'none';
-        closeBtn.style.color = '#0766FF';
+        closeBtn.style.color = '#01AEFD';
         closeBtn.style.fontSize = '16px';
         closeBtn.style.cursor = 'pointer';
         closeBtn.onclick = () => {
@@ -516,7 +415,6 @@ function removeBlurForSidebar() {
         title.style.textAlign = 'center';
         title.style.fontSize = '24px';
         title.style.fontWeight = 'bold';
-        title.style.textShadow = '0 0 5px #0766FF, 0 0 10px #0766FF, 0 0 1px #0766FF, 0 0 2px #0766FF, 0 0 3px #0766FF';
         settingsPanel.appendChild(title);
 
         const content = document.createElement('div');
@@ -524,55 +422,15 @@ function removeBlurForSidebar() {
         <h3>Misc</h3>
         <div id="misc-section"></div>
         <h3>Keybinds</h3>
-        <p style="color: #0766FF;">Ctrl + E | Hide<br>Ctrl + M | Menu<br>More Soon...</p>
+        <p style="color: #01AEFD;">Ctrl + E | Hide<br>Ctrl + M | Menu<br>More Soon...</p>
         <h3>Credits</h3>
-        <p style="color: #0766FF;">Owner: trulyzeph</p>
+        <p style="color: #01AEFD;">Owner: trulyzeph</p>
         <div style="text-align: center; font-size: 10px; margin-top: 60px;">
         Zephware 2025 | <span style="font-size: 0.75rem;">${version}</span>
         </div>
 `;
 
         settingsPanel.appendChild(content);
-        const miscSection = content.querySelector('#misc-section');
-
-
-        const toggleContainer = document.createElement('div');
-        toggleContainer.style.display = 'flex';
-        toggleContainer.style.alignItems = 'center';
-        toggleContainer.style.justifyContent = 'space-between';
-        toggleContainer.style.margin = '10px 0';
-
-        const toggleLabel = document.createElement('span');
-        toggleLabel.innerText = 'Enable Background';
-        toggleLabel.style.fontSize = '16px';
-        toggleLabel.style.color = '#0766FF';
-
-        const toggleSwitch = document.createElement('label');
-        toggleSwitch.className = 'switch';
-
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-
-        const slider = document.createElement('span');
-        slider.className = 'slider';
-
-        checkbox.onchange = () => {
-        	if (checkbox.checked) {
-        enableAnimatedBackground()
-	        } else {
-        disableAnimatedBackground()
-	        }
-        };
-
-        checkbox.checked = true;
-
-    toggleSwitch.appendChild(checkbox);
-    toggleSwitch.appendChild(slider);
-    toggleContainer.appendChild(toggleLabel);
-    toggleContainer.appendChild(toggleSwitch);
-    miscSection.appendChild(toggleContainer);
-
-
         document.body.appendChild(settingsPanel);
     }
 
@@ -590,13 +448,12 @@ function removeBlurForSidebar() {
 	dropdownMenu.style.background = '#1a1a1a';
 	dropdownMenu.style.width = '300px';
 	dropdownMenu.style.height = '350px';
-	dropdownMenu.style.border = '1px solid #0766FF';
+	dropdownMenu.style.border = '1px solid #01AEFD';
 	dropdownMenu.style.borderRadius = '8px';
     dropdownMenu.style.display = 'flex';
     dropdownMenu.style.flexDirection = 'column';
     dropdownMenu.style.justifyContent = 'center';
     dropdownMenu.style.alignItems = 'center';
-	dropdownMenu.style.boxShadow = '0 0 10px #0766FF';
 	dropdownMenu.style.visibility = 'hidden';
     dropdownMenu.style.zIndex = '5';
 	dropdownMenu.id = 'dropdownmenu';
@@ -604,9 +461,9 @@ function removeBlurForSidebar() {
 	const settingsBtn = document.createElement('button');
 	settingsBtn.innerText = 'Settings';
 	settingsBtn.style.background = 'transparent';
-    settingsBtn.style.fontFamily = 'Verdana, sans-serif';
+    settingsBtn.style.fontFamily = 'Fredoka, sans-serif';
     settingsBtn.style.fontWeight = 'bold';
-	settingsBtn.style.color = '#0766FF';
+	settingsBtn.style.color = '#01AEFD';
 	settingsBtn.style.border = 'none';
 	settingsBtn.style.fontSize = '32px';
 	settingsBtn.style.cursor = 'pointer';
@@ -615,26 +472,12 @@ function removeBlurForSidebar() {
 		dropdownMenu.style.visibility = 'hidden';
 	};
 
-	const changelogBtn = document.createElement('button');
-	changelogBtn.innerText = 'Changelog';
-	changelogBtn.style.background = 'transparent';
-    changelogBtn.style.fontFamily = 'Verdana, sans-serif';
-    changelogBtn.style.fontWeight = 'bold';
-	changelogBtn.style.color = '#0766FF';
-	changelogBtn.style.border = 'none';
-	changelogBtn.style.fontSize = '32px';
-	changelogBtn.style.cursor = 'pointer';
-	changelogBtn.onclick = () => {
-		showChangelog();
-		dropdownMenu.style.visibility = 'hidden';
-	};
-
 	const hideBtn = document.createElement('button');
 	hideBtn.innerText = 'Hide';
 	hideBtn.style.background = 'transparent';
-    hideBtn.style.fontFamily = 'Verdana, sans-serif';
+    hideBtn.style.fontFamily = 'Fredoka, sans-serif';
     hideBtn.style.fontWeight = 'bold';
-	hideBtn.style.color = '#0766FF';
+	hideBtn.style.color = '#01AEFD';
 	hideBtn.style.border = 'none';
 	hideBtn.style.fontSize = '32px';
 	hideBtn.style.cursor = 'pointer';
@@ -648,7 +491,7 @@ function removeBlurForSidebar() {
 	const closeBtn = document.createElement('button');
 	closeBtn.innerText = 'Exit';
 	closeBtn.style.background = 'transparent';
-    closeBtn.style.fontFamily = 'Verdana, sans-serif';
+    closeBtn.style.fontFamily = 'Fredoka, sans-serif';
     closeBtn.style.fontWeight = 'bold';
 	closeBtn.style.color = '#ff0000';
 	closeBtn.style.border = 'none';
@@ -657,7 +500,6 @@ function removeBlurForSidebar() {
 	closeBtn.onclick = () => {
 		panel?.remove();
 		iframe?.remove();
-		changelogPanel?.remove();
 		settingsPanel?.remove();
 		dropdownMenu?.remove();
 		dropdownBtn?.remove();
@@ -667,9 +509,9 @@ function removeBlurForSidebar() {
 	const homeBtn = document.createElement('button');
 	homeBtn.innerText = 'Home';
 	homeBtn.style.background = 'transparent';
-    homeBtn.style.fontFamily = 'Verdana, sans-serif';
+    homeBtn.style.fontFamily = 'Fredoka, sans-serif';
     homeBtn.style.fontWeight = 'bold';
-	homeBtn.style.color = '#0766FF';
+	homeBtn.style.color = '#01AEFD';
 	homeBtn.style.border = 'none';
 	homeBtn.style.fontSize = '32px';
 	homeBtn.style.cursor = 'pointer';
@@ -683,25 +525,9 @@ function removeBlurForSidebar() {
 		}
 	};
 
-	function createSeparator() {
-		const line = document.createElement('div');
-    	line.style.height = '2px';
-	    line.style.width = '80%';
-    	line.style.margin = '10px auto';
-	    line.style.background = 'linear-gradient(to right, transparent, #0766FF, transparent)';
-    	line.style.backgroundSize = '200% auto';
-    	line.style.animation = 'moveGradient 3s linear infinite';
-	    return line;
-	}
-
 	dropdownMenu.appendChild(homeBtn);
-    dropdownMenu.appendChild(createSeparator());
-	dropdownMenu.appendChild(changelogBtn);
-    dropdownMenu.appendChild(createSeparator());
 	dropdownMenu.appendChild(settingsBtn);
-	dropdownMenu.appendChild(createSeparator());	
     dropdownMenu.appendChild(hideBtn);
-	dropdownMenu.appendChild(createSeparator());	
     dropdownMenu.appendChild(closeBtn);
 
 	document.body.appendChild(dropdownMenu);
@@ -736,83 +562,106 @@ function removeBlurForSidebar() {
 		return sidebar;
 	}
 
-	sidebar = document.createElement('div');
-	sidebar.id = 'sidebar';
-	sidebar.className = 'sidebar sidebar-visible';
+    const blooketSidebarStyle = document.createElement('style');
+    blooketSidebarStyle.textContent = `
+    #wp-sidebar {
+        width: 200px;
+        background: #111;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid rgba(255,255,255,0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 5;
+        transform: translateX(-220px);
+        opacity: 0;
+        transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.3s cubic-bezier(.4,0,.2,1);
+    }
+    #wp-sidebar.sidebar-visible {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    .wp-sidebar-btn {
+        padding: 16px;
+        border: none;
+        background: none;
+        color: #01AEFD;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.2s;
+    }
+    .wp-sidebar-btn.active {
+        border-left: 4px solid #01AEFD;
+        background: rgba(255,255,255,0.05);
+    }
+    .wp-divider {
+        width: 100%;
+        height: 1px;
+        background: rgba(255,255,255,0.1);
+        margin: 4px 0;
+    }
+    `;
+    document.head.appendChild(blooketSidebarStyle);
+
+    sidebar = document.createElement('div');
+    sidebar.id = 'wp-sidebar';
+    sidebar.className = 'sidebar';
     sidebar.style.zIndex = '5';
+    sidebar.style.display = 'none';
+    const buttons = [
+        { label: 'Random', onClick: () => {
+            const randomGame = buttonConfigs[Math.floor(Math.random() * buttonConfigs.length)];
+            if (panel) panel.remove();
+            createIframe(randomGame.url);
+        }},
+        { label: 'Settings', onClick: () => {
+            showSettings();
+            hideSidebar();
+        }},
+        { label: 'Forms', onClick: () => {
+            window.open('https://forms.gle/h5DHdt5EnsT3bwqP7', '_blank');
+        }},
+        { divider: true },
+        { divider: true },
+        { label: 'Close', onClick: () => hideSidebar() },
+        { divider: true },
+        { label: 'Exit', onClick: () => {
+            panel?.remove();
+            iframe?.remove();
+            settingsPanel?.remove();
+            sidebar?.remove();
+            dropdownBtn?.remove();
+        }, style: { color: '#FF0000' } }
+    ];
+    let first = true;
+    buttons.forEach(btn => {
+        if (btn.divider) {
+            const divider = document.createElement('div');
+            divider.className = 'wp-divider';
+            sidebar.appendChild(divider);
+            return;
+        }
+        const button = document.createElement('button');
+        button.className = 'wp-sidebar-btn' + (first ? ' active' : '');
+        button.innerText = btn.label;
+        if (btn.style) Object.assign(button.style, btn.style);
+        button.onclick = btn.onClick;
+        sidebar.appendChild(button);
+        first = false;
+    });
+    document.body.appendChild(sidebar);
 
-	const randomBtn = document.createElement('button');
-	randomBtn.innerText = 'Random';
-	randomBtn.className = 'sidebar-btn';
-	randomBtn.onclick = () => {
-		const randomGame = buttonConfigs[Math.floor(Math.random() * buttonConfigs.length)];
-        if (panel) panel.remove();
-		createIframe(randomGame.url);
-	};
-
-	const changelogBtn = document.createElement('button');
-	changelogBtn.innerText = 'Changelog';
-	changelogBtn.className = 'sidebar-btn';
-	changelogBtn.onclick = () => {
-		showChangelog();
-		toggleSidebar(false);
-	};
-
-	const settingsBtn = document.createElement('button');
-	settingsBtn.innerText = 'Settings';
-	settingsBtn.className = 'sidebar-btn';
-	settingsBtn.onclick = () => {
-		showSettings();
-		toggleSidebar(false);
-	};
-
-    const formsBtn = document.createElement('button');
-    formsBtn.innerText = 'Forms';
-    formsBtn.className = 'sidebar-btn';
-    formsBtn.onclick = () => {
-        window.open('https://forms.gle/h5DHdt5EnsT3bwqP7', '_blank');
+    function hideSidebar() {
+        if (!sidebar) return;
+        sidebar.classList.remove('sidebar-visible');
+        setTimeout(() => { sidebar.style.display = 'none'; }, 300);
+        if (dropdownBtn) dropdownBtn.style.display = 'flex';
     }
 
-	const closeBtn = document.createElement('button');
-	closeBtn.innerText = 'Close';
-	closeBtn.className = 'sidebar-btn';
-	closeBtn.onclick = () => toggleSidebar(false);
-
-	const exitBtn = document.createElement('button');
-	exitBtn.innerText = 'Exit';
-	exitBtn.className = 'sidebar-btn';
-	exitBtn.style.color = '#FF0000';
-	exitBtn.onclick = () => {
-		panel?.remove();
-		iframe?.remove();
-		changelogPanel?.remove();
-		settingsPanel?.remove();
-		sidebar?.remove();
-		dropdownBtn?.remove();
-		removeBlurForSidebar();
-	};
-
-	function createDivider() {
-		const divider = document.createElement('div');
-		divider.className = 'sidebar-divider';
-		return divider;
-	}
-
-	sidebar.appendChild(randomBtn);
-	sidebar.appendChild(createDivider());
-	sidebar.appendChild(changelogBtn);
-	sidebar.appendChild(createDivider());
-	sidebar.appendChild(settingsBtn);
-	sidebar.appendChild(createDivider());
-	sidebar.appendChild(formsBtn);
-    sidebar.appendChild(createDivider());
-	sidebar.appendChild(closeBtn);
-	sidebar.appendChild(createDivider());
-	sidebar.appendChild(exitBtn);
-
-	document.body.appendChild(sidebar);
-	createBlurForSidebar();
-	return sidebar;
+    return sidebar;
     }
 
     function toggleSidebar(show) {
@@ -822,116 +671,6 @@ function removeBlurForSidebar() {
 
 	    sidebar.classList.toggle('sidebar-visible', shouldShow);
     	sidebar.classList.toggle('sidebar-hidden', !shouldShow);
-
-	    if (shouldShow) {
-    		createBlurForSidebar();
-	    } else {
-		    removeBlurForSidebar();
-	    }
-    }
-
-    function createChangelogPanel() {
-        changelogPanel = document.createElement('div');
-        changelogPanel.style.width = '300px';
-        changelogPanel.style.height = '350px';
-        changelogPanel.style.overflowY = 'scroll';
-        changelogPanel.style.overflow = 'auto';
-        changelogPanel.style.borderRadius = '20px';
-        changelogPanel.style.boxShadow = '0 0 20px #0766FF';
-        changelogPanel.style.position = 'absolute';
-        changelogPanel.style.top = '50%';
-        changelogPanel.style.left = '50%';
-        changelogPanel.style.transform = 'translate(-50%, -50%)';
-        changelogPanel.style.background = 'linear-gradient(135deg, #2C2A2A, #171212)';
-        changelogPanel.style.fontFamily = 'Verdana, sans-serif';
-        changelogPanel.style.color = '#0766FF';
-        changelogPanel.style.padding = '20px';
-        changelogPanel.style.zIndex = 5;
-        changelogPanel.className = 'custom-scroll-panel';
-
-        const title = document.createElement('div');
-        title.innerText = 'Change Log';
-        title.style.textAlign = 'center';
-        title.style.fontSize = '24px';
-        title.style.fontWeight = 'bold';
-        title.style.textShadow = '0 0 5px #0766FF, 0 0 10px #0766FF, 0 0 1px #0766FF, 0 0 2px #0766FF, 0 0 3px #0766FF';
-        changelogPanel.appendChild(title);
-
-        const closeBtn = document.createElement('button');
-        closeBtn.innerText = '✕';
-        closeBtn.style.position = 'absolute';
-        closeBtn.style.top = '10px';
-        closeBtn.style.right = '15px';
-        closeBtn.style.background = 'transparent';
-        closeBtn.style.border = 'none';
-        closeBtn.style.color = '#0766FF';
-        closeBtn.style.fontSize = '24px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.onclick = () => {
-            changelogPanel.remove()
-            removeBlur();
-        };
-
-        changelogPanel.appendChild(closeBtn);
-
-        const content = document.createElement('div');
-        content.style.marginTop = '20px';
-        content.innerHTML = `<div id="changelog-container"></div>`;
-
-        fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/data/updates.json')
-          .then(response => response.json())
-          .then(data => renderChangelog(data))
-          .catch(error => console.error('Error fetching changelog data:', error));
-      
-        function renderChangelog(data) {
-          const changelogContainer = document.getElementById('changelog-container');
-      
-          data.forEach(update => {
-            const updateDiv = document.createElement('div');
-            updateDiv.classList.add('update-entry');
-      
-            const title = document.createElement('h3');
-            title.style.textDecoration = 'underline';
-            title.style.fontSize = '18px';
-            title.textContent = update.title;
-            title.style.textAlign = 'center';
-      
-            const version = document.createElement('h5');
-            version.style.marginTop = '-10px';
-            version.textContent = `${update.version}: ${update.date}`;
-            version.style.textAlign = 'center';
-      
-            const changeList = document.createElement('ul');
-            changeList.style.marginLeft = '-15px';
-            changeList.style.marginTop = '-15px';
-      
-            update.changes.forEach(change => {
-              const listItem = document.createElement('li');
-              listItem.textContent = change;
-              changeList.appendChild(listItem);
-            });
-      
-            updateDiv.appendChild(title);
-            updateDiv.appendChild(version);
-            updateDiv.appendChild(changeList);
-      
-            changelogContainer.appendChild(updateDiv);
-          });
-        }
-
-        changelogPanel.appendChild(content);
-    }
-
-    function showSettings() {
-        if (changelogPanel) changelogPanel.remove();
-        createSettingsPanel();
-        createBlur();
-    }
-    function showChangelog() {
-        if (changelogPanel) changelogPanel.remove();
-        createChangelogPanel();
-        createBlur();
-        document.body.appendChild(changelogPanel);
     }
 
     function toggleFrames(event) {
@@ -952,6 +691,13 @@ function removeBlurForSidebar() {
         if (iframe) if (!blurLayer) createBlur(); else removeBlur();
     }
 }
+
+    function showSidebar() {
+        if (!sidebar) return;
+        sidebar.style.display = '';
+        setTimeout(() => sidebar.classList.add('sidebar-visible'), 10);
+        if (dropdownBtn) dropdownBtn.style.display = 'none';
+    }
 
     document.addEventListener('keydown', toggleFrames);
     document.addEventListener('keydown', toggleMenu);
