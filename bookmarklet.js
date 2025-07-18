@@ -1,1 +1,5 @@
-javascript:(function()%7Bfetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/main/main.js').then(response=%3Eresponse.text()).then(scriptText=%3E%7Beval(scriptText);console.log('Zephware%20Loaded!');%7D).catch(err=%3Econsole.error('Error%20loading%20script:',err));%7D)();
+javascript:(function(){
+  fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/main/main.js')
+    .then(response => response.text())
+    .catch(err => console.error('Error loading script:', err));
+})();

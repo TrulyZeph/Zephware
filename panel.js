@@ -49,11 +49,8 @@ javascript:(function(){
 
     .header {
       position: fixed;
-      top: 4em;
-      left: 0;
       width: 100%;
       text-align: center;
-      font-size: 4em;
       font-weight: bold;
       font-family: 'Fredoka', sans-serif;
       background: linear-gradient(to bottom, #01AEFD, #015AFD);
@@ -233,6 +230,94 @@ javascript:(function(){
   svg.appendChild(g);
   document.body.appendChild(svg);
 
+  var guiWidth = 600,
+  guiHeight = 375,
+  borderRadius = 20,
+  guiDiv = document.createElement('div');
+
+  var password = 'password';
+  var panelVisible = true;
+
+  guiDiv.style.position = 'fixed';
+  guiDiv.style.top = '50%';
+  guiDiv.style.left = '50%';
+  guiDiv.style.transform = 'translate(-50%, -50%)';
+  guiDiv.style.width = guiWidth + 'px';
+  guiDiv.style.height = guiHeight + 'px';
+  guiDiv.style.borderRadius = borderRadius + 'px';
+  guiDiv.style.overflow = 'hidden';
+  guiDiv.style.zIndex = 9999;
+  guiDiv.style.background = '#111';
+  guiDiv.style.textAlign = 'center';
+  guiDiv.style.fontFamily = 'Verdana, sans-serif';
+
+  var title = document.createElement('div');
+  title.className = 'header';
+  title.textContent = 'Zephware';
+  title.style.marginTop = '70px';
+  title.style.fontSize = '3em';
+
+  var inputBox = document.createElement('input');
+  inputBox.style.position = 'absolute';
+  inputBox.style.left = '50%';
+  inputBox.style.top = '170px';
+  inputBox.style.transform = 'translateX(-50%)';
+  inputBox.style.width = '300px';
+  inputBox.style.height = '35px';
+  inputBox.style.border = '2px solid #0766FF';
+  inputBox.style.borderRadius = '15px';
+  inputBox.style.background = 'transparent';
+  inputBox.style.color = '#0766FF';
+  inputBox.style.fontSize = '18px';
+  inputBox.style.paddingLeft = '10px';
+  inputBox.style.outline = 'none';
+  inputBox.style.textAlign = 'center';
+  inputBox.placeholder = 'Enter Password';
+  inputBox.type = 'password';
+
+  inputBox.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      checkPassword();
+    }
+  });
+
+  function checkPassword() {
+    if (inputBox.value === password) {
+      closePanel();
+      showNewsPanel();
+    } else {
+      alert('make sure you are in about:blank');
+      inputBox.classList.add('input-shake');
+      setTimeout(() => inputBox.classList.remove('input-shake'), 500);
+    }
+  }
+
+  function closePanel() {
+    if (guiDiv.parentNode) guiDiv.parentNode.removeChild(guiDiv);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === ']') {
+      panelVisible = !panelVisible;
+      guiDiv.style.display = panelVisible ? 'block' : 'none';
+    }
+  });
+
+  var passdesc = document.createElement('div');
+  passdesc.style.position = 'absolute';
+  passdesc.style.left = '50%';
+  passdesc.style.top = '215px';
+  passdesc.style.transform = 'translateX(-50%)';
+  passdesc.style.fontSize = '11px';
+  passdesc.style.fontWeight = 'bold';
+  passdesc.style.color = '#3D3636';
+  passdesc.innerText = 'ZephWare requires a password to hide from GoGuardian';
+
+  guiDiv.appendChild(title);
+  guiDiv.appendChild(inputBox);
+  guiDiv.appendChild(passdesc);
+  document.body.appendChild(guiDiv);
+
   const coverBox = document.createElement('div');
   coverBox.style.position = 'fixed';
   coverBox.style.left = '0';
@@ -250,6 +335,7 @@ javascript:(function(){
   const header = document.createElement('div');
   header.className = 'header';
   header.textContent = 'Zephware';
+  header.style.fontSize = '4em';
   document.body.appendChild(header);
 
   const description = document.createElement('div');
@@ -266,7 +352,7 @@ javascript:(function(){
   inputArea.appendChild(labelText);
 
   const select = document.createElement('select');
-  const options = ['Games', 'Unblockers', 'Soundboard', 'Learning Tools', 'Blooket Hacks', 'Gimkit Hacks'];
+  const options = ['Games', 'Unblockers', 'Soundboard', 'Learning Tools', 'Marketplace', 'Blooket Hacks', 'Gimkit Hacks'];
   options.forEach(opt => {
     const option = document.createElement('option');
     option.value = opt.toLowerCase();
@@ -313,12 +399,10 @@ javascript:(function(){
       { text: "More & Fixed Unblockers", desc: "More Unblockers, Unblocked, Fast, Working" },
       { text: "Zephware Website", desc: "You can access Zephware via website" },
       { text: "Gimkit Hacks", desc: "Finally Released" },
-      { text: "Student Library", desc: "???" }
+      { text: "Marketplace", desc: "Sponsor YOUR Business, Make Sales, All Here! For a Small Fee" }
     ]
   }
 ];
-
-showNewsPanel();
 
 function showNewsPanel() {
   let pageIdx = 0;
@@ -725,7 +809,7 @@ function showNewsPanel() {
     const val = select.value.toLowerCase();
     if (lockedTabs[val]) {
       setButtonStatus('locked');
-    } else if (val === 'gimkit hacks' || val === 'learning tools') {
+    } else if (val === 'gimkit hacks' || val === 'learning tools' || val === 'marketplace') {
       setButtonStatus('wip');
     } else {
       setButtonStatus('open');

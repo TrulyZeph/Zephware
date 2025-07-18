@@ -81,12 +81,12 @@
     },
     {
         "label": "Drift Boss",
-        "image": "https://static.wikia.nocookie.net/zephware/images/2/27/DriftBoss.jpg",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/DriftBoss.jpg",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/driftboss2/index.html"
     },
     {
         "label": "Drive Mad",
-        "image": "https://static.wikia.nocookie.net/zephware/images/f/fa/DriveMad.webp",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/DriveMad.webp",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/drive-mad/game/index.html"
     },
     {
@@ -820,7 +820,7 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "1v1 LOL Again",
+        "label": "1v1.lol",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/1v1lolagain/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },

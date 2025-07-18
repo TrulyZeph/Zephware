@@ -1,12 +1,11 @@
 javascript:(function () {
     let iframe = null;
     let panel = null;
-    let blurLayer = null;
     let settingsPanel = null;
     let dropdownMenu = null;
     let sidebar = null;
     let buttonConfigs = [];
-    const version = 'v1.15';
+    const version = 'v2.0';
 
     function loadGameList() {
         fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/gamelist.json')
@@ -39,51 +38,51 @@ javascript:(function () {
 
     const toggle = document.createElement('style');
     toggle.innerHTML = `
-	.switch {
-		position: relative;
-		display: inline-block;
-		width: 50px;
-		height: 24px;
-	}
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+    }
 
-	.switch input {
-		opacity: 0;
-		width: 0;
-		height: 0;
-	}
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
 
-	.slider {
-		position: absolute;
-		cursor: pointer;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: #444;
-		transition: .4s;
-		border-radius: 24px;
-		box-shadow: 0 0 5px #01AEFD;
-	}
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #444;
+        transition: .4s;
+        border-radius: 24px;
+        box-shadow: 0 0 5px #01AEFD;
+    }
 
-	.slider:before {
-		position: absolute;
-		content: "";
-		height: 18px;
-		width: 18px;
-		left: 3px;
-		bottom: 3px;
-		background-color: white;
-		transition: .4s;
-		border-radius: 50%;
-	}
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
 
-	.switch input:checked + .slider {
-		background-color: #01AEFD;
-	}
+    .switch input:checked + .slider {
+        background-color: #01AEFD;
+    }
 
-	.switch input:checked + .slider:before {
-		transform: translateX(26px);
-	}
+    .switch input:checked + .slider:before {
+        transform: translateX(26px);
+    }
 `;
 
 const sidebarStyle = document.createElement('style');
@@ -177,7 +176,6 @@ document.head.appendChild(sidebarStyle);
         const titleBar = TitleText();
         panel.appendChild(titleBar);
         if (!sidebar) createSidebar();
-        panel.appendChild(sidebar);
         toggleSidebar();
 
         const searchBar = document.createElement('input');
@@ -209,21 +207,21 @@ document.head.appendChild(sidebarStyle);
         panel.appendChild(searchBar);
 
 
-        const dropdownBtn = document.createElement('button');
-        dropdownBtn.style.position = 'absolute';
-        dropdownBtn.style.top = '25px';
-        dropdownBtn.style.left = '25px';
-        dropdownBtn.style.width = '30px';
-        dropdownBtn.style.height = '24px';
-        dropdownBtn.style.background = 'transparent';
-        dropdownBtn.style.border = 'none';
-        dropdownBtn.style.cursor = 'pointer';
-        dropdownBtn.style.color = '#01AEFD';
-        dropdownBtn.id = 'dropdownbtn';
-        dropdownBtn.style.display = 'flex';
-        dropdownBtn.style.alignItems = 'center';
-        dropdownBtn.style.justifyContent = 'center';
-        dropdownBtn.style.padding = '0';
+        const sidebarBtn = document.createElement('button');
+        sidebarBtn.style.position = 'absolute';
+        sidebarBtn.style.top = '25px';
+        sidebarBtn.style.left = '25px';
+        sidebarBtn.style.width = '30px';
+        sidebarBtn.style.height = '24px';
+        sidebarBtn.style.background = 'transparent';
+        sidebarBtn.style.border = 'none';
+        sidebarBtn.style.cursor = 'pointer';
+        sidebarBtn.style.color = '#01AEFD';
+        sidebarBtn.id = 'sidebarBtn';
+        sidebarBtn.style.display = 'flex';
+        sidebarBtn.style.alignItems = 'center';
+        sidebarBtn.style.justifyContent = 'center';
+        sidebarBtn.style.padding = '0';
 
         const svgIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svgIcon.setAttribute('width', '30');
@@ -235,13 +233,13 @@ document.head.appendChild(sidebarStyle);
           <rect y="10" width="25" height="4" rx="2" fill="currentColor"/>
           <rect y="20" width="25" height="4" rx="2" fill="currentColor"/>
         `;
-        dropdownBtn.appendChild(svgIcon);
+        sidebarBtn.appendChild(svgIcon);
 
-        dropdownBtn.onclick = () => {
+        sidebarBtn.onclick = () => {
             showSidebar();
         };
 
-        panel.appendChild(dropdownBtn);
+        panel.appendChild(sidebarBtn);
         const container = document.createElement('div');
         container.style.display = 'flex';
         container.style.flexWrap = 'wrap';
@@ -351,30 +349,6 @@ document.head.appendChild(sidebarStyle);
         document.body.appendChild(panel);
     }
 
-    function createBlur() {
-	    if (blurLayer) return;
-
-	    blurLayer = document.createElement('div');
-    	blurLayer.style.position = 'fixed';
-	    blurLayer.style.top = 0;
-    	blurLayer.style.left = 0;
-	    blurLayer.style.width = '100vw';
-    	blurLayer.style.height = '100vh';
-    	blurLayer.style.backdropFilter = 'blur(10px)';
-    	blurLayer.style.zIndex = '4';
-	    blurLayer.style.pointerEvents = 'none';
-	    blurLayer.id = 'blur-layer';
-
-	    document.body.appendChild(blurLayer);
-    }
-
-    function removeBlur() {
-	    if (blurLayer) {
-		blurLayer.remove();
-		blurLayer = null;
-	    }
-    }
-
     function createSettingsPanel() {
         settingsPanel = document.createElement('div');
         settingsPanel.style.width = '300px';
@@ -386,13 +360,15 @@ document.head.appendChild(sidebarStyle);
         settingsPanel.style.top = '50%';
         settingsPanel.style.left = '50%';
         settingsPanel.style.transform = 'translate(-50%, -50%)';
-        settingsPanel.style.background = 'rgba(17, 17, 17, 0.95)';
+        settingsPanel.style.background = '#111';
         settingsPanel.style.fontFamily = 'Fredoka, sans-serif';
         settingsPanel.style.color = '#01AEFD';
         settingsPanel.style.padding = '20px';
-        settingsPanel.style.zIndex = 5;
+        settingsPanel.style.zIndex = '5';
         settingsPanel.className = 'custom-scroll-panel';
         if (settingsPanel) settingsPanel.remove();
+        let oldRoller = document.getElementById('random-roller-modal');
+        if (oldRoller) oldRoller.remove();
 
         const closeBtn = document.createElement('button');
         closeBtn.innerText = '✕';
@@ -406,7 +382,8 @@ document.head.appendChild(sidebarStyle);
         closeBtn.style.cursor = 'pointer';
         closeBtn.onclick = () => {
             settingsPanel.remove();
-            removeBlur();
+            if (overlay) overlay.remove();
+            hideSidebar();
         };
         settingsPanel.appendChild(closeBtn);
 
@@ -421,11 +398,12 @@ document.head.appendChild(sidebarStyle);
         content.innerHTML = `
         <h3>Misc</h3>
         <div id="misc-section"></div>
+        <p>Nothing Yet..</p>
         <h3>Keybinds</h3>
         <p style="color: #01AEFD;">Ctrl + E | Hide<br>Ctrl + M | Menu<br>More Soon...</p>
         <h3>Credits</h3>
-        <p style="color: #01AEFD;">Owner: trulyzeph</p>
-        <div style="text-align: center; font-size: 10px; margin-top: 60px;">
+        <p style="color: #01AEFD;">Owner: @trulyzeph</p>
+        <div style="text-align: center; font-size: 10px; margin-top: 35px;">
         Zephware 2025 | <span style="font-size: 0.75rem;">${version}</span>
         </div>
 `;
@@ -436,131 +414,127 @@ document.head.appendChild(sidebarStyle);
 
 
     function createDropdownMenu() {
-	if (dropdownMenu) {
-		dropdownMenu.style.visibility = dropdownMenu.style.visibility === 'hidden' ? 'visible' : 'hidden';
-		return dropdownMenu;
-	}
+    if (dropdownMenu) {
+        dropdownMenu.style.visibility = dropdownMenu.style.visibility === 'hidden' ? 'visible' : 'hidden';
+        return dropdownMenu;
+    }
 
-	dropdownMenu = document.createElement('div');
-	dropdownMenu.style.position = 'fixed';
-	dropdownMenu.style.top = '30%';
-	dropdownMenu.style.left = '42%';
-	dropdownMenu.style.background = '#1a1a1a';
-	dropdownMenu.style.width = '300px';
-	dropdownMenu.style.height = '350px';
-	dropdownMenu.style.border = '1px solid #01AEFD';
-	dropdownMenu.style.borderRadius = '8px';
+    dropdownMenu = document.createElement('div');
+    dropdownMenu.style.position = 'fixed';
+    dropdownMenu.style.top = '30%';
+    dropdownMenu.style.left = '42%';
+    dropdownMenu.style.background = '#1a1a1a';
+    dropdownMenu.style.width = '300px';
+    dropdownMenu.style.height = '350px';
+    dropdownMenu.style.border = '1px solid #01AEFD';
+    dropdownMenu.style.borderRadius = '8px';
     dropdownMenu.style.display = 'flex';
     dropdownMenu.style.flexDirection = 'column';
     dropdownMenu.style.justifyContent = 'center';
     dropdownMenu.style.alignItems = 'center';
-	dropdownMenu.style.visibility = 'hidden';
+    dropdownMenu.style.visibility = 'hidden';
     dropdownMenu.style.zIndex = '5';
-	dropdownMenu.id = 'dropdownmenu';
+    dropdownMenu.id = 'dropdownmenu';
 
-	const settingsBtn = document.createElement('button');
-	settingsBtn.innerText = 'Settings';
-	settingsBtn.style.background = 'transparent';
+    const settingsBtn = document.createElement('button');
+    settingsBtn.innerText = 'Settings';
+    settingsBtn.style.background = 'transparent';
     settingsBtn.style.fontFamily = 'Fredoka, sans-serif';
     settingsBtn.style.fontWeight = 'bold';
-	settingsBtn.style.color = '#01AEFD';
-	settingsBtn.style.border = 'none';
-	settingsBtn.style.fontSize = '32px';
-	settingsBtn.style.cursor = 'pointer';
-	settingsBtn.onclick = () => {
-		showSettings();
-		dropdownMenu.style.visibility = 'hidden';
-	};
+    settingsBtn.style.color = '#01AEFD';
+    settingsBtn.style.border = 'none';
+    settingsBtn.style.fontSize = '32px';
+    settingsBtn.style.cursor = 'pointer';
+    settingsBtn.onclick = () => {
+        createSettingsPanel();
+        dropdownMenu.style.visibility = 'hidden';
+    };
 
-	const hideBtn = document.createElement('button');
-	hideBtn.innerText = 'Hide';
-	hideBtn.style.background = 'transparent';
+    const hideBtn = document.createElement('button');
+    hideBtn.innerText = 'Hide';
+    hideBtn.style.background = 'transparent';
     hideBtn.style.fontFamily = 'Fredoka, sans-serif';
     hideBtn.style.fontWeight = 'bold';
-	hideBtn.style.color = '#01AEFD';
-	hideBtn.style.border = 'none';
-	hideBtn.style.fontSize = '32px';
-	hideBtn.style.cursor = 'pointer';
-	hideBtn.onclick = () => {
-		if (panel) panel.style.display = 'none';
-		if (iframe) iframe.style.display = 'none';
-		dropdownMenu.style.visibility = 'hidden';
-        removeBlur();
-	};
+    hideBtn.style.color = '#01AEFD';
+    hideBtn.style.border = 'none';
+    hideBtn.style.fontSize = '32px';
+    hideBtn.style.cursor = 'pointer';
+    hideBtn.onclick = () => {
+        if (panel) panel.style.display = 'none';
+        if (iframe) iframe.style.display = 'none';
+        dropdownMenu.style.visibility = 'hidden';
+    };
 
-	const closeBtn = document.createElement('button');
-	closeBtn.innerText = 'Exit';
-	closeBtn.style.background = 'transparent';
+    const closeBtn = document.createElement('button');
+    closeBtn.innerText = 'Exit';
+    closeBtn.style.background = 'transparent';
     closeBtn.style.fontFamily = 'Fredoka, sans-serif';
     closeBtn.style.fontWeight = 'bold';
-	closeBtn.style.color = '#ff0000';
-	closeBtn.style.border = 'none';
-	closeBtn.style.fontSize = '32px';
-	closeBtn.style.cursor = 'pointer';
-	closeBtn.onclick = () => {
-		panel?.remove();
-		iframe?.remove();
-		settingsPanel?.remove();
-		dropdownMenu?.remove();
-		dropdownBtn?.remove();
-		removeBlur();
-	};
+    closeBtn.style.color = '#ff0000';
+    closeBtn.style.border = 'none';
+    closeBtn.style.fontSize = '32px';
+    closeBtn.style.cursor = 'pointer';
+    closeBtn.onclick = () => {
+        panel?.remove();
+        iframe?.remove();
+        settingsPanel?.remove();
+        dropdownMenu?.remove();
+        sidebarBtn?.remove();
+    };
 
-	const homeBtn = document.createElement('button');
-	homeBtn.innerText = 'Home';
-	homeBtn.style.background = 'transparent';
+    const homeBtn = document.createElement('button');
+    homeBtn.innerText = 'Home';
+    homeBtn.style.background = 'transparent';
     homeBtn.style.fontFamily = 'Fredoka, sans-serif';
     homeBtn.style.fontWeight = 'bold';
-	homeBtn.style.color = '#01AEFD';
-	homeBtn.style.border = 'none';
-	homeBtn.style.fontSize = '32px';
-	homeBtn.style.cursor = 'pointer';
-	homeBtn.style.textAlign = 'center';
-	homeBtn.onclick = () => {
-		if (document.getElementById('panel') == null) {
-			createPanel();
-			iframe?.remove();
-            removeBlur();
+    homeBtn.style.color = '#01AEFD';
+    homeBtn.style.border = 'none';
+    homeBtn.style.fontSize = '32px';
+    homeBtn.style.cursor = 'pointer';
+    homeBtn.style.textAlign = 'center';
+    homeBtn.onclick = () => {
+        if (document.getElementById('panel') == null) {
+            createPanel();
+            iframe?.remove();
             dropdownMenu.style.visibility = 'hidden';
-		}
-	};
+        }
+    };
 
-	dropdownMenu.appendChild(homeBtn);
-	dropdownMenu.appendChild(settingsBtn);
+    dropdownMenu.appendChild(homeBtn);
+    dropdownMenu.appendChild(settingsBtn);
     dropdownMenu.appendChild(hideBtn);
     dropdownMenu.appendChild(closeBtn);
 
-	document.body.appendChild(dropdownMenu);
-	return dropdownMenu;
+    document.body.appendChild(dropdownMenu);
+    return dropdownMenu;
     }
 
-	const style = document.createElement('style');
-	style.innerHTML = `
-		@keyframes pulseLine {
-			0% {
-				transform: scaleX(0);
-				opacity: 0.2;
-			}
-			50% {
-				transform: scaleX(1);
-				opacity: 0.6;
-			}
-			100% {
-				transform: scaleX(0);
-				opacity: 0.2;
-			}
-		}
-	`;
-	document.head.appendChild(style);
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes pulseLine {
+            0% {
+                transform: scaleX(0);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scaleX(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scaleX(0);
+                opacity: 0.2;
+            }
+        }
+    `;
+    document.head.appendChild(style);
 
     function createSidebar() {
-	if (sidebar) {
-		const isHidden = sidebar.classList.contains('sidebar-hidden');
-		sidebar.classList.toggle('sidebar-hidden', !isHidden);
-		sidebar.classList.toggle('sidebar-visible', isHidden);
-		isHidden ? createBlur() : removeBlur();
-		return sidebar;
-	}
+    if (sidebar) {
+        const isHidden = sidebar.classList.contains('sidebar-hidden');
+        sidebar.classList.toggle('sidebar-hidden', !isHidden);
+        sidebar.classList.toggle('sidebar-visible', isHidden);
+        return sidebar;
+    }
 
     const blooketSidebarStyle = document.createElement('style');
     blooketSidebarStyle.textContent = `
@@ -612,32 +586,42 @@ document.head.appendChild(sidebarStyle);
     sidebar.style.zIndex = '5';
     sidebar.style.display = 'none';
     const buttons = [
-        { label: 'Random', onClick: () => {
-            const randomGame = buttonConfigs[Math.floor(Math.random() * buttonConfigs.length)];
-            if (panel) panel.remove();
-            createIframe(randomGame.url);
-        }},
-        { label: 'Settings', onClick: () => {
-            showSettings();
+        { label: 'Home', onClick: function() {
+            setActiveSidebarBtn(this);
             hideSidebar();
         }},
-        { label: 'Forms', onClick: () => {
+        { label: 'Random', onClick: function() {
+            setActiveSidebarBtn(this);
+            rollGame();
+        }},
+        { label: 'Settings', onClick: function() {
+            setActiveSidebarBtn(this);
+            createSettingsPanel();
+            showOverlay();
+        }},
+        { label: 'Forms', onClick: function() {
+            setActiveSidebarBtn(this);
             window.open('https://forms.gle/h5DHdt5EnsT3bwqP7', '_blank');
         }},
-        { divider: true },
-        { divider: true },
-        { label: 'Close', onClick: () => hideSidebar() },
-        { divider: true },
-        { label: 'Exit', onClick: () => {
+        { label: 'Close', onClick: function() {
+            setActiveSidebarBtn(this);
+            hideSidebar();
+        }},
+        { label: 'Exit', onClick: function() {
+            setActiveSidebarBtn(this);
             panel?.remove();
             iframe?.remove();
             settingsPanel?.remove();
             sidebar?.remove();
-            dropdownBtn?.remove();
+            sidebarBtn?.remove();
         }, style: { color: '#FF0000' } }
     ];
-    let first = true;
-    buttons.forEach(btn => {
+    function setActiveSidebarBtn(btnElem) {
+        const allBtns = sidebar.querySelectorAll('.wp-sidebar-btn');
+        allBtns.forEach(b => b.classList.remove('active'));
+        btnElem.classList.add('active');
+    }
+    buttons.forEach((btn, idx) => {
         if (btn.divider) {
             const divider = document.createElement('div');
             divider.className = 'wp-divider';
@@ -645,32 +629,44 @@ document.head.appendChild(sidebarStyle);
             return;
         }
         const button = document.createElement('button');
-        button.className = 'wp-sidebar-btn' + (first ? ' active' : '');
+        button.className = 'wp-sidebar-btn' + (idx === 0 ? ' active' : '');
         button.innerText = btn.label;
         if (btn.style) Object.assign(button.style, btn.style);
         button.onclick = btn.onClick;
         sidebar.appendChild(button);
-        first = false;
     });
     document.body.appendChild(sidebar);
+
+    return sidebar;
+    }
 
     function hideSidebar() {
         if (!sidebar) return;
         sidebar.classList.remove('sidebar-visible');
         setTimeout(() => { sidebar.style.display = 'none'; }, 300);
-        if (dropdownBtn) dropdownBtn.style.display = 'flex';
-    }
-
-    return sidebar;
+        if (sidebarBtn) sidebarBtn.style.display = 'flex';
+        const allBtns = sidebar.querySelectorAll('.wp-sidebar-btn');
+        allBtns.forEach((b, i) => {
+            if (i === 0) {
+                b.classList.add('active');
+            } else {
+                b.classList.remove('active');
+            }
+        });
+        const news = document.getElementById('overlay');
+        if (news) news.remove();
+        if (settingsPanel && settingsPanel.parentNode) {
+            settingsPanel.remove();
+        }
     }
 
     function toggleSidebar(show) {
-	    if (!sidebar) return;
+        if (!sidebar) return;
 
-    	const shouldShow = typeof show === 'boolean' ? show : !sidebar.classList.contains('sidebar-visible');
+        const shouldShow = typeof show === 'boolean' ? show : !sidebar.classList.contains('sidebar-visible');
 
-	    sidebar.classList.toggle('sidebar-visible', shouldShow);
-    	sidebar.classList.toggle('sidebar-hidden', !shouldShow);
+        sidebar.classList.toggle('sidebar-visible', shouldShow);
+        sidebar.classList.toggle('sidebar-hidden', !shouldShow);
     }
 
     function toggleFrames(event) {
@@ -688,16 +684,194 @@ document.head.appendChild(sidebarStyle);
         
         if (!dropdownMenu) return;
         if (iframe) dropdownMenu.style.visibility = dropdownMenu.style.visibility === 'hidden' ? 'visible' : 'hidden';
-        if (iframe) if (!blurLayer) createBlur(); else removeBlur();
     }
 }
+
 
     function showSidebar() {
         if (!sidebar) return;
         sidebar.style.display = '';
         setTimeout(() => sidebar.classList.add('sidebar-visible'), 10);
-        if (dropdownBtn) dropdownBtn.style.display = 'none';
+        if (sidebarBtn) sidebarBtn.style.display = 'none';
+        showOverlay();
     }
+
+    function rollGame() {
+    // Close settings panel if open
+    if (settingsPanel && settingsPanel.parentNode) {
+        settingsPanel.remove();
+    }
+    // Remove any existing roller
+    let oldRoller = document.getElementById('random-roller-modal');
+    if (oldRoller) oldRoller.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'random-roller-modal';
+    modal.style.position = 'fixed';
+    modal.style.top = '50%';
+    modal.style.left = '50%';
+    modal.style.transform = 'translate(-50%, -50%)';
+    modal.style.width = '225px';
+    modal.style.height = '275px';
+    modal.style.background = '#181818';
+    modal.style.borderRadius = '24px';
+    modal.style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)';
+    modal.style.display = 'flex';
+    modal.style.flexDirection = 'column';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.zIndex = '1000';
+    modal.style.padding = '24px';
+    modal.style.userSelect = 'none';
+
+    let rolling = true;
+    let currentIdx = Math.floor(Math.random() * buttonConfigs.length);
+    let cycles = 0;
+    let maxCycles = 30;
+    let interval = null;
+
+    const gameBtn = document.createElement('button');
+    gameBtn.style.width = '150px';
+    gameBtn.style.height = '190px';
+    gameBtn.style.display = 'flex';
+    gameBtn.style.flexDirection = 'column';
+    gameBtn.style.alignItems = 'center';
+    gameBtn.style.justifyContent = 'center';
+    gameBtn.style.background = 'linear-gradient(45deg, #038FF9, #00C5FF)';
+    gameBtn.style.border = 'none';
+    gameBtn.style.borderRadius = '18px';
+    gameBtn.style.boxShadow = '0 2px 12px rgba(1,174,253,0.2)';
+    gameBtn.style.cursor = 'pointer';
+    gameBtn.style.transition = 'box-shadow 0.2s';
+    gameBtn.style.position = 'relative';
+
+    const img = document.createElement('img');
+    img.style.width = '120px';
+    img.style.height = '120px';
+    img.style.borderRadius = '12px';
+    img.style.objectFit = 'cover';
+    img.style.marginBottom = '10px';
+    gameBtn.appendChild(img);
+
+    const label = document.createElement('div');
+    label.style.fontSize = '18px';
+    label.style.fontWeight = 'bold';
+    label.style.color = '#fff';
+    label.style.textAlign = 'center';
+    label.style.marginTop = '0';
+    label.style.textShadow = '0 2px 8px #01AEFD44';
+    gameBtn.appendChild(label);
+
+    const rerollBtn = document.createElement('button');
+    rerollBtn.innerText = 'Reroll';
+    rerollBtn.style.marginTop = '18px';
+    rerollBtn.style.background = '#01AEFD';
+    rerollBtn.style.color = '#fff';
+    rerollBtn.style.border = 'none';
+    rerollBtn.style.borderRadius = '8px';
+    rerollBtn.style.padding = '8px 24px';
+    rerollBtn.style.fontSize = '16px';
+    rerollBtn.style.cursor = 'pointer';
+    rerollBtn.style.display = 'none';
+
+    const closeBtn = document.createElement('button');
+    closeBtn.innerText = '✕';
+    closeBtn.style.position = 'absolute';
+    closeBtn.style.top = '12px';
+    closeBtn.style.right = '18px';
+    closeBtn.style.background = 'transparent';
+    closeBtn.style.border = 'none';
+    closeBtn.style.color = '#01AEFD';
+    closeBtn.style.fontSize = '22px';
+    closeBtn.style.cursor = 'pointer';
+    closeBtn.onclick = () => {
+        modal.remove();
+        hideSidebar();
+        const overlayElem = document.getElementById('overlay');
+        if (overlayElem) overlayElem.remove();
+    };
+    modal.appendChild(closeBtn);
+
+    function updateGameBtn(idx) {
+        const config = buttonConfigs[idx];
+        img.src = config.image;
+        label.innerText = config.label || '';
+        if (!rolling) {
+            gameBtn.onclick = function() {
+                modal.remove();
+                hideSidebar();
+                const overlayElem = document.getElementById('overlay');
+                if (overlayElem) overlayElem.remove();
+                if (panel) panel.remove();
+                iframe = document.createElement('iframe');
+                iframe.src = config.url;
+                iframe.style.width = '100vw';
+                iframe.style.height = '100vh';
+                iframe.style.border = 'none';
+                iframe.style.borderRadius = '0';
+                iframe.style.display = 'block';
+                iframe.style.margin = '0';
+                iframe.style.zIndex = 2;
+                iframe.style.position = 'fixed';
+                iframe.style.top = '0';
+                iframe.style.left = '0';
+                document.body.appendChild(iframe);
+            };
+        } else {
+            gameBtn.onclick = function() {
+                if (rolling) stopRolling();
+            };
+        }
+    }
+
+    function rollStep() {
+        currentIdx = Math.floor(Math.random() * buttonConfigs.length);
+        updateGameBtn(currentIdx);
+        cycles++;
+        if (!rolling) return;
+        if (cycles >= maxCycles) {
+            stopRolling();
+        }
+    }
+
+    function stopRolling() {
+        if (!rolling) return;
+        rolling = false;
+        clearInterval(interval);
+        updateGameBtn(currentIdx);
+        rerollBtn.style.display = 'block';
+    }
+
+    updateGameBtn(currentIdx);
+    interval = setInterval(rollStep, 100);
+
+    rerollBtn.onclick = function() {
+        rolling = true;
+        cycles = 0;
+        rerollBtn.style.display = 'none';
+        interval = setInterval(rollStep, 100);
+        updateGameBtn(currentIdx);
+    };
+
+    modal.appendChild(gameBtn);
+    modal.appendChild(rerollBtn);
+    document.body.appendChild(modal);
+}
+
+function showOverlay() {
+    if (document.getElementById('overlay')) return;
+    const overlay = document.createElement('div');
+    overlay.id = 'overlay';
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.background = 'rgba(17, 17, 17, 0.7)';
+    overlay.style.zIndex = '3';
+    overlay.style.pointerEvents = 'auto';
+    document.body.appendChild(overlay);
+}
 
     document.addEventListener('keydown', toggleFrames);
     document.addEventListener('keydown', toggleMenu);
