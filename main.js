@@ -57,7 +57,6 @@ javascript:(function(){
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       color: transparent;
-      padding: 0.5em 0;
       user-select: none;
       z-index: 100;
     }
@@ -140,7 +139,7 @@ javascript:(function(){
         width: auto;
       }
     }
-    #zw-overlay {
+    #overlay {
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
@@ -150,7 +149,7 @@ javascript:(function(){
       justify-content: center;
       align-items: center;
     }
-    #zw-overlay-box {
+    #overlay-box {
       background: rgba(17, 17, 17, 0.95);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 16px;
@@ -160,16 +159,16 @@ javascript:(function(){
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
       text-align: center;
     }
-    #zw-overlay-box h1 {
+    #overlay-box h1 {
       font-size: 24px;
       color: #01AEFD;
       margin-bottom: 16px;
     }
-    #zw-overlay-box p {
+    #overlay-box p {
       color: white;
       margin-bottom: 24px;
     }
-    #zw-overlay-box button {
+    #overlay-box button {
       font-size: 16px;
       font-family: 'Fredoka', sans-serif;
       padding: 10px 20px;
@@ -237,7 +236,7 @@ javascript:(function(){
 
   var password = 'password';
   var panelVisible = true;
-
+  
   guiDiv.style.position = 'fixed';
   guiDiv.style.top = '50%';
   guiDiv.style.left = '50%';
@@ -256,6 +255,7 @@ javascript:(function(){
   title.textContent = 'Zephware';
   title.style.marginTop = '70px';
   title.style.fontSize = '3em';
+  title.style.padding = '0.5em 0';
 
   var inputBox = document.createElement('input');
   inputBox.style.position = 'absolute';
@@ -275,6 +275,21 @@ javascript:(function(){
   inputBox.placeholder = 'Enter Password';
   inputBox.type = 'password';
 
+  var graybg = document.createElement('div');
+  graybg.id = 'news-overlay';
+  graybg.style.position = 'fixed';
+  graybg.style.top = '0';
+  graybg.style.left = '0';
+  graybg.style.width = '100vw';
+  graybg.style.height = '100vh';
+  graybg.style.background = 'rgba(0,0,0,0.9)';
+  graybg.style.zIndex = '100';
+  graybg.style.display = 'flex';
+  graybg.style.justifyContent = 'center';
+  graybg.style.alignItems = 'center';
+  graybg.style.fontFamily = "'Fredoka', sans-serif";
+  document.body.appendChild(graybg);
+
   inputBox.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
       checkPassword();
@@ -286,9 +301,7 @@ javascript:(function(){
       closePanel();
       showNewsPanel();
     } else {
-      alert('make sure you are in about:blank');
-      inputBox.classList.add('input-shake');
-      setTimeout(() => inputBox.classList.remove('input-shake'), 500);
+      alert('Incorrect Password! Make sure you are in about:blank');
     }
   }
 
@@ -317,6 +330,7 @@ javascript:(function(){
   guiDiv.appendChild(inputBox);
   guiDiv.appendChild(passdesc);
   document.body.appendChild(guiDiv);
+  document.body.appendChild(graybg);
 
   const coverBox = document.createElement('div');
   coverBox.style.position = 'fixed';
@@ -336,6 +350,7 @@ javascript:(function(){
   header.className = 'header';
   header.textContent = 'Zephware';
   header.style.fontSize = '4em';
+  header.style.padding = '9.25em 0';
   document.body.appendChild(header);
 
   const description = document.createElement('div');
@@ -408,11 +423,11 @@ function showNewsPanel() {
   let pageIdx = 0;
   let imgIdx = 0;
 
-  const old = document.getElementById('zw-news-overlay');
+  const old = document.getElementById('news-overlay');
   if (old) old.remove();
 
   const overlay = document.createElement('div');
-  overlay.id = 'zw-news-overlay';
+  overlay.id = 'news-overlay';
   overlay.style.position = 'fixed';
   overlay.style.top = '0';
   overlay.style.left = '0';
@@ -449,7 +464,7 @@ function showNewsPanel() {
   panelContent.style.scrollbarWidth = 'none';
   panelContent.style.msOverflowStyle = 'none';
   panelContent.style.overflowX = 'hidden';
-  panelContent.classList.add('zw-hide-scrollbar');
+  panelContent.classList.add('hide-scrollbar');
 
   const navRow = document.createElement('div');
   navRow.style.display = 'flex';
@@ -655,7 +670,6 @@ function showNewsPanel() {
   panel.appendChild(closeBtn);
   overlay.appendChild(panel);
   document.body.appendChild(overlay);
-
   render();
   overlay.focus();
  }
@@ -663,26 +677,26 @@ function showNewsPanel() {
   let lockedTabs = { 'blooket hacks': true };
 
   function showPasswordOverlay(onSuccess) {
-    const old = document.getElementById('zw-overlay');
+    const old = document.getElementById('overlay');
     if (old) old.remove();
     const overlay = document.createElement('div');
-    overlay.id = 'zw-overlay';
+    overlay.id = 'overlay';
     overlay.style.zIndex = '99999';
     overlay.style.fontFamily = "'Fredoka', sans-serif";
     overlay.innerHTML = `
-      <div id="zw-overlay-box" style="font-family:'Fredoka',sans-serif;">
+      <div id="overlay-box" style="font-family:'Fredoka',sans-serif;">
         <h1>Password Required</h1>
         <p>Enter the password to access this section.</p>
-        <input id="zw-password-input" type="password" placeholder="Password" style="font-size:16px;padding:8px 12px;border-radius:8px;border:1px solid #444;width:80%;margin-bottom:16px;outline:none;font-family:'Fredoka',sans-serif;" />
+        <input id="password-input" type="password" placeholder="Password" style="font-size:16px;padding:8px 12px;border-radius:8px;border:1px solid #444;width:80%;margin-bottom:16px;outline:none;font-family:'Fredoka',sans-serif;" />
         <br>
-        <button id="zw-password-submit" style="font-family:'Fredoka',sans-serif;">Submit</button>
-        <div id="zw-password-error" style="color:#ff5555;margin-top:10px;display:none;">Incorrect password.</div>
+        <button id="password-submit" style="font-family:'Fredoka',sans-serif;">Submit</button>
+        <div id="password-error" style="color:#ff5555;margin-top:10px;display:none;">Incorrect password.</div>
       </div>
     `;
-    document.body.appendChild(overlay);
-    const input = overlay.querySelector('#zw-password-input');
-    const submit = overlay.querySelector('#zw-password-submit');
-    const error = overlay.querySelector('#zw-password-error');
+
+    const input = overlay.querySelector('#password-input');
+    const submit = overlay.querySelector('#password-submit');
+    const error = overlay.querySelector('#password-error');
     input.focus();
     function unlock() {
       if (input.value === "happysummer") {
@@ -701,16 +715,16 @@ function showNewsPanel() {
   }
 
   function showInstructionsOverlay() {
-    const old = document.getElementById('zw-overlay');
+    const old = document.getElementById('overlay');
     if (old) old.remove();
     const overlay = document.createElement('div');
-    overlay.id = 'zw-overlay';
+    overlay.id = 'overlay';
     overlay.style.zIndex = '99999';
     overlay.style.fontFamily = "'Fredoka', sans-serif";
     overlay.innerHTML = `
-      <div id="zw-overlay-box" style="font-family:'Fredoka',sans-serif;">
+      <div id="overlay-box" style="font-family:'Fredoka',sans-serif;">
         <h1>Instructions</h1>
-        <ol id="zw-instructions-list" style="text-align:center;margin:0 0 24px 0;padding-left:0;font-size:16px;list-style-position:inside;color:#fff;">
+        <ol id="instructions-list" style="text-align:center;margin:0 0 24px 0;padding-left:0;font-size:16px;list-style-position:inside;color:#fff;">
           <li style="margin:8px 0;">Create a bookmark</li>
           <li style="margin:8px 0;">Click the "Copy" button below</li>
           <li style="margin:8px 0;">Do Cmd + C</li>
@@ -719,8 +733,8 @@ function showNewsPanel() {
           <li style="margin:8px 0;">Try it out!</li>
         </ol>
         <div style="display:flex;justify-content:center;gap:12px;align-items:center;">
-          <button id="zw-highlight-btn" style="font-family:'Fredoka',sans-serif;min-width:80px;">Copy</button>
-          <button id="zw-instructions-close" style="font-family:'Fredoka',sans-serif;min-width:80px;">Close</button>
+          <button id="highlight-btn" style="font-family:'Fredoka',sans-serif;min-width:80px;">Copy</button>
+          <button id="instructions-close" style="font-family:'Fredoka',sans-serif;min-width:80px;">Close</button>
         </div>
       </div>
     `;
@@ -736,10 +750,10 @@ function showNewsPanel() {
         pre.style.pointerEvents = 'none';
         pre.style.userSelect = 'text';
         pre.style.zIndex = '-1';
-        pre.id = 'zw-invisible-code';
+        pre.id = 'invisible-code';
         document.body.appendChild(pre);
 
-        overlay.querySelector('#zw-highlight-btn').onclick = () => {
+        overlay.querySelector('#highlight-btn').onclick = () => {
           const range = document.createRange();
           range.selectNodeContents(pre);
           const sel = window.getSelection();
@@ -748,9 +762,9 @@ function showNewsPanel() {
         };
       });
 
-    overlay.querySelector('#zw-instructions-close').onclick = () => {
+    overlay.querySelector('#instructions-close').onclick = () => {
       overlay.remove();
-      const pre = document.getElementById('zw-invisible-code');
+      const pre = document.getElementById('invisible-code');
       if (pre) pre.remove();
     };
   }
@@ -822,18 +836,18 @@ function showNewsPanel() {
 (function() {
   const style = document.createElement('style');
   style.textContent = `
-    body, #zw-overlay, #zw-overlay *, .header, .description, .input-area, .input-area *, .content, .label-text, select, button {
+    body, #overlay, #overlay *, .header, .description, .input-area, .input-area *, .content, .label-text, select, button {
       font-family: 'Fredoka', sans-serif !important;
     }
-    #zw-overlay {
+    #overlay {
       z-index: 99999 !important;
       font-family: 'Fredoka', sans-serif !important;
     }
-    #zw-overlay-box {
+    #overlay-box {
       font-family: 'Fredoka', sans-serif !important;
     }
-    .zw-hide-scrollbar::-webkit-scrollbar { display: none; }
-    .zw-hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   `;
   document.head.appendChild(style);
 })();
