@@ -57,7 +57,7 @@ javascript:(function(){
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       color: transparent;
-      user-select: none;
+      -webkit-user-select: none;
       z-index: 100;
     }
     
@@ -72,7 +72,7 @@ javascript:(function(){
       font-weight: 400;
       font-style: italic;
       font-family: 'Fredoka', sans-serif;
-      user-select: none;
+      -webkit-user-select: none;
       z-index: 100;
     }
 
@@ -93,7 +93,7 @@ javascript:(function(){
       font-size: 1.4em;
       color: #ddd;
       font-weight: 500;
-      user-select: none;
+      -webkit-user-select: none;
       white-space: nowrap;
     }
 
@@ -364,9 +364,12 @@ javascript:(function(){
   const labelText = document.createElement('div');
   labelText.className = 'label-text';
   labelText.textContent = 'I wish to access';
+  labelText.setAttribute('for', 'selector');
   inputArea.appendChild(labelText);
 
   const select = document.createElement('select');
+  select.id = 'selector';
+  select.setAttribute('title', '');
   const options = ['Games', 'Unblockers', 'Soundboard', 'Learning Tools', 'Marketplace', 'Blooket Hacks', 'Gimkit Hacks'];
   options.forEach(opt => {
     const option = document.createElement('option');
@@ -383,9 +386,23 @@ javascript:(function(){
   const newsPages = [
   {
     title: "What's New?",
+    desc: "v1.0.4 : September 2nd, 2025",
+    images: [
+      { src: "assets/Zephware.png", alt: "Zephware" }
+    ],
+    changes: [
+      { text: "New Zephware Icon", desc: "" },
+      { text: "More Games!", desc: "UI Rework, More Games" },
+      { text: "New Core: Learning Tools", desc: "Hacks, Calculator, Marker Tool, Ect." },
+      { text: "Zephware Website", desc: "https://zephware.netlify.app" },
+      { text: "Gimkit Hacks", desc: "I've been looking into them and it seems they've been patched. I'll see what I can do though..." }
+    ]
+  },
+  {
+    title: "What'd I Miss?",
     desc: "v1.0.3",
     images: [
-      { src: "https://wallpaperaccess.com/full/7225605.jpg", alt: "Update GIF" }
+      { src: "https://wallpaperaccess.com/full/7225605.jpg", alt: "New" }
     ],
     changes: [
       { text: "Blooket Hacks Update!", desc: "More friendly for those whose keyboard doesn't work" },
@@ -393,28 +410,16 @@ javascript:(function(){
     ]
   },
   {
-    title: "What'd I Miss?",
-    desc: "v1.0.2",
-    images: [
-      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/updates/ZephwareBlooket.png", alt: "Previous Update" }
-    ],
-    changes: [
-      { text: "Blooket Hacks Have Released!", desc: "" },
-    ]
-  },
-  {
     title: "What's Next?",
-    desc: "v1.0.4 : Releasing 1st Day of 25-26 School Year",
+    desc: "v1.0.5 : Next Week!",
     images: [
       { src: "https://placehold.co/560x160/222/fff.png?text=Coming+Soon", alt: "Coming Soon" }
     ],
     changes: [
-      { text: "More Games!", desc: "UI Rework, All Game Icons Fixed, More Games" },
-      { text: "New Core: Learning Tools", desc: "IXL Hacks, AI, Study Helper, Marker Tool, Ect." },
+      { text: "Fixed Games & Icons + UI Changes", desc: "All Game Icons Fixed, Not Happy with UI so expect changes" },
+      { text: "New Core: Learning Tools", desc: "Hacks, Calculator, Marker Tool, Ect." },
       { text: "More & Fixed Unblockers", desc: "More Unblockers, Unblocked, Fast, Working" },
-      { text: "Zephware Website", desc: "You can access Zephware via website" },
-      { text: "Gimkit Hacks", desc: "Finally Released" },
-      { text: "Marketplace", desc: "Sponsor YOUR Business, Make Sales, All Here! For a Small Fee" }
+      { text: "Gimkit Hacks", desc: "Release..?" }
     ]
   }
 ];
@@ -699,7 +704,7 @@ function showNewsPanel() {
     const error = overlay.querySelector('#password-error');
     input.focus();
     function unlock() {
-      if (input.value === "happysummer") {
+      if (input.value === "back2schoolggs") {
         overlay.remove();
         onSuccess();
       } else {
@@ -712,6 +717,7 @@ function showNewsPanel() {
     input.addEventListener('keydown', e => {
       if (e.key === 'Enter') unlock();
     });
+    document.body.appendChild(overlay);
   }
 
   function showInstructionsOverlay() {
@@ -847,7 +853,7 @@ function showNewsPanel() {
       font-family: 'Fredoka', sans-serif !important;
     }
     .hide-scrollbar::-webkit-scrollbar { display: none; }
-    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .hide-scrollbar { -ms-overflow-style: none; }
   `;
   document.head.appendChild(style);
 })();
