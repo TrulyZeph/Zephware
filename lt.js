@@ -121,10 +121,10 @@ function parseNumberSafe(numStr) {
     return parseFloat(numStr.replace(/,/g, ''));
 }
 
-function createAutoAnswerPanel() {
-    if (document.getElementById('auto-answer-panel')) return;
+function createUI() {
+    if (document.getElementById('main-ui')) return;
     const panel = document.createElement('div');
-    panel.id = 'auto-answer-panel';
+    panel.id = 'main-ui';
     panel.style.position = 'fixed';
     panel.style.width = '220px';
     panel.style.background = 'rgba(30,30,30,0.95)';
@@ -275,7 +275,7 @@ function createAutoAnswerPanel() {
     inputArea.appendChild(accLabel);
 
     const updateBtn = document.createElement('button');
-    updateBtn.textContent = 'Update Delay & Accuracy';
+    updateBtn.textContent = 'Save Settings';
     updateBtn.style.fontSize = '1em';
     updateBtn.style.marginTop = '6px';
     updateBtn.style.background = '#015AFD';
@@ -317,8 +317,8 @@ function createAutoAnswerPanel() {
     btn.addEventListener('click', toggleAnswering);
 }
 
-if (!document.getElementById('auto-answer-panel')) {
-    createAutoAnswerPanel();
+if (!document.getElementById('main-ui')) {
+    createUI();
 }
 
 window.answering = window.answering || false;
@@ -459,7 +459,6 @@ function answerQuestions() {
     });
     processHorizontalBinary();
     processSimpleHorizontalEquations();
-    processComparisonProblems();
     const widgetFt = document.querySelector('.yui3-widget-ft.fade-in');
     if (widgetFt) {
         const submitBtn = widgetFt.querySelector('button.crisp-button');
@@ -508,155 +507,96 @@ function cleanResult(num, decimals) {
 }
 
 function processHorizontalBinary() {
-    document.querySelectorAll('.math.section').forEach(section => {
-        const bundles = section.querySelectorAll('.bundle');
-        if (bundles.length === 3) {
-            let num1 = getOperandValue(bundles[0]);
-            let num2 = getOperandValue(bundles[1]);
-            let operator = null;
-            if (bundles[0].querySelector('.minusSymbolContainer')) operator = '-';
-            else if (bundles[0].querySelector('.plusSymbolContainer')) operator = '+';
-            else if (bundles[0].querySelector('.xSymbolContainer')) operator = '*';
-            else if (bundles[0].querySelector('.divideSymbolContainer')) operator = '/';
-            if (!operator) {
-                if (bundles[1].querySelector('.minusSymbolContainer')) operator = '-';
-                else if (bundles[1].querySelector('.plusSymbolContainer')) operator = '+';
-                else if (bundles[1].querySelector('.xSymbolContainer')) operator = '*';
-                else if (bundles[1].querySelector('.divideSymbolContainer')) operator = '/';
+   document.querySelectorAll('.math.section').forEach(section => {
+      const bundles = section.querySelectorAll('.bundle');
+      if (bundles.length >= 3) {
+         let exprParts = [];
+         for (let i = 0; i < bundles.length - 1; i++) {
+            let num = getOperandValue(bundles[i]);
+            if (!isNaN(num)) {
+               exprParts.push(num);
+            } else {
+               if (bundles[i].querySelector('.minusSymbolContainer')) exprParts.push('-');
+               else if (bundles[i].querySelector('.plusSymbolContainer')) exprParts.push('+');
+               else if (bundles[i].querySelector('.xSymbolContainer')) exprParts.push('*');
+               else if (bundles[i].querySelector('.divideSymbolContainer')) exprParts.push('/');
+               else {
+                  let txt = bundles[i].textContent;
+                  if (txt.includes('-') || txt.includes('–')) exprParts.push('-');
+                  else if (txt.includes('+')) exprParts.push('+');
+                  else if (txt.includes('×') || txt.includes('x')) exprParts.push('*');
+                  else if (txt.includes('÷') || txt.includes('/')) exprParts.push('/');
+               }
             }
-            if (!operator) {
-                const opText = bundles[0].textContent + bundles[1].textContent;
-                if (opText.includes('-') || opText.includes('–')) operator = '-';
-                else if (opText.includes('+')) operator = '+';
-                else if (opText.includes('×') || opText.includes('x')) operator = '*';
-                else if (opText.includes('÷') || opText.includes('/')) operator = '/';
-            }
-            if (!isNaN(num1) && !isNaN(num2) && operator) {
-                let result;
-                switch (operator) {
-                    case '+': result = num1 + num2; break;
-                    case '-': result = num1 - num2; break;
-                    case '*': result = num1 * num2; break;
-                    case '/': result = num2 !== 0 ? num1 / num2 : ''; break;
-                    default: result = '';
-                }
-                const dec1 = countDecimals(String(num1));
-                const dec2 = countDecimals(String(num2));
-                const leastDecimals = Math.max(dec1, dec2, 2);
-                if (typeof result === 'number' && !isNaN(result)) {
-                    result = cleanResult(result, leastDecimals);
-                }
-                const answerInput = bundles[2].querySelector('input.fillIn');
-                if (answerInput && typeof result === 'string') {
-                    answerInput.value = result;
-                }
-            }
-        }
-    });
+         }
+
+         let expr = exprParts.join(' ');
+         let result;
+         try {
+            result = Function('"use strict";return (' + expr + ')')();
+         } catch (e) {
+            result = '';
+         }
+
+         if (typeof result === 'number' && !isNaN(result)) {
+            let numbers = expr.match(/-?\d+(\.\d+)?/g) || [];
+            let maxDecimals = Math.max(...numbers.map(n => countDecimals(n)), 2);
+            result = cleanResult(result, maxDecimals);
+         }
+
+         const answerInput = bundles[bundles.length - 1].querySelector('input.fillIn');
+         if (answerInput && typeof result === 'string') {
+            answerInput.value = result;
+         }
+      }
+   });
 }
 
 function processSimpleHorizontalEquations() {
-    document.querySelectorAll('div.old-space-indent').forEach(div => {
-        let text = '';
-        div.childNodes.forEach(node => {
-            if (node.nodeType === Node.TEXT_NODE) text += node.textContent;
-            if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SPAN') {
-                const sup = node.querySelector('sup.negative.old-negative-sign');
-                if (sup) {
-                    text += '-';
-                    const num = node.textContent.replace(/[–-]/g, '').replace(/^\s*-?/, '').trim();
-                    text += num;
-                } else {
-                    text += node.textContent;
-                }
+   document.querySelectorAll('div.old-space-indent').forEach(div => {
+      let text = '';
+      div.childNodes.forEach(node => {
+         if (node.nodeType === Node.TEXT_NODE) text += node.textContent;
+         if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SPAN') {
+            const sup = node.querySelector('sup.negative.old-negative-sign');
+            if (sup) {
+               text += '-';
+               const num = node.textContent.replace(/[–-]/g, '').replace(/^\s*-?/, '').trim();
+               text += num;
+            } else {
+               text += node.textContent;
             }
-            if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SUP' && node.classList.contains('negative') && node.classList.contains('old-negative-sign')) {
-                text += '-';
-            }
-        });
-        text = text.replace(/–/g, '-').replace(/−/g, '-').replace(/\u2212/g, '-').replace(/\s+/g, ' ').trim();
-        const match = text.match(/(-?\d+(?:\.\d+)?)\s*([+\-×x*/÷])\s*(-?\d+(?:\.\d+)?)\s*=\s*$/);
-        if (match) {
-            let num1 = parseFloat(match[1]);
-            let op = match[2];
-            let num2 = parseFloat(match[3]);
-            let result;
-            switch (op) {
-                case '+': result = num1 + num2; break;
-                case '-': result = num1 - num2; break;
-                case '×': case 'x': case '*': result = num1 * num2; break;
-                case '÷': case '/': result = num2 !== 0 ? num1 / num2 : ''; break;
-                default: result = '';
-            }
-            let dec1 = countDecimals(match[1]);
-            let dec2 = countDecimals(match[3]);
-            let leastDecimals = Math.max(dec1, dec2, 2);
-            if (typeof result === 'number' && !isNaN(result)) {
-                result = cleanResult(result, leastDecimals);
-            }
-            const input = div.querySelector('input.fillIn');
-            if (input && typeof result === 'string') {
-                input.value = result;
-            }
-        }
-    });
-}
+         }
+         if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SUP' && node.classList.contains('negative') && node.classList.contains('old-negative-sign')) {
+            text += '-';
+         }
+      });
 
-function processComparisonProblems() {
-    document.querySelectorAll('.old-space-indent').forEach(div => {
-        const tds = div.querySelectorAll('td');
-        if (tds.length < 5) return;
-        const leftNum = tds[0].querySelector('.old-expression');
-        const leftDen = tds[1].querySelector('.old-expression');
-        const rightNum1 = tds[3].querySelector('.old-expression');
-        const rightDen1 = tds[4].querySelector('.old-expression');
-        let rightNum2 = null, rightDen2 = null;
-        let plusIdx = -1;
-        tds.forEach((td, idx) => { if (td.textContent.includes('+')) plusIdx = idx; });
-        if (plusIdx > 0 && tds.length > plusIdx + 2) {
-            rightNum2 = tds[plusIdx + 1].querySelector('.old-expression');
-            rightDen2 = tds[plusIdx + 2].querySelector('.old-expression');
-        }
-        if (leftNum && leftDen && rightNum1 && rightDen1) {
-            const left = parseFloat(leftNum.textContent) / parseFloat(leftDen.textContent);
-            let right = parseFloat(rightNum1.textContent) / parseFloat(rightDen1.textContent);
-            if (rightNum2 && rightDen2) {
-                right += parseFloat(rightNum2.textContent) / parseFloat(rightDen2.textContent);
-            }
-            let correctSign = '=';
-            if (left < right) correctSign = '<';
-            else if (left > right) correctSign = '>';
-            document.querySelectorAll('.LaidOutTiles').forEach(laidOut => {
-                laidOut.querySelectorAll('.SelectableTile').forEach(tile => {
-                    const signDiv = tile.querySelector('div.GeneticallyModified > div');
-                    if (signDiv && signDiv.textContent.trim() === correctSign) {
-                        setTimeout(() => {
-                            signDiv.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-                        }, 0);
-                    }
-                });
-            });
-        }
-    });
-    document.querySelectorAll('.old-space-indent').forEach(div => {
-        const tds = div.querySelectorAll('td');
-        if (tds.length >= 5) {
-            const frac1Num = tds[0].querySelector('.old-expression');
-            const frac1Den = tds[1].querySelector('.old-expression');
-            const frac2Num = tds[2].querySelector('.old-expression');
-            const frac2Den = tds[3].querySelector('.old-expression');
-            const answerInput = tds[4].querySelector('input.fillIn');
-            if (frac1Num && frac1Den && frac2Num && frac2Den && answerInput) {
-                const n1 = parseInt(frac1Num.textContent.trim());
-                const d1 = parseInt(frac1Den.textContent.trim());
-                const n2 = parseInt(frac2Num.textContent.trim());
-                const d2 = parseInt(frac2Den.textContent.trim());
-                if (!isNaN(n1) && !isNaN(d1) && !isNaN(n2) && !isNaN(d2) && d1 === d2) {
-                    const num = n1 + n2;
-                    const den = d1;
-                    answerInput.value = num + '/' + den;
-                }
-            }
-        }
-    });
+      text = text.replace(/–/g, '-').replace(/−/g, '-').replace(/\u2212/g, '-').replace(/\s+/g, ' ').trim();
+
+      const match = text.match(/^(.*?)=\s*$/);
+      if (match) {
+         let expr = match[1].trim();
+
+         expr = expr.replace(/×|x/g, '*').replace(/÷/g, '/');
+
+         let result;
+         try {
+            result = Function('"use strict";return (' + expr + ')')();
+         } catch (e) {
+            result = '';
+         }
+
+         if (typeof result === 'number' && !isNaN(result)) {
+            let numbers = expr.match(/-?\d+(\.\d+)?/g) || [];
+            let maxDecimals = Math.max(...numbers.map(n => countDecimals(n)), 2);
+            result = cleanResult(result, maxDecimals);
+         }
+
+         const input = div.querySelector('input.fillIn');
+         if (input && typeof result === 'string') {
+            input.value = result;
+         }
+      }
+   });
 }
