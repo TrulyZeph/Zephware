@@ -390,25 +390,6 @@ function answerQuestions() {
         }
     });
     document.querySelectorAll('.old-space-indent').forEach(div => {
-        const divisorCell = div.querySelector('.old-long-division-divisor');
-        const dividendCell = div.querySelector('.old-long-division-bar td[align="left"]');
-        const answerInput = div.querySelector('.old-long-division-quotient input.fillIn');
-        if (divisorCell && dividendCell && answerInput) {
-            const divisorStr = divisorCell.textContent.trim();
-            const dividendStr = dividendCell.textContent.trim();
-            const divisor = parseNumberSafe(divisorStr);
-            const dividend = parseNumberSafe(dividendStr);
-            if (!isNaN(divisor) && !isNaN(dividend) && divisor !== 0) {
-                const dec1 = countDecimals(divisorStr);
-                const dec2 = countDecimals(dividendStr);
-                const leastDecimals = Math.max(dec1, dec2, 2);
-                let result = dividend / divisor;
-                result = cleanResult(result, leastDecimals);
-                answerInput.value = result;
-            }
-        }
-    });
-    document.querySelectorAll('.old-space-indent').forEach(div => {
         const tables = div.querySelectorAll('table');
         if (tables.length === 0) return;
         const table = tables[0];
@@ -459,6 +440,8 @@ function answerQuestions() {
     });
     processHorizontalBinary();
     processSimpleHorizontalEquations();
+    processLongDivision();
+    processFractionDivision();
     const widgetFt = document.querySelector('.yui3-widget-ft.fade-in');
     if (widgetFt) {
         const submitBtn = widgetFt.querySelector('button.crisp-button');
@@ -507,49 +490,51 @@ function cleanResult(num, decimals) {
 }
 
 function processHorizontalBinary() {
-   document.querySelectorAll('.math.section').forEach(section => {
-      const bundles = section.querySelectorAll('.bundle');
-      if (bundles.length >= 3) {
-         let exprParts = [];
-         for (let i = 0; i < bundles.length - 1; i++) {
-            let num = getOperandValue(bundles[i]);
-            if (!isNaN(num)) {
-               exprParts.push(num);
-            } else {
-               if (bundles[i].querySelector('.minusSymbolContainer')) exprParts.push('-');
-               else if (bundles[i].querySelector('.plusSymbolContainer')) exprParts.push('+');
-               else if (bundles[i].querySelector('.xSymbolContainer')) exprParts.push('*');
-               else if (bundles[i].querySelector('.divideSymbolContainer')) exprParts.push('/');
-               else {
-                  let txt = bundles[i].textContent;
-                  if (txt.includes('-') || txt.includes('–')) exprParts.push('-');
-                  else if (txt.includes('+')) exprParts.push('+');
-                  else if (txt.includes('×') || txt.includes('x')) exprParts.push('*');
-                  else if (txt.includes('÷') || txt.includes('/')) exprParts.push('/');
-               }
+    document.querySelectorAll('.math.section').forEach(section => {
+        const bundles = section.querySelectorAll('.bundle');
+        if (bundles.length === 3) {
+            let num1 = getOperandValue(bundles[0]);
+            let num2 = getOperandValue(bundles[1]);
+            let operator = null;
+            if (bundles[0].querySelector('.minusSymbolContainer')) operator = '-';
+            else if (bundles[0].querySelector('.plusSymbolContainer')) operator = '+';
+            else if (bundles[0].querySelector('.xSymbolContainer')) operator = '*';
+            else if (bundles[0].querySelector('.divideSymbolContainer')) operator = '/';
+            if (!operator) {
+                if (bundles[1].querySelector('.minusSymbolContainer')) operator = '-';
+                else if (bundles[1].querySelector('.plusSymbolContainer')) operator = '+';
+                else if (bundles[1].querySelector('.xSymbolContainer')) operator = '*';
+                else if (bundles[1].querySelector('.divideSymbolContainer')) operator = '/';
             }
-         }
-
-         let expr = exprParts.join(' ');
-         let result;
-         try {
-            result = Function('"use strict";return (' + expr + ')')();
-         } catch (e) {
-            result = '';
-         }
-
-         if (typeof result === 'number' && !isNaN(result)) {
-            let numbers = expr.match(/-?\d+(\.\d+)?/g) || [];
-            let maxDecimals = Math.max(...numbers.map(n => countDecimals(n)), 2);
-            result = cleanResult(result, maxDecimals);
-         }
-
-         const answerInput = bundles[bundles.length - 1].querySelector('input.fillIn');
-         if (answerInput && typeof result === 'string') {
-            answerInput.value = result;
-         }
-      }
-   });
+            if (!operator) {
+                const opText = bundles[0].textContent + bundles[1].textContent;
+                if (opText.includes('-') || opText.includes('–')) operator = '-';
+                else if (opText.includes('+')) operator = '+';
+                else if (opText.includes('×') || opText.includes('x')) operator = '*';
+                else if (opText.includes('÷') || opText.includes('/')) operator = '/';
+            }
+            if (!isNaN(num1) && !isNaN(num2) && operator) {
+                let result;
+                switch (operator) {
+                    case '+': result = num1 + num2; break;
+                    case '-': result = num1 - num2; break;
+                    case '*': result = num1 * num2; break;
+                    case '/': result = num2 !== 0 ? num1 / num2 : ''; break;
+                    default: result = '';
+                }
+                const dec1 = countDecimals(String(num1));
+                const dec2 = countDecimals(String(num2));
+                const leastDecimals = Math.max(dec1, dec2, 2);
+                if (typeof result === 'number' && !isNaN(result)) {
+                    result = cleanResult(result, leastDecimals);
+                }
+                const answerInput = bundles[2].querySelector('input.fillIn');
+                if (answerInput && typeof result === 'string') {
+                    answerInput.value = result;
+                }
+            }
+        }
+    });
 }
 
 function processSimpleHorizontalEquations() {
@@ -596,6 +581,33 @@ function processSimpleHorizontalEquations() {
          const input = div.querySelector('input.fillIn');
          if (input && typeof result === 'string') {
             input.value = result;
+         }
+      }
+   });
+}
+function processLongDivision() {
+   document.querySelectorAll('div.old-space-indent').forEach(div => {
+      const divisorLD = div.querySelector('.old-long-division-divisor');
+      const dividendLD = div.querySelector('.old-long-division-bar td[align="left"]');
+      const divisorFC = div.querySelector('.old-fraction');
+      const dividendFC = div.querySelector('.old-fraction old-fraction-bar');
+      const input = div.querySelector('.fillIn');
+
+      if (divisorLD && dividendLD) {
+         let divisor = parseFloat(divisorLD.textContent.replace(/–/g, '-').trim());
+         let dividend = parseFloat(dividendLD.textContent.replace(/–/g, '-').trim());
+
+         if (!isNaN(divisor) && !isNaN(dividend) && divisor !== 0) {
+            let result = dividend / divisor;
+
+            let dec1 = countDecimals(String(dividend));
+            let dec2 = countDecimals(String(divisor));
+            let leastDecimals = Math.max(dec1, dec2, 2);
+
+            result = cleanResult(result, leastDecimals);
+         if (input && typeof result === 'string') {
+            input.value = result;
+         }         
          }
       }
    });
