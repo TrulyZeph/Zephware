@@ -768,8 +768,4 @@ function processFractionEquations() {
    });
    return answer;
 }
-<<<<<<< HEAD
 })();
-=======
-})();
->>>>>>> 893bf5182c4b95a1de3b5e37f5e5f69f270efdfb
