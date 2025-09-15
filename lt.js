@@ -1,4 +1,5 @@
 javascript:(function(){
+
   if (!document.getElementById('fredoka-font-link')) {
     const link = document.createElement('link');
     link.id = 'fredoka-font-link';
@@ -114,11 +115,26 @@ style.textContent = `
       transition: none;
     }
 `;
-})();
 
-function parseNumberSafe(numStr) {
-    if (typeof numStr !== 'string' ) numStr = String(numStr);
-    return parseFloat(numStr.replace(/,/g, ''));
+function parseNumberSafe(str) {
+    if (!str) return NaN;
+    str = removeCommas(str.trim());
+    const num = Number(str);
+    return isNaN(num) ? NaN : num;
+}
+
+const SESSION_EXPIRE = new Date('2025-09-15T14:10:00-04:00');
+
+function isSessionActive() {
+    const now = new Date();
+    const estOffset = -4 * 60;
+    const nowEST = new Date(now.getTime() + (now.getTimezoneOffset() + estOffset) * 60000);
+    return nowEST < SESSION_EXPIRE;
+}
+
+if (!isSessionActive()) {
+    alert("Session Expired. Go to Zephware for Current Session.");
+    return;
 }
 
 function createUI() {
@@ -126,7 +142,7 @@ function createUI() {
     const panel = document.createElement('div');
     panel.id = 'main-ui';
     panel.style.position = 'fixed';
-    panel.style.width = '220px';
+    panel.style.width = '260px';
     panel.style.background = 'rgba(30,30,30,0.95)';
     panel.style.color = '#fff';
     panel.style.border = '1px solid #888';
@@ -162,7 +178,6 @@ function createUI() {
         panel.style.transition = '';
         document.body.style.userSelect = '';
     });
-
     panel.addEventListener('touchstart', function(e) {
         if (e.target !== panel && e.target.tagName !== 'H1') return;
         dragging = true;
@@ -202,105 +217,52 @@ function createUI() {
     divider.style.alignSelf = 'center';
     panel.appendChild(divider);
 
-    const inputArea = document.createElement('div');
-    inputArea.className = 'input-area';
-    inputArea.style.position = 'static';
-    inputArea.style.transform = 'none';
-    inputArea.style.display = 'flex';
-    inputArea.style.flexDirection = 'column';
-    inputArea.style.gap = '6px';
-    inputArea.style.alignItems = 'flex-start';
-    inputArea.style.color = '#ddd';
-    inputArea.style.background = 'transparent';
+    const timerDiv = document.createElement('div');
+    timerDiv.id = 'session-timer';
+    timerDiv.style.fontSize = '1em';
+    timerDiv.style.color = '#3c80ffff';
+    timerDiv.style.margin = '6px 0 0 0';
+    timerDiv.style.textAlign = 'center';
+    timerDiv.style.marginTop = '-10px';
+    panel.appendChild(timerDiv);
 
-    const delayLabel = document.createElement('label');
-    delayLabel.className = 'label-text';
-    delayLabel.style.fontSize = '1em';
-    delayLabel.style.color = '#ddd';
-    delayLabel.textContent = 'Set Delay (ms):';
-    const delayInput = document.createElement('input');
-    delayInput.type = 'text';
-    delayInput.inputMode = 'numeric';
-    delayInput.pattern = '[0-9]*';
-    delayInput.value = window.autoAnswerDelay || 2000;
-    delayInput.style.width = '80px';
-    delayInput.style.fontSize = '1em';
-    delayInput.style.borderRadius = '5px';
-    delayInput.style.border = 'none';
-    delayInput.style.background = '#222';
-    delayInput.style.color = '#01AEFD';
-    delayInput.style.padding = '2px 8px';
-    delayInput.style.marginLeft = '6px';
-    delayInput.addEventListener('input', function() {
-        delayInput.value = delayInput.value.replace(/[^0-9]/g, '');
-    });
-    delayInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            window.autoAnswerDelay = parseInt(delayInput.value) || 2000;
-            if (window.answering) {
-                clearInterval(window.answerInterval);
-                window.answerInterval = setInterval(answerQuestions, window.autoAnswerDelay);
-            }
-        }
-    });
-    delayLabel.appendChild(delayInput);
-    const accLabel = document.createElement('label');
-    accLabel.className = 'label-text';
-    accLabel.style.fontSize = '1em';
-    accLabel.style.color = '#ddd';
-    accLabel.textContent = 'Set Accuracy (%):';
-    const accInput = document.createElement('input');
-    accInput.type = 'text';
-    accInput.inputMode = 'numeric';
-    accInput.pattern = '[0-9]*';
-    accInput.value = window.autoAnswerAccuracy || 100;
-    accInput.style.width = '60px';
-    accInput.style.fontSize = '1em';
-    accInput.style.borderRadius = '5px';
-    accInput.style.border = 'none';
-    accInput.style.background = '#222';
-    accInput.style.color = '#01AEFD';
-    accInput.style.padding = '2px 8px';
-    accInput.style.marginLeft = '6px';
-    accInput.addEventListener('input', function() {
-        accInput.value = accInput.value.replace(/[^0-9]/g, '');
-    });
-    accInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            window.autoAnswerAccuracy = parseInt(accInput.value) || 100;
-        }
-    });
-    accLabel.appendChild(accInput);
-    inputArea.appendChild(delayLabel);
-    inputArea.appendChild(accLabel);
+    const supportText = document.createElement('a');
+    supportText.style.fontSize = '1em';
+    supportText.style.color = '#00aeffff';
+    supportText.style.margin = '6px 0 0 0';
+    supportText.style.textAlign = 'center';
+    supportText.style.marginTop = '-5px';
+    supportText.style.display = 'block';
+    supportText.style.textDecoration = 'underline';
+    supportText.textContent = 'Broken Question? Report Here';
+    supportText.href = 'https://docs.google.com/forms/d/e/1FAIpQLSfGXVgEYvTsZc3XPkfFFD9hQLuzBpAc2v2riige6UvysCYarA/viewform?usp=sharing&ouid=111901428890608330223';
+    supportText.target = '_blank';
+    panel.appendChild(supportText);
 
-    const updateBtn = document.createElement('button');
-    updateBtn.textContent = 'Save Settings';
-    updateBtn.style.fontSize = '1em';
-    updateBtn.style.marginTop = '6px';
-    updateBtn.style.background = '#015AFD';
-    updateBtn.style.color = '#fff';
-    updateBtn.style.border = 'none';
-    updateBtn.style.borderRadius = '5px';
-    updateBtn.style.padding = '6px 12px';
-    updateBtn.style.cursor = 'pointer';
-    updateBtn.style.transition = 'background-color 0.2s';
-    updateBtn.style.alignSelf = 'center';
-    updateBtn.addEventListener('click', getInputValues);
-    function getInputValues() {
-        window.autoAnswerDelay = parseInt(delayInput.value);
-        window.autoAnswerAccuracy = parseInt(accInput.value);
-        if (!window.answering) {
-            clearInterval(window.answerInterval);
-            window.answerInterval = setInterval(answerQuestions, window.autoAnswerDelay);
-        }
-    };
-    inputArea.appendChild(updateBtn);
-    panel.appendChild(inputArea);
+    const answerArea = document.createElement('div');
+    answerArea.id = 'answer-area';
+    answerArea.style.fontSize = '1.1em';
+    answerArea.style.color = '#fff';
+    answerArea.style.margin = '10px 0 0 0';
+    answerArea.style.textAlign = 'center';
+    answerArea.style.minHeight = '32px';
+    panel.appendChild(answerArea);
+
+    const msgTableWrap = document.createElement('div');
+    msgTableWrap.style.marginTop = '8px';
+    msgTableWrap.style.display = 'none';
+    msgTableWrap.style.background = '#222';
+    msgTableWrap.style.borderRadius = '6px';
+    msgTableWrap.style.padding = '8px';
+    msgTableWrap.style.fontSize = '0.95em';
+    msgTableWrap.style.color = '#01AEFD';
+    msgTableWrap.style.textAlign = 'left';
+    msgTableWrap.innerHTML = '<b>Possible messages:</b><ul id="msg-table" style="margin:0;padding-left:18px;"></ul>';
+    panel.appendChild(msgTableWrap);
 
     const btn = document.createElement('button');
     btn.id = 'auto-answer-btn';
-    btn.textContent = 'Start Auto Answer';
+    btn.textContent = 'Answer Question';
     btn.style.fontSize = '16px';
     btn.style.fontFamily = "'Fredoka',sans-serif";
     btn.style.padding = '10px 20px';
@@ -311,10 +273,80 @@ function createUI() {
     btn.style.cursor = 'pointer';
     btn.style.marginTop = '10px';
     btn.style.width = '100%';
+    btn.style.position = 'relative';
     panel.appendChild(btn);
     document.body.appendChild(panel);
-    btn.removeEventListener('click', toggleAnswering);
-    btn.addEventListener('click', toggleAnswering);
+
+    const progressBar = document.createElement('div');
+    progressBar.style.position = 'absolute';
+    progressBar.style.left = '0';
+    progressBar.style.top = '0';
+    progressBar.style.height = '100%';
+    progressBar.style.width = '0%';
+    progressBar.style.background = 'rgba(80,80,80,0.7)';
+    progressBar.style.borderRadius = '10px';
+    progressBar.style.transition = 'width 0.2s';
+    progressBar.style.pointerEvents = 'none';
+    btn.appendChild(progressBar);
+
+    const messages = [
+        'yo gng try {answer}',
+        '{answer} is prolly it',
+        '{answer} is so tuff',
+        'ayo bro i gotchu the answer is {answer}!',
+        'here you go brochacho {answer}',
+        'gng the answer is {answer}, how do we not know this',
+        'bro ITS LITERALLY {answer}',
+        "lock in bro, a first grader could tell you it's {answer}",
+        'the next update is in {answer} days',
+        'twin do {answer}',
+        'am i smart bro its {answer} im smart right',
+        'im sentient atp ykyk like im telling you answers left and right like {answer}',
+        'the answer is {answer}, trust me bro',
+        'i just asked my dog and he said {answer}',
+        'the guy behind you told me its {answer}',
+        'i dreamt it was {answer}',
+        'i saw it in a vision bro its {answer}',
+        '{answer} was the grade i got on my last test',
+        'yoo {answer} is the same number as my fortune cookie',
+        'try {answer} in the lottery you might win',
+        "ts so peak bro here's the answer {answer}",
+        'lowk had a lot of fun typing these messages, {answer} btw',
+        "they don't want you to know but the answer is {answer}",
+        'bully learns the truth about the number {answer}, what happens next will shock you!!'
+    ];
+    const msgTable = msgTableWrap.querySelector('#msg-table');
+    messages.forEach(msg => {
+        const li = document.createElement('li');
+        li.textContent = msg.replace('{answer}', '[answer]');
+        msgTable.appendChild(li);
+    });
+
+    let cooldown = false;
+    btn.onclick = function() {
+        if (cooldown) return;
+        cooldown = true;
+        btn.style.cursor = 'not-allowed';
+        btn.disabled = true;
+        progressBar.style.width = '0%';
+        let progress = 0;
+        let interval = setInterval(() => {
+            progress += 2;
+            progressBar.style.width = progress + '%';
+            if (progress >= 100) {
+                clearInterval(interval);
+                btn.style.cursor = 'pointer';
+                btn.disabled = false;
+                progressBar.style.width = '0%';
+                cooldown = false;
+            }
+        }, 100);
+        setTimeout(() => {
+            const answer = answerQuestions();
+            const msg = messages[Math.floor(Math.random() * messages.length)].replace('{answer}', answer);
+            answerArea.textContent = msg;
+        }, 500);
+    };
 }
 
 if (!document.getElementById('main-ui')) {
@@ -324,71 +356,88 @@ if (!document.getElementById('main-ui')) {
 window.answering = window.answering || false;
 window.answerInterval = window.answerInterval || null;
 
-function toggleAnswering() {
-    window.answering = !window.answering;
-    const btn = document.getElementById('auto-answer-btn');
-    if (window.answering) {
-        btn.textContent = 'Stop Auto Answer';
-        answerQuestions();
-        let delay = window.autoAnswerDelay || 2000;
-        window.answerInterval = setInterval(answerQuestions, delay);
-    } else {
-        btn.textContent = 'Start Auto Answer';
-        clearInterval(window.answerInterval);
+function SessionTimer() {
+    function updateTimer() {
+        let timerDiv = document.getElementById('session-timer');
+        const now = new Date();
+        const estOffset = -4 * 60;
+        const nowEST = new Date(now.getTime() + (now.getTimezoneOffset() + estOffset) * 60000);
+        const diff = SESSION_EXPIRE - nowEST;
+        if (diff <= 0) {
+            timerDiv.textContent = "Session Expired.";
+            if (!isSessionActive()) {
+            alert("Session Expired. Go to Zephware for Current Session.");
+            return;
+            }
+        } else {
+            const hours = Math.floor(diff / 3600000);
+            const mins = Math.floor((diff % 3600000) / 60000);
+            const secs = Math.floor((diff % 60000) / 1000);
+            timerDiv.textContent = `Session Expiring In: ${hours}h ${mins}m ${secs}s`;
+        }
     }
+    updateTimer();
+    setInterval(updateTimer, 1000);
+}
+SessionTimer();
+
+function addFractions(fractions) {
+    let commonDen = fractions.reduce((a, b) => a * b[1], 1);
+    let numerators = fractions.map(([num, den]) => num * (commonDen / den));
+    let sumNum = numerators.reduce((a, b) => a + b, 0);
+    return `${sumNum}/${commonDen}`;
 }
 
-function answerQuestions() {
-    if (window.autoAnswerAccuracy && window.autoAnswerAccuracy < 100) {
-        if (Math.random() * 100 > window.autoAnswerAccuracy) return;
-    }
-    document.querySelectorAll('.math.section').forEach(section => {
-        const vertArith = section.querySelector('.vertArith');
-        if (vertArith) {
-            const rows = vertArith.querySelectorAll('.vertArithRow');
-            if (rows.length < 2) return;
-            let num1str = '';
-            rows[0].querySelectorAll('.expression.number, .txt').forEach(cell => {
-                num1str += cell.textContent.trim();
+function findProblems() {
+    const equations = [];
+    document.querySelectorAll('.secContentPiece.section').forEach(section => {
+        const bundles = section.querySelectorAll('.bundle');
+        if (bundles.length >= 2) {
+            let fractions = [];
+            let foundPlus = false;
+            bundles.forEach(bundle => {
+                const frac = bundle.querySelector('.expression.vFrac');
+                if (frac) {
+                    let num = parseInt(frac.querySelector('.numerator .expression.number')?.innerText || '0', 10);
+                    let den = parseInt(frac.querySelector('.denominator .expression.number')?.innerText || '1', 10);
+                    fractions.push([num, den]);
+                }
+                const plus = bundle.querySelector('.plusSymbolContainer');
+                if (plus) foundPlus = true;
             });
-            let num2str = '';
-            rows[1].querySelectorAll('.expression.number, .txt').forEach(cell => {
-                num2str += cell.textContent.trim();
-            });
-            let num1 = parseNumberSafe(num1str);
-            let num2 = parseNumberSafe(num2str);
-            let operator = null;
-            if (rows[1].querySelector('.xSymbol')) operator = '*';
-            else if (rows[1].textContent.includes('+')) operator = '+';
-            else if (rows[1].textContent.includes('-') || rows[1].textContent.includes('–')) operator = '-';
-            else if (rows[1].textContent.includes('÷') || rows[1].textContent.includes('/')) operator = '/';
-            let result;
-            switch (operator) {
-                case '*': result = num1 * num2; break;
-                case '+': result = num1 + num2; break;
-                case '-': result = num1 - num2; break;
-                case '/': result = num2 !== 0 ? num1 / num2 : ''; break;
-                default: result = '';
-            }
-            const dec1 = countDecimals(num1str);
-            const dec2 = countDecimals(num2str);
-            const leastDecimals = Math.max(dec1, dec2, 2);
-            if (typeof result === 'number' && !isNaN(result)) {
-                result = cleanResult(result, leastDecimals);
-            }
-            const answerInputs = vertArith.querySelectorAll('input.fillIn');
-            if (answerInputs.length > 0 && typeof result === 'string') {
-                if (answerInputs.length === 1) {
-                    answerInputs[0].value = result;
-                } else {
-                    const digits = result.replace('.', '').padStart(answerInputs.length, '0').split('');
-                    for (let i = 0; i < answerInputs.length; i++) {
-                        answerInputs[i].value = digits[digits.length - answerInputs.length + i];
-                    }
+            if (fractions.length >= 2 && foundPlus) {
+                const input = section.querySelector('input[type="text"],input[type="number"],input');
+                if (input) {
+                    equations.push({el: input, equation: fractions});
                 }
             }
         }
     });
+    return equations;
+}
+
+function answerQuestions() {
+    let answer = 'idk bro ggs';
+    answer = processHorizontalBinary();
+    if (answer) return answer;
+    answer = processSimpleHorizontalEquations();
+    if (answer) return answer;
+    answer = processLongDivision();
+    if (answer) return answer;
+    answer = processFractionEquations();
+    if (answer) return answer;
+    answer = processVertArith();
+    if (answer) return answer;
+
+    const problems = findProblems();
+    problems.forEach(({el, equation}) => {
+        if (Array.isArray(equation)) {
+            el.value = addFractions(equation);
+        }
+    });
+    if (window.autoAnswerAccuracy && window.autoAnswerAccuracy < 100) {
+        if (Math.random() * 100 > window.autoAnswerAccuracy) return;
+    }
     document.querySelectorAll('.old-space-indent').forEach(div => {
         const tables = div.querySelectorAll('table');
         if (tables.length === 0) return;
@@ -432,25 +481,15 @@ function answerQuestions() {
             if (typeof result === 'number' && !isNaN(result)) {
                 result = cleanResult(result, leastDecimals);
             }
-            const answerInput = div.querySelector('input.fillIn');
-            if (answerInput && typeof result === 'string') {
-                answerInput.value = result;
-            }
+            answer = result;
         }
     });
     processHorizontalBinary();
     processSimpleHorizontalEquations();
     processLongDivision();
-    processFractionDivision();
-    const widgetFt = document.querySelector('.yui3-widget-ft.fade-in');
-    if (widgetFt) {
-        const submitBtn = widgetFt.querySelector('button.crisp-button');
-        if (submitBtn) {
-            setTimeout(() => {
-                submitBtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-            }, 100);
-        }
-    }
+    processFractionEquations();
+    processVertArith();
+    return answer;
 }
 
 function getOperandValue(bundle) {
@@ -467,6 +506,11 @@ function getOperandValue(bundle) {
     const numSpan = bundle.querySelector('.expression.number');
     if (numSpan) return parseNumberSafe(numSpan.textContent.trim());
     return NaN;
+}
+
+function removeCommas(numStr) {
+    if (typeof numStr !== "string") numStr = String(numStr);
+    return numStr.replace(/,/g, '');
 }
 
 function countDecimals(numStr) {
@@ -489,7 +533,50 @@ function cleanResult(num, decimals) {
     return str;
 }
 
+function processVertArith() {
+    let answer = '';
+    document.querySelectorAll('.math.section').forEach(section => {
+        const vertArith = section.querySelector('.vertArith');
+        if (vertArith) {
+            const rows = vertArith.querySelectorAll('.vertArithRow');
+            if (rows.length < 2) return;
+            let num1str = '';
+            rows[0].querySelectorAll('.expression.number, .txt').forEach(cell => {
+                num1str += cell.textContent.trim();
+            });
+            let num2str = '';
+            rows[1].querySelectorAll('.expression.number, .txt').forEach(cell => {
+                num2str += cell.textContent.trim();
+            });
+            let num1 = parseNumberSafe(num1str);
+            let num2 = parseNumberSafe(num2str);
+            let operator = null;
+            if (rows[1].querySelector('.xSymbol')) operator = '*';
+            else if (rows[1].textContent.includes('+')) operator = '+';
+            else if (rows[1].textContent.includes('-') || rows[1].textContent.includes('–')) operator = '-';
+            else if (rows[1].textContent.includes('÷') || rows[1].textContent.includes('/')) operator = '/';
+            let result;
+            switch (operator) {
+                case '*': result = num1 * num2; break;
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '/': result = num2 !== 0 ? num1 / num2 : ''; break;
+                default: result = '';
+            }
+            const dec1 = countDecimals(num1str);
+            const dec2 = countDecimals(num2str);
+            const leastDecimals = Math.max(dec1, dec2, 2);
+            if (typeof result === 'number' && !isNaN(result)) {
+                result = cleanResult(result, leastDecimals);
+            }
+            answer = result;
+        }
+    });
+    return answer;
+}
+
 function processHorizontalBinary() {
+    let answer = 'idk bro ggs';
     document.querySelectorAll('.math.section').forEach(section => {
         const bundles = section.querySelectorAll('.bundle');
         if (bundles.length === 3) {
@@ -528,16 +615,15 @@ function processHorizontalBinary() {
                 if (typeof result === 'number' && !isNaN(result)) {
                     result = cleanResult(result, leastDecimals);
                 }
-                const answerInput = bundles[2].querySelector('input.fillIn');
-                if (answerInput && typeof result === 'string') {
-                    answerInput.value = result;
-                }
+                answer = result;
             }
         }
     });
+    return answer;
 }
 
 function processSimpleHorizontalEquations() {
+    let answer = 'idk bro ggs';
    document.querySelectorAll('div.old-space-indent').forEach(div => {
       let text = '';
       div.childNodes.forEach(node => {
@@ -577,26 +663,19 @@ function processSimpleHorizontalEquations() {
             let maxDecimals = Math.max(...numbers.map(n => countDecimals(n)), 2);
             result = cleanResult(result, maxDecimals);
          }
-
-         const input = div.querySelector('input.fillIn');
-         if (input && typeof result === 'string') {
-            input.value = result;
-         }
+         answer = result;
       }
    });
+   return answer;
 }
 function processLongDivision() {
-   document.querySelectorAll('div.old-space-indent').forEach(div => {
-      const divisorLD = div.querySelector('.old-long-division-divisor');
-      const dividendLD = div.querySelector('.old-long-division-bar td[align="left"]');
-      const divisorFC = div.querySelector('.old-fraction');
-      const dividendFC = div.querySelector('.old-fraction old-fraction-bar');
-      const input = div.querySelector('.fillIn');
-
-      if (divisorLD && dividendLD) {
-         let divisor = parseFloat(divisorLD.textContent.replace(/–/g, '-').trim());
-         let dividend = parseFloat(dividendLD.textContent.replace(/–/g, '-').trim());
-
+    let answer = 'idk bro ggs';
+   document.querySelectorAll('div.old-long-division').forEach(div => {
+      const divisorEl = div.querySelector('.old-long-division-divisor');
+      const dividendEl = div.querySelector('.old-long-division-bar td[align="left"]');
+      if (divisorEl && dividendEl) {
+         let divisor = parseNumberSafe(divisorEl.textContent.replace(/–/g, '-').trim());
+         let dividend = parseNumberSafe(dividendEl.textContent.replace(/–/g, '-').trim());
          if (!isNaN(divisor) && !isNaN(dividend) && divisor !== 0) {
             let result = dividend / divisor;
 
@@ -605,10 +684,88 @@ function processLongDivision() {
             let leastDecimals = Math.max(dec1, dec2, 2);
 
             result = cleanResult(result, leastDecimals);
-         if (input && typeof result === 'string') {
-            input.value = result;
-         }         
+            answer = result;
          }
       }
    });
+   return answer;
 }
+function processFractionEquations() {
+    let answer = 'idk bro ggs';
+   function gcd(a, b) {
+      return b === 0 ? a : gcd(b, a % b);
+   }
+   function lcm(a, b) {
+      return (a * b) / gcd(a, b);
+   }
+   function parseFraction(td) {
+      const numEl = td.querySelector('.old-fraction:not(.old-fraction-bar) .old-expression');
+      const denEl = td.querySelector('.old-fraction-bar .old-expression');
+      if (numEl && denEl) {
+         const numerator = parseNumberSafe(numEl.textContent.trim());
+         const denominator = parseNumberSafe(denEl.textContent.trim());
+         if (!isNaN(numerator) && !isNaN(denominator) && denominator !== 0) {
+            return { numerator, denominator };
+         }
+      }
+      return null;
+   }
+   document.querySelectorAll('.old-space-indent').forEach(div => {
+      const tds = div.querySelectorAll('td');
+      let whole = null;
+      let fractions = [];
+      let operator = null;
+      tds.forEach(td => {
+         if (!whole && /^\d+$/.test(td.textContent.trim())) {
+            whole = parseInt(td.textContent.trim(), 10);
+         }
+         if (td.textContent.includes('×') || td.textContent.includes('x')) {
+            operator = '*';
+         } else if (td.textContent.includes('–') || td.textContent.includes('-')) {
+            operator = '-';
+         } else if (td.textContent.includes('+')) {
+            operator = '+';
+         } else if (td.textContent.includes('÷') || td.textContent.includes('/')) {
+            operator = '/';
+         }
+         const frac = parseFraction(td);
+         if (frac) {
+            fractions.push(frac);
+         }
+      });
+      let result = '';
+      if (fractions.length === 2 && operator) {
+         let a = fractions[0], b = fractions[1];
+         if (operator === '+') {
+            let commonDen = lcm(a.denominator, b.denominator);
+            let n1 = a.numerator * (commonDen / a.denominator);
+            let n2 = b.numerator * (commonDen / b.denominator);
+            result = `${n1 + n2}/${commonDen}`;
+         } else if (operator === '-') {
+            let commonDen = lcm(a.denominator, b.denominator);
+            let n1 = a.numerator * (commonDen / a.denominator);
+            let n2 = b.numerator * (commonDen / b.denominator);
+            result = `${n1 - n2}/${commonDen}`;
+         } else if (operator === '*') {
+            result = `${a.numerator * b.numerator}/${a.denominator * b.denominator}`;
+         } else if (operator === '/') {
+            result = `${a.numerator * b.denominator}/${a.denominator * b.numerator}`;
+         }
+      } else if (fractions.length === 1 && whole !== null && operator === '*') {
+         let a = fractions[0];
+         let num = whole * a.numerator;
+         let den = a.denominator;
+         let intPart = Math.floor(num / den);
+         let rem = num % den;
+         result = rem === 0 ? `${intPart}` : (intPart > 0 ? `${intPart} ${rem}/${den}` : `${num}/${den}`);
+      } else if (fractions.length === 1 && whole !== null && operator === '/') {
+         let a = fractions[0];
+         result = `${a.numerator}/${a.denominator * whole}`;
+      }
+      if (result) {
+            answer = result;
+      }
+   });
+   return answer;
+}
+})();
