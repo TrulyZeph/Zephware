@@ -878,4 +878,7 @@ function showInstructionsOverlay(customLink) {
   `;
   document.head.appendChild(style);
 })();
+<<<<<<< HEAD
 /* yo bro u prolly forgot so to fix the zephware text too high js make two classes instead of using one for password and main then set the position in the css */
+=======
+>>>>>>> 893bf5182c4b95a1de3b5e37f5e5f69f270efdfb
