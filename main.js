@@ -47,8 +47,23 @@ javascript:(function(){
       height: 100vh;
     }
 
-    .header {
+    .header1 {
       position: fixed;
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(to bottom, #01AEFD, #015AFD);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      -webkit-user-select: none;
+      z-index: 100;
+    }
+
+    .header2 {
+      position: fixed;
+      top: 4.25em;
       width: 100%;
       text-align: center;
       font-weight: bold;
@@ -251,7 +266,7 @@ javascript:(function(){
   guiDiv.style.fontFamily = 'Verdana, sans-serif';
 
   var title = document.createElement('div');
-  title.className = 'header';
+  title.className = 'header1';
   title.textContent = 'Zephware';
   title.style.marginTop = '70px';
   title.style.fontSize = '3em';
@@ -347,10 +362,10 @@ javascript:(function(){
   document.body.appendChild(content);
 
   const header = document.createElement('div');
-  header.className = 'header';
+  header.className = 'header2';
   header.textContent = 'Zephware';
   header.style.fontSize = '4em';
-  header.style.padding = '9.25em 0';
+  header.style.padding = '0.25em 0';
   document.body.appendChild(header);
 
   const description = document.createElement('div');
@@ -386,9 +401,19 @@ javascript:(function(){
   const newsPages = [
   {
     title: "What's New?",
+    desc: "v1.0.5 : September 15th, 2025",
+    images: [
+      { src: "https://wallpaperaccess.com/full/7225605.jpg", alt: "" }
+    ],
+    changes: [
+      { text: "New Core: Learning Tools", desc: "IXL Hacks (Basic Only, Plus Next Week)" },
+    ]
+  },
+  {
+    title: "What'd I Miss?",
     desc: "v1.0.4 : September 2nd, 2025",
     images: [
-      { src: "assets/Zephware.png", alt: "Zephware" }
+      { src: "assets/Zephware.png", alt: "" }
     ],
     changes: [
       { text: "New Zephware Icon", desc: "" },
@@ -399,27 +424,16 @@ javascript:(function(){
     ]
   },
   {
-    title: "What'd I Miss?",
-    desc: "v1.0.3",
-    images: [
-      { src: "https://wallpaperaccess.com/full/7225605.jpg", alt: "New" }
-    ],
-    changes: [
-      { text: "Blooket Hacks Update!", desc: "More friendly for those whose keyboard doesn't work" },
-      { text: "Added News Panel", desc: "This helps you know what was added and what's coming next" },
-    ]
-  },
-  {
     title: "What's Next?",
-    desc: "v1.0.5 : Next Week!",
+    desc: "v1.0.6 : Next Week!",
     images: [
       { src: "https://placehold.co/560x160/222/fff.png?text=Coming+Soon", alt: "Coming Soon" }
     ],
     changes: [
-      { text: "Fixed Games & Icons + UI Changes", desc: "All Game Icons Fixed, Not Happy with UI so expect changes" },
-      { text: "New Core: Learning Tools", desc: "Hacks, Calculator, Marker Tool, Ect." },
+      { text: "Learning Tools Completion", desc: "Added Calculator, Marker Tool, Ect." },
+      { text: "Fixed Games & Icons + UI Changes", desc: "All Game (Icons) Fixed, UI Changes" },
       { text: "More & Fixed Unblockers", desc: "More Unblockers, Unblocked, Fast, Working" },
-      { text: "Gimkit Hacks", desc: "Release..?" }
+      { text: "Gimkit Hacks", desc: "I'll look into it at some point, seems patched for now though." }
     ]
   }
 ];
@@ -679,9 +693,42 @@ function showNewsPanel() {
   overlay.focus();
  }
 
-  let lockedTabs = { 'blooket hacks': true };
+  let lockedTabs = { 'blooket hacks': true || false, 'learning tools' : true};
 
-  function showPasswordOverlay(onSuccess) {
+button.addEventListener('click', () => {
+    const val = select.value.toLowerCase();
+    if (lockedTabs[val]) {
+        if (val === 'learning tools') {
+            showPasswordOverlay(() => {
+                showInstructionsOverlay('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/lt.js');
+            }, 'tookforeversry');
+        } else {
+            showPasswordOverlay(() => showInstructionsOverlay());
+        }
+        return;
+    }
+    if (val === 'games' || val === 'unblockers' || val === 'soundboard') {
+        document.head.innerHTML = '';
+        document.body.innerHTML = '';
+        let file;
+        if (val === 'games') file = 'games.js';
+        else if (val === 'unblockers') file = 'proxies.js';
+        else if (val === 'soundboard') file = 'library.js';
+        fetch(`https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/${file}`)
+            .then(response => response.text())
+            .then(scriptContent => {
+                const script = document.createElement('script');
+                script.innerHTML = scriptContent;
+                document.body.appendChild(script);
+            })
+            .catch(error => {
+                console.error(`Failed to load ${file}.`, error);
+                alert('Failed, Try Again.');
+            });
+    }
+});
+
+function showPasswordOverlay(onSuccess, customPassword) {
     const old = document.getElementById('overlay');
     if (old) old.remove();
     const overlay = document.createElement('div');
@@ -704,23 +751,24 @@ function showNewsPanel() {
     const error = overlay.querySelector('#password-error');
     input.focus();
     function unlock() {
-      if (input.value === "back2schoolggs") {
-        overlay.remove();
-        onSuccess();
-      } else {
-        error.style.display = 'block';
-        input.value = '';
-        input.focus();
-      }
+        const passwordToCheck = customPassword || "back2schoolggs";
+        if (input.value === passwordToCheck) {
+            overlay.remove();
+            onSuccess();
+        } else {
+            error.style.display = 'block';
+            input.value = '';
+            input.focus();
+        }
     }
     submit.onclick = unlock;
     input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') unlock();
+        if (e.key === 'Enter') unlock();
     });
     document.body.appendChild(overlay);
-  }
+}
 
-  function showInstructionsOverlay() {
+function showInstructionsOverlay(customLink) {
     const old = document.getElementById('overlay');
     if (old) old.remove();
     const overlay = document.createElement('div');
@@ -746,34 +794,34 @@ function showNewsPanel() {
     `;
     document.body.appendChild(overlay);
 
-    fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/blooket/min.js')
-      .then(res => res.text())
-      .then(code => {
-        const pre = document.createElement('pre');
-        pre.textContent = code;
-        pre.style.position = 'fixed';
-        pre.style.opacity = '0';
-        pre.style.pointerEvents = 'none';
-        pre.style.userSelect = 'text';
-        pre.style.zIndex = '-1';
-        pre.id = 'invisible-code';
-        document.body.appendChild(pre);
+    fetch(customLink || 'https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/blooket/min.js')
+        .then(res => res.text())
+        .then(code => {
+            const pre = document.createElement('pre');
+            pre.textContent = code;
+            pre.style.position = 'fixed';
+            pre.style.opacity = '0';
+            pre.style.pointerEvents = 'none';
+            pre.style.userSelect = 'text';
+            pre.style.zIndex = '-1';
+            pre.id = 'invisible-code';
+            document.body.appendChild(pre);
 
-        overlay.querySelector('#highlight-btn').onclick = () => {
-          const range = document.createRange();
-          range.selectNodeContents(pre);
-          const sel = window.getSelection();
-          sel.removeAllRanges();
-          sel.addRange(range);
-        };
-      });
+            overlay.querySelector('#highlight-btn').onclick = () => {
+                const range = document.createRange();
+                range.selectNodeContents(pre);
+                const sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            };
+        });
 
     overlay.querySelector('#instructions-close').onclick = () => {
-      overlay.remove();
-      const pre = document.getElementById('invisible-code');
-      if (pre) pre.remove();
+        overlay.remove();
+        const pre = document.getElementById('invisible-code');
+        if (pre) pre.remove();
     };
-  }
+}
 
   function setButtonStatus(status) {
     const gradientOpen = 'linear-gradient(to bottom, #01AEFD, #015AFD)';
@@ -798,38 +846,11 @@ function showNewsPanel() {
     }
   }
 
-  button.addEventListener('click', () => {
-    const val = select.value.toLowerCase();
-    if (lockedTabs[val]) {
-      showPasswordOverlay(() => showInstructionsOverlay());
-      return;
-    }
-    if (val === 'games' || val === 'unblockers' || val === 'soundboard') {
-      document.head.innerHTML = '';
-      document.body.innerHTML = '';
-      let file;
-      if (val === 'games') file = 'games.js';
-      else if (val === 'unblockers') file = 'proxies.js';
-      else if (val === 'soundboard') file = 'library.js';
-      fetch(`https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/${file}`)
-        .then(response => response.text())
-        .then(scriptContent => {
-          const script = document.createElement('script');
-          script.innerHTML = scriptContent;
-          document.body.appendChild(script);
-        })
-        .catch(error => {
-          console.error(`Failed to load ${file}.`, error);
-          alert('Failed, Try Again.');
-        });
-    }
-  });
-
   select.onchange = () => {
     const val = select.value.toLowerCase();
     if (lockedTabs[val]) {
       setButtonStatus('locked');
-    } else if (val === 'gimkit hacks' || val === 'learning tools' || val === 'marketplace') {
+    } else if (val === 'gimkit hacks' || val === 'marketplace') {
       setButtonStatus('wip');
     } else {
       setButtonStatus('open');
