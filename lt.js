@@ -123,7 +123,7 @@ function parseNumberSafe(str) {
     return isNaN(num) ? NaN : num;
 }
 
-const SESSION_EXPIRE = new Date('2025-09-15T14:10:00-04:00');
+const SESSION_EXPIRE = new Date('2025-09-17T14:10:00-04:00');
 
 function isSessionActive() {
     const now = new Date();
@@ -353,9 +353,6 @@ if (!document.getElementById('main-ui')) {
     createUI();
 }
 
-window.answering = window.answering || false;
-window.answerInterval = window.answerInterval || null;
-
 function SessionTimer() {
     function updateTimer() {
         let timerDiv = document.getElementById('session-timer');
@@ -406,10 +403,7 @@ function findProblems() {
                 if (plus) foundPlus = true;
             });
             if (fractions.length >= 2 && foundPlus) {
-                const input = section.querySelector('input[type="text"],input[type="number"],input');
-                if (input) {
-                    equations.push({el: input, equation: fractions});
-                }
+                equations.push({ equation: fractions });
             }
         }
     });
@@ -417,17 +411,28 @@ function findProblems() {
 }
 
 function answerQuestions() {
-    let answer = 'idk bro ggs';
-    answer = processHorizontalBinary();
-    if (answer) return answer;
+    let answer = processBasicHorizontal();
+    processHorizontalBinary();
+    processSimpleHorizontalEquations();
+    processLongDivision();
+    processFractionEquations();
+    processVertArith();
+    processHorizontalBinary();
+    processSolveArith();
+
+    if (answer && answer !== 'idk bro sry') return answer;
     answer = processSimpleHorizontalEquations();
-    if (answer) return answer;
+    if (answer && answer !== 'idk bro sry') return answer;
     answer = processLongDivision();
-    if (answer) return answer;
+    if (answer && answer !== 'idk bro sry') return answer;
     answer = processFractionEquations();
-    if (answer) return answer;
+    if (answer && answer !== 'idk bro sry') return answer;
     answer = processVertArith();
-    if (answer) return answer;
+    if (answer && answer !== 'idk bro sry') return answer;
+    answer = processHorizontalBinary();
+    if (answer && answer !== 'idk bro sry') return answer;
+    answer = processSolveArith();
+    if (answer && answer !== 'idk bro sry') return answer;
 
     const problems = findProblems();
     problems.forEach(({el, equation}) => {
@@ -435,9 +440,7 @@ function answerQuestions() {
             el.value = addFractions(equation);
         }
     });
-    if (window.autoAnswerAccuracy && window.autoAnswerAccuracy < 100) {
-        if (Math.random() * 100 > window.autoAnswerAccuracy) return;
-    }
+
     document.querySelectorAll('.old-space-indent').forEach(div => {
         const tables = div.querySelectorAll('table');
         if (tables.length === 0) return;
@@ -483,13 +486,9 @@ function answerQuestions() {
             }
             answer = result;
         }
+        return answer;
     });
-    processHorizontalBinary();
-    processSimpleHorizontalEquations();
-    processLongDivision();
-    processFractionEquations();
-    processVertArith();
-    return answer;
+    return 'idk bro sry';
 }
 
 function getOperandValue(bundle) {
@@ -533,50 +532,8 @@ function cleanResult(num, decimals) {
     return str;
 }
 
-function processVertArith() {
-    let answer = '';
-    document.querySelectorAll('.math.section').forEach(section => {
-        const vertArith = section.querySelector('.vertArith');
-        if (vertArith) {
-            const rows = vertArith.querySelectorAll('.vertArithRow');
-            if (rows.length < 2) return;
-            let num1str = '';
-            rows[0].querySelectorAll('.expression.number, .txt').forEach(cell => {
-                num1str += cell.textContent.trim();
-            });
-            let num2str = '';
-            rows[1].querySelectorAll('.expression.number, .txt').forEach(cell => {
-                num2str += cell.textContent.trim();
-            });
-            let num1 = parseNumberSafe(num1str);
-            let num2 = parseNumberSafe(num2str);
-            let operator = null;
-            if (rows[1].querySelector('.xSymbol')) operator = '*';
-            else if (rows[1].textContent.includes('+')) operator = '+';
-            else if (rows[1].textContent.includes('-') || rows[1].textContent.includes('–')) operator = '-';
-            else if (rows[1].textContent.includes('÷') || rows[1].textContent.includes('/')) operator = '/';
-            let result;
-            switch (operator) {
-                case '*': result = num1 * num2; break;
-                case '+': result = num1 + num2; break;
-                case '-': result = num1 - num2; break;
-                case '/': result = num2 !== 0 ? num1 / num2 : ''; break;
-                default: result = '';
-            }
-            const dec1 = countDecimals(num1str);
-            const dec2 = countDecimals(num2str);
-            const leastDecimals = Math.max(dec1, dec2, 2);
-            if (typeof result === 'number' && !isNaN(result)) {
-                result = cleanResult(result, leastDecimals);
-            }
-            answer = result;
-        }
-    });
-    return answer;
-}
-
 function processHorizontalBinary() {
-    let answer = 'idk bro ggs';
+    answer = 'idk bro sry';
     document.querySelectorAll('.math.section').forEach(section => {
         const bundles = section.querySelectorAll('.bundle');
         if (bundles.length === 3) {
@@ -621,9 +578,83 @@ function processHorizontalBinary() {
     });
     return answer;
 }
+function processSolveArith() {
+   answer = 'idk bro sry';
+   const tds = Array.from(document.querySelectorAll("td[align='right']"));
+
+   const nums = [];
+   let operator = null;
+
+   for (const td of tds) {
+      const text = td.textContent.trim();
+
+      if (!text) continue;
+
+      if (/^[\d,]+$/.test(text)) {
+         const val = parseNumberSafe(text);
+         if (!isNaN(val)) nums.push(val);
+      } else if (/[+\-×÷]/.test(text)) {
+         operator = text.replace(/\s/g, "");
+      }
+   }
+
+   if (nums.length >= 2 && operator) {
+      let result;
+
+      switch (operator) {
+         case "+":
+            result = nums[0] + nums[1];
+            break;
+         case "−":
+         case "-":
+            result = nums[0] - nums[1];
+            break;
+         case "×":
+         case "x":
+            result = nums[0] * nums[1];
+            break;
+         case "÷":
+         case "/":
+            result = nums[0] / nums[1];
+            break;
+      }
+
+      if (result !== undefined) {
+        answer = result;
+      }
+   }
+   return answer;
+}
+function processBasicHorizontal() {
+    let answer = '';
+    document.querySelectorAll('.old-space-indent').forEach(div => {
+        let text = div.textContent.replace(/,/g, '').trim();
+        let match = text.match(/(\d+)\s*([+\-×x÷/])\s*(\d+)\s*=/);
+        if (match) {
+            let num1 = parseFloat(match[1]);
+            let op = match[2];
+            let num2 = parseFloat(match[3]);
+            let result;
+            switch (op) {
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '×':
+                case 'x': result = num1 * num2; break;
+                case '÷':
+                case '/': result = num2 !== 0 ? num1 / num2 : ''; break;
+                default: result = '';
+            }
+            if (typeof result === 'number' && !isNaN(result)) {
+                result = cleanResult(result, 2);
+            }
+            answer = result;
+        }
+    });
+    return answer;
+}
 
 function processSimpleHorizontalEquations() {
-    let answer = 'idk bro ggs';
+    answer = 'idk bro sry';
    document.querySelectorAll('div.old-space-indent').forEach(div => {
       let text = '';
       div.childNodes.forEach(node => {
@@ -669,8 +700,8 @@ function processSimpleHorizontalEquations() {
    return answer;
 }
 function processLongDivision() {
-    let answer = 'idk bro ggs';
-   document.querySelectorAll('div.old-long-division').forEach(div => {
+    answer = 'idk bro sry';
+    document.querySelectorAll('div.old-long-division').forEach(div => {
       const divisorEl = div.querySelector('.old-long-division-divisor');
       const dividendEl = div.querySelector('.old-long-division-bar td[align="left"]');
       if (divisorEl && dividendEl) {
@@ -684,6 +715,7 @@ function processLongDivision() {
             let leastDecimals = Math.max(dec1, dec2, 2);
 
             result = cleanResult(result, leastDecimals);
+
             answer = result;
          }
       }
@@ -691,7 +723,7 @@ function processLongDivision() {
    return answer;
 }
 function processFractionEquations() {
-    let answer = 'idk bro ggs';
+    answer = 'idk bro sry';
    function gcd(a, b) {
       return b === 0 ? a : gcd(b, a % b);
    }
@@ -762,10 +794,50 @@ function processFractionEquations() {
          let a = fractions[0];
          result = `${a.numerator}/${a.denominator * whole}`;
       }
-      if (result) {
-            answer = result;
-      }
+      answer = result;
    });
    return answer;
+}
+
+function processVertArith() {
+    answer = 'idk bro sry';
+     document.querySelectorAll('.math.section').forEach(section => {
+        const vertArith = section.querySelector('.vertArith');
+        if (vertArith) {
+            const rows = vertArith.querySelectorAll('.vertArithRow');
+            if (rows.length < 2) return;
+            let num1str = '';
+            rows[0].querySelectorAll('.expression.number, .txt').forEach(cell => {
+                num1str += cell.textContent.trim();
+            });
+            let num2str = '';
+            rows[1].querySelectorAll('.expression.number, .txt').forEach(cell => {
+                num2str += cell.textContent.trim();
+            });
+            let num1 = parseNumberSafe(num1str);
+            let num2 = parseNumberSafe(num2str);
+            let operator = null;
+            if (rows[1].querySelector('.xSymbol')) operator = '*';
+            else if (rows[1].textContent.includes('+')) operator = '+';
+            else if (rows[1].textContent.includes('-') || rows[1].textContent.includes('–')) operator = '-';
+            else if (rows[1].textContent.includes('÷') || rows[1].textContent.includes('/')) operator = '/';
+            let result;
+            switch (operator) {
+                case '*': result = num1 * num2; break;
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '/': result = num2 !== 0 ? num1 / num2 : ''; break;
+                default: result = '';
+            }
+            const dec1 = countDecimals(num1str);
+            const dec2 = countDecimals(num2str);
+            const leastDecimals = Math.max(dec1, dec2, 2);
+            if (typeof result === 'number' && !isNaN(result)) {
+                result = cleanResult(result, leastDecimals);
+            }
+            answer = result;
+        }
+    });
+    return answer;
 }
 })();
