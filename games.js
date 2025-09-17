@@ -21,6 +21,19 @@ javascript:(function () {
             });
     }
 
+    function injectRuffle() {
+    return new Promise((resolve) => {
+        if (window.RufflePlayer) {
+          resolve();
+          return;
+        }
+        const script = document.createElement('script');
+        script.src = "https://unpkg.com/@ruffle-rs/ruffle";
+          script.onload = () => resolve();
+          document.body.appendChild(script);
+        });
+    }
+
     const fredokaFontLink = document.createElement('link');
     fredokaFontLink.id = 'fredoka-font-link';
     fredokaFontLink.rel = 'stylesheet';
@@ -323,27 +336,39 @@ document.head.appendChild(sidebarStyle);
                button.style.position = 'relative';
                button.appendChild(label);
 
-              button.addEventListener('click', () => {
-                 panel.remove();
+              button.addEventListener('click', async () => {
+                panel.remove();
+                const url = config.url;
 
-                 iframe = document.createElement('iframe');
-                 iframe.src = config.url;
-                 iframe.style.width = '100vw';
-                 iframe.style.height = '100vh';
-                 iframe.style.border = 'none';
-                 iframe.style.borderRadius = '0';
-                 iframe.style.display = 'block';
-                 iframe.style.margin = '0';
-                 iframe.style.zIndex = 2;
-                 iframe.style.position = 'fixed';
-                 iframe.style.top = '0';
-                 iframe.style.left = '0';
-                 document.body.appendChild(iframe);
-              });
+                if (url.endsWith(".swf")) {
+                  await injectRuffle();
+                  const ruffle = window.RufflePlayer.newest();
+                  const player = ruffle.createPlayer();
+                  player.style.width = "100vw";
+                  player.style.height = "100vh";
+                  player.style.position = "fixed";
+                  player.style.top = "0";
+                  player.style.left = "0";
+                  player.style.zIndex = 2;
+                  document.body.appendChild(player);
+                  player.load(url);
+               } else {
+                  iframe = document.createElement('iframe');
+                  iframe.src = url;
+                  iframe.style.width = '100vw';
+                  iframe.style.height = '100vh';
+                  iframe.style.border = 'none';
+                  iframe.style.position = 'fixed';
+                  iframe.style.top = '0';
+                  iframe.style.left = '0';
+                  iframe.style.zIndex = 2;
+                  document.body.appendChild(iframe);
+               }
+            });
 
               container.appendChild(button);
            });
-        }     
+        }
 
         panel.appendChild(container);
         document.body.appendChild(panel);

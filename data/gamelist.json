@@ -170,6 +170,11 @@
         "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/558/Block-Blast.jpg"
     },
     {
+        "label": "Stick RPG",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/stick-rpg.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/StickRPG.jpg"
+    },
+    {
         "label": "Survival Karts",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity3/survival-karts/index.html",
         "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/557/Survival-Karts.jpg"
