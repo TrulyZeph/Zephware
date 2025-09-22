@@ -40,7 +40,7 @@
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/boxingrandom/index.html"
     },
     {
-        "label": "Stick Man Hook",
+        "label": "Stickman Hook",
         "image": "https://d3rtzzzsiu7gdr.cloudfront.net/files/stickmanhook/unnamed.jpg",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/stickmanhook/game/index.html"
     },
@@ -110,11 +110,6 @@
         "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/569/Soccer-Random-Pro.jpg"
     },
     {
-        "label": "Papa's Burgeria",
-        "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/papas-burgeria/index.html",
-        "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/568/Papas-Burgeria.jpg"
-    },
-    {
         "label": "Bleach vs. Naruto",
         "url": "https://script.google.com/macros/s/AKfycbzc5m5Dpz0ZNrAaFfGXDNGN83yp0bLghZ4qiguix5eE371TwcOKuUo7fg0H0GdxJnd5/exec",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/BleachvsNaruto.jpg"
@@ -173,6 +168,11 @@
         "label": "Stick RPG",
         "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/stick-rpg.swf",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/StickRPG.jpg"
+    },
+    {
+        "label": "Electric Man",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/electric-man.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/ElectricMan.png"
     },
     {
         "label": "Blackjack",
@@ -290,16 +290,6 @@
         "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/538/duck-life-4-unity.webp"
     },
     {
-        "label": "Moto X3M",
-        "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity/moto-x3m/index.html",
-        "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/448/Moto-X3M-Original-512x512.jpg"
-    },
-    {
-        "label": "Stack",
-        "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/phaser/stack/index.html",
-        "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/51/stack.jpg"
-    },
-    {
         "label": "Duck Life Adventure",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/flash/duck-life-adventure/index.html",
         "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/544/duck-life-adventure.webp"
@@ -327,12 +317,12 @@
     {
         "label": "Madalin Stunt Cars Pro",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/unity/madalin-stunt-cars-pro/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/StuntCarPro.png"
     },
     {
         "label": "Stunt Rider",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity/stunt-rider/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/StuntRider.png"
     },
     {
         "label": "FNF",
@@ -342,7 +332,7 @@
     {
         "label": "Geometry Dash (Scratch)",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/scratch/geometry-dash-scratch/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/GeometryDashScratch.png"
     },
     {
         "label": "Bubble Shooter",
@@ -350,39 +340,39 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/BubbleShooter.jpg"
     },
     {
-        "label": "Car Football",
+        "label": "Car Soccer",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/construct/198/car-football/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/CarSoccer.png"
     },
     {
         "label": "We Become What We Behold",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/more/we-become-what-we-behold/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/WeBecomeWhatWeBehold.png"
     },
     {
         "label": "Gummy Blocks",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/code/gummy-blocks/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/GummyBlocks.png"
     },
     {
         "label": "ClassiCube",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/cube/classicube/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/ClassiCube.png"
     },
     {
         "label": "Snow War.io",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/snow-war-io/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/SnowWarIO.png"
     },
     {
         "label": "State.io Wars",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/233/state-io-wars/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/StateIOWars.png"
     },
     {
         "label": "Tennis Masters",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/tennis-masters/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/TennisMasters.png"
     },
     {
         "label": "Highway Racer 2",
@@ -790,11 +780,6 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "Boxing Random",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/boxingrandom/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "Block Post",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/blockpost/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
@@ -875,16 +860,6 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "Volleyball Random",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/volleyrandom/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Soccer Random",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/soccerrandom/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "DC3",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/dc3/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
@@ -905,11 +880,6 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "SF2M",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/sf2m/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "SF2M: SF3",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/sf2m/sf3.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
@@ -920,33 +890,8 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "Bullet New",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/bulletnew/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Armed Forces",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/armed-forces/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "Just Fall",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/just-fall/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Roblox",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/fork/game/index.html?roblox",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Roblox Offline",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/Roblox-Offline/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Cluster Rush",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/cluster-rush/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
@@ -957,11 +902,6 @@
     {
         "label": "Game Inside Game",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/gameinsidegame/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Tanuki Sunset",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/tanuki-sunset/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
@@ -1015,11 +955,6 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "Paperio 2",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/paperio2/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "Paperio 3D",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/paperio3d/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
@@ -1027,36 +962,6 @@
     {
         "label": "Flappy Bird",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/flappybird/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Angry Birds",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/AngryBirds/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Angry Birds Radox",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/AngryBirdsRadox/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Angry Birds WebGL",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/AngryBirdsWebGL/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Crossy Road",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/CrossyRoad/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Crossy Road Space",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/CrossyRoad-space/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Crossy Road Remake",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/CrossyRoad-remake/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
@@ -1075,18 +980,8 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "Minecraft Classic",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/minecraft-classic/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "Moto X3M",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/motox3m/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Papas Doggeria",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/papas-doggeria/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
@@ -1095,28 +990,8 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "Papas Burgeria",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/fork/game/index.html?papas-burgeria",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Papas Scooperia",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/papas-scooperia/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Papas Pancakeria",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/fork/game/index.html?papas-pancakeria",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "Couch 2048",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/couch2048/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "2048",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/fork/game/index.html?2048",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
@@ -1165,11 +1040,6 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "FNAF WebGL",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/fnaf-webgl/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "FNAF 2",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/fnaf-2/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
@@ -1187,11 +1057,6 @@
     {
         "label": "FNAF 4",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/fnaf-4/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "FNAF 5",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/fnaf-5/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
@@ -1220,16 +1085,6 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "NutSim",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/nutsim/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "NutSim Hacked",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/nutsimhacked/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "Fruit Ninja",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/fruitninja/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
@@ -1245,23 +1100,8 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "Stack",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/stack/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Stickman Hook",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/stickmanhook/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "Neon Swing",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/neonswing/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Poor Eddie",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/pooreddie/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
@@ -1275,23 +1115,8 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "UNO",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/uno/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "Slither.io",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/slitherio/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Google Snake",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/fork/game/index.html?google-snake",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Slither Remake",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/slither-remake/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
@@ -1300,23 +1125,8 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "Funny Shooter",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/fork/game/index.html?funny-shooter",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Masked Forces",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/maskedforces/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "Shell Shockers",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/shellshockers/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Repuls.io",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/fork/game/index.html?repuls.io",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {

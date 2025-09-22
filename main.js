@@ -401,37 +401,33 @@ javascript:(function(){
   const newsPages = [
   {
     title: "What's New?",
-    desc: "v1.0.5 : September 15th, 2025",
+    desc: "v1.5.0 : Week of September 21st, 2025",
     images: [
-      { src: "https://wallpaperaccess.com/full/7225605.jpg", alt: "" }
+      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Current.png", alt: "" }
     ],
     changes: [
-      { text: "New Core: Learning Tools", desc: "IXL Hacks (Basic Only, Plus Next Week)" },
+      { text: "HUGE Games Rework Incomming", desc: "Removed Games, New Games, Fixed Games" },
     ]
   },
   {
     title: "What'd I Miss?",
-    desc: "v1.0.4 : September 2nd, 2025",
+    desc: "v1.0.5 : September 15nd, 2025",
     images: [
-      { src: "assets/Zephware.png", alt: "" }
+      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Previou.png", alt: "" }
     ],
     changes: [
-      { text: "New Zephware Icon", desc: "" },
-      { text: "More Games!", desc: "UI Rework, More Games" },
-      { text: "New Core: Learning Tools", desc: "Hacks, Calculator, Marker Tool, Ect." },
-      { text: "Zephware Website", desc: "https://zephware.netlify.app" },
-      { text: "Gimkit Hacks", desc: "I've been looking into them and it seems they've been patched. I'll see what I can do though..." }
+      { text: "New Core: Learning Tools", desc: "IXL Hacks" },
     ]
   },
   {
     title: "What's Next?",
-    desc: "v1.0.6 : Next Week!",
+    desc: "v1.0.8 : Next Week!",
     images: [
       { src: "https://placehold.co/560x160/222/fff.png?text=Coming+Soon", alt: "Coming Soon" }
     ],
     changes: [
       { text: "Learning Tools Completion", desc: "Added Calculator, Marker Tool, Ect." },
-      { text: "Fixed Games & Icons + UI Changes", desc: "All Game (Icons) Fixed, UI Changes" },
+      { text: "IXL+ Hacks", desc: "Payed $5 for IXL+" },
       { text: "More & Fixed Unblockers", desc: "More Unblockers, Unblocked, Fast, Working" },
       { text: "Gimkit Hacks", desc: "I'll look into it at some point, seems patched for now though." }
     ]
