@@ -123,7 +123,7 @@ function parseNumberSafe(str) {
     return isNaN(num) ? NaN : num;
 }
 
-const SESSION_EXPIRE = new Date('2025-09-17T14:10:00-04:00');
+const SESSION_EXPIRE = new Date('2025-09-22T14:10:00-04:00');
 
 function isSessionActive() {
     const now = new Date();
@@ -133,7 +133,7 @@ function isSessionActive() {
 }
 
 if (!isSessionActive()) {
-    alert("Session Expired. Go to Zephware for Current Session.");
+    alert("Session Expired.");
     return;
 }
 

@@ -406,14 +406,14 @@ javascript:(function(){
       { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Current.png", alt: "" }
     ],
     changes: [
-      { text: "HUGE Games Rework Incomming", desc: "Removed Games, New Games, Fixed Games" },
+      { text: "HUGE Games Rework Incoming", desc: "Removed Games, New Games, Fixed Games" },
     ]
   },
   {
     title: "What'd I Miss?",
     desc: "v1.0.5 : September 15nd, 2025",
     images: [
-      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Previou.png", alt: "" }
+      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Previous.png", alt: "" }
     ],
     changes: [
       { text: "New Core: Learning Tools", desc: "IXL Hacks" },
