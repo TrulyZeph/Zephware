@@ -110,6 +110,11 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/BleachvsNaruto.jpg"
     },
     {
+        "label": "Bleach vs. Naruto 3.0",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/bvn3.0.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/BleachvsNaruto3.0.png"
+    },
+    {
         "label": "Nuts and Bolts",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2025/unity/nuts-and-bolts-puzzle/index.html",
         "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/567/Nuts-and-Bolts-Puzzle.jpg"
@@ -173,6 +178,16 @@
         "label": "Blackjack",
         "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/blackjack.swf",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/Blackjack.png"
+    },
+    {
+        "label": "Boss Slayer",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/boss-slayer.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/BossSlayer.png"
+    },
+    {
+        "label": "Hero Simulator",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/hero-simulator.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/HeroSim.png"
     },
     {
         "label": "Survival Karts",
