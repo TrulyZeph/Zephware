@@ -55,6 +55,11 @@
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/pokemon-ruby/index.html"
     },
     {
+        "label": "Commando 2",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/commando2.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/Commando2.png"
+    },
+    {
         "label": "Territorial",
         "image": "https://d3rtzzzsiu7gdr.cloudfront.net/files/territorialio/splash.webp",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/territorialio/build/index.html"
@@ -135,6 +140,11 @@
         "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/564/Snake.jpg"
     },
     {
+        "label": "Motherload",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/motherload.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/Motherload.png"
+    },
+    {
         "label": "Super Car Driving",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity2/super-car-driving/index.html",
         "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/562/Super-Car-Driving.jpg"
@@ -153,6 +163,11 @@
         "label": "Geometry Escape",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/299/geometry-escape/index.html",
         "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/560/Geometry-Escape.jpg"
+    },
+    {
+        "label": "Unfair Mario",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/unfairmario.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/UnfairMario.png"
     },
     {
         "label": "Bookworm",
