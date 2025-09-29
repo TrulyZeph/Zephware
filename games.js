@@ -34,6 +34,63 @@ javascript:(function () {
         });
     }
 
+    async function zephwarePersistSaves(gameId) {
+    	const saveKey = `zephwareSaves_${gameId}`;
+
+	    const existing = localStorage.getItem(saveKey);
+    	if (existing) {
+		    try {
+	    		const parsed = JSON.parse(existing);
+    			for (const [db, stores] of Object.entries(parsed)) {
+				    const request = indexedDB.open(db);
+			    	request.onsuccess = () => {
+		    			const tx = request.result.transaction(Object.keys(stores), "readwrite");
+	    				for (const [store, records] of Object.entries(stores)) {
+    						const objectStore = tx.objectStore(store);
+					    	records.forEach(r => objectStore.put(r));
+				    	}
+			    	};
+		    	}
+	    		console.log(`[Zephware] Loaded Progress for ${gameId}`);
+    		} catch (e) {
+		    	console.warn("[Zephware] Failed to load previous progress:", e);
+	    	}
+    	}
+
+    	const backup = async () => {
+		    const dbs = await indexedDB.databases();
+	    	const dump = {};
+    		for (const { name } of dbs) {
+			    if (!name) continue;
+		    	await new Promise(res => {
+	    			const req = indexedDB.open(name);
+    				req.onsuccess = () => {
+					    const db = req.result;
+				    	const tx = db.transaction(db.objectStoreNames, "readonly");
+			    		const storesDump = {};
+		    			let pending = db.objectStoreNames.length;
+	    				if (!pending) return res();
+    					for (const storeName of db.objectStoreNames) {
+					    	const store = tx.objectStore(storeName);
+				    		store.getAll().onsuccess = ev => {
+			    				storesDump[storeName] = ev.target.result;
+		    					if (--pending === 0) {
+	    							dump[name] = storesDump;
+    								res();
+						    	}
+				    		};
+					    }
+			    	};
+		    	});
+	    	}
+    		localStorage.setItem(saveKey, JSON.stringify(dump));
+	    };
+
+	    setInterval(backup, 10000);
+	    window.addEventListener("beforeunload", backup);
+    }
+
+
     const fredokaFontLink = document.createElement('link');
     fredokaFontLink.id = 'fredoka-font-link';
     fredokaFontLink.rel = 'stylesheet';
@@ -148,8 +205,12 @@ document.head.appendChild(sidebarStyle);
         title.innerHTML = `Zephware <sup style="font-size: 0.75rem">${version}</sup>`;
         title.style.fontFamily = 'Fredoka';
         title.style.fontWeight = 'bold';
-        title.style.color = '#01AEFD';
-        title.style.fontSize = '32px';
+        title.style.background = 'linear-gradient(to bottom, #01AEFD, #015AFD)';
+        title.style.webkitBackgroundClip = 'text';
+        title.style.webkitTextFillColor = 'transparent';
+        title.style.webkitUserSelect = 'none';
+        title.style.color = 'transparent';
+        title.style.fontSize = '40px';
         title.style.textAlign = 'center';
         title.style.marginTop = '15px';
   
@@ -342,16 +403,20 @@ document.head.appendChild(sidebarStyle);
 
                 if (url.endsWith(".swf")) {
                   await injectRuffle();
-                  const ruffle = window.RufflePlayer.newest();
-                  const player = ruffle.createPlayer();
-                  player.style.width = "100vw";
-                  player.style.height = "100vh";
-                  player.style.position = "fixed";
-                  player.style.top = "0";
-                  player.style.left = "0";
-                  player.style.zIndex = 2;
-                  document.body.appendChild(player);
-                  player.load(url);
+            	  const ruffle = window.RufflePlayer.newest();
+        		  const player = ruffle.createPlayer();
+		          player.style.width = "100vw";
+        		  player.style.height = "100vh";
+        		  player.style.position = "fixed";
+        		  player.style.top = "0";
+        		  player.style.left = "0";
+          		  player.style.zIndex = 2;
+		          document.body.appendChild(player);
+
+		          const gameId = url.split('/').pop().replace(/\.swf$/i, "");
+		          zephwarePersistSaves(gameId);
+
+		          player.load(url);
                } else {
                   iframe = document.createElement('iframe');
                   iframe.src = url;
@@ -365,6 +430,7 @@ document.head.appendChild(sidebarStyle);
                   document.body.appendChild(iframe);
                }
             });
+
 
               container.appendChild(button);
            });
@@ -722,11 +788,9 @@ document.head.appendChild(sidebarStyle);
     }
 
     function rollGame() {
-    // Close settings panel if open
     if (settingsPanel && settingsPanel.parentNode) {
         settingsPanel.remove();
     }
-    // Remove any existing roller
     let oldRoller = document.getElementById('random-roller-modal');
     if (oldRoller) oldRoller.remove();
 
@@ -906,5 +970,4 @@ function showOverlay() {
 add disguise (fake background) -- customizable through settings
 add tab disguise
 add escape button
-add console
 */

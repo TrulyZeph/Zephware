@@ -482,12 +482,12 @@
     {
         "label": "Slither Snakes",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/slither-snakes/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/snake.io.webp"
     },
     {
         "label": "Solitaire Adventure",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity4/solitaire-adventure/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/Solitare.jpg"
     },
     {
         "label": "Doggo Clicker",
@@ -503,6 +503,11 @@
         "label": "Basketball Slam Dunk",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2021/unity2/basketball-slam-dunk/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+    },
+    {
+        "label": "Pandemic 2",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/pandemic2.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/Pandemic2.jpg"
     },
     {
         "label": "Crazy Car Arena",
