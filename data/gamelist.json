@@ -420,6 +420,11 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/MotoX3MPoolParty.jpg"
     },
     {
+        "label": "Resort Empire",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/resortempire.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/ResortEmpire.png"
+    },
+    {
         "label": "Football King",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/226/football-king/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/FootballKing.png"
@@ -533,6 +538,11 @@
         "label": "Subway Idle 3D",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity4/subway-idle-3d/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
+    },
+    {
+        "label": "Bubble Tanks 2",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/bubbletanks2.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/BubbleTanks2.png"
     },
     {
         "label": "Stunt Simulator Multiplayer",
