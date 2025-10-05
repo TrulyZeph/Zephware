@@ -7,13 +7,18 @@
     document.head.appendChild(link);
   }
 
-  const dogeLinks = [
-    "https://kahoot.albert.ixl.masteryconnect.104.243.38.142.backname.io",
-    "https://renrendane.laviewddns.com"
+  const ddxLinks = [
+    "https://meowl.goguardian.pro.cdn.cloudflare.net/",
+    "https://hawk.stayinschooleducation.org.cdn.cloudflare.net/",
+    "https://woof.amplifyz.cfd.cdn.cloudflare.net/",
+    "https://cuh.googledrive.icu.cdn.cloudflare.net/"
   ];
 
   const spaceLinks = [
-    "https://buy.wine-software.com/"
+    "https://imkayandisuck.info.north-kazakhstan.su.cdn.cloudflare.net/",
+    "https://guh.prodigy.it.com.cdn.cloudflare.net/",
+    "https://wuh.desmosgraphing.xyz.cdn.cloudflare.net/",
+    "https://duh.desmosgraphing.xyz.cdn.cloudflare.net/"
   ];
 
   const style = document.createElement('style');
@@ -60,6 +65,12 @@
       letter-spacing: -0.5px;
     }
 
+    .p {
+      font-size: 0.9em;
+      font-family: 'Fredoka', sans-serif;
+      color: #666;
+    }
+
     .overlay select, .overlay button {
       font-size: 1.2em;
       font-family: 'Fredoka', sans-serif;
@@ -99,10 +110,14 @@
   title.className = 'title';
   title.textContent = 'Select Unblocker';
 
+  const disclaimer = document.createElement('p');
+  disclaimer.className = 'p';
+  disclaimer.textContent = "* Note: I did not make and do not own these unblockers. I am simply providing a way to access them."
+
   header.appendChild(title);
 
   const dropdown = document.createElement('select');
-  const options = ['Doge', 'Space'];
+  const options = ['DayDream X', 'Space'];
   options.forEach(name => {
     const option = document.createElement('option');
     option.value = name.toLowerCase();
@@ -115,7 +130,7 @@
 
   button.onclick = () => {
     const selectedVal = dropdown.value;
-    const links = selectedVal === 'doge' ? dogeLinks : spaceLinks;
+    const links = selectedVal === 'daydream x' ? ddxLinks : spaceLinks;
     const selectedLink = links[Math.floor(Math.random() * links.length)];
 
     document.head.innerHTML = '';
@@ -140,6 +155,7 @@
   box.appendChild(header);
   box.appendChild(dropdown);
   box.appendChild(button);
+  box.appendChild(disclaimer);
   overlay.appendChild(box);
   document.body.appendChild(overlay);
 })();

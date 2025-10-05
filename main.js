@@ -7,6 +7,36 @@ javascript:(function(){
     document.head.appendChild(link);
   }
 
+const themes = {
+   blue: {
+      color1: '#01AEFD',
+      color2: '#015AFD',
+      waves: ['#63baff','#3ea7f7','#298ee0']
+   },
+   green: {
+      color1: '#63fd01',
+      color2: '#25fd01',
+      waves: ['#87ff63ff','#72f73eff','#3ee029ff']
+   },
+   orange: {
+      color1: '#fdba01ff',
+      color2: '#f77e1dff',
+      waves: ['#fdba01ff','#f77e1dff','#b35415ff']
+   },
+   red: {
+      color1: '#ff6363ff',
+      color2: '#e03e3eff',
+      waves: ['#ff6363ff','#e03e3eff','#b31515ff']
+   },
+   purple: {
+      color1: '#b463ffff',
+      color2: '#8d3ee0ff',
+      waves: ['#b463ffff','#8d3ee0ff','#5a15b3ff']
+   }
+};
+const theme = themes.blue
+const waves = theme.waves
+
   const style = document.createElement('style');
   style.textContent = `
     ::selection{background-color: salmon; color: white;}
@@ -47,28 +77,14 @@ javascript:(function(){
       height: 100vh;
     }
 
-    .header1 {
-      position: fixed;
-      width: 100%;
-      text-align: center;
-      font-weight: bold;
-      font-family: 'Fredoka', sans-serif;
-      background: linear-gradient(to bottom, #01AEFD, #015AFD);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: transparent;
-      -webkit-user-select: none;
-      z-index: 100;
-    }
-
-    .header2 {
+    .header {
       position: fixed;
       top: 4.25em;
       width: 100%;
       text-align: center;
       font-weight: bold;
       font-family: 'Fredoka', sans-serif;
-      background: linear-gradient(to bottom, #01AEFD, #015AFD);
+      background: linear-gradient(to bottom, ${theme.color1}, ${theme.color2});
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       color: transparent;
@@ -116,7 +132,7 @@ javascript:(function(){
       font-family: 'Fredoka', sans-serif;
       font-size: 1.2em;
       font-weight: 500;
-      color: #01AEFD;
+      color: ${theme.color1};
       padding: 0.3em 0.6em;
       border: none;
       border-radius: 5px;
@@ -132,7 +148,7 @@ javascript:(function(){
       padding: 0.4em 1em;
       border: none;
       border-radius: 5px;
-      background: linear-gradient(to bottom, #01AEFD, #015AFD);
+      background: linear-gradient(to bottom, ${theme.color1}, ${theme.color2});
       color: white;
       font-weight: bold;
       cursor: pointer;
@@ -176,7 +192,7 @@ javascript:(function(){
     }
     #overlay-box h1 {
       font-size: 24px;
-      color: #01AEFD;
+      color: ${theme.color1};
       margin-bottom: 16px;
     }
     #overlay-box p {
@@ -189,7 +205,7 @@ javascript:(function(){
       padding: 10px 20px;
       border: none;
       border-radius: 10px;
-      background-color: #01AEFD;
+      background-color: ${theme.color1};
       color: white;
       cursor: pointer;
     }
@@ -231,121 +247,17 @@ javascript:(function(){
   const g = document.createElementNS(svgNS, 'g');
   g.setAttribute('class', 'parallax');
 
-  const colors = ['#63baff','#3ea7f7','#298ee0'];
   const ys = ['0','3','6'];
   for(let i=0; i<3; i++){
     const use = document.createElementNS(svgNS, 'use');
     use.setAttributeNS(xlinkNS, 'xlink:href', '#gentle-wave');
     use.setAttribute('x', '50');
     use.setAttribute('y', ys[i]);
-    use.setAttribute('fill', colors[i]);
+    use.setAttribute('fill', theme.waves[i]);
     g.appendChild(use);
   }
   svg.appendChild(g);
   document.body.appendChild(svg);
-
-  var guiWidth = 600,
-  guiHeight = 375,
-  borderRadius = 20,
-  guiDiv = document.createElement('div');
-
-  var password = 'password';
-  var panelVisible = true;
-  
-  guiDiv.style.position = 'fixed';
-  guiDiv.style.top = '50%';
-  guiDiv.style.left = '50%';
-  guiDiv.style.transform = 'translate(-50%, -50%)';
-  guiDiv.style.width = guiWidth + 'px';
-  guiDiv.style.height = guiHeight + 'px';
-  guiDiv.style.borderRadius = borderRadius + 'px';
-  guiDiv.style.overflow = 'hidden';
-  guiDiv.style.zIndex = 9999;
-  guiDiv.style.background = '#111';
-  guiDiv.style.textAlign = 'center';
-  guiDiv.style.fontFamily = 'Verdana, sans-serif';
-
-  var title = document.createElement('div');
-  title.className = 'header1';
-  title.textContent = 'Zephware';
-  title.style.marginTop = '70px';
-  title.style.fontSize = '3em';
-  title.style.padding = '0.5em 0';
-
-  var inputBox = document.createElement('input');
-  inputBox.style.position = 'absolute';
-  inputBox.style.left = '50%';
-  inputBox.style.top = '170px';
-  inputBox.style.transform = 'translateX(-50%)';
-  inputBox.style.width = '300px';
-  inputBox.style.height = '35px';
-  inputBox.style.border = '2px solid #0766FF';
-  inputBox.style.borderRadius = '15px';
-  inputBox.style.background = 'transparent';
-  inputBox.style.color = '#0766FF';
-  inputBox.style.fontSize = '18px';
-  inputBox.style.paddingLeft = '10px';
-  inputBox.style.outline = 'none';
-  inputBox.style.textAlign = 'center';
-  inputBox.placeholder = 'Enter Password';
-  inputBox.type = 'password';
-
-  var graybg = document.createElement('div');
-  graybg.id = 'news-overlay';
-  graybg.style.position = 'fixed';
-  graybg.style.top = '0';
-  graybg.style.left = '0';
-  graybg.style.width = '100vw';
-  graybg.style.height = '100vh';
-  graybg.style.background = 'rgba(0,0,0,0.9)';
-  graybg.style.zIndex = '100';
-  graybg.style.display = 'flex';
-  graybg.style.justifyContent = 'center';
-  graybg.style.alignItems = 'center';
-  graybg.style.fontFamily = "'Fredoka', sans-serif";
-  document.body.appendChild(graybg);
-
-  inputBox.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-      checkPassword();
-    }
-  });
-
-  function checkPassword() {
-    if (inputBox.value === password) {
-      closePanel();
-      showNewsPanel();
-    } else {
-      alert('Incorrect Password! Make sure you are in about:blank');
-    }
-  }
-
-  function closePanel() {
-    if (guiDiv.parentNode) guiDiv.parentNode.removeChild(guiDiv);
-  }
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === ']') {
-      panelVisible = !panelVisible;
-      guiDiv.style.display = panelVisible ? 'block' : 'none';
-    }
-  });
-
-  var passdesc = document.createElement('div');
-  passdesc.style.position = 'absolute';
-  passdesc.style.left = '50%';
-  passdesc.style.top = '215px';
-  passdesc.style.transform = 'translateX(-50%)';
-  passdesc.style.fontSize = '11px';
-  passdesc.style.fontWeight = 'bold';
-  passdesc.style.color = '#3D3636';
-  passdesc.innerText = 'ZephWare requires a password to hide from GoGuardian';
-
-  guiDiv.appendChild(title);
-  guiDiv.appendChild(inputBox);
-  guiDiv.appendChild(passdesc);
-  document.body.appendChild(guiDiv);
-  document.body.appendChild(graybg);
 
   const coverBox = document.createElement('div');
   coverBox.style.position = 'fixed';
@@ -353,7 +265,7 @@ javascript:(function(){
   coverBox.style.right = '0';
   coverBox.style.bottom = '0';
   coverBox.style.height = '11vh';
-  coverBox.style.backgroundColor = '#298ee0';
+  coverBox.style.backgroundColor = theme.waves[2];
   coverBox.style.zIndex = '5';
   document.body.appendChild(coverBox);
 
@@ -362,7 +274,7 @@ javascript:(function(){
   document.body.appendChild(content);
 
   const header = document.createElement('div');
-  header.className = 'header2';
+  header.className = 'header';
   header.textContent = 'Zephware';
   header.style.fontSize = '4em';
   header.style.padding = '0.25em 0';
@@ -401,12 +313,14 @@ javascript:(function(){
   const newsPages = [
   {
     title: "What's New?",
-    desc: "v1.5.0 : Week of September 21st, 2025",
+    desc: "v1.5.0 : Week of October 6th, 2025",
     images: [
       { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Current.png", alt: "" }
     ],
     changes: [
-      { text: "HUGE Games Rework Incoming", desc: "Removed Games, New Games, Fixed Games" },
+      { text: "Games Changes", desc: "UI Changes, New Games, Fixed Games (Dropping Tuesday)" },
+      { text: "More & Fixed Unblockers", desc: "finally stopped neglecting this lol (More Unblockers, Better, Faster)" },
+      { text: "Learning Tools Expansion", desc: "Releasing Mid-Week, Custom Tiny Task & Autoclicker for Browsers!" }
     ]
   },
   {
@@ -428,8 +342,8 @@ javascript:(function(){
     changes: [
       { text: "Learning Tools Completion", desc: "Added Calculator, Marker Tool, Ect." },
       { text: "IXL+ Hacks", desc: "Payed $5 for IXL+" },
-      { text: "More & Fixed Unblockers", desc: "More Unblockers, Unblocked, Fast, Working" },
-      { text: "Gimkit Hacks", desc: "I'll look into it at some point, seems patched for now though." }
+      { text: "Gimkit Hacks", desc: "I'll look into it at some point, seems patched for now though." },
+      { text: "Themes", desc: "Themes Dropping Week of October 13th! (Or Earlier?)" }
     ]
   }
 ];
@@ -494,7 +408,7 @@ function showNewsPanel() {
   leftArrow.style.cursor = 'pointer';
   leftArrow.style.userSelect = 'none';
   leftArrow.style.marginRight = '8px';
-  leftArrow.style.color = '#01AEFD';
+  leftArrow.style.color = theme.color1;
   leftArrow.title = 'Previous';
 
   const rightArrow = document.createElement('span');
@@ -503,13 +417,13 @@ function showNewsPanel() {
   rightArrow.style.cursor = 'pointer';
   rightArrow.style.userSelect = 'none';
   rightArrow.style.marginLeft = '8px';
-  rightArrow.style.color = '#01AEFD';
+  rightArrow.style.color = theme.color1;
   rightArrow.title = 'Next';
 
   const title = document.createElement('span');
   title.style.fontSize = '2em';
   title.style.fontWeight = 'bold';
-  title.style.color = '#01AEFD';
+  title.style.color = theme.color1;
   title.style.fontFamily = "'Fredoka', sans-serif";
   navRow.appendChild(leftArrow);
   navRow.appendChild(title);
@@ -688,6 +602,7 @@ function showNewsPanel() {
   render();
   overlay.focus();
  }
+ showNewsPanel();
 
   let lockedTabs = { 'blooket hacks': true || false, 'learning tools' : true};
 
