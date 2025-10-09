@@ -69,7 +69,12 @@
         "image": "https://tse3.mm.bing.net/th/id/OIP.Mnn3DuxS17bBpOcgIf6bSQHaHa?w=185&h=186&c=7&r=0&o=5&dpr=1.3&pid=1.7",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/basketrandom/index.html"
     },
-        {
+    {
+        "label": "World Domination 2",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/worlddomination2.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/WorldDomination2.png"
+    },
+    {
         "label": "Super Liquid Soccer",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/SuperLiquidSoccer.png",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/superliquidsoccer/index.html"
