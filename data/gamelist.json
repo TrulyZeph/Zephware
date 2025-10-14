@@ -500,6 +500,26 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/Solitare.jpg"
     },
     {
+        "label": "Cooking Mama",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/cookingmama.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/CookingMama.png"
+    },
+    {
+        "label": "McDonald's Game",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/mcdonaldsgame.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/McDonaldsGame.png"
+    },
+    {
+        "label": "Toxic",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/toxic.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/Toxic.png"
+    },
+    {
+        "label": "Truck Loader",
+        "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/swf/truckloader.swf",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/TruckLoader.png"
+    },
+    {
         "label": "Doggo Clicker",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/games4/doggo-clicker/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"

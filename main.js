@@ -318,9 +318,9 @@ const waves = theme.waves
       { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Current.png", alt: "" }
     ],
     changes: [
-      { text: "Games Changes", desc: "UI Changes, New Games, Fixed Games (Dropping Tuesday)" },
+      { text: "Games Changes", desc: "UI Changes, New Games, Data Saving!" },
       { text: "More & Fixed Unblockers", desc: "finally stopped neglecting this lol (More Unblockers, Better, Faster)" },
-      { text: "Learning Tools Expansion", desc: "Releasing Mid-Week, Custom Tiny Task & Autoclicker for Browsers!" }
+      { text: "Learning Tools Expansion", desc: "Releasing Soon, Custom Tiny Task & Autoclicker for Browsers!" }
     ]
   },
   {
