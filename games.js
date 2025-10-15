@@ -6,7 +6,7 @@ javascript:(function () {
     let buttonConfigs = [];
 
     function loadGameList() {
-        fetch('data/gamelist.json')
+        fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/data/gamelist.json')
             .then(response => response.json())
             .then(data => {
                 buttonConfigs = data;
@@ -207,6 +207,48 @@ const DataLoader = (() => {
 		_hostSet
 	};
 })();
+
+async function enableRuffleSavePersistence(player, gameId) {
+	if (!player || !player.load) return;
+
+	const KEY = 'ruffle_sol_' + gameId;
+
+	const storage = {
+		async getItem(name) {
+			try {
+				const data = localStorage.getItem(KEY);
+				const all = data ? JSON.parse(data) : {};
+				return all[name] || null;
+			} catch (e) {
+				console.warn('Ruffle getItem failed', e);
+				return null;
+			}
+		},
+		async setItem(name, value) {
+			try {
+				const data = localStorage.getItem(KEY);
+				const all = data ? JSON.parse(data) : {};
+				all[name] = value;
+				localStorage.setItem(KEY, JSON.stringify(all));
+			} catch (e) {
+				console.warn('Ruffle setItem failed', e);
+			}
+		},
+		async removeItem(name) {
+			try {
+				const data = localStorage.getItem(KEY);
+				const all = data ? JSON.parse(data) : {};
+				delete all[name];
+				localStorage.setItem(KEY, JSON.stringify(all));
+			} catch (e) {}
+		}
+	};
+
+	player.config = player.config || {};
+	player.config.storageBackend = storage;
+
+	console.log('✅ Ruffle persistent save enabled for', gameId);
+}
 
     const fredokaFontLink = document.createElement('link');
     fredokaFontLink.id = 'fredoka-font-link';
@@ -587,7 +629,10 @@ const DataLoader = (() => {
                         player.style.left = "0";
                         player.style.zIndex = 2;
                         document.body.appendChild(player);
-                        player.load(url);
+
+                    	await enableRuffleSavePersistence(player, url);
+
+	                    player.load(url);
                     } else {
                         iframe = document.createElement('iframe');
                         iframe.src = url;
@@ -734,15 +779,15 @@ const DataLoader = (() => {
                   iframe.style.zIndex = 2;
                   document.body.appendChild(iframe);
 
-                  if (window.ZephwareSaveBridge) {
+                  if (window.DataLoader) {
         			try {
-		        		await ZephwareSaveBridge.attach(iframe, {
+		        		await DataLoader.attach(iframe, {
         					id: url,
         					origin: '*',
 		        			auto: true
         				});
 		        	} catch (e) {
-        				console.warn('ZephwareSaveBridge attach failed', e);
+        				console.warn('DataLoader attach failed', e);
 		        	}
         		}
                }
