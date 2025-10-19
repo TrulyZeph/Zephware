@@ -4,7 +4,6 @@ javascript:(function () {
     let settingsPanel = null;
     let dropdownMenu = null;
     let buttonConfigs = [];
-
     function loadGameList() {
         fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/data/gamelist.json')
             .then(response => response.json())
@@ -31,6 +30,13 @@ javascript:(function () {
           document.body.appendChild(script);
         });
     }
+
+function getPersistentUrl(url) {
+	if (url.startsWith('about:blank')) {
+		return `${location.origin}/zephware.html?u=${encodeURIComponent(url)}`;
+	}
+	return url;
+}
 
 const DataLoader = (() => {
 	const KEY_PREFIX = 'zephware_save_';
@@ -314,15 +320,26 @@ async function enableRuffleSavePersistence(player, gameId) {
     }
 `;
 
-    const fontStyle = document.createElement("style");
-    fontStyle.type = "text/css";
-    fontStyle.innerText = `
-       * {
-          font-family: 'Fredoka', sans-serif !important;
-       }
-    `;
-    document.head.appendChild(fontStyle);
     document.head.appendChild(toggle);
+
+    const keyframesStyle = document.createElement('style');
+    keyframesStyle.innerHTML = `
+        @keyframes pulseLine {
+            0% {
+                transform: scaleX(0);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scaleX(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scaleX(0);
+                opacity: 0.2;
+            }
+        }
+    `;
+    document.head.appendChild(keyframesStyle);
 
     function TitleText() {
         const title = document.createElement('div');
@@ -751,47 +768,50 @@ async function enableRuffleSavePersistence(player, gameId) {
                button.style.position = 'relative';
                button.appendChild(label);
 
-              button.addEventListener('click', async () => {
-                panel.remove();
-                const url = config.url;
+               button.addEventListener('click', async () => {
+	panel.remove();
+	let url = config.url;
+	url = getPersistentUrl(url);
 
-                if (url.endsWith(".swf")) {
-                  await injectRuffle();
-                  const ruffle = window.RufflePlayer.newest();
-                  const player = ruffle.createPlayer();
-                  player.style.width = "100vw";
-                  player.style.height = "100vh";
-                  player.style.position = "fixed";
-                  player.style.top = "0";
-                  player.style.left = "0";
-                  player.style.zIndex = 2;
-                  document.body.appendChild(player);
-                  player.load(url);
-               } else {
-                  iframe = document.createElement('iframe');
-                  iframe.src = url;
-                  iframe.style.width = '100vw';
-                  iframe.style.height = '100vh';
-                  iframe.style.border = 'none';
-                  iframe.style.position = 'fixed';
-                  iframe.style.top = '0';
-                  iframe.style.left = '0';
-                  iframe.style.zIndex = 2;
-                  document.body.appendChild(iframe);
+	if (url.endsWith('.swf')) {
+		await injectRuffle();
+		const ruffle = window.RufflePlayer.newest();
+		const player = ruffle.createPlayer();
+		player.style.width = '100vw';
+		player.style.height = '100vh';
+		player.style.position = 'fixed';
+		player.style.top = '0';
+		player.style.left = '0';
+		player.style.zIndex = 2;
+		document.body.appendChild(player);
 
-                  if (window.DataLoader) {
-        			try {
-		        		await DataLoader.attach(iframe, {
-        					id: url,
-        					origin: '*',
-		        			auto: true
-        				});
-		        	} catch (e) {
-        				console.warn('DataLoader attach failed', e);
-		        	}
-        		}
-               }
-            });
+		await enableRuffleSavePersistence(player, url);
+		player.load(url);
+	} else {
+		const iframe = document.createElement('iframe');
+		iframe.src = url;
+		iframe.style.width = '100vw';
+		iframe.style.height = '100vh';
+		iframe.style.border = 'none';
+		iframe.style.position = 'fixed';
+		iframe.style.top = '0';
+		iframe.style.left = '0';
+		iframe.style.zIndex = 2;
+		document.body.appendChild(iframe);
+
+		    if (window.ZephwareSaveBridge) {
+	    		try {
+    				await ZephwareSaveBridge.attach(iframe, {
+			    		id: url,
+		    			origin: '*',
+	    				auto: true
+    				});
+            			} catch (e) {
+        	    			console.warn('ZephwareSaveBridge attach failed', e);
+            			}
+            		}
+            	}
+              });
               container.appendChild(button);
            });
         }
@@ -1019,25 +1039,6 @@ async function enableRuffleSavePersistence(player, gameId) {
     document.body.appendChild(dropdownMenu);
     return dropdownMenu;
     }
-
-    const style = document.createElement('style');
-    style.innerHTML = `
-        @keyframes pulseLine {
-            0% {
-                transform: scaleX(0);
-                opacity: 0.2;
-            }
-            50% {
-                transform: scaleX(1);
-                opacity: 0.6;
-            }
-            100% {
-                transform: scaleX(0);
-                opacity: 0.2;
-            }
-        }
-    `;
-    document.head.appendChild(style);
 
     function rollGame() {
     if (settingsPanel && settingsPanel.parentNode) {

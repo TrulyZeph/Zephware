@@ -297,7 +297,7 @@ const waves = theme.waves
   const select = document.createElement('select');
   select.id = 'selector';
   select.setAttribute('title', '');
-  const options = ['Games', 'Unblockers', 'Soundboard', 'Learning Tools', 'Marketplace', 'Blooket Hacks', 'Gimkit Hacks'];
+  const options = ['Games', 'Unblockers', 'Soundboard', 'Learning Tools', 'Marketplace', 'Blooket Hacks', 'Gimkit Hacks', 'Messages'];
   options.forEach(opt => {
     const option = document.createElement('option');
     option.value = opt.toLowerCase();
@@ -618,6 +618,12 @@ button.addEventListener('click', () => {
         }
         return;
     }
+
+    if (val === 'messages') {
+        showInstructionsOverlay('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/msg.js');
+        return;
+    }
+
     if (val === 'games' || val === 'unblockers' || val === 'soundboard') {
         document.head.innerHTML = '';
         document.body.innerHTML = '';
