@@ -620,7 +620,7 @@ button.addEventListener('click', () => {
     }
 
     if (val === 'messages') {
-        showInstructionsOverlay('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/msg.js');
+        showInstructionsOverlay('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/msgBridge.js');
         return;
     }
 

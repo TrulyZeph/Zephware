@@ -1,14 +1,14 @@
 javascript:(() => {
-	const firebaseConfig = {
-	  apiKey: "AIzaSyBM8PsYtRud5ZKI7MdQxJeOYTQ2YLBMA0M",
-	  authDomain: "messages.firebaseapp.com",
-	  databaseURL: "https://messages-default-rtdb.firebaseio.com/",
-	  projectId: "messages",
-	  storageBucket: "messages.firebasestorage.app",
-	  messagingSenderId: "649260131467",
-	  appId: "1:649260131467:web:7447ca7512a6ab3a81a08e",
-	  measurementId: "G-HRF3TYZT57"
-	};
+   const firebaseConfig = {
+     apiKey: "AIzaSyBM8PsYtRud5ZKI7MdQxJeOYTQ2YLBMA0M",
+     authDomain: "zephware-messages.firebaseapp.com",
+     databaseURL: "https://zephware-messages-default-rtdb.firebaseio.com",
+     projectId: "zephware-messages",
+     storageBucket: "zephware-messages.firebasestorage.app",
+     messagingSenderId: "649260131467",
+     appId: "1:649260131467:web:7447ca7512a6ab3a81a08e",
+     measurementId: "G-HRF3TYZT57"
+   };
 
    const script = document.createElement('script');
    script.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js";
