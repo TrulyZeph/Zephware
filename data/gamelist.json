@@ -80,6 +80,21 @@
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/superliquidsoccer/index.html"
     },
     {
+        "label": "Hollow Knight",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/HollowKnight.webp",
+        "url": "https://d1yh00vn2fvto7.cloudfront.net/play?gameID=game_c548_229f0f5dbd3a88"
+    },
+    {
+        "label": "Undertale",
+        "url": "https://d1yh00vn2fvto7.cloudfront.net/play?gameID=game_f23f_aa7b2677e4e1c8",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/Undertale.jpg"
+    },
+    {
+        "label": "Idle Superpowers",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/IdleSuperpowers.png",
+        "url": "https://d1yh00vn2fvto7.cloudfront.net/play?gameID=game_dcf3_28249e4fa8d3f"
+    },
+    {
         "label": "Soccer Random",
         "image": "https://d3rtzzzsiu7gdr.cloudfront.net/assets/gmsimgs/soccerrandom.png",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/soccerrandom/index.html"
