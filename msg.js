@@ -1,7 +1,5 @@
 javascript:(() => {
 
-	alert("I did NOT have time to test this so uh sorry if theres bugs, which there probably will be lol");
-
 	const ZW_TEXT_COLOR = "#ffffff";
 
 	const el = (tag, attrs = {}, children = []) => {
@@ -23,7 +21,7 @@ javascript:(() => {
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&display=swap');
 *{box-sizing:border-box;font-family:'Fredoka',sans-serif;color:var(--zw-text-color)}
 .zw-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:2147483646}
-.zw-card{width:75%;max-width:1100px;height:78vh;border-radius:12px;background:#0f1115;display:grid;grid-template-columns:260px 1fr 300px;gap:12px;padding:12px;box-shadow:0 8px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03)}
+.zw-card{width:75%;max-width:1100px;height:78vh;border-radius:12px;background:#0f1115;display:grid;grid-template-columns:260px 1fr 250px;gap:12px;padding:12px;box-shadow:0 8px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03)}
 .zw-left,.zw-center,.zw-right{min-height:0}
 .zw-left{background:#0e0f13;border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:8px;overflow:auto}
 .zw-center{background:linear-gradient(180deg,#0b0c10,#07080a);border-radius:8px;padding:10px;display:flex;flex-direction:column;overflow:hidden}
@@ -48,7 +46,6 @@ javascript:(() => {
 .zw-msg-right{align-self:flex-end;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px}
 .zw-msg-left{align-self:flex-start;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px}
 .zw-pfp.small{width:36px;height:36px;border-radius:8px}
-.zw-channel-badge{font-size:11px;padding:4px 6px;border-radius:6px;background:rgba(255,255,255,0.02)}
 .zw-invite-row{display:flex;gap:8px;margin-top:8px}
 `
 	});
@@ -57,7 +54,9 @@ javascript:(() => {
 	const backdrop = el('div', { class: 'zw-backdrop' });
 	const card = el('div', { class: 'zw-card' });
 	backdrop.appendChild(card);
-	document.body.appendChild(backdrop);
+	const root = el('div', { id: 'zw-ui-root' });
+	root.appendChild(backdrop);
+	document.body.appendChild(root);
 
 	const left = el('div', { class: 'zw-left' });
 	const headerLeft = el('div', { class: 'zw-header' }, [
@@ -68,7 +67,7 @@ javascript:(() => {
 
 	left.appendChild(el('div', { class: 'zw-section-title' }, ['Channels']));
 	const channelsList = el('div', { class: 'zw-list', id: 'zw-channels-list' });
-	const chGlobal = el('div', { class: 'zw-channel', 'data-path': 'chat', title: 'Global chat' }, ['# global', el('span', { class: 'zw-channel-badge', style: { marginLeft: 'auto' } }, ['🌐'])]);
+	const chGlobal = el('div', { class: 'zw-channel', 'data-path': 'chat', title: 'Global chat' }, ['# global']);
 	channelsList.appendChild(chGlobal);
 	left.appendChild(channelsList);
 
@@ -127,7 +126,8 @@ javascript:(() => {
 		el('input', { placeholder: 'password', id: 'zw-auth-password', type: 'password', style: { padding: '8px', borderRadius: '8px', border: 'none', background: 'rgba(255,255,255,0.02)', color: 'var(--zw-text-color)' } }),
 		el('div', { style: { display: 'flex', gap: '8px' } }, [
 			el('button', { class: 'zw-smallbtn', id: 'zw-register' }, ['Register']),
-			el('button', { class: 'zw-smallbtn', id: 'zw-login' }, ['Login'])
+			el('button', { class: 'zw-smallbtn', id: 'zw-login' }, ['Login']),
+			el('button', { class: 'zw-smallbtn', id: 'zw-logout' }, ['Log Out'])
 		])
 	]);
 	settingsContainer.appendChild(authBox);
@@ -143,7 +143,6 @@ javascript:(() => {
 	settingsContainer.appendChild(el('div', { style: { display: 'flex', gap: '8px' } }, [
 		el('input', { class: 'zw-input-sm', id: 'setColor', placeholder: '#01AEFD', value: '#01AEFD', style: { flex: '1', padding: '8px', borderRadius: '8px', border: 'none', background: 'rgba(255,255,255,0.02)', color: 'var(--zw-text-color)' } }),
 		el('button', { class: 'zw-smallbtn', id: 'zw-save-settings' }, ['Save Settings']),
-		el('button', { class: 'zw-smallbtn', id: 'zw-logout' }, ['Log Out'])
 	]));
 
 	right.appendChild(settingsContainer);
