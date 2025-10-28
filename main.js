@@ -19,9 +19,9 @@ const themes = {
       waves: ['#87ff63ff','#72f73eff','#3ee029ff']
    },
    orange: {
-      color1: '#fdba01ff',
-      color2: '#f77e1dff',
-      waves: ['#fdba01ff','#f77e1dff','#b35415ff']
+      color1: '#f7ab1dff',
+      color2: '#eb6c04ff',
+      waves: ['#fdba01ff','#f77e1dff','#e26817ff']
    },
    red: {
       color1: '#ff6363ff',
@@ -34,8 +34,7 @@ const themes = {
       waves: ['#b463ffff','#8d3ee0ff','#5a15b3ff']
    }
 };
-const theme = themes.blue
-const waves = theme.waves
+const theme = themes.orange;
 
   const style = document.createElement('style');
   style.textContent = `
@@ -313,24 +312,25 @@ const waves = theme.waves
   const newsPages = [
   {
     title: "What's New?",
+    desc: "v1.7.0 : Week of October 26th, 2025",
+    images: [
+      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Current.png", alt: "" }
+    ],
+    changes: [
+      { text: "Games Changes", desc: "Data Saving, New Really Good Games" },
+      { text: "Messaging App", desc: "An App to Message People" },
+      { text: "Halloween Theme", desc: "Halloween theme for the week cause why not" }
+    ]
+  },
+  {
+    title: "What'd I Miss?",
     desc: "v1.5.0 : Week of October 6th, 2025",
     images: [
       { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Current.png", alt: "" }
     ],
     changes: [
       { text: "Games Changes", desc: "UI Changes, New Games, Data Saving!" },
-      { text: "More & Fixed Unblockers", desc: "finally stopped neglecting this lol (More Unblockers, Better, Faster)" },
-      { text: "Learning Tools Expansion", desc: "Releasing Soon, Custom Tiny Task & Autoclicker for Browsers!" }
-    ]
-  },
-  {
-    title: "What'd I Miss?",
-    desc: "v1.0.5 : September 15nd, 2025",
-    images: [
-      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Previous.png", alt: "" }
-    ],
-    changes: [
-      { text: "New Core: Learning Tools", desc: "IXL Hacks" },
+      { text: "More & Fixed Unblockers", desc: "finally stopped neglecting this lol (More Unblockers, Better, Faster)" }
     ]
   },
   {
@@ -343,7 +343,8 @@ const waves = theme.waves
       { text: "Learning Tools Completion", desc: "Added Calculator, Marker Tool, Ect." },
       { text: "IXL+ Hacks", desc: "Payed $5 for IXL+" },
       { text: "Gimkit Hacks", desc: "I'll look into it at some point, seems patched for now though." },
-      { text: "Themes", desc: "Themes Dropping Week of October 13th! (Or Earlier?)" }
+      { text: "Themes", desc: "Themes Dropping Week of October 13th! (Or Earlier?)" },
+      { text: "TinyTask Ripoff", desc: "basically tinytask for browsers idk when tho" }
     ]
   }
 ];

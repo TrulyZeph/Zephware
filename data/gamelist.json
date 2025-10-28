@@ -196,7 +196,7 @@
     },
     {
         "label": "Block Blast",
-        "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/unity3/block-blast/index.html",
+        "url": "https://d1yh00vn2fvto7.cloudfront.net/play?gameID=game_af9c_a45849eb55ba2",
         "image": "https://dnrweqffuwjtx.cloudfront.net/media/posts/558/Block-Blast.jpg"
     },
     {
@@ -375,6 +375,11 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/WeBecomeWhatWeBehold.png"
     },
     {
+        "label": "Tiny Fishing",
+        "url": "https://d1yh00vn2fvto7.cloudfront.net/play?gameID=game_a1b4_acffc0bb42c2",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/TinyFishing.png"
+    },
+    {
         "label": "Gummy Blocks",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2023/code/gummy-blocks/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/GummyBlocks.png"
@@ -390,6 +395,16 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/SnowWarIO.png"
     },
     {
+        "label": "Idle Dice",
+        "url": "https://d1yh00vn2fvto7.cloudfront.net/play?gameID=game_c411_d5ac57bea9aaa",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/IdleDice.png"
+    },
+    {
+        "label": "Final Earth 2",
+        "url": "https://d1yh00vn2fvto7.cloudfront.net/play?gameID=game_1b43_2af1d9de47c62",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/FinalEarth2.png"
+    },
+    {
         "label": "State.io Wars",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/233/state-io-wars/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/StateIOWars.png"
@@ -403,6 +418,16 @@
         "label": "Highway Racer 2",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2022/unity2/highway-racer-2/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/HighwayRacer2.png"
+    },
+    {
+        "label": "BitLife",
+        "url": "https://d1yh00vn2fvto7.cloudfront.net/play?gameID=game_d8d4_1fde2f2baf006",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/Bitlife.jpg"
+    },
+    {
+        "label": "Retro Bowl",
+        "url": "https://d1yh00vn2fvto7.cloudfront.net/play?gameID=game_dd93_14f8744605bda",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/RetroBowl.png"
     },
     {
         "label": "Drift Hunters Pro",
@@ -430,6 +455,16 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/EggClicker.png"
     },
     {
+        "label": "Slow Roads",
+        "url": "https://d1yh00vn2fvto7.cloudfront.net/play?gameID=game_d7b2_9a27357abcb8c",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/SlowRoads.png"
+    },
+    {
+        "label": "GladiHoppers",
+        "url": "https://d1yh00vn2fvto7.cloudfront.net/play?gameID=game_e45c_0d7531e30a6e5",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/Gladihoppers.jpg"
+    },
+    {
         "label": "Bloxorz",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/gm/games4/bloxorz/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/Bloxorz.png"
@@ -448,6 +483,11 @@
         "label": "Football King",
         "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/226/football-king/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/FootballKing.png"
+    },
+    {
+        "label": "Suika Game",
+        "url": "https://d1yh00vn2fvto7.cloudfront.net/play?gameID=game_a857_f1261a87ea8d",
+        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/SuikaGame.png"
     },
     {
         "label": "Moto X3M Spooky Land",
@@ -685,11 +725,6 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "Slow Roads",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/slow-roads/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "NZP Gay",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/nzp-gay/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
@@ -835,11 +870,6 @@
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
-        "label": "Gladi Hoppers",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/gladihoppers/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
         "label": "Stick Duel Battle",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/stick-duel-battle/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
@@ -952,11 +982,6 @@
     {
         "label": "BF3D",
         "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/bf3d/index.html",
-        "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
-    },
-    {
-        "label": "Tiny Fishing",
-        "url": "https://d3rtzzzsiu7gdr.cloudfront.net/files/tiny-fishing/index.html",
         "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/placeholder.png"
     },
     {
