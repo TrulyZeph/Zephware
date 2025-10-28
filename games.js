@@ -1381,45 +1381,39 @@ function schGames () {
    fredokaFontLink.href = 'https://fonts.googleapis.com/css2?family=Fredoka&display=swap';
    document.head.appendChild(fredokaFontLink);
 
-   const fredokaFontStyle = document.createElement('style');
-   fredokaFontStyle.type = 'text/css';
-   fredokaFontStyle.innerText = `
-       * {
-          font-family: 'Fredoka', sans-serif !important;
-       }
-   `;
-   document.head.appendChild(fredokaFontStyle);
-
-   const overlay = document.createElement('div');
-   overlay.style.position = 'fixed';
-   overlay.style.top = '0';
-   overlay.style.left = '0';
-   overlay.style.width = '100%';
-   overlay.style.height = '100%';
-   overlay.style.display = 'flex';
-   overlay.style.justifyContent = 'center';
-   overlay.style.alignItems = 'center';
-   overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
-   overlay.style.zIndex = '9999';
-
    const container = document.createElement('div');
    container.style.backgroundColor = '#fff';
    container.style.padding = '30px';
+   container.style.width = '250px';
+   container.style.height = '100px';
+   container.style.left = '50%';
+   container.style.top = '50%';
+   container.style.zIndex = '10000';
+   container.style.transform = 'translate(-50%, -50%)';
+   container.style.position = 'fixed';
    container.style.borderRadius = '12px';
    container.style.textAlign = 'center';
+   container.style.fontFamily = 'Fredoka, sans-serif';
    container.style.background = '#111';
+   container.style.textAlign = 'center';
    container.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
 
    const title = document.createElement('h2');
    title.innerText = 'Select Game Source';
    title.style.color = '#fff';
+   title.style.marginTop = '0';
+   title.style.position = 'relative';
+   title.style.top = '0px';   
    container.appendChild(title);
 
    function createButton(text, onClick) {
       const btn = document.createElement('button');
       btn.innerText = text;
+      btn.style.fontFamily = 'Fredoka, sans-serif';
+      btn.style.fontWeight = 'bold';
       btn.style.padding = '12px 25px';
       btn.style.margin = '10px';
+      btn.style.marginTop = '5%';
       btn.style.fontSize = '16px';
       btn.style.border = 'none';
       btn.style.borderRadius = '20px';
@@ -1431,20 +1425,19 @@ function schGames () {
       btn.onmouseout = () => btn.style.backgroundColor = '#007BFF';
             btn.onclick = () => {
          onClick();
-         overlay.remove();
+         container.remove();
       };
       return btn;
    }
 
-   const button1 = createButton('Main', () => {
+   const mainBtn = createButton('Main', () => {
     mainGames()
    });
-   const button2 = createButton('Schoology', () => {
+   const schBtn = createButton('Schoology', () => {
     schGames()
    });
 
-   container.appendChild(button1);
-   container.appendChild(button2);
-   overlay.appendChild(container);
-   document.body.appendChild(overlay);
-})();
+   container.appendChild(mainBtn);
+   container.appendChild(schBtn);
+   document.body.appendChild(container);
+})();   
