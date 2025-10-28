@@ -1,4 +1,4 @@
-javascript:(function(){
+javascript:(function (){
   if (!document.getElementById('fredoka-font-link')) {
     const link = document.createElement('link');
     link.id = 'fredoka-font-link';
@@ -65,7 +65,7 @@ const theme = themes.orange;
     }
 
     body {
-      background-color: #234;
+      background-color: #111;
       margin: 0;    
       max-height: 100vh;
       overflow: hidden;
@@ -776,6 +776,47 @@ function showInstructionsOverlay(customLink) {
   };
 
   document.body.appendChild(inputArea);
+})();
+
+(function () {
+
+   const img = document.createElement("img");
+   img.src = "https://www.indiatimes.com/thumb/123963169.cms?imgsize=46526&width=616&resizemode=4"
+   img.style.position = "fixed";
+   img.style.top = "0";
+   img.style.left = "0";
+   img.style.width = "110vw";
+   img.style.height = "100vh";
+   img.style.opacity = 0.1;
+   img.style.zIndex = 1;
+   img.style.display = "none";
+   img.style.pointerEvents = "none";
+   document.body.appendChild(img);
+
+   function showFlicker() {
+      let flickerCount = 0;
+      img.style.display = "block";
+
+      const flicker = setInterval(() => {
+         img.style.visibility = (
+           img.style.visibility === "hidden"
+           ? "visible"
+           : "hidden"
+         );
+         flickerCount++;
+
+         if (flickerCount >= 20) {
+            clearInterval(flicker);
+            img.style.display = "none";
+            img.style.visibility = "visible";
+         }
+      }, 150);
+
+      const nextDelay = Math.random() * (15000 - 5000) + 5000;
+      setTimeout(showFlicker, nextDelay);
+   }
+
+   setTimeout(showFlicker, Math.random() * (15000 - 5000) + 5000);
 })();
 
 (function() {
