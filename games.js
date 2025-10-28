@@ -769,51 +769,44 @@ async function enableRuffleSavePersistence(player, gameId) {
                button.appendChild(label);
 
                button.addEventListener('click', async () => {
-	panel.remove();
-	let url = config.url;
-	url = getPersistentUrl(url);
+                panel.remove();
+                let url = config.url;
+                url = getPersistentUrl(url);
 
-	if (url.endsWith('.swf')) {
-		await injectRuffle();
-		const ruffle = window.RufflePlayer.newest();
-		const player = ruffle.createPlayer();
-		player.style.width = '100vw';
-		player.style.height = '100vh';
-		player.style.position = 'fixed';
-		player.style.top = '0';
-		player.style.left = '0';
-		player.style.zIndex = 2;
-		document.body.appendChild(player);
+                if (url.endsWith('.swf')) {
+                    await injectRuffle();
+                    const ruffle = window.RufflePlayer.newest();
+                    const player = ruffle.createPlayer();
+                    player.style.width = '100vw';
+                    player.style.height = '100vh';
+                    player.style.position = 'fixed';
+                    player.style.top = '0';
+                    player.style.left = '0';
+                    player.style.zIndex = 2;
+                    document.body.appendChild(player);
 
-		await enableRuffleSavePersistence(player, url);
-		player.load(url);
-	} else {
-		const iframe = document.createElement('iframe');
-		iframe.src = url;
-		iframe.style.width = '100vw';
-		iframe.style.height = '100vh';
-		iframe.style.border = 'none';
-		iframe.style.position = 'fixed';
-		iframe.style.top = '0';
-		iframe.style.left = '0';
-		iframe.style.zIndex = 2;
-		document.body.appendChild(iframe);
-
-		    if (window.ZephwareSaveBridge) {
-	    		try {
-    				await ZephwareSaveBridge.attach(iframe, {
-			    		id: url,
-		    			origin: '*',
-	    				auto: true
-    				});
-            			} catch (e) {
-        	    			console.warn('ZephwareSaveBridge attach failed', e);
-            			}
-            		}
-            	}
-              });
-              container.appendChild(button);
-           });
+                    await enableRuffleSavePersistence(player, url);
+                    player.load(url);
+                    } else {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = url;
+                    iframe.style.width = '100vw';
+                    iframe.style.height = '100vh';
+                    iframe.style.border = 'none';
+                    iframe.style.position = 'fixed';
+                    iframe.style.top = '0';
+                    iframe.style.left = '0';
+                    iframe.style.zIndex = 2;
+                    document.body.appendChild(iframe);
+                    DataLoader.attach(iframe, {
+                    id: url,
+                    auto: true,
+                	origin: '*'
+                    });
+                    }
+                });
+                container.appendChild(button);
+            });
         }
 
         panel.appendChild(container);
