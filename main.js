@@ -296,7 +296,7 @@ const theme = themes.orange;
   const select = document.createElement('select');
   select.id = 'selector';
   select.setAttribute('title', '');
-  const options = ['Games', 'Unblockers', 'Soundboard', 'Learning Tools', 'Marketplace', 'Blooket Hacks', 'Gimkit Hacks', 'Messages'];
+  const options = ['Games', 'Schoology Games', 'Unblockers', 'Soundboard', 'Learning Tools', 'Marketplace', 'Blooket Hacks', 'Gimkit Hacks', 'Messages'];
   options.forEach(opt => {
     const option = document.createElement('option');
     option.value = opt.toLowerCase();
@@ -622,6 +622,11 @@ button.addEventListener('click', () => {
 
     if (val === 'messages') {
         showInstructionsOverlay('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/msgBridge.js');
+        return;
+    }
+
+    if (val === 'schoology games') {
+        showInstructionsOverlay('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/schGames.js');
         return;
     }
 
