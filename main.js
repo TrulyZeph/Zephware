@@ -620,13 +620,8 @@ button.addEventListener('click', () => {
         return;
     }
 
-    if (val === 'messages') {
-        showInstructionsOverlay('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/msgBridge.js');
-        return;
-    }
-
-    if (val === 'schoology games') {
-        showInstructionsOverlay('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/schGames.js');
+    if (val === 'messages' || val === 'schoology games') {
+        showInstructionsOverlay('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/bridge.js');
         return;
     }
 
