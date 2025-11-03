@@ -34,7 +34,7 @@ const themes = {
       waves: ['#b463ffff','#8d3ee0ff','#5a15b3ff']
    }
 };
-const theme = themes.orange;
+const theme = themes.blue;
 
   const style = document.createElement('style');
   style.textContent = `
@@ -65,7 +65,7 @@ const theme = themes.orange;
     }
 
     body {
-      background-color: #111;
+      background-color: #234;
       margin: 0;    
       max-height: 100vh;
       overflow: hidden;
@@ -312,9 +312,19 @@ const theme = themes.orange;
   const newsPages = [
   {
     title: "What's New?",
-    desc: "v1.7.0 : Week of October 26th, 2025",
+    desc: "v1.0.8 : Week of November 2nd, 2025",
     images: [
-      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Current.png", alt: "" }
+      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/CurrentB.png", alt: "" }
+    ],
+    changes: [
+      { text: "Games Changes", desc: "Improved Data Saving, New Games, UI Changes, Removed Broken Games" }
+    ]
+  },
+  {
+    title: "What'd I Miss?",
+    desc: "v1.0.7 : Week of October 26th, 2025",
+    images: [
+      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/CurrentB.png", alt: "" }
     ],
     changes: [
       { text: "Games Changes", desc: "Data Saving, New Really Good Games" },
@@ -323,19 +333,8 @@ const theme = themes.orange;
     ]
   },
   {
-    title: "What'd I Miss?",
-    desc: "v1.5.0 : Week of October 6th, 2025",
-    images: [
-      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Current.png", alt: "" }
-    ],
-    changes: [
-      { text: "Games Changes", desc: "UI Changes, New Games, Data Saving!" },
-      { text: "More & Fixed Unblockers", desc: "finally stopped neglecting this lol (More Unblockers, Better, Faster)" }
-    ]
-  },
-  {
     title: "What's Next?",
-    desc: "v1.0.8 : Next Week!",
+    desc: "v1.0.9 : Possible Additions Next Week!",
     images: [
       { src: "https://placehold.co/560x160/222/fff.png?text=Coming+Soon", alt: "Coming Soon" }
     ],
@@ -343,8 +342,9 @@ const theme = themes.orange;
       { text: "Learning Tools Completion", desc: "Added Calculator, Marker Tool, Ect." },
       { text: "IXL+ Hacks", desc: "Payed $5 for IXL+" },
       { text: "Gimkit Hacks", desc: "I'll look into it at some point, seems patched for now though." },
-      { text: "Themes", desc: "Themes Dropping Week of October 13th! (Or Earlier?)" },
-      { text: "TinyTask Ripoff", desc: "basically tinytask for browsers idk when tho" }
+      { text: "Themes", desc: "Pick from green, orange, red, and purple!" },
+      { text: "TinyTask Ripoff", desc: "basically tinytask for browsers idk when tho" },
+      { text: "Messages Relauch", desc: "its coming soon, trust me bro"}
     ]
   }
 ];
@@ -778,7 +778,7 @@ function showInstructionsOverlay(customLink) {
   document.body.appendChild(inputArea);
 })();
 
-(function () {
+/*(function () {
 
    const img = document.createElement("img");
    img.src = "https://www.indiatimes.com/thumb/123963169.cms?imgsize=46526&width=616&resizemode=4"
@@ -817,7 +817,7 @@ function showInstructionsOverlay(customLink) {
    }
 
    setTimeout(showFlicker, Math.random() * (15000 - 5000) + 5000);
-})();
+})();*/
 
 (function() {
   const style = document.createElement('style');
