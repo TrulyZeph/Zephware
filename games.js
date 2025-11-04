@@ -5,7 +5,7 @@
     let activeTag = null;
     let buttonConfigs = [];
     function loadGameList() {
-        fetch('https://raw.githubusercontent.com/trulyzeph/zephware/main/data/gamelist.json')
+        fetch('https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/gamelist.json')
             .then(response => response.json())
             .then(data => {
                 buttonConfigs = data;
@@ -373,9 +373,9 @@ async function enableRuffleSavePersistence(player, gameId) {
 
     function TitleBar() {
         const bar = document.createElement('div');
-        bar.style.width = '40%';
+        bar.style.width = '60%';
         bar.style.height = '50px';
-        bar.style.marginLeft = '30%';
+        bar.style.marginLeft = '19.5%';
         bar.style.marginTop = '20px';
         bar.style.borderRadius = '15px';
         bar.style.display = 'flex';
