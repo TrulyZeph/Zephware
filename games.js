@@ -37,222 +37,450 @@
         return url;
     }
 
+function normalizeGameId(url) {
+    try {
+        const u = new URL(url, location.href);
+        u.search = '';
+        u.hash = '';
+        const s = u.toString();
+        let h = 2166136261 >>> 0;
+        for (let i = 0; i < s.length; i++) {
+            h ^= s.charCodeAt(i);
+            h += (h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24);
+            h = h >>> 0;
+        }
+        return `zwb_${h.toString(16)}_${btoa(s).slice(0,8)}`;
+    } catch (e) {
+        return `zwb_raw_${String(url)}`;
+    }
+}
+
+function trySyncToHostStore(key, obj) {
+    try {
+        localStorage.setItem(key, JSON.stringify(obj));
+        return true;
+    } catch (e) {
+        console.warn('trySyncToHostStore failed', e);
+        return false;
+    }
+}
+
+function readHostStore(key) {
+    try {
+        const v = localStorage.getItem(key);
+        return v ? JSON.parse(v) : null;
+    } catch (e) {
+        console.warn('readHostStore failed', e);
+        return null;
+    }
+}
+
 const DataLoader = (() => {
-	const KEY_PREFIX = 'zephware_save_';
+    const KEY_PREFIX = 'zephware_save_';
+    const SAVE_DEBOUNCE = 250;
 
-	const SAVE_DEBOUNCE = 250;
+    function _keyFor(gameId) {
+        return KEY_PREFIX + gameId;
+    }
 
-	function _hostSet(gameId, obj) {
-		try {
-			localStorage.setItem(KEY_PREFIX + gameId, JSON.stringify(obj));
-		} catch (e) {
-			console.warn('DataLoader: failed to write host storage', e);
-		}
-	}
+    function _hostSet(gameId, obj) {
+        try {
+            localStorage.setItem(_keyFor(gameId), JSON.stringify(obj));
+        } catch (e) {
+            console.warn('DataLoader: failed to write host storage', e);
+        }
+    }
 
-	function _hostGet(gameId) {
-		try {
-			const v = localStorage.getItem(KEY_PREFIX + gameId);
-			return v ? JSON.parse(v) : null;
-		} catch (e) {
-			console.warn('DataLoader: failed to read host storage', e);
-			return null;
-		}
-	}
+    function _hostGet(gameId) {
+        try {
+            const v = localStorage.getItem(_keyFor(gameId));
+            return v ? JSON.parse(v) : null;
+        } catch (e) {
+            console.warn('DataLoader: failed to read host storage', e);
+            return null;
+        }
+    }
 
-	function _isSameOrigin(iframe) {
-		try {
-			void iframe.contentWindow.location.href;
-			return true;
-		} catch (e) {
-			return false;
-		}
-	}
+    function _isSameOrigin(iframe) {
+        try {
+            void iframe.contentWindow.location.href;
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
 
-	async function _directSync(iframe, gameId, options = {}) {
-		const win = iframe.contentWindow;
-		if (!win) return false;
+    async function _directSync(iframe, gameId, options = {}) {
+        const win = iframe.contentWindow;
+        if (!win) return false;
 
-		const persisted = _hostGet(gameId);
-		if (persisted && typeof persisted === 'object' && persisted.__localStorageSnapshot) {
-			try {
-				for (const k in persisted.__localStorageSnapshot) {
-					win.localStorage.setItem(k, persisted.__localStorageSnapshot[k]);
-				}
-			} catch (e) {
-				console.warn('DataLoader: failed to restore into iframe localStorage', e);
-			}
-		}
+        const persisted = _hostGet(gameId);
+        if (persisted && typeof persisted === 'object' && persisted.__localStorageSnapshot) {
+            try {
+                for (const k in persisted.__localStorageSnapshot) {
+                    win.localStorage.setItem(k, persisted.__localStorageSnapshot[k]);
+                }
+            } catch (e) {
+                console.warn('DataLoader: failed to restore into iframe localStorage', e);
+            }
+        }
 
-		let lastSnapshot = {};
-		try {
-			for (let i = 0; i < win.localStorage.length; i++) {
-				const k = win.localStorage.key(i);
-				lastSnapshot[k] = win.localStorage.getItem(k);
-			}
-		} catch (e) {
-			console.warn('DataLoader: reading iframe localStorage failed', e);
-			return false;
-		}
+        let lastSnapshot = {};
+        try {
+            for (let i = 0; i < win.localStorage.length; i++) {
+                const k = win.localStorage.key(i);
+                lastSnapshot[k] = win.localStorage.getItem(k);
+            }
+        } catch (e) {
+            console.warn('DataLoader: reading iframe localStorage failed', e);
+            return false;
+        }
 
-		let timer = null;
-		function poll() {
-			try {
-				const snap = {};
-				for (let i = 0; i < win.localStorage.length; i++) {
-					const k = win.localStorage.key(i);
-					snap[k] = win.localStorage.getItem(k);
-				}
-				const changed = JSON.stringify(snap) !== JSON.stringify(lastSnapshot);
-				if (changed) {
-					lastSnapshot = snap;
-					_hostSet(gameId, { __localStorageSnapshot: snap, updatedAt: Date.now() });
-				}
-			} catch (e) {
-				console.warn('DataLoader: polling iframe localStorage failed', e);
-				clearInterval(timer);
-			}
-		}
-		timer = setInterval(poll, options.pollInterval || 1000);
-		iframe._zwb_directPoll = timer;
-		return true;
-	}
+        let timer = null;
+        function poll() {
+            try {
+                const snap = {};
+                for (let i = 0; i < win.localStorage.length; i++) {
+                    const k = win.localStorage.key(i);
+                    snap[k] = win.localStorage.getItem(k);
+                }
+                const changed = JSON.stringify(snap) !== JSON.stringify(lastSnapshot);
+                if (changed) {
+                    lastSnapshot = snap;
+                    _hostSet(gameId, { __localStorageSnapshot: snap, updatedAt: Date.now() });
+                }
+            } catch (e) {
+                console.warn('DataLoader: polling iframe localStorage failed', e);
+                clearInterval(timer);
+            }
+        }
+        timer = setInterval(poll, options.pollInterval || 1000);
+        iframe._zwb_directPoll = timer;
+        return true;
+    }
 
-	function _postMessageBridge(iframe, gameId, allowedOrigin = '*') {
-		const targetWin = iframe.contentWindow;
-		if (!targetWin) return false;
+    function _postMessageBridge(iframe, gameId, allowedOrigin = '*') {
+        const targetWin = iframe.contentWindow;
+        if (!targetWin) return false;
 
-		let lastSave = null;
-		let debounced = null;
+        let lastSave = null;
+        let debounced = null;
 
-		function onMessage(e) {
-			if (allowedOrigin !== '*' && e.origin !== allowedOrigin) return;
-			const d = e.data || {};
-			if (d && d.__zwb_type === 'zephware_save') {
-				lastSave = { payload: d.payload, t: Date.now() };
-				if (debounced) clearTimeout(debounced);
-				debounced = setTimeout(() => {
-					_hostSet(gameId, { __payload: lastSave.payload, updatedAt: lastSave.t });
-					debounced = null;
-				}, SAVE_DEBOUNCE);
-			}
-			if (d && d.__zwb_type === 'zephware_request_restore') {
-				const persisted = _hostGet(gameId);
-				const payload = persisted && persisted.__payload ? persisted.__payload : null;
-				targetWin.postMessage({ __zwb_type: 'zephware_restore', payload }, allowedOrigin);
-			}
-		}
+        function onMessage(e) {
+            if (allowedOrigin !== '*' && e.origin !== allowedOrigin) return;
+            const d = e.data || {};
+            if (d && d.__zwb_type === 'zephware_save') {
+                lastSave = { payload: d.payload, t: Date.now() };
+                if (debounced) clearTimeout(debounced);
+                debounced = setTimeout(() => {
+                    _hostSet(gameId, { __payload: lastSave.payload, updatedAt: lastSave.t });
+                    debounced = null;
+                }, SAVE_DEBOUNCE);
+            }
+            if (d && d.__zwb_type === 'zephware_request_restore') {
+                const persisted = _hostGet(gameId);
+                const payload = persisted && persisted.__payload ? persisted.__payload : null;
+                targetWin.postMessage({ __zwb_type: 'zephware_restore', payload }, allowedOrigin);
+            }
+        }
 
-		window.addEventListener('message', onMessage);
+        window.addEventListener('message', onMessage);
 
-		const persisted = _hostGet(gameId);
-		targetWin.postMessage({ __zwb_type: 'zephware_host_ready', payload: persisted ? persisted.__payload : null }, allowedOrigin);
+        const persisted = _hostGet(gameId);
+        try {
+            targetWin.postMessage({ __zwb_type: 'zephware_host_ready', payload: persisted ? persisted.__payload : null }, allowedOrigin);
+        } catch (err) {
+        }
 
-		iframe._zwb_messageListener = onMessage;
-		return true;
-	}
+        iframe._zwb_messageListener = onMessage;
+        return true;
+    }
 
-	async function attach(iframe, opts = {}) {
-		if (!iframe || !opts.id) throw new Error('DataLoader.attach requires iframe element and opts.id');
+    async function attach(iframe, opts = {}) {
+        if (!iframe || !opts.id) throw new Error('DataLoader.attach requires iframe element and opts.id');
 
-		const gameId = opts.id;
-		const origin = opts.origin || '*';
-		const auto = typeof opts.auto === 'boolean' ? opts.auto : true;
+        const gameId = typeof opts.id === 'string' ? normalizeGameId(opts.id) : opts.id;
+        const origin = opts.origin || '*';
+        const auto = typeof opts.auto === 'boolean' ? opts.auto : true;
 
-		detach(iframe);
+        detach(iframe);
 
-		const sameOrigin = _isSameOrigin(iframe);
-		if (auto && sameOrigin) {
-			const ok = await _directSync(iframe, gameId, opts);
-			if (ok) {
-				console.log('DataLoader: using direct same-origin sync for', gameId);
-				return { mode: 'direct' };
-			}
-		}
+        const sameOrigin = _isSameOrigin(iframe);
+        if (auto && sameOrigin) {
+            const ok = await _directSync(iframe, gameId, opts);
+            if (ok) {
+                console.log('DataLoader: using direct same-origin sync for', gameId);
+                return { mode: 'direct' };
+            }
+        }
 
-		const pmok = _postMessageBridge(iframe, gameId, origin);
-		if (pmok) {
-			console.log('DataLoader: using postMessage bridge for', gameId);
-			return { mode: 'postMessage' };
-		}
+        const pmok = _postMessageBridge(iframe, gameId, origin);
+        if (pmok) {
+            console.log('DataLoader: using postMessage bridge for', gameId);
+            return { mode: 'postMessage' };
+        }
 
-		console.warn('DataLoader: failed to attach bridge for', gameId);
-		return { mode: 'none' };
-	}
+        console.warn('DataLoader: failed to attach bridge for', gameId);
+        return { mode: 'none' };
+    }
 
-	function detach(iframe) {
-		if (!iframe) return;
-		if (iframe._zwb_directPoll) {
-			clearInterval(iframe._zwb_directPoll);
-			delete iframe._zwb_directPoll;
-		}
-		if (iframe._zwb_messageListener) {
-			window.removeEventListener('message', iframe._zwb_messageListener);
-			delete iframe._zwb_messageListener;
-		}
-	}
+    function detach(iframe) {
+        if (!iframe) return;
+        if (iframe._zwb_directPoll) {
+            clearInterval(iframe._zwb_directPoll);
+            delete iframe._zwb_directPoll;
+        }
+        if (iframe._zwb_messageListener) {
+            window.removeEventListener('message', iframe._zwb_messageListener);
+            delete iframe._zwb_messageListener;
+        }
+    }
 
-	function restoreIntoIframe(iframe, gameId, origin = '*') {
-		try {
-			const persisted = _hostGet(gameId);
-			const payload = persisted && persisted.__payload ? persisted.__payload : null;
-			if (iframe.contentWindow) {
-				iframe.contentWindow.postMessage({ __zwb_type: 'zephware_restore', payload }, origin);
-			}
-		} catch (e) {
-			console.warn('DataLoader: restoreIntoIframe failed', e);
-		}
-	}
+    function restoreIntoIframe(iframe, gameId, origin = '*') {
+        try {
+            const persisted = _hostGet(gameId);
+            const payload = persisted && persisted.__payload ? persisted.__payload : null;
+            if (iframe.contentWindow) {
+                iframe.contentWindow.postMessage({ __zwb_type: 'zephware_restore', payload }, origin);
+            }
+        } catch (e) {
+            console.warn('DataLoader: restoreIntoIframe failed', e);
+        }
+    }
 
-	return {
-		attach,
-		detach,
-		restoreIntoIframe,
-		_hostGet,
-		_hostSet
-	};
+    function exportSnapshot(gameId) {
+        return JSON.stringify(_hostGet(gameId) || {}, null, 2);
+    }
+
+    function importSnapshot(gameId, json) {
+        try {
+            const obj = JSON.parse(json);
+            _hostSet(gameId, obj);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    return {
+        attach,
+        detach,
+        restoreIntoIframe,
+        _hostGet,
+        _hostSet,
+        exportSnapshot,
+        importSnapshot
+    };
 })();
 
-async function enableRuffleSavePersistence(player, gameId) {
-	if (!player || !player.load) return;
+async function enableRuffleSavePersistence(player, rawUrl) {
+    if (!player || !player.load) return;
 
-	const KEY = 'ruffle_sol_' + gameId;
+    const gameId = normalizeGameId(rawUrl);
+    const KEY = 'ruffle_sol_' + gameId;
 
-	const storage = {
-		async getItem(name) {
-			try {
-				const data = localStorage.getItem(KEY);
-				const all = data ? JSON.parse(data) : {};
-				return all[name] || null;
-			} catch (e) {
-				console.warn('Ruffle getItem failed', e);
-				return null;
-			}
-		},
-		async setItem(name, value) {
-			try {
-				const data = localStorage.getItem(KEY);
-				const all = data ? JSON.parse(data) : {};
-				all[name] = value;
-				localStorage.setItem(KEY, JSON.stringify(all));
-			} catch (e) {
-				console.warn('Ruffle setItem failed', e);
-			}
-		},
-		async removeItem(name) {
-			try {
-				const data = localStorage.getItem(KEY);
-				const all = data ? JSON.parse(data) : {};
-				delete all[name];
-				localStorage.setItem(KEY, JSON.stringify(all));
-			} catch (e) {}
-		}
-	};
+    const storage = {
+        async getItem(name) {
+            try {
+                const data = localStorage.getItem(KEY);
+                const all = data ? JSON.parse(data) : {};
+                return all[name] || null;
+            } catch (e) {
+                console.warn('Ruffle getItem failed', e);
+                return null;
+            }
+        },
+        async setItem(name, value) {
+            try {
+                const data = localStorage.getItem(KEY);
+                const all = data ? JSON.parse(data) : {};
+                all[name] = value;
+                localStorage.setItem(KEY, JSON.stringify(all));
+                trySyncToHostStore(KEY, { __payload: all, updatedAt: Date.now() });
+            } catch (e) {
+                console.warn('Ruffle setItem failed', e);
+            }
+        },
+        async removeItem(name) {
+            try {
+                const data = localStorage.getItem(KEY);
+                const all = data ? JSON.parse(data) : {};
+                delete all[name];
+                localStorage.setItem(KEY, JSON.stringify(all));
+                trySyncToHostStore(KEY, { __payload: all, updatedAt: Date.now() });
+            } catch (e) {}
+        }
+    };
 
-	player.config = player.config || {};
-	player.config.storageBackend = storage;
+    player.config = player.config || {};
+    player.config.storageBackend = storage;
 
-	console.log('✅ Ruffle persistent save enabled for', gameId);
+    try {
+        const hostSnapshot = readHostStore(KEY);
+        if (hostSnapshot && hostSnapshot.__payload) {
+            const payload = hostSnapshot.__payload;
+            for (const k in payload) {
+                try {
+                    localStorage.setItem(k, payload[k]);
+                } catch (e) {}
+            }
+        }
+    } catch (e) {}
+
+    const flushInterval = setInterval(async () => {
+        try {
+            const data = localStorage.getItem(KEY);
+            const all = data ? JSON.parse(data) : {};
+            trySyncToHostStore(KEY, { __payload: all, updatedAt: Date.now() });
+        } catch (e) {}
+    }, 3_000);
+    const observer = new MutationObserver(() => {
+        if (!document.body.contains(player)) {
+            clearInterval(flushInterval);
+            observer.disconnect();
+        }
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+
+    console.log('✅ Ruffle persistent save enabled for', gameId);
+}
+
+async function tryBlobProxyAndInject(iframe, targetUrl, opts = {}) {
+    try {
+        const res = await fetch(targetUrl, { credentials: 'omit', mode: 'cors' });
+        if (!res.ok) throw new Error('fetch failed ' + res.status);
+        let html = await res.text();
+
+        const shim = `
+<script>
+(function(){
+    // shim: intercept localStorage operations and forward saves to parent
+    function postSave(payload) {
+        try { parent.postMessage({ __zwb_type: 'zephware_save', payload }, '*'); } catch (e) {}
+    }
+    function sendRestoreRequest() {
+        try { parent.postMessage({ __zwb_type: 'zephware_request_restore' }, '*'); } catch (e) {}
+    }
+    // on host_ready the parent may provide initial payload
+    window.addEventListener('message', function(e){
+        try {
+            var d = e.data || {};
+            if (d && d.__zwb_type === 'zephware_restore') {
+                var payload = d.payload || null;
+                if (payload && typeof payload === 'object') {
+                    for (var k in payload) {
+                        try { localStorage.setItem(k, payload[k]); } catch (e) {}
+                    }
+                }
+            }
+            if (d && d.__zwb_type === 'zephware_host_ready') {
+                if (d.payload) {
+                    for (var k in d.payload) {
+                        try { localStorage.setItem(k, d.payload[k]); } catch (e) {}
+                    }
+                }
+            }
+        } catch (e) {}
+    }, false);
+
+    // Intercept setItem/removeItem to notify parent
+    var _lsSet = Storage.prototype.setItem;
+    var _lsRemove = Storage.prototype.removeItem;
+    Storage.prototype.setItem = function(k,v){
+        try { _lsSet.apply(this, arguments); } catch(e) {}
+        // debounce by using a microtask; parent will debounce server-side
+        Promise.resolve().then(function(){ postSave({k:v}); });
+    };
+    Storage.prototype.removeItem = function(k){
+        try { _lsRemove.apply(this, arguments); } catch(e) {}
+        Promise.resolve().then(function(){ postSave({remove:k}); });
+    };
+
+    // On load ask host to restore
+    try { sendRestoreRequest(); } catch(e){}
+    // Also send initial snapshot
+    try {
+        var snap = {};
+        for (var i=0;i<localStorage.length;i++){ var key = localStorage.key(i); snap[key] = localStorage.getItem(key); }
+        postSave(snap);
+    } catch(e){}
+})();
+</script>
+`;
+
+        if (/<head[\s>]/i.test(html)) {
+            html = html.replace(/<head([\s>])/i, '<head$1' + shim);
+        } else if (/<body[\s>]/i.test(html)) {
+            html = html.replace(/<body([\s>])/i, '<body$1' + shim);
+        } else {
+            html = shim + html;
+        }
+
+        const blob = new Blob([html], { type: 'text/html' });
+        const blobUrl = URL.createObjectURL(blob);
+
+        iframe.src = blobUrl;
+
+        const gid = normalizeGameId(targetUrl);
+        setTimeout(() => DataLoader.attach(iframe, { id: gid, origin: '*' }), 300);
+
+        console.log('DataLoader: used blob-proxy injection for', targetUrl);
+        return true;
+    } catch (err) {
+        console.warn('Blob proxy injection failed (CORS or network):', err);
+        return false;
+    }
+}
+
+async function loadGameIntoPage(rawUrl) {
+    const url = rawUrl;
+    const normalizedId = normalizeGameId(url);
+
+    if (url.endsWith('.swf')) {
+        await injectRuffle();
+        const ruffle = window.RufflePlayer && window.RufflePlayer.newest && window.RufflePlayer.newest();
+        if (!ruffle) {
+            console.error('Ruffle missing');
+            return;
+        }
+        const player = ruffle.createPlayer();
+        player.style.width = '100vw';
+        player.style.height = '100vh';
+        player.style.position = 'fixed';
+        player.style.top = '0';
+        player.style.left = '0';
+        player.style.zIndex = 2147483647;
+        document.body.appendChild(player);
+
+        await enableRuffleSavePersistence(player, url);
+        player.load(url);
+        return { mode: 'ruffle', id: normalizedId };
+    }
+
+    const iframe = document.createElement('iframe');
+    iframe.style.width = '100vw';
+    iframe.style.height = '100vh';
+    iframe.style.border = 'none';
+    iframe.style.position = 'fixed';
+    iframe.style.top = '0';
+    iframe.style.left = '0';
+    iframe.style.zIndex = 2147483647;
+    document.body.appendChild(iframe);
+
+    const proxied = await tryBlobProxyAndInject(iframe, url).catch(() => false);
+    if (proxied) {
+        console.log('Loaded via blob-proxy; DataLoader attached for same-origin persistence.');
+        return { mode: 'proxy', id: normalizedId };
+    }
+
+    iframe.src = url;
+    const attachResult = await DataLoader.attach(iframe, { id: normalizedId, origin: '*' });
+    if (attachResult.mode === 'postMessage') {
+        console.log('Loaded via cross-origin iframe with postMessage bridge. Game must post messages to save/restore.');
+    } else {
+        console.warn('Loaded iframe without persistence support. Consider using a CORS proxy or a server-side proxy to enable injection.');
+    }
+    return { mode: attachResult.mode, id: normalizedId };
 }
 
     const globalFontLink = document.createElement('link');
@@ -690,10 +918,17 @@ async function enableRuffleSavePersistence(player, gameId) {
 
                 button.appendChild(imgContainer);
 
-               button.addEventListener('click', async () => {
+                button.addEventListener('click', async () => {
                 panel.remove();
-                let url = config.url;
-                url = getPersistentUrl(url);
+                const raw = config.url;
+                let url = raw;
+
+                try {
+                    url = await loadGameIntoPage(raw);
+                    console.log('game loaded result', url);
+                } catch (e) {
+                    console.error('Failed to load game', e);
+                }
 
                 if (url.endsWith('.swf')) {
                     await injectRuffle();
@@ -709,7 +944,7 @@ async function enableRuffleSavePersistence(player, gameId) {
 
                     await enableRuffleSavePersistence(player, url);
                     player.load(url);
-                    } else {
+                } else {
                     const iframe = document.createElement('iframe');
                     iframe.src = url;
                     iframe.style.width = '100vw';
@@ -720,12 +955,13 @@ async function enableRuffleSavePersistence(player, gameId) {
                     iframe.style.left = '0';
                     iframe.style.zIndex = 2;
                     document.body.appendChild(iframe);
+
                     DataLoader.attach(iframe, {
-                    id: url,
-                    auto: true,
-                	origin: '*'
+                        id: url,
+                        auto: true,
+                        origin: '*'
                     });
-                    }
+                }
                 });
                 container.appendChild(button);
             });
