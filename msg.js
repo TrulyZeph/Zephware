@@ -27,6 +27,49 @@ function loadFirebase(cb){
    };
 }
 
+let sheet = document.createElement('style');
+sheet.textContent = `
+   #zwb-msg-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+      margin-top: 10px;
+      margin-left: 15px;
+   }
+   #zwb-send {
+      font-size: 1.2em;
+      padding: 0.3em 4em;
+      border: none;
+      border-radius: 5px;
+      background: #005da1;
+      color: white;
+      font-weight: bold;
+   }
+   #zwb-choose-btn {
+      font-size: 1.2em;
+      padding: 0.3em 2.5em;
+      border-radius: 5px;
+      background: #91cceb;
+      color: white;
+      font-weight: bold;
+   }
+   #zwb-clear {
+      font-size: 1.2em;
+      padding: 0.3em 4em;
+      border: none;
+      border: 1px solid #d4d4d4ff;
+      border-radius: 5px;
+      background: #fff;
+      color: #005da1;
+      font-weight: bold;
+   }
+   #zwb-textarea {
+      border-radius: 5px;
+   }
+`;
+document.head.appendChild(sheet);
+
 function startMessagingSystem(){
    const STORAGE_PREFIX = 'zeph_msg_history_';
    const ROOM_KEY = 'zeph_msg_room';
@@ -81,7 +124,6 @@ function startMessagingSystem(){
       const style = document.createElement('style');
       style.textContent = `
 #zwb-file-preview img{max-width:60px;max-height:60px;border-radius:4px;margin-right:6px;cursor:pointer}
-#zwb-msg-actions{display:flex;gap:6px;align-items:center}
       `;
       document.head.appendChild(style);
 
@@ -110,7 +152,7 @@ function startMessagingSystem(){
                  <div class="smart-box-mid">
                    <div class="create-type">Room:</div>
                    <span id="room-name" style="margin-left:auto;font-size:12px;color:#555;cursor:pointer;">
-                     Room: ${escapeHtml(room)}
+                     ${escapeHtml(room)}
                    </span>
                    <div id="smart-box-messages"></div>
                    <div id="smart-box-content">
@@ -127,7 +169,7 @@ function startMessagingSystem(){
             <div style="margin-top:10px; display:flex; flex-direction:column;">
                <div style="display:flex; gap:8px; align-items:flex-start;">
                  <div style="flex:1;">
-                   <textarea id="zwb-textarea" placeholder="Write a message..." style="width:100%;margin-top:10px;min-height:70px;"></textarea>
+                   <textarea id="zwb-textarea" placeholder="Write a message..." style="width:100%;margin-top:10px;min-height:77.5px;"></textarea>
                    <div id="zwb-file-preview" style="margin-top:6px; font-size:12px;color:#333;"></div>
                  </div>
                  <div style="display:flex; flex-direction:column; gap:6px;">
@@ -142,19 +184,26 @@ function startMessagingSystem(){
             </div>
          `;
          document.getElementById('room-name').onclick = () => {
+            if(feedEl) feedEl.innerHTML = '';
+            localStorage.removeItem(STORAGE_PREFIX + room);
+
             const r = prompt("Enter room name:", room);
             if(!r) return;
+
             room = r;
             localStorage.setItem(ROOM_KEY, r);
             document.getElementById('room-name').textContent = 'Room: ' + r;
+
             if(unsubscribe) unsubscribe();
             startListener();
             refreshMessages();
-            autoScrollToBottom();
+            setTimeout(() => autoScrollToBottom(true), 200);
          };
+
          document.getElementById('zwb-send').onclick = sendMessage;
          document.getElementById('zwb-img-upload-hidden').onchange = handleFileSelect;
          document.getElementById('zwb-clear').onclick = clearChat;
+
          const ta = document.getElementById('zwb-textarea');
          ta.addEventListener('keydown', function(e){
             if(e.key === 'Enter' && !e.shiftKey){
@@ -162,6 +211,7 @@ function startMessagingSystem(){
                sendMessage();
             }
          });
+
          feedEl = document.getElementById('zwb-msg-feed');
          scrollContainer = document.getElementById('zwb-feed-wrap') || feedEl.parentElement;
       }
@@ -212,10 +262,17 @@ function startMessagingSystem(){
          }));
       }
 
-      function autoScrollToBottom(){
+      function autoScrollToBottom(force){
          if(!scrollContainer) return;
-         try{ scrollContainer.scrollTop = scrollContainer.scrollHeight; }catch(e){}
+
+         const threshold = 80;
+         const distanceFromBottom = scrollContainer.scrollHeight - scrollContainer.scrollTop - scrollContainer.clientHeight;
+
+         if(force || distanceFromBottom < threshold){
+            scrollContainer.scrollTop = scrollContainer.scrollHeight;
+         }
       }
+
       function uid(){ return 'm_' + Math.random().toString(36).slice(2,9); }
       function nowISO(){ return (new Date()).toISOString(); }
       function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -290,6 +347,7 @@ function startMessagingSystem(){
                appendMessage(msg,true);
                saveMessage(msg);
                pushToFirebase(msg);
+               autoScrollToBottom(true);
                pendingFiles = [];
                updateFilePreview();
                ta.value = '';
@@ -333,10 +391,11 @@ function startMessagingSystem(){
       function refreshMessages(){
          if(!feedEl) return;
          feedEl.innerHTML = '';
-         loadHistory().forEach(m=>{
-            if(!document.getElementById(m.id)) appendMessage(m,false);
-         });
-         autoScrollToBottom();
+         const hist = loadHistory();
+         if(hist && hist.length){
+            hist.forEach(m => appendMessage(m,false));
+         }
+         setTimeout(() => autoScrollToBottom(true), 50);
       }
 
       function appendMessage(msg, local){
@@ -348,7 +407,17 @@ function startMessagingSystem(){
          const displayName = escapeHtml(msg.from.displayName || msg.from.rawName || 'Anonymous');
          const li = document.createElement('li');
          li.id = msg.id;
-         li.setAttribute('timestamp', Math.floor(Date.parse(msg.ts || nowISO())/1000).toString());
+         const date = msg.timestamp ? new Date(msg.timestamp) : new Date();
+         const weekday = date.toLocaleString("en-US", { weekday: "short" });
+         const month   = date.toLocaleString("en-US", { month: "short" });
+         const day     = date.getDate();
+         const year    = date.getFullYear();
+         const time    = date.toLocaleString("en-US", { 
+         hour: "numeric", 
+         minute: "2-digit", 
+         hour12: true 
+         });
+         const formatted = `${weekday} ${month} ${day}, ${year} at ${time.toLowerCase()}`;
          li.className = 'first';
          li.innerHTML = `
 <div class="s-edge-type-update-post sUpdate-processed">
@@ -376,7 +445,7 @@ ${profileId? `<a href="/user/${profileId}" class="sExtlink-processed">${displayN
 </span>
 <span class="edge-main"><div class="post-body"></div></span>
 <div class="edge-footer">
-<div class="created"><span class="small gray">${new Date(msg.ts).toLocaleString()}</span></div>
+<div class="created"><span class="small gray">${formatted}</span></div>
 </div>
 </div>
 </div>
@@ -384,6 +453,9 @@ ${profileId? `<a href="/user/${profileId}" class="sExtlink-processed">${displayN
          feedEl.appendChild(li);
          if(!historyHas(msg.id)) saveMessage(msg);
          if(local) autoScrollToBottom();
+         setTimeout(() => {
+            autoScrollToBottom(true);
+         }, 30);
       }
 
       function startListener(){
