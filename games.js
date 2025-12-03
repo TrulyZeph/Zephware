@@ -5,7 +5,7 @@
     let activeTag = null;
     let buttonConfigs = [];
     function loadGameList() {
-        fetch('data/gamelist.json')
+        fetch('https://raw.githubusercontent.com/trulyzeph/zephware/main/data/gamelist.json')
             .then(response => response.json())
             .then(data => {
                 buttonConfigs = data;
