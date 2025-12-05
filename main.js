@@ -32,9 +32,14 @@ const themes = {
       color1: '#b463ffff',
       color2: '#8d3ee0ff',
       waves: ['#b463ffff','#8d3ee0ff','#5a15b3ff']
+   },
+   christmas: {
+      color1: '#00ff2aff',
+      color2: '#ff0000ff',
+      waves: ['#e0dbdbff','#f0f0f0ff','#fdfdfdff']
    }
 };
-const theme = themes.blue;
+const theme = themes.christmas;
 
   const style = document.createElement('style');
   style.textContent = `
@@ -65,7 +70,7 @@ const theme = themes.blue;
     }
 
     body {
-      background-color: #234;
+      background-color: #012929ff;
       margin: 0;    
       max-height: 100vh;
       overflow: hidden;
@@ -83,7 +88,7 @@ const theme = themes.blue;
       text-align: center;
       font-weight: bold;
       font-family: 'Fredoka', sans-serif;
-      background: linear-gradient(to bottom, ${theme.color1}, ${theme.color2});
+      background: linear-gradient(to bottom, ${theme.color1}, #dbf884ff, ${theme.color2});
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       color: transparent;
@@ -312,9 +317,9 @@ const theme = themes.blue;
   const newsPages = [
   {
     title: "What's New?",
-    desc: "v1.0.8 : Week of November 2nd, 2025",
+    desc: "v1.0.8 : Week of December 1st, 2025",
     images: [
-      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/CurrentB.png", alt: "" }
+      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/themes/christmas/Current.png", alt: "" }
     ],
     changes: [
       { text: "Games Changes", desc: "Improved Data Saving, New Games, UI Changes, Removed Broken Games" }
@@ -324,7 +329,7 @@ const theme = themes.blue;
     title: "What'd I Miss?",
     desc: "v1.0.7 : Week of October 26th, 2025",
     images: [
-      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/CurrentB.png", alt: "" }
+      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/themes/christmas/Previous.png", alt: "" }
     ],
     changes: [
       { text: "Games Changes", desc: "Data Saving, New Really Good Games" },
@@ -605,18 +610,16 @@ function showNewsPanel() {
  }
  showNewsPanel();
 
-  let lockedTabs = { 'blooket hacks': true || false, 'learning tools' : true};
+  let lockedTabs = {};
 
 button.addEventListener('click', () => {
     const val = select.value.toLowerCase();
-    if (lockedTabs[val]) {
-        if (val === 'learning tools') {
-            showPasswordOverlay(() => {
-                showInstructionsOverlay('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/lt.js');
-            }, 'tookforeversry');
-        } else {
-            showPasswordOverlay(() => showInstructionsOverlay());
-        }
+    if (val === 'learning tools') {
+        showInstructionsOverlay('https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/lt.js');
+        return;
+    }
+    if (val === 'blooket hacks') {
+        showInstructionsOverlay();
         return;
     }
 
@@ -645,46 +648,6 @@ button.addEventListener('click', () => {
             });
     }
 });
-
-function showPasswordOverlay(onSuccess, customPassword) {
-    const old = document.getElementById('overlay');
-    if (old) old.remove();
-    const overlay = document.createElement('div');
-    overlay.id = 'overlay';
-    overlay.style.zIndex = '99999';
-    overlay.style.fontFamily = "'Fredoka', sans-serif";
-    overlay.innerHTML = `
-      <div id="overlay-box" style="font-family:'Fredoka',sans-serif;">
-        <h1>Password Required</h1>
-        <p>Enter the password to access this section.</p>
-        <input id="password-input" type="password" placeholder="Password" style="font-size:16px;padding:8px 12px;border-radius:8px;border:1px solid #444;width:80%;margin-bottom:16px;outline:none;font-family:'Fredoka',sans-serif;" />
-        <br>
-        <button id="password-submit" style="font-family:'Fredoka',sans-serif;">Submit</button>
-        <div id="password-error" style="color:#ff5555;margin-top:10px;display:none;">Incorrect password.</div>
-      </div>
-    `;
-
-    const input = overlay.querySelector('#password-input');
-    const submit = overlay.querySelector('#password-submit');
-    const error = overlay.querySelector('#password-error');
-    input.focus();
-    function unlock() {
-        const passwordToCheck = customPassword || "back2schoolggs";
-        if (input.value === passwordToCheck) {
-            overlay.remove();
-            onSuccess();
-        } else {
-            error.style.display = 'block';
-            input.value = '';
-            input.focus();
-        }
-    }
-    submit.onclick = unlock;
-    input.addEventListener('keydown', e => {
-        if (e.key === 'Enter') unlock();
-    });
-    document.body.appendChild(overlay);
-}
 
 function showInstructionsOverlay(customLink) {
     const old = document.getElementById('overlay');
@@ -742,7 +705,7 @@ function showInstructionsOverlay(customLink) {
 }
 
   function setButtonStatus(status) {
-    const gradientOpen = 'linear-gradient(to bottom, #01AEFD, #015AFD)';
+    const gradientOpen = `linear-gradient(to bottom, ${color1}, ${color2})`;
     const gradientWIP = 'linear-gradient(to bottom, #002D62, #001B44)';
     switch (status.toLowerCase()) {
       case 'wip':
@@ -766,9 +729,7 @@ function showInstructionsOverlay(customLink) {
 
   select.onchange = () => {
     const val = select.value.toLowerCase();
-    if (lockedTabs[val]) {
-      setButtonStatus('locked');
-    } else if (val === 'gimkit hacks' || val === 'marketplace') {
+    if (val === 'gimkit hacks' || val === 'marketplace') {
       setButtonStatus('wip');
     } else {
       setButtonStatus('open');
@@ -778,7 +739,67 @@ function showInstructionsOverlay(customLink) {
   document.body.appendChild(inputArea);
 })();
 
-/*(function () {
+// Winter Snowfall
+(function () {
+   if (window.__zephwareSnowfall) return;
+   window.__zephwareSnowfall = true;
+
+   const style = document.createElement("style");
+   style.textContent = `
+      #zeph-snow-container {
+         pointer-events: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100vw;
+         height: 100vh;
+         overflow: hidden;
+         z-index: 0;
+      }
+      .zeph-snowflake {
+         position: absolute;
+         top: -5vh;
+         color: white;
+         font-size: 10px;
+         opacity: 0.8;
+         user-select: none;
+         animation-timing-function: linear;
+         animation-fill-mode: forwards;
+      }
+      @keyframes zeph-snowfall {
+         0% { transform: translateY(0) translateX(0); }
+         100% { transform: translateY(110vh) translateX(var(--drift)); }
+      }
+   `;
+   document.head.appendChild(style);
+
+   const container = document.createElement("div");
+   container.id = "zeph-snow-container";
+   document.body.appendChild(container);
+
+   function createSnowflake() {
+      const flake = document.createElement("div");
+      flake.className = "zeph-snowflake";
+      flake.textContent = "❄";
+
+      flake.style.left = Math.random() * 100 + "vw";
+      flake.style.fontSize = 8 + Math.random() * 20 + "px";
+      flake.style.opacity = 0.5 + Math.random() * 0.5;
+      flake.style.setProperty("--drift", (Math.random() * 50 - 25) + "px");
+
+      const fallTime = 6 + Math.random() * 7;
+      flake.style.animation = `zeph-snowfall ${fallTime}s linear forwards`;
+
+      container.appendChild(flake);
+
+      setTimeout(() => flake.remove(), fallTime * 1000);
+   }
+
+   setInterval(createSnowflake, 120);
+})();
+
+/* JUMP SCARE (DISABLED)
+(function () {
 
    const img = document.createElement("img");
    img.src = "https://www.indiatimes.com/thumb/123963169.cms?imgsize=46526&width=616&resizemode=4"
