@@ -65,9 +65,10 @@
   "url": "https://dnrweqffuwjtx.cloudfront.net/games/2024/construct/303/soccer-random-pro/index.html"
  },
  {
-  "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/YoHoHo.png",
-  "label": "YoHoHo",
-  "url": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/gameBuilds/YoHoHo/index.html"
+  "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/Zephware.png",
+  "label": "Trimps",
+  "url": "Trimps/Trimps.github.io/master",
+  "type": "gameBuild"
  },
  {
   "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/BleachvsNaruto.jpg",

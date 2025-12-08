@@ -264,8 +264,10 @@ function startMessagingSystem(){
 
       function autoScrollToBottom(force){
          if(!scrollContainer) return;
+
          const threshold = 80;
          const distanceFromBottom = scrollContainer.scrollHeight - scrollContainer.scrollTop - scrollContainer.clientHeight;
+
          if(force || distanceFromBottom < threshold){
             scrollContainer.scrollTop = scrollContainer.scrollHeight;
          }
@@ -334,6 +336,7 @@ function startMessagingSystem(){
          const txtRaw = ta.value;
          const txt = txtRaw.trim();
          const nameFmt = document.getElementById('zwb-name-format').value;
+
          if(pendingFiles.length){
             const files = pendingFiles.slice();
             processFilesToDataURLs(files).then(urls=>{
@@ -341,26 +344,28 @@ function startMessagingSystem(){
                const imgsHtml = urls.map(u=>`<img src="${u}" style="max-width:360px;border-radius:4px;">`).join('<br>');
                const combined = (safeText? safeText + '<br>' : '') + imgsHtml;
                const msg = buildMessage(combined, nameFmt);
+               appendMessage(msg,true);
+               saveMessage(msg);
                pushToFirebase(msg);
+               autoScrollToBottom(true);
                pendingFiles = [];
                updateFilePreview();
                ta.value = '';
-               autoScrollToBottom(true);
+               autoScrollToBottom();
             }).catch(()=>{});
             return;
          }
          if(!txt) return;
          const msg = buildMessage(escapeHtml(txt).replace(/\n/g,'<br>'), nameFmt);
+         appendMessage(msg,true);
+         saveMessage(msg);
          pushToFirebase(msg);
          ta.value = '';
-         autoScrollToBottom(true);
+         autoScrollToBottom();
       }
 
       function pushToFirebase(msg){
-         msg.ts = Date.now();
-         const ref = db.ref("rooms/"+room+"/messages").push();
-         msg.id = ref.key;
-         ref.set(msg).catch(()=>{  });
+         db.ref("rooms/"+room+"/messages/"+msg.id).set(msg);
       }
 
       function saveMessage(msg){
@@ -383,141 +388,85 @@ function startMessagingSystem(){
          return loadHistory().some(x=>x.id === id);
       }
 
-      async function refreshMessages() {
-         if (!feedEl) return;
-         feedEl.innerHTML = "";
-
-         const ref = db.ref("rooms/" + room + "/messages");
-         ref.once("value", snapshot => {
-            const msgs = snapshot.val() || {};
-            const list = Object.values(msgs).sort((a, b) => a.ts - b.ts);
-
-            list.forEach(m => appendMessage(m, false));
-            autoScrollToBottom(true);
-         });
+      function refreshMessages(){
+         if(!feedEl) return;
+         feedEl.innerHTML = '';
+         const hist = loadHistory();
+         if(hist && hist.length){
+            hist.forEach(m => appendMessage(m,false));
+         }
+         setTimeout(() => autoScrollToBottom(true), 50);
       }
 
       function appendMessage(msg, local){
          if(!feedEl) return;
-         if(!msg || !msg.id) return;
          if(document.getElementById(msg.id)) return;
-
-         // --- normalize timestamp to numeric milliseconds ---
-         if(typeof msg.ts === 'object' && msg.ts !== null){
-            // handle Firestore Timestamp-like { seconds, nanoseconds }
-            if(typeof msg.ts.seconds === 'number') msg.ts = msg.ts.seconds * 1000 + Math.floor((msg.ts.nanoseconds || 0)/1e6);
-            else msg.ts = Date.now();
-         } else if(typeof msg.ts === 'string'){
-            const parsed = Date.parse(msg.ts);
-            msg.ts = isNaN(parsed) ? Date.now() : parsed;
-         } else if(typeof msg.ts !== 'number' || !isFinite(msg.ts)){
-            msg.ts = Date.now();
-         }
-
-         const avatar = msg.from && msg.from.avatar ? msg.from.avatar : '';
-         const profileId = (msg.from && msg.from.id ? msg.from.id : '').replace(/^user_/,'') || '';
-         const displayName = escapeHtml((msg.from && (msg.from.displayName || msg.from.rawName)) || 'Anonymous');
-
+         if((msg.from && (msg.from.rawName||'').toLowerCase().includes('teacher'))) return;
+         const avatar = msg.from.avatar || '';
+         const profileId = (msg.from.id || '').replace(/^user_/,'') || '';
+         const displayName = escapeHtml(msg.from.displayName || msg.from.rawName || 'Anonymous');
          const li = document.createElement('li');
          li.id = msg.id;
-         // keep legacy "timestamp" attribute (seconds) for any other code expecting it
-         li.setAttribute('timestamp', Math.floor(msg.ts/1000).toString());
-         li.dataset.ts = String(msg.ts);
-         li.className = 'first';
-
-         const date = new Date(msg.ts);
+         const date = msg.timestamp ? new Date(msg.timestamp) : new Date();
          const weekday = date.toLocaleString("en-US", { weekday: "short" });
          const month   = date.toLocaleString("en-US", { month: "short" });
          const day     = date.getDate();
          const year    = date.getFullYear();
-         const time    = date.toLocaleString("en-US", { hour: "numeric", minute: "2-digit", hour12: true });
+         const time    = date.toLocaleString("en-US", { 
+         hour: "numeric", 
+         minute: "2-digit", 
+         hour12: true 
+         });
          const formatted = `${weekday} ${month} ${day}, ${year} at ${time.toLowerCase()}`;
-
+         li.className = 'first';
          li.innerHTML = `
-      <div class="s-edge-type-update-post sUpdate-processed">
-      <div class="edge-item">
-         <div class="edge-left">
-            <div class="picture">
-            <div class="profile-picture-wrapper">
-               <div class="profile-picture">
-                  ${profileId? `<a href="/user/${profileId}" class="sExtlink-processed">` : ''}
-                  <img src="${escapeHtml(avatar)}" alt="${displayName}" class="imagecache imagecache-profile_sm">
-                  ${profileId? `</a>` : ''}
-               </div>
-            </div>
-            </div>
-         </div>
-         <div class="edge-main-wrapper">
-            <span class="edge-sentence">
-            <div class="edge-sentence-actions"></div>
-            <div class="update-sentence-inner">
-               <span class="long-username">
-                  ${profileId? `<a href="/user/${profileId}" class="sExtlink-processed">${displayName}</a>` : `${displayName}`}
-               </span>
-               <span class="update-body s-rte">${msg.text}</span>
-            </div>
-            </span>
-            <span class="edge-main"><div class="post-body"></div></span>
-            <div class="edge-footer">
-            <div class="created"><span class="small gray">${formatted}</span></div>
-            </div>
-         </div>
-      </div>
-      </div>`;
-
-         // --- insert in chronological order (by numeric ms timestamp) ---
-         const children = Array.from(feedEl.children);
-         let inserted = false;
-         for(let i=0;i<children.length;i++){
-            const c = children[i];
-            let cts = NaN;
-            if(c.dataset && c.dataset.ts) cts = Number(c.dataset.ts);
-            if(isNaN(cts)){
-               const attr = c.getAttribute('timestamp');
-               cts = (attr && attr !== 'NaN') ? Number(attr) * 1000 : NaN;
-            }
-            if(isNaN(cts)) cts = Infinity;
-            if(cts > msg.ts){
-               feedEl.insertBefore(li, c);
-               inserted = true;
-               break;
-            }
-         }
-         if(!inserted) feedEl.appendChild(li);
-
+<div class="s-edge-type-update-post sUpdate-processed">
+<div class="edge-item">
+<div class="edge-left">
+<div class="picture">
+<div class="profile-picture-wrapper">
+<div class="profile-picture">
+${profileId? `<a href="/user/${profileId}" class="sExtlink-processed">` : ''}
+<img src="${escapeHtml(avatar)}" alt="${displayName}" class="imagecache imagecache-profile_sm">
+${profileId? `</a>` : ''}
+</div>
+</div>
+</div>
+</div>
+<div class="edge-main-wrapper">
+<span class="edge-sentence">
+<div class="edge-sentence-actions"></div>
+<div class="update-sentence-inner">
+<span class="long-username">
+${profileId? `<a href="/user/${profileId}" class="sExtlink-processed">${displayName}</a>` : `${displayName}`}
+</span>
+<span class="update-body s-rte">${msg.text}</span>
+</div>
+</span>
+<span class="edge-main"><div class="post-body"></div></span>
+<div class="edge-footer">
+<div class="created"><span class="small gray">${formatted}</span></div>
+</div>
+</div>
+</div>
+</div>`;
+         feedEl.appendChild(li);
          if(!historyHas(msg.id)) saveMessage(msg);
-
-         const imgs = li.querySelectorAll('img');
-         if(imgs && imgs.length){
-            const shouldForce = (local === true);
-            imgs.forEach(img => {
-               if(img.complete){
-                  if(shouldForce) autoScrollToBottom(true); else autoScrollToBottom(false);
-                  return;
-               }
-               img.addEventListener('load', () => {
-                  if(shouldForce) autoScrollToBottom(true); else autoScrollToBottom(false);
-               }, { once: true });
-            });
-         } else {
-            autoScrollToBottom(local === true);
-         }
+         if(local) autoScrollToBottom();
+         setTimeout(() => {
+            autoScrollToBottom(true);
+         }, 30);
       }
 
-      function startListener() {
-         if (unsubscribe) unsubscribe();
-
-         const ref = db.ref("rooms/" + room + "/messages").orderByChild("ts");
-
-         const listener = ref.on("child_added", snap => {
-            const data = snap.val();
-            if (!data) return;
-
-            data.id = snap.key;
-            appendMessage(data, false);
+      function startListener(){
+         unsubscribe = db.ref("rooms/"+room+"/messages").limitToLast(MAX_MESSAGES_TO_KEEP).on("child_added",(snap)=>{
+            const msg = snap.val();
+            if(!msg) return;
+            if(msg.from && msg.from.id === user.id) return;
+            if(historyHas(msg.id)) return;
+            appendMessage(msg,false);
+            saveMessage(msg);
          });
-
-         unsubscribe = () => ref.off("child_added", listener);
       }
 
       function clearChat(){

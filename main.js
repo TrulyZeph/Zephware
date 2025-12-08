@@ -70,7 +70,7 @@ const theme = themes.christmas;
     }
 
     body {
-      background-color: #012929ff;
+      background-color: #111;
       margin: 0;    
       max-height: 100vh;
       overflow: hidden;
