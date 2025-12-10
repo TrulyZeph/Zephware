@@ -278,35 +278,60 @@ function startMessagingSystem(){
       function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
       function autoTrimServer(){
-         const cutoff = Date.now() - (MAX_DAYS_TO_KEEP * 86400000);
+         const oneDayAgo = Date.now() - 86400000;
+         
          db.ref("rooms/"+room+"/messages").once("value",snapshot=>{
             const msgs = snapshot.val() || {};
             let deletions = {};
-            let countToday = 0;
+            
             for(const id in msgs){
                const ts = Date.parse(msgs[id].ts);
-               if(isNaN(ts) || ts < cutoff){
+               if(isNaN(ts) || ts < oneDayAgo){
                   deletions[id] = null;
-               } else {
-                  if(ts > Date.now() - 86400000) countToday++;
                }
             }
-            if(countToday > MAX_PER_DAY_THRESHOLD){
-               let sorted = Object.values(msgs)
-                  .sort((a,b)=>Date.parse(a.ts)-Date.parse(b.ts));
-               let toDel = Math.floor(sorted.length * 0.40);
-               for(let x=0; x<toDel; x++){
-                  deletions[sorted[x].id] = null;
-               }
-            }
+            
             if(Object.keys(deletions).length){
+               console.log(`Deleting ${Object.keys(deletions).length} old messages from server`);
                db.ref("rooms/"+room+"/messages").update(deletions);
             }
          });
       }
 
+      function cleanLocalStorage(){
+         try{
+            const key = STORAGE_PREFIX + room;
+            const raw = localStorage.getItem(key);
+            if(!raw) return;
+            
+            const arr = JSON.parse(raw);
+            const oneDayAgo = Date.now() - 86400000;
+            const filtered = arr.filter(msg=>{
+               const ts = Date.parse(msg.ts);
+               return !isNaN(ts) && ts >= oneDayAgo;
+            });
+            
+            if(filtered.length !== arr.length){
+               console.log(`Removed ${arr.length - filtered.length} old messages from local storage`);
+               localStorage.setItem(key, JSON.stringify(filtered));
+               
+               if(feedEl && document.getElementById('msgs-tab')?.classList.contains('active')){
+                  refreshMessages();
+               }
+            }
+         }catch(e){
+            console.error('Error cleaning local storage:', e);
+         }
+      }
+
       function dailySafetyCron(){
-         setInterval(autoTrimServer, 12 * 60 * 60 * 1000);
+         setInterval(()=>{
+            autoTrimServer();
+            cleanLocalStorage();
+         }, 60 * 60 * 1000);
+         
+         autoTrimServer();
+         cleanLocalStorage();
       }
 
       function buildMessage(text, nameFormat){
@@ -393,7 +418,12 @@ function startMessagingSystem(){
          feedEl.innerHTML = '';
          const hist = loadHistory();
          if(hist && hist.length){
-            hist.forEach(m => appendMessage(m,false));
+            const sorted = hist.slice().sort((a,b)=>{
+               const tsA = Date.parse(a.ts);
+               const tsB = Date.parse(b.ts);
+               return tsA - tsB;
+            });
+            sorted.forEach(m => appendMessage(m,false));
          }
          setTimeout(() => autoScrollToBottom(true), 50);
       }
@@ -402,22 +432,27 @@ function startMessagingSystem(){
          if(!feedEl) return;
          if(document.getElementById(msg.id)) return;
          if((msg.from && (msg.from.rawName||'').toLowerCase().includes('teacher'))) return;
+         
          const avatar = msg.from.avatar || '';
          const profileId = (msg.from.id || '').replace(/^user_/,'') || '';
          const displayName = escapeHtml(msg.from.displayName || msg.from.rawName || 'Anonymous');
          const li = document.createElement('li');
          li.id = msg.id;
-         const date = msg.timestamp ? new Date(msg.timestamp) : new Date();
+         
+         const date = msg.ts ? new Date(msg.ts) : new Date();
          const weekday = date.toLocaleString("en-US", { weekday: "short" });
          const month   = date.toLocaleString("en-US", { month: "short" });
          const day     = date.getDate();
          const year    = date.getFullYear();
          const time    = date.toLocaleString("en-US", { 
-         hour: "numeric", 
-         minute: "2-digit", 
-         hour12: true 
+            hour: "numeric", 
+            minute: "2-digit", 
+            hour12: true 
          });
          const formatted = `${weekday} ${month} ${day}, ${year} at ${time.toLowerCase()}`;
+         
+         li.dataset.timestamp = msg.ts || new Date().toISOString();
+         
          li.className = 'first';
          li.innerHTML = `
 <div class="s-edge-type-update-post sUpdate-processed">
@@ -450,7 +485,28 @@ ${profileId? `<a href="/user/${profileId}" class="sExtlink-processed">${displayN
 </div>
 </div>
 </div>`;
-         feedEl.appendChild(li);
+         
+         const existingMessages = Array.from(feedEl.children);
+         const msgTimestamp = Date.parse(li.dataset.timestamp);
+         
+         let inserted = false;
+         for(let i = existingMessages.length - 1; i >= 0; i--){
+            const existingTs = Date.parse(existingMessages[i].dataset.timestamp);
+            if(msgTimestamp >= existingTs){
+               existingMessages[i].after(li);
+               inserted = true;
+               break;
+            }
+         }
+         
+         if(!inserted){
+            if(existingMessages.length > 0){
+               existingMessages[0].before(li);
+            } else {
+               feedEl.appendChild(li);
+            }
+         }
+         
          if(!historyHas(msg.id)) saveMessage(msg);
          if(local) autoScrollToBottom();
          setTimeout(() => {
@@ -478,17 +534,35 @@ ${profileId? `<a href="/user/${profileId}" class="sExtlink-processed">${displayN
 
    function detectUser(){
       try{
-         const menu = document.querySelector('[data-sgy-sitenav="header-my-account-menu"]');
-         const imgEl = menu ? menu.querySelector('img') : null;
-         const nameEl = menu ? (menu.querySelector('.util-max-width-twenty-characters-2pOJU') || menu.querySelector('.LGaPf')) : null;
+         const menu = document.querySelector('[data-sgy-sitenav="header-my-account-menu"]') ||
+                     document.querySelector('.Header_header-my-account-menu') ||
+                     document.querySelector('[class*="my-account"]');
+         
+         if(!menu){
+            console.warn('Could not find user menu element');
+            return { id:'user_anon_' + Math.random().toString(36).slice(2,8), rawName:'Anonymous', displayName:'Anonymous', avatar:'' };
+         }
+         
+         const imgEl = menu.querySelector('img');
+         
+         const nameEl = menu.querySelector('.util-max-width-twenty-characters-2pOJU') ||
+                       menu.querySelector('.LGaPf') ||
+                       menu.querySelector('[class*="util-max-width"]') ||
+                       menu.querySelector('[class*="name"]');
+         
          const id = extractUserIdFromProfileLink(menu) || ('user_anon_' + Math.random().toString(36).slice(2,8));
          const rawName = nameEl ? nameEl.textContent.trim() : 'Anonymous';
          const avatar = imgEl ? imgEl.src : '';
+         
+         console.log('Detected user:', { id, rawName, avatar });
+         
          return { id, rawName, displayName: rawName, avatar };
       }catch(e){
-         return { id:'user_anon', rawName:'Anonymous', displayName:'Anonymous', avatar:'' };
+         console.error('Error detecting user:', e);
+         return { id:'user_anon_' + Math.random().toString(36).slice(2,8), rawName:'Anonymous', displayName:'Anonymous', avatar:'' };
       }
    }
+   
    function extractUserIdFromProfileLink(menu){
       if(!menu) return null;
       const a = menu.querySelector('a[href*="/user/"]');
