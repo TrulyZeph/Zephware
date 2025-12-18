@@ -63,8 +63,16 @@ async function loadGameBuild(rawOrShorthandUrl) {
 		let baseUrl = convertToRawGitHubURL(rawOrShorthandUrl);
 		if (!baseUrl.endsWith('/')) baseUrl += '/';
 
-		const resp = await fetch(baseUrl + 'index.html');
-		if (!resp.ok) throw new Error('Failed to fetch index.html from game build: ' + resp.status);
+		const fetchCache = new Map();
+		const cachedFetch = (url) => {
+			if (fetchCache.has(url)) return fetchCache.get(url);
+			const p = fetch(url);
+			fetchCache.set(url, p);
+			return p;
+		};
+
+		const resp = await cachedFetch(baseUrl + 'index.html');
+		if (!resp.ok) throw new Error('Failed to fetch index.html: ' + resp.status);
 		let htmlText = await resp.text();
 
 		const externalScriptPatterns = [
@@ -76,19 +84,13 @@ async function loadGameBuild(rawOrShorthandUrl) {
 			/https?:\/\/.*analytics/gi,
 			/https?:\/\/static\.addtoany/gi
 		];
-		htmlText = htmlText.replace(/<script[\s\S]*?<\/script>/gi, (match) => {
-			for (const p of externalScriptPatterns) {
-				if (p.test(match)) return '';
-			}
-			return match;
-		});
 
-		htmlText = htmlText.replace(/<div id=["']?fb-root["']?><\/div>/gi, '');
-		htmlText = htmlText.replace(/window\.fbAsyncInit[\s\S]*?<\/script>/gi, '');
-		htmlText = htmlText.replace(/function\s+onGoogleSignIn[\s\S]*?<\/script>/gi, '');
-		htmlText = htmlText.replace(/function\s+onFacebookLogin[\s\S]*?<\/script>/gi, '');
-		htmlText = htmlText.replace(/window\.doorbellOptions[\s\S]*?<\/script>/gi, '');
-		htmlText = htmlText.replace(/<meta[^>]*google-signin-client_id[^>]*>/gi, '');
+		htmlText = htmlText.replace(/<script[\s\S]*?<\/script>/gi, (m) => {
+			for (const p of externalScriptPatterns) {
+				if (p.test(m)) return '';
+			}
+			return m;
+		});
 
 		const parser = new DOMParser();
 		const doc = parser.parseFromString(htmlText, 'text/html');
@@ -96,61 +98,51 @@ async function loadGameBuild(rawOrShorthandUrl) {
 		let baseEl = doc.querySelector('base');
 		if (!baseEl) {
 			baseEl = doc.createElement('base');
-			baseEl.setAttribute('href', baseUrl);
-			const head = doc.querySelector('head') || doc.createElement('head');
-			head.insertBefore(baseEl, head.firstChild);
-			if (!doc.querySelector('head')) doc.documentElement.insertBefore(head, doc.body);
+			baseEl.href = baseUrl;
+			(doc.head || doc.documentElement).insertBefore(baseEl, doc.head?.firstChild || null);
 		} else {
-			baseEl.setAttribute('href', baseUrl);
+			baseEl.href = baseUrl;
 		}
 
 		const linkEls = Array.from(doc.querySelectorAll('link[rel="stylesheet"]'));
 		for (const link of linkEls) {
 			const href = link.getAttribute('href') || '';
 			const absHref = makeAbsoluteFromBase(baseUrl, href);
-			if (/^(https?:|\/\/)/i.test(href) && !href.includes('raw.githubusercontent.com')) {
-				if (/analytics|googletagmanager|doubleclick|adsbygoogle/i.test(href)) {
-					link.remove();
-				}
-				continue;
-			}
+
 			try {
-				const cssResp = await fetch(absHref);
-				if (!cssResp.ok) throw new Error('CSS fetch failed');
+				const cssResp = await cachedFetch(absHref);
+				if (!cssResp.ok) throw 0;
 				let cssText = await cssResp.text();
-				cssText = cssText.replace(/url\(["']?(.+?)["']?\)/gi, (m, p1) => {
-					const abs = makeAbsoluteFromBase(baseUrl, p1);
-					return `url("${abs}")`;
+				const cssDir = absHref.substring(0, absHref.lastIndexOf('/') + 1);
+
+				cssText = cssText.replace(/url\(([^)]+)\)/gi, (m, p1) => {
+					const clean = p1.trim().replace(/^['"]|['"]$/g, '');
+					if (/^(data:|https?:|\/\/)/i.test(clean)) return m;
+					return `url("${makeAbsoluteFromBase(cssDir, clean)}")`;
 				});
+
 				const styleEl = doc.createElement('style');
-				styleEl.textContent = `/* inlined ${href} */\n` + cssText;
-				link.parentNode.insertBefore(styleEl, link);
-				link.remove();
-			} catch (e) {
-				link.setAttribute('href', absHref);
+				styleEl.textContent = cssText;
+				link.replaceWith(styleEl);
+			} catch {
+				link.href = absHref;
 			}
 		}
 
 		const scriptEls = Array.from(doc.querySelectorAll('script[src]'));
 		for (const s of scriptEls) {
 			const src = s.getAttribute('src') || '';
-			if (/^(https?:|\/\/)/i.test(src) && !src.includes('raw.githubusercontent.com')) {
-				if (/analytics|googletagmanager|doubleclick|adsbygoogle|ravenjs|connect\.facebook\.net/i.test(src)) {
-					s.remove();
-				}
-				continue;
-			}
 			const absSrc = makeAbsoluteFromBase(baseUrl, src);
+
 			try {
-				const jsResp = await fetch(absSrc);
-				if (!jsResp.ok) throw new Error('JS fetch failed');
-				let jsText = await jsResp.text();
+				const jsResp = await cachedFetch(absSrc);
+				if (!jsResp.ok) throw 0;
+				const jsText = await jsResp.text();
 				const inline = doc.createElement('script');
-				inline.textContent = `/* inlined ${src} */\n` + jsText;
-				s.parentNode.insertBefore(inline, s);
-				s.remove();
-			} catch (e) {
-				s.setAttribute('src', absSrc);
+				inline.textContent = jsText;
+				s.replaceWith(inline);
+			} catch {
+				s.src = absSrc;
 			}
 		}
 
@@ -161,52 +153,56 @@ async function loadGameBuild(rawOrShorthandUrl) {
 			{ sel: 'source', attr: 'src' },
 			{ sel: 'iframe', attr: 'src' },
 			{ sel: 'a', attr: 'href' },
-			{ sel: 'link[rel="icon"]', attr: 'href' },
-			{ sel: 'use', attr: 'href' }
+			{ sel: 'link[rel="icon"]', attr: 'href' }
 		];
+
 		for (const { sel, attr } of ATTRS) {
-			const nodes = Array.from(doc.querySelectorAll(sel));
-			for (const node of nodes) {
+			for (const node of doc.querySelectorAll(sel)) {
 				const val = node.getAttribute(attr);
 				if (!val) continue;
-				if (attr === 'href' && val.startsWith('#')) continue;
 				if (/^(https?:|\/\/|data:|mailto:|javascript:)/i.test(val)) continue;
-				const abs = makeAbsoluteFromBase(baseUrl, val);
-				node.setAttribute(attr, abs);
+				node.setAttribute(attr, makeAbsoluteFromBase(baseUrl, val));
 			}
 		}
 
-		const styleTags = Array.from(doc.querySelectorAll('style'));
-		for (const st of styleTags) {
-			st.textContent = st.textContent.replace(/@import\s+["']([^"']+)["']/gi, (m, p1) => {
-				const abs = makeAbsoluteFromBase(baseUrl, p1);
-				return `@import "${abs}"`;
-			});
-		}
+		const runtimeFix = doc.createElement('script');
+		runtimeFix.textContent = `
+			const __base = ${JSON.stringify(baseUrl)};
+			const __origFetch = window.fetch;
+			window.fetch = function(input, init){
+				try{
+					if (typeof input === 'string' && !/^(https?:|data:|blob:)/i.test(input)) {
+						input = new URL(input, __base).href;
+					}
+				}catch{}
+				return __origFetch(input, init);
+			};
 
-		const suppress = doc.createElement('script');
-		suppress.textContent = `
-			/* zephware injected suppression */
-			window.gapi = window.gapi || { load: function(){}, auth2: { init: function(){} } };
-			window.FB = window.FB || { init: function(){}, AppEvents: { logPageView: function(){} }, getLoginStatus: function(){} };
-			window.onGoogleSignIn = window.onGoogleSignIn || function(){};
-			window.onFacebookLogin = window.onFacebookLogin || function(){};
-			window.doorbell = window.doorbell || { show: function(){} };
-			document.addEventListener('DOMContentLoaded', function(){
-				try {
-					document.querySelectorAll('[id*="banner"], [id*="ad"], [class*="pub"], [class*="advert"]').forEach(function(e){ e.style.display = "none"; });
-				} catch(e){}
-			});
+			const __origOpen = XMLHttpRequest.prototype.open;
+			XMLHttpRequest.prototype.open = function(m,u){
+				try{
+					if (u && !/^(https?:|data:|blob:)/i.test(u)) {
+						u = new URL(u, __base).href;
+					}
+				}catch{}
+				return __origOpen.apply(this, arguments);
+			};
+
+			const __origWorker = window.Worker;
+			window.Worker = function(u, o){
+				if (!/^(https?:|blob:)/i.test(u)) {
+					u = new URL(u, __base).href;
+				}
+				return new __origWorker(u, o);
+			};
 		`;
-		(doc.querySelector('head') || doc.documentElement).appendChild(suppress);
+		(doc.head || doc.documentElement).appendChild(runtimeFix);
 
 		const finalHtml = '<!doctype html>\n' + doc.documentElement.outerHTML;
-
-		const blob = new Blob([finalHtml], { type: 'text/html' });
-		return URL.createObjectURL(blob);
-	} catch (error) {
-		console.error('Error building game from repo:', error);
-		throw error;
+		return URL.createObjectURL(new Blob([finalHtml], { type: 'text/html' }));
+	} catch (e) {
+		console.error('Error building game from repo:', e);
+		throw e;
 	}
 }
 
