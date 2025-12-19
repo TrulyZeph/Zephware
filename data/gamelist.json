@@ -77,6 +77,12 @@
   "type": "gameBuild"
  },
  {
+  "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/YoHoHo.png",
+  "label": "YoHoHo.io",
+  "url": "imarealmexican/Mope.io/master",
+  "type": "gameBuild"
+ },
+ {
   "image": "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/games/BleachvsNaruto.jpg",
   "label": "Bleach vs. Naruto",
   "tag": "Fighting",
