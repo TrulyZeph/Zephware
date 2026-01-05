@@ -39,7 +39,7 @@ const themes = {
       waves: ['#e0dbdbff','#f0f0f0ff','#fdfdfdff']
    }
 };
-const theme = themes.christmas;
+const theme = themes.blue;
 
   const style = document.createElement('style');
   style.textContent = `
@@ -70,7 +70,7 @@ const theme = themes.christmas;
     }
 
     body {
-      background-color: #111;
+      background-color: #234;
       margin: 0;    
       max-height: 100vh;
       overflow: hidden;
@@ -88,7 +88,7 @@ const theme = themes.christmas;
       text-align: center;
       font-weight: bold;
       font-family: 'Fredoka', sans-serif;
-      background: linear-gradient(to bottom, ${theme.color1}, #dbf884ff, ${theme.color2});
+      background: linear-gradient(to bottom, ${theme.color1}, ${theme.color2});
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       color: transparent;
@@ -301,7 +301,7 @@ const theme = themes.christmas;
   const select = document.createElement('select');
   select.id = 'selector';
   select.setAttribute('title', '');
-  const options = ['Games', 'Schoology Games', 'Unblockers', 'Soundboard', 'Learning Tools', 'Marketplace', 'Blooket Hacks', 'Gimkit Hacks', 'Messages'];
+  const options = ['Games', 'Schoology Games', 'Messages', 'Soundboard', 'Learning Tools', 'Blooket Hacks', 'Gimkit Hacks'];
   options.forEach(opt => {
     const option = document.createElement('option');
     option.value = opt.toLowerCase();
@@ -317,24 +317,24 @@ const theme = themes.christmas;
   const newsPages = [
   {
     title: "What's New?",
-    desc: "v1.0.8 : Week of December 1st, 2025",
+    desc: "v1.2.0 : Week of January 4th, 2026",
     images: [
-      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/themes/christmas/Current.png", alt: "" }
+      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/themes/main/Current.png", alt: "" }
     ],
     changes: [
-      { text: "Games Changes", desc: "Improved Data Saving, New Games, UI Changes, Removed Broken Games" }
+      { text: "Deleted Unblockers", desc: "dont wanna get in trouble for hosting these" },
+      { text: "Reverted to Main Theme", desc: "christmas is over" },
+      { text: "[Tues/Wed] Library", desc: "soundboard reworked to library, has animes now" }
     ]
   },
   {
     title: "What'd I Miss?",
-    desc: "v1.0.7 : Week of October 26th, 2025",
+    desc: "v1.0.8 : Week of December 1st, 2025",
     images: [
-      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/themes/christmas/Previous.png", alt: "" }
+      { src: "https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/assets/themes/main/Previous.png", alt: "" }
     ],
     changes: [
-      { text: "Games Changes", desc: "Data Saving, New Really Good Games" },
-      { text: "Messaging App", desc: "An App to Message People" },
-      { text: "Halloween Theme", desc: "Halloween theme for the week cause why not" }
+      { text: "Games Changes", desc: "Improved Data Saving, New Games, UI Changes, Removed Broken Games" }
     ]
   },
   {
@@ -628,12 +628,11 @@ button.addEventListener('click', () => {
         return;
     }
 
-    if (val === 'games' || val === 'unblockers' || val === 'soundboard') {
+    if (val === 'games' || val === 'soundboard') {
         document.head.innerHTML = '';
         document.body.innerHTML = '';
         let file;
         if (val === 'games') file = 'games.js';
-        else if (val === 'unblockers') file = 'proxies.js';
         else if (val === 'soundboard') file = 'library.js';
         fetch(`https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/${file}`)
             .then(response => response.text())
@@ -729,7 +728,7 @@ function showInstructionsOverlay(customLink) {
 
   select.onchange = () => {
     const val = select.value.toLowerCase();
-    if (val === 'gimkit hacks' || val === 'marketplace') {
+    if (val === 'gimkit hacks') {
       setButtonStatus('wip');
     } else {
       setButtonStatus('open');
@@ -739,7 +738,7 @@ function showInstructionsOverlay(customLink) {
   document.body.appendChild(inputArea);
 })();
 
-// Winter Snowfall
+/* Winter Snowfall (Disabled)
 (function () {
    if (window.__zephwareSnowfall) return;
    window.__zephwareSnowfall = true;
@@ -797,6 +796,7 @@ function showInstructionsOverlay(customLink) {
 
    setInterval(createSnowflake, 120);
 })();
+*/
 
 /* JUMP SCARE (DISABLED)
 (function () {
