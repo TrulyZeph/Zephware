@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Gachiakuta",
+    "category": "Anime",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/gachiakuta.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 24,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Gachiakuta/",
+        "names": [
+          {
+            "ep": 1,
+            "name": "The Sphere"
+          },
+          {
+            "ep": 2,
+            "name": "The Inhabited"
+          }
+        ]
+      }
+    ]
+  }
+]
