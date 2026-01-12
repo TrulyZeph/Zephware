@@ -263,6 +263,84 @@
           { "ep": 22, "name": "Metamorphosis, Part 2" },
           { "ep": 23, "name": "Shibuya Incident – Gate, Close" }
         ]
+      },
+      {
+        "season": 3,
+        "episodes": 2,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/JJK/Season%203/",
+        "names": [
+          { "ep": 1, "name": "Execution" },
+          { "ep": 2, "name": "One More Time" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Vinland Saga",
+    "category": "Action",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/VinlandSaga.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 24,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Vinland%20Saga/Season%201/",
+        "names": [
+          { "ep": 1, "name": "Somewhere Not Here" },
+          { "ep": 2, "name": "Sword" },
+          { "ep": 3, "name": "Troll" },
+          { "ep": 4, "name": "A True Warrior" },
+          { "ep": 5, "name": "The Troll's Son" },
+          { "ep": 6, "name": "Journey's End" },
+          { "ep": 7, "name": "Normanni" },
+          { "ep": 8, "name": "Beyond the Edge of the Sea" },
+          { "ep": 9, "name": "The Battle of London Bridge" },
+          { "ep": 10, "name": "Ragnarok" },
+          { "ep": 11, "name": "A Gamble" },
+          { "ep": 12, "name": "The Land on the Far Bank" },
+          { "ep": 13, "name": "Child of a Hero" },
+          { "ep": 14, "name": "The Light of Dawn" },
+          { "ep": 15, "name": "After Yule" },
+          { "ep": 16, "name": "History of Beasts" },
+          { "ep": 17, "name": "Servant" },
+          { "ep": 18, "name": "Out of the Cradle" },
+          { "ep": 19, "name": "United Front" },
+          { "ep": 20, "name": "Crown" },
+          { "ep": 21, "name": "Reunion" },
+          { "ep": 22, "name": "Lone Wolf" },
+          { "ep": 23, "name": "Miscalculation" },
+          { "ep": 24, "name": "End of the Prologue" }
+        ]
+      },
+      {
+        "season": 2,
+        "episodes": 24,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Vinland%20Saga/Season%202/",
+        "names": [
+          { "ep": 1, "name": "Slave" },
+          { "ep": 2, "name": "Ketil's Farm" },
+          { "ep": 3, "name": "Snake" },
+          { "ep": 4, "name": "Awakening" },
+          { "ep": 5, "name": "The Path of Blood" },
+          { "ep": 6, "name": "We Need a Horse" },
+          { "ep": 7, "name": "Iron Fist Ketil" },
+          { "ep": 8, "name": "An Empty Man" },
+          { "ep": 9, "name": "Oath" },
+          { "ep": 10, "name": "The Cursed Head" },
+          { "ep": 11, "name": "The King of Rebellion" },
+          { "ep": 12, "name": "For Lost Love" },
+          { "ep": 13, "name": "Dark Clouds" },
+          { "ep": 14, "name": "Freedom" },
+          { "ep": 15, "name": "Storm" },
+          { "ep": 16, "name": "The Cause of War" },
+          { "ep": 17, "name": "The Road Home" },
+          { "ep": 18, "name": "The First Method" },
+          { "ep": 19, "name": "The Second Method" },
+          { "ep": 20, "name": "Pain" },
+          { "ep": 21, "name": "Courage" },
+          { "ep": 22, "name": "King Canute" },
+          { "ep": 23, "name": "Two Paths" },
+          { "ep": 24, "name": "Home" }
+        ]
       }
     ]
   }
