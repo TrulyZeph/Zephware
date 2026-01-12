@@ -301,7 +301,7 @@ const theme = themes.blue;
   const select = document.createElement('select');
   select.id = 'selector';
   select.setAttribute('title', '');
-  const options = ['Games', 'Schoology Games', 'Messages', 'Soundboard', 'Learning Tools', 'Blooket Hacks', 'Gimkit Hacks'];
+  const options = ['Games', 'Schoology Games', 'Messages', 'Library', 'Learning Tools', 'Blooket Hacks', 'Gimkit Hacks'];
   options.forEach(opt => {
     const option = document.createElement('option');
     option.value = opt.toLowerCase();
@@ -324,7 +324,7 @@ const theme = themes.blue;
     changes: [
       { text: "Deleted Unblockers", desc: "dont wanna get in trouble for hosting these" },
       { text: "Reverted to Main Theme", desc: "christmas is over" },
-      { text: "[Tues/Wed] Library", desc: "soundboard reworked to library, has animes now" }
+      { text: "Library", desc: "soundboard reworked to library, has animes now" }
     ]
   },
   {
@@ -628,12 +628,12 @@ button.addEventListener('click', () => {
         return;
     }
 
-    if (val === 'games' || val === 'soundboard') {
+    if (val === 'games' || val === 'library') {
         document.head.innerHTML = '';
         document.body.innerHTML = '';
         let file;
         if (val === 'games') file = 'games.js';
-        else if (val === 'soundboard') file = 'library.js';
+        else if (val === 'library') file = 'library.js';
         fetch(`https://raw.githubusercontent.com/TrulyZeph/Zephware/refs/heads/main/${file}`)
             .then(response => response.text())
             .then(scriptContent => {

@@ -1,8 +1,8 @@
 [
   {
     "name": "Gachiakuta",
-    "category": "Anime",
-    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/gachiakuta.png",
+    "category": "Action",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/Gachiakuta.png",
     "seasons": [
       {
         "season": 1,
@@ -16,7 +16,252 @@
           {
             "ep": 2,
             "name": "The Inhabited"
+          },
+          {
+            "ep": 3,
+            "name": "The Ground"
+          },
+          {
+            "ep": 4,
+            "name": "Cleaner HQ"
+          },
+          {
+            "ep": 5,
+            "name": "Raiders"
+          },
+          {
+            "ep": 6,
+            "name": "One Good Strike!!"
+          },
+          {
+            "ep": 7,
+            "name": "A Score to Settle"
+          },
+          {
+            "ep": 8,
+            "name": "Moving Forward"
+          },
+          {
+            "ep": 9,
+            "name": "The City of Graffiti"
+          },
+          {
+            "ep": 10,
+            "name": "Penta: The Desert No Man's Land"
+          },
+          {
+            "ep": 11,
+            "name": "Amo's Hospitality"
+          },
+          {
+            "ep": 12,
+            "name": "Something Like a Curse"
+          },
+          {
+            "ep": 13,
+            "name": "An Empty Gaze"
+          },
+          {
+            "ep": 14,
+            "name": "The Storm Before the Storm"
+          },
+          {
+            "ep": 15,
+            "name": "Clash!"
+          },
+          {
+            "ep": 16,
+            "name": "Gifted and Not"
+          },
+          {
+            "ep": 17,
+            "name": "Memories of a Mediocrity"
+          },
+          {
+            "ep": 18,
+            "name": "Oh Zap, Totes Legit"
+          },
+          {
+            "ep": 19,
+            "name": "Watchmen Series"
+          },
+          {
+            "ep": 20,
+            "name": "Ensign"
+          },
+          {
+            "ep": 21,
+            "name": "TIME ATTACK"
+          },
+          {
+            "ep": 22,
+            "name": "The Power of Protection"
+          },
+          {
+            "ep": 23,
+            "name": "The Man Who Will Be Stronger"
+          },
+          {
+            "ep": 24,
+            "name": "Field Trip"
           }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fire Force",
+    "category": "Action",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/FireForce.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 24,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Fire%20Force/Season%201/",
+        "names": [
+          { "ep": 1, "name": "Shinra Kusakabe Enlists" },
+          { "ep": 2, "name": "The Heart of a Fire Soldier" },
+          { "ep": 3, "name": "The Rookie Fire Soldier Games" },
+          { "ep": 4, "name": "The Hero and the Princess" },
+          { "ep": 5, "name": "The Battle Begins" },
+          { "ep": 6, "name": "The Spark of Promise" },
+          { "ep": 7, "name": "The Investigation of the 1st Commences" },
+          { "ep": 8, "name": "Infernal Insects" },
+          { "ep": 9, "name": "The Spreading Malice" },
+          { "ep": 10, "name": "The Promise" },
+          { "ep": 11, "name": "Formation of Special Fire Force Company 8 - The Mightiest Hikeshi" },
+          { "ep": 12, "name": "Eve of Hostilities in Asakusa" },
+          { "ep": 13, "name": "The Trap is Set" },
+          { "ep": 14, "name": "For Whom The Flame Burns" },
+          { "ep": 15, "name": "The Blacksmith's Dream" },
+          { "ep": 16, "name": "We Are Family" },
+          { "ep": 17, "name": "Black and White and Gray" },
+          { "ep": 18, "name": "The Secrets of Pyrokinesis" },
+          { "ep": 19, "name": "Into the Nether" },
+          { "ep": 20, "name": "Wearing his Pride" },
+          { "ep": 21, "name": "Those Connected" },
+          { "ep": 22, "name": "A Brother's Determination" },
+          { "ep": 23, "name": "Smile" },
+          { "ep": 24, "name": "The Burning Past" }
+        ]
+      },
+      {
+        "season": 2,
+        "episodes": 24,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Fire%20Force/Season%202/",
+        "names": [
+          { "ep": 1, "name": "A Fire Soldier's Fight" },
+          { "ep": 2, "name": "Flames of Madness" },
+          { "ep": 3, "name": "A New Flashpoint" },
+          { "ep": 4, "name": "Groping Through the Fire" },
+          { "ep": 5, "name": "Corna (Sign of the Devil)" },
+          { "ep": 6, "name": "The Time to Choose" },
+          { "ep": 7, "name": "Road to Obi" },
+          { "ep": 8, "name": "Smoldering Malevolence" },
+          { "ep": 9, "name": "The Core" },
+          { "ep": 10, "name": "The Woman in Black" },
+          { "ep": 11, "name": "Dark Hero" },
+          { "ep": 12, "name": "Shadows Cast by Divine Light" },
+          { "ep": 13, "name": "A Pair of One-Eyes" },
+          { "ep": 14, "name": "The Ashen Reaper" },
+          { "ep": 15, "name": "A Three-Way Melee" },
+          { "ep": 16, "name": "Mind Blown" },
+          { "ep": 17, "name": "Boys, Be Weak" },
+          { "ep": 18, "name": "The Holy Woman's Anguish / The Man, Assault" },
+          { "ep": 19, "name": "The Oze Family" },
+          { "ep": 20, "name": "Weapons of Destruction" },
+          { "ep": 21, "name": "Enemy Contact" },
+          { "ep": 22, "name": "Plot" },
+          { "ep": 23, "name": "Firecat" },
+          { "ep": 24, "name": "Signs of Upheaval" }
+        ]
+      },
+      {
+        "season": 3,
+        "episodes": 13,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Fire%20Force/Season%203/",
+        "names": [
+          { "ep": 1, "name": "Indomitable Resolve" },
+          { "ep": 2, "name": "Prisoner" },
+          { "ep": 3, "name": "Incarnation of Flame" },
+          { "ep": 4, "name": "Golden Secret" },
+          { "ep": 5, "name": "Chance Meeting With an Arch-Enemy" },
+          { "ep": 6, "name": "Beyond Prayer's End" },
+          { "ep": 7, "name": "Sleeping Truth" },
+          { "ep": 8, "name": "Holy Mother of Darkness / The Knight King's Great Adventure" },
+          { "ep": 9, "name": "Holy Sword, Resurrected" },
+          { "ep": 10, "name": "Advent" },
+          { "ep": 11, "name": "The Great Kaiju Battlefront" },
+          { "ep": 12, "name": "The Madness of the Distant Past" },
+          { "ep": 13, "name": "Unaware" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Jujutsu Kaisen",
+    "category": "Action",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/JJK.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 24,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/JJK/Season%201/",
+        "names": [
+          { "ep": 1, "name": "Ryomen Sukuna" },
+          { "ep": 2, "name": "For Myself" },
+          { "ep": 3, "name": "Girl of Steel" },
+          { "ep": 4, "name": "Curse Womb Must Die" },
+          { "ep": 5, "name": "Curse Womb Must Die -II-" },
+          { "ep": 6, "name": "After Rain" },
+          { "ep": 7, "name": "Assault" },
+          { "ep": 8, "name": "Boredom" },
+          { "ep": 9, "name": "Small Fry and Reverse Retribution" },
+          { "ep": 10, "name": "Idle Transfiguration" },
+          { "ep": 11, "name": "Narrow-minded" },
+          { "ep": 12, "name": "To You, Someday" },
+          { "ep": 13, "name": "Tomorrow" },
+          { "ep": 14, "name": "Kyoto Sister School Exchange Event - Group Battle 0 -" },
+          { "ep": 15, "name": "Kyoto Sister School Exchange Event - Group Battle 1 -" },
+          { "ep": 16, "name": "Kyoto Sister School Exchange Event - Group Battle 2 -" },
+          { "ep": 17, "name": "Kyoto Sister School Exchange Event - Group Battle 3 -" },
+          { "ep": 18, "name": "Sage" },
+          { "ep": 19, "name": "Black Flash" },
+          { "ep": 20, "name": "Nonstandard" },
+          { "ep": 21, "name": "Jujutsu Koshien" },
+          { "ep": 22, "name": "The Origin of Blind Obedience" },
+          { "ep": 23, "name": "The Origin of Blind Obedience - 2 -" },
+          { "ep": 24, "name": "Accomplices" }
+        ]
+      },
+      {
+        "season": 2,
+        "episodes": 23,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/JJK/Season%202/",
+        "names": [
+          { "ep": 1, "name": "Hidden Inventory" },
+          { "ep": 2, "name": "Hidden Inventory, Part 2" },
+          { "ep": 3, "name": "Hidden Inventory, Part 3" },
+          { "ep": 4, "name": "Hidden Inventory, Part 4" },
+          { "ep": 5, "name": "Premature Death" },
+          { "ep": 6, "name": "It's Like That" },
+          { "ep": 7, "name": "Evening Festival" },
+          { "ep": 8, "name": "The Shibuya Incident" },
+          { "ep": 9, "name": "Shibuya Incident – Gate, Open" },
+          { "ep": 10, "name": "Pandemonium" },
+          { "ep": 11, "name": "Seance" },
+          { "ep": 12, "name": "Dull Knife" },
+          { "ep": 13, "name": "Red Scale" },
+          { "ep": 14, "name": "Fluctuations" },
+          { "ep": 15, "name": "Fluctuations, Part 2" },
+          { "ep": 16, "name": "Thunderclap" },
+          { "ep": 17, "name": "Thunderclap, Part 2" },
+          { "ep": 18, "name": "Right and Wrong" },
+          { "ep": 19, "name": "Right and Wrong, Part 2" },
+          { "ep": 20, "name": "Right and Wrong, Part 3" },
+          { "ep": 21, "name": "Metamorphosis" },
+          { "ep": 22, "name": "Metamorphosis, Part 2" },
+          { "ep": 23, "name": "Shibuya Incident – Gate, Close" }
         ]
       }
     ]

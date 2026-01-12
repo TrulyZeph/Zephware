@@ -1,6 +1,6 @@
 (function () {
   const moviesUrl = "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/movies.json";
-  const showsUrl = "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/shows.json";
+  const showsUrl = "data/shows.json";
   const soundsUrl = "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/sounds.json";
 
   if (!document.getElementById('fredoka-font-link')) {
@@ -259,7 +259,7 @@
       position: relative;
       overflow: hidden;
       background-size: cover;
-      background-position: center;
+      background-position: 15% 15%;
     }
     
     .zw-card-thumbnail::before {
@@ -417,10 +417,7 @@
       font-size: 42px;
       font-weight: 600;
       margin-bottom: 10px;
-      background: linear-gradient(135deg, #01AEFD 0%, #63baff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #81c1fdff;
     }
     
     #zw-show-category {
@@ -609,6 +606,11 @@
 
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
+      if (content.querySelector('#zw-show-modal')) {
+        const video = content.querySelector('#zw-show-video');
+        if (video) video.pause();
+      }
+      
       navLinks.forEach(l => l.classList.remove('active'));
       link.classList.add('active');
       currentPage = link.dataset.page;
@@ -619,6 +621,15 @@
   });
 
   logo.addEventListener('click', () => {
+    if (content.querySelector('#zw-show-modal')) {
+      currentPage = 'home';
+      navLinks.forEach(l => l.classList.remove('active'));
+      navLinks[0].classList.add('active');
+      searchQuery = '';
+      searchInput.value = '';
+      renderPage();
+      return;
+    }
     navLinks.forEach(l => l.classList.remove('active'));
     navLinks[0].classList.add('active');
     currentPage = 'home';
@@ -733,9 +744,12 @@
     const firstSeason = show.seasons[0];
     const firstEpisode = firstSeason.names && firstSeason.names.length > 0 ? firstSeason.names[0] : { ep: 1, name: 'Episode 1' };
     
-    overlay.innerHTML = `
-      <button id="zw-modal-close">×</button>
-      <div id="zw-show-modal">
+    const returnPage = currentPage;
+    
+    navLinks.forEach(l => l.classList.remove('active'));
+    
+    content.innerHTML = `
+      <div id="zw-show-modal" style="margin-top: -125px;">
         <div id="zw-show-header">
           <div id="zw-show-title">${show.name}</div>
           <div id="zw-show-category">${show.category}</div>
@@ -759,15 +773,9 @@
       </div>
     `;
     
-    const newClose = overlay.querySelector('#zw-modal-close');
-    newClose.addEventListener('click', () => {
-      overlay.classList.remove('active');
-      overlay.innerHTML = `<button id="zw-modal-close">×</button>`;
-    });
-    
-    const seasonSelector = overlay.querySelector('.zw-season-selector');
-    const episodesContainer = overlay.querySelector('#zw-episodes');
-    const video = overlay.querySelector('#zw-show-video');
+    const seasonSelector = content.querySelector('.zw-season-selector');
+    const episodesContainer = content.querySelector('#zw-episodes');
+    const video = content.querySelector('#zw-show-video');
     
     let currentSeason = firstSeason;
     let currentEpisodeNum = firstEpisode.ep;
@@ -812,7 +820,6 @@
     }
     
     renderEpisodes(firstSeason);
-    overlay.classList.add('active');
   }
 
   function filterContent(items, type) {
@@ -825,7 +832,7 @@
       content.innerHTML = `
         <div id="zw-hero">
           <div id="zw-hero-text">
-            <h1>Welcome to Zephware</h1>
+            <h1>Zephware Library</h1>
             <p><i>your favorite content, at school, unblocked.</i></p>
           </div>
         </div>
@@ -899,6 +906,75 @@
       renderSoundsSection('All Sounds', filteredSounds);
     }
   }
+
+  const csOverlay = document.createElement('div');
+  csOverlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `;
+  
+  csOverlay.innerHTML = `
+    <div style="
+      background: linear-gradient(135deg, rgba(1, 174, 253, 0.1) 0%, rgba(1, 90, 253, 0.1) 100%);
+      border: 2px solid rgba(1, 174, 253, 0.3);
+      border-radius: 20px;
+      padding: 40px 50px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    ">
+      <h1 style="
+        font-size: 42px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, #01AEFD 0%, #63baff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      ">Notice!</h1>
+      <div style="
+        width: 80%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #01AEFD, transparent);
+        margin: 0 auto 25px;
+      "></div>
+      <p style="
+        color: #e0e0e0;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      ">All Shows & Movies <b>ARE</b> pirated, which is against the law. If you do not wish to support piracy, do not use this service. Also please be patient as I am adding <b>new animes every day</b>, give it a week and remember that I have a life.</p>
+      <button id="zw-ok-btn" style="
+        background: linear-gradient(135deg, #01AEFD 0%, #015AFD 100%);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 15px 40px;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 5px 20px rgba(1, 174, 253, 0.4);
+      " onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 30px rgba(1, 174, 253, 0.6)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 5px 20px rgba(1, 174, 253, 0.4)';">
+        Cool!
+      </button>
+    </div>
+  `;
+  
+  document.body.appendChild(csOverlay);
+  
+  document.getElementById('zw-ok-btn').addEventListener('click', () => {
+    csOverlay.remove();
+  });
 
   function renderSection(title, items, type) {
     const section = document.createElement('div');
