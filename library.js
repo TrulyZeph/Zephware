@@ -1,6 +1,6 @@
 (function () {
   const moviesUrl = "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/movies.json";
-  const showsUrl = "data/shows.json";
+  const showsUrl = "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/shows.json";
   const soundsUrl = "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/sounds.json";
 
   if (!document.getElementById('fredoka-font-link')) {
