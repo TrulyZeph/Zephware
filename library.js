@@ -232,6 +232,7 @@
     
     .zw-card {
       min-width: 220px;
+      max-width: 220px;
       height: 330px;
       background: linear-gradient(135deg, rgba(1, 174, 253, 0.1) 0%, rgba(1, 90, 253, 0.1) 100%);
       border-radius: 15px;
