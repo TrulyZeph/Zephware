@@ -564,5 +564,451 @@
         ]
       }
     ]
+  },
+  {
+    "name": "Sakamoto Days",
+    "category": "Action",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/SakamotoDays.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 22,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Sakamoto%20Days/",
+        "names": [
+          { "ep": 1,  "name": "The Legendary Hit Man" },
+          { "ep": 2,  "name": "Vs. Son Hee and Bacho" },
+          { "ep": 3,  "name": "Welcome to Sugar Park" },
+          { "ep": 4,  "name": "Hard-Boiled" },
+          { "ep": 5,  "name": "Source of Strength" },
+          { "ep": 6,  "name": "Heisuke Mashimo" },
+          { "ep": 7,  "name": "Jurassic Bastard" },
+          { "ep": 8,  "name": "Sakamoto's vs. the Lab" },
+          { "ep": 9,  "name": "All Aboard" },
+          { "ep": 10, "name": "Bathhouse Roughhouse" },
+          { "ep": 11, "name": "Casino Battle" },
+          { "ep": 12, "name": "Overload" },
+          { "ep": 13, "name": "Just Desserts" },
+          { "ep": 14, "name": "Strong Assault" },
+          { "ep": 15, "name": "Round and Round the Tower" },
+          { "ep": 16, "name": "Slice Slice Dance" },
+          { "ep": 17, "name": "Have a Nice Flight" },
+          { "ep": 18, "name": "Kanaguri" },
+          { "ep": 19, "name": "Exam, Stage Three" },
+          { "ep": 20, "name": "Mutual Fans" },
+          { "ep": 21, "name": "Hard Mode" },
+          { "ep": 22, "name": "Each One's Mission" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Solo Leveling",
+    "category": "Action",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/SoloLeveling.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 12,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Solo%20Leveling/Season%201/",
+        "names": [
+          { "ep": 1, "name": "I'm Used to It" },
+          { "ep": 2, "name": "If I Had One More Chance" },
+          { "ep": 3, "name": "It's Like a Game" },
+          { "ep": 4, "name": "I've Gotta Get Stronger" },
+          { "ep": 5, "name": "A Pretty Good Deal" },
+          { "ep": 6, "name": "The Real Hunt Begins" },
+          { "ep": 7, "name": "Let's See How Far I Can Go" },
+          { "ep": 8, "name": "This is Frustrating" },
+          { "ep": 9, "name": "You've Been Hiding Your Skills" },
+          { "ep": 10, "name": "What Is This, a Picnic?" },
+          { "ep": 11, "name": "A Knight Who Defends an Empty Throne?" },
+          { "ep": 12, "name": "Arise" }
+        ]
+      },
+      {
+        "season": 2,
+        "episodes": 13,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Solo%20Leveling/Season%202/",
+        "names": [
+          { "ep": 1, "name": "You Aren't E-Rank, Are You?" },
+          { "ep": 2, "name": "I Suppose You Aren't Aware" },
+          { "ep": 3, "name": "Still a Long Way to Go" },
+          { "ep": 4, "name": "I Need to Stop Faking" },
+          { "ep": 5, "name": "This Is What We're Trained to Do" },
+          { "ep": 6, "name": "Don't Look Down on My Guys" },
+          { "ep": 7, "name": "The 10th S-Rank Hunter" },
+          { "ep": 8, "name": "Looking Up Was Tiring Me Out" },
+          { "ep": 9, "name": "It Was All Worth It" },
+          { "ep": 10, "name": "We Need a Hero" },
+          { "ep": 11, "name": "It's Going to Get Even More Intense" },
+          { "ep": 12, "name": "Are You the King of Humans?" },
+          { "ep": 13, "name": "On to the Next Target" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "The Eminence in Shadow",
+    "category": "Isekai",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/EminenceInShadow.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 20,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Eminence%20in%20Shadow/Season%201/",
+        "names": [
+          { "ep": 1,  "name": "The Hated Classmate" },
+          { "ep": 2,  "name": "Shadow Garden Is Born" },
+          { "ep": 3,  "name": "Fencer Ordinaire" },
+          { "ep": 4,  "name": "Sadism's Rewards" },
+          { "ep": 5,  "name": "I Am..." },
+          { "ep": 6,  "name": "Pretenders" },
+          { "ep": 7,  "name": "A Fencing Tournament of Intrigue & Bloodshed" },
+          { "ep": 8,  "name": "Dark Knight Academy Under Attack" },
+          { "ep": 9,  "name": "The End of a Lie" },
+          { "ep": 10, "name": "The Sacred Land, City of Deception" },
+          { "ep": 11, "name": "The Goddess's Trial" },
+          { "ep": 12, "name": "The Truth Within the Memories" },
+          { "ep": 13, "name": "A Bloody Showdown as an Offering to Annihilation" },
+          { "ep": 14, "name": "Your Lie, Your Wish" },
+          { "ep": 15, "name": "The Strongest Weakest Man" },
+          { "ep": 16, "name": "Unseen Intentions" },
+          { "ep": 17, "name": "Moonlight That Pierces the Darkness" },
+          { "ep": 18, "name": "Betting on a Moment" },
+          { "ep": 19, "name": "Dancing Puppet" },
+          { "ep": 20, "name": "Advent of the Demon" }
+        ]
+      },
+      {
+        "season": 2,
+        "episodes": 12,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Eminence%20in%20Shadow/Season%202/",
+        "names": [
+          { "ep": 1,  "name": "The Lawless City" },
+          { "ep": 2,  "name": "The Haven" },
+          { "ep": 3,  "name": "The Hour of Awakening" },
+          { "ep": 4,  "name": "Mask of Falsehood" },
+          { "ep": 5,  "name": "He Who Pulls the Strings" },
+          { "ep": 6,  "name": "John Smith" },
+          { "ep": 7,  "name": "Something Precious" },
+          { "ep": 8,  "name": "The Dragon’s Tears" },
+          { "ep": 9,  "name": "The Key" },
+          { "ep": 10, "name": "Caged Bird" },
+          { "ep": 11, "name": "Determination" },
+          { "ep": 12, "name": "Highest" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Your Lie in April",
+    "category": "Slice of Life",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/YourLieinApril.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 22,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Your%20Lie%20in%20April/",
+        "names": [
+          { "ep": 1,  "name": "Monotone/Colorful" },
+          { "ep": 2,  "name": "Friend A" },
+          { "ep": 3,  "name": "Inside Spring" },
+          { "ep": 4,  "name": "Departure" },
+          { "ep": 5,  "name": "Gray Skies" },
+          { "ep": 6,  "name": "On the Way Home" },
+          { "ep": 7,  "name": "The Shadows Whisper" },
+          { "ep": 8,  "name": "Let It Ring" },
+          { "ep": 9,  "name": "Resonance" },
+          { "ep": 10, "name": "The Scenery I Shared With You" },
+          { "ep": 11, "name": "Light of Life" },
+          { "ep": 12, "name": "Twinkle Little Star" },
+          { "ep": 13, "name": "Love’s Sorrow" },
+          { "ep": 14, "name": "Footsteps" },
+          { "ep": 15, "name": "Liar" },
+          { "ep": 16, "name": "Two of a Kind" },
+          { "ep": 17, "name": "Twilight" },
+          { "ep": 18, "name": "Hearts Come Together" },
+          { "ep": 19, "name": "Goodbye, Hero" },
+          { "ep": 20, "name": "Hand in Hand" },
+          { "ep": 21, "name": "Snow" },
+          { "ep": 22, "name": "Spring Wind" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Akame ga Kill!",
+    "category": "Action",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/AkamegaKill.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 24,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Akame%20ga%20Kill/",
+        "names": [
+          { "ep": 1,  "name": "Kill the Darkness" },
+          { "ep": 2,  "name": "Kill the Authority" },
+          { "ep": 3,  "name": "Kill Your Cares" },
+          { "ep": 4,  "name": "Kill the Imperial Arm Users" },
+          { "ep": 5,  "name": "Kill the Dream" },
+          { "ep": 6,  "name": "Kill the Absolute Justice" },
+          { "ep": 7,  "name": "Kill the Three (Part 1)" },
+          { "ep": 8,  "name": "Kill the Three (Part 2)" },
+          { "ep": 9,  "name": "Kill the Battle Fanatic" },
+          { "ep": 10, "name": "Kill the Temptation" },
+          { "ep": 11, "name": "Kill the Mad Scientist" },
+          { "ep": 12, "name": "Kill the Newcomers" },
+          { "ep": 13, "name": "Kill the Nuisances" },
+          { "ep": 14, "name": "Kill the Giant Danger Beast" },
+          { "ep": 15, "name": "Kill the Religious Organization" },
+          { "ep": 16, "name": "Kill the Puppets" },
+          { "ep": 17, "name": "Kill the Curse" },
+          { "ep": 18, "name": "Kill the Demon" },
+          { "ep": 19, "name": "Kill the Fate" },
+          { "ep": 20, "name": "Kill the Carnage" },
+          { "ep": 21, "name": "Kill the Despair" },
+          { "ep": 22, "name": "Kill the Little Sister" },
+          { "ep": 23, "name": "Kill the Emperor" },
+          { "ep": 24, "name": "Akame ga Kill!" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Undead Unluck",
+    "category": "Action",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/UndeadUnluck.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 24,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Undead%20Unluck/",
+        "names": [
+          { "ep": 1,  "name": "Undead and Unluck" },
+          { "ep": 2,  "name": "Union" },
+          { "ep": 3,  "name": "How to Use My Unluck" },
+          { "ep": 4,  "name": "Do You Love the Change in Me?" },
+          { "ep": 5,  "name": "United We Negate" },
+          { "ep": 6,  "name": "Spoil" },
+          { "ep": 7,  "name": "Dream" },
+          { "ep": 8,  "name": "Victhor" },
+          { "ep": 9,  "name": "Return" },
+          { "ep": 10, "name": "Result" },
+          { "ep": 11, "name": "Rio de Janeiro" },
+          { "ep": 12, "name": "Activate" },
+          { "ep": 13, "name": "Tatiana" },
+          { "ep": 14, "name": "Crimson Bullet" },
+          { "ep": 15, "name": "Under" },
+          { "ep": 16, "name": "Revolution" },
+          { "ep": 17, "name": "Outsmart" },
+          { "ep": 18, "name": "Cry for the Moon" },
+          { "ep": 19, "name": "Undead + Unluck" },
+          { "ep": 20, "name": "Anno Un" },
+          { "ep": 21, "name": "Memento Mori" },
+          { "ep": 22, "name": "Profile" },
+          { "ep": 23, "name": "A Story I Won't See Coming" },
+          { "ep": 24, "name": "To You, From Me" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mashle: Magic and Muscles",
+    "category": "Action",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/Mashle.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 12,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Mashle/Season%201/",
+        "names": [
+          { "ep": 1, "name": "Mash Burnedead and the Body of the Gods" },
+          { "ep": 2, "name": "Mash Burnedead and the Mysterious Maze" },
+          { "ep": 3, "name": "Mash Burnedead and the Baleful Bully" },
+          { "ep": 4, "name": "Mash Burnedead and the Challenging Magic User" },
+          { "ep": 5, "name": "Mash Burnedead and the Unpopular Classmate" },
+          { "ep": 6, "name": "Mash Burnedead and the Magic of Iron" },
+          { "ep": 7, "name": "Mash Burnedead and the Puppet Master" },
+          { "ep": 8, "name": "Mash Burnedead and the Wolves of Magic" },
+          { "ep": 9, "name": "Mash Burnedead and the Accelerated Battle" },
+          { "ep": 10, "name": "Mash Burnedead and the Divine Visionary" },
+          { "ep": 11, "name": "Mash Burnedead and the Survival of the Fittest" },
+          { "ep": 12, "name": "Mash Burnedead and the Magic Mirror" }
+        ]
+      },
+      {
+        "season": 2,
+        "episodes": 12,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Mashle/Season%202/",
+        "names": [
+          { "ep": 1, "name": "Mash Burnedead and the Divine Visionaries" },
+          { "ep": 2, "name": "Mash Burnedead and the Home Visit" },
+          { "ep": 3, "name": "Rayne Ames and God's Gift" },
+          { "ep": 4, "name": "Mash Burnedead and the Brawny Balloon" },
+          { "ep": 5, "name": "Finn Ames and the Friend" },
+          { "ep": 6, "name": "Mash Burnedead and You Look, You Lose Your Life" },
+          { "ep": 7, "name": "Mash Burnedead and the Magical Maestro" },
+          { "ep": 8, "name": "Mash Burnedead and the Tall Tower" },
+          { "ep": 9, "name": "Wahlberg Baigan and the Magic of Darkness" },
+          { "ep": 10, "name": "Wahlberg Baigan and the Greatest Danger" },
+          { "ep": 11, "name": "Mash Burnedead and the Origin of the Greatest Magic User" },
+          { "ep": 12, "name": "Mash Burnedead and His Good Friends" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Horimiya",
+    "category": "Romance",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/Horimiya.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 13,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Horimiya/Season%201/",
+        "names": [
+          { "ep": 1,  "name": "A Tiny Happenstance" },
+          { "ep": 2,  "name": "You Wear More Than One Face" },
+          { "ep": 3,  "name": "That's Why It's Okay" },
+          { "ep": 4,  "name": "Everybody Loves Somebody" },
+          { "ep": 5,  "name": "I Can't Say It Out Loud" },
+          { "ep": 6,  "name": "This Summer's Going to Be a Hot One" },
+          { "ep": 7,  "name": "You're Here, I'm Here" },
+          { "ep": 8,  "name": "The Truth Deception Reveals" },
+          { "ep": 9,  "name": "It's Hard, but Not Impossible" },
+          { "ep": 10, "name": "Until the Snow Melts" },
+          { "ep": 11, "name": "It May Seem Like Hate" },
+          { "ep": 12, "name": "Hitherto, and Forevermore" },
+          { "ep": 13, "name": "I Would Gift You the Sky" }
+        ]
+      },
+      {
+        "season": 2,
+        "episodes": 13,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Horimiya/Season%202/",
+        "names": [
+          { "ep": 1,  "name": "Class Trip" },
+          { "ep": 2,  "name": "Cooking Class" },
+          { "ep": 3,  "name": "Sports Day" },
+          { "ep": 4,  "name": "Hori Kotatsu" },
+          { "ep": 5,  "name": "Iura" },
+          { "ep": 6,  "name": "Sleepover" },
+          { "ep": 7,  "name": "Friends" },
+          { "ep": 8,  "name": "Yanagi-kun" },
+          { "ep": 9,  "name": "Teacher" },
+          { "ep": 10, "name": "Jealousy" },
+          { "ep": 11, "name": "Chocolate" },
+          { "ep": 12, "name": "Hori's House" },
+          { "ep": 13, "name": "Graduation" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Frieren: Beyond Journey's End",
+    "category": "Action",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/Frieren.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 28,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Frieren/Season%201/",
+        "names": [
+          { "ep": 1,  "name": "The Journey’s End" },
+          { "ep": 2,  "name": "It Didn't Have to Be Magic…" },
+          { "ep": 3,  "name": "Killing Magic" },
+          { "ep": 4,  "name": "The Land Where Souls Rest" },
+          { "ep": 5,  "name": "Phantoms of the Dead" },
+          { "ep": 6,  "name": "The Hero of the Village" },
+          { "ep": 7,  "name": "Like a Fairy Tale" },
+          { "ep": 8,  "name": "Frieren the Slayer" },
+          { "ep": 9,  "name": "Aura the Guillotine" },
+          { "ep": 10, "name": "A Powerful Mage" },
+          { "ep": 11, "name": "Winter in the Northern Lands" },
+          { "ep": 12, "name": "A Real Hero" },
+          { "ep": 13, "name": "Aversion to One’s Own Kind" },
+          { "ep": 14, "name": "Privilege of the Young" },
+          { "ep": 15, "name": "Smells Like Trouble" },
+          { "ep": 16, "name": "Long‑Lived Friends" },
+          { "ep": 17, "name": "Take Care" },
+          { "ep": 18, "name": "First‑Class Mage Exam" },
+          { "ep": 19, "name": "Well‑Laid Plans" },
+          { "ep": 20, "name": "Necessary Killing" },
+          { "ep": 21, "name": "The World of Magic" },
+          { "ep": 22, "name": "Future Enemies" },
+          { "ep": 23, "name": "Conquering the Labyrinth" },
+          { "ep": 24, "name": "Perfect Replicas" },
+          { "ep": 25, "name": "A Fatal Vulnerability" },
+          { "ep": 26, "name": "The Height of Magic" },
+          { "ep": 27, "name": "An Era of Humans" },
+          { "ep": 28, "name": "It Would Be Embarrassing When We Met Again" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mob Psycho 100",
+    "category": "Action",
+    "cover": "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/assets/covers/MobPsycho100.png",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 12,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Mob%20Psycho%20100/Season%201/",
+        "names": [
+          { "ep": 1, "name": "Self-Proclaimed Psychic: Arataka Reigen ~And Mob~" },
+          { "ep": 2, "name": "Doubts about Youth ~The Telepathy Club Appears~" },
+          { "ep": 3, "name": "An Invitation to a Meeting ~Simply Put, I Just Want to be Popular~" },
+          { "ep": 4, "name": "Idiots Only Event ~Kin~" },
+          { "ep": 5, "name": "Ochimusha ~Psychic Powers and Me~" },
+          { "ep": 6, "name": "Discord ~To Become One~" },
+          { "ep": 7, "name": "Exaltation ~I've Obtained Loss~" },
+          { "ep": 8, "name": "The Older Brother Bows ~Destructive Intent~" },
+          { "ep": 9, "name": "Claw ~7th Division~" },
+          { "ep": 10, "name": "The Heinous Aura ~Mastermind~" },
+          { "ep": 11, "name": "Master ~Leader~" },
+          { "ep": 12, "name": "Mob and Reigen ~A Giant Tsuchinoko Appears~" }
+        ]
+      },
+      {
+        "season": 2,
+        "episodes": 13,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Mob%20Psycho%20100/Season%202/",
+        "names": [
+          { "ep": 1, "name": "Ripped Apart ~Someone Is Watching~" },
+          { "ep": 2, "name": "Urban Legends ~Encountering Rumors~" },
+          { "ep": 3, "name": "One Danger After Another ~Degeneration~" },
+          { "ep": 4, "name": "Inside ~Evil Spirit~" },
+          { "ep": 5, "name": "Discord ~Choices~" },
+          { "ep": 6, "name": "Poor, Lonely, Whitey" },
+          { "ep": 7, "name": "Cornered ~True Identity~" },
+          { "ep": 8, "name": "Even Then ~Continue Forward~" },
+          { "ep": 9, "name": "Reunion ~Guidance~" },
+          { "ep": 10, "name": "Performance ~Psychic Sensor~" },
+          { "ep": 11, "name": "Guidance ~Spiritual Guidance~" },
+          { "ep": 12, "name": "The Battle For Social Rehabilitation ~Friendship~" },
+          { "ep": 13, "name": "Boss Fight ~The Final Light~" }
+        ]
+      },
+      {
+        "season": 3,
+        "episodes": 12,
+        "url": "https://pub-e2ee947ccd7e42deaa601503e637d760.r2.dev/Mob%20Psycho%20100/Season%203/",
+        "names": [
+          { "ep": 1, "name": "Future ~Career Paths~" },
+          { "ep": 2, "name": "Yokai Hunter Amakusa Haruaki Appears! ~The Threat of a Hundred Demons!!~" },
+          { "ep": 3, "name": "Getting Carried Away ~100%~" },
+          { "ep": 4, "name": "Divine Tree 1 ~The Founder Appears~" },
+          { "ep": 5, "name": "Divine Tree 2 ~Peace~" },
+          { "ep": 6, "name": "Divine Tree 3 ~Dimple Is~" },
+          { "ep": 7, "name": "Transmission 1 ~Winter Break~" },
+          { "ep": 8, "name": "Transmission 2 ~Encountering the Unknown~" },
+          { "ep": 9, "name": "Mob 1 ~Moving~" },
+          { "ep": 10, "name": "Mob 2 ~Rival~" },
+          { "ep": 11, "name": "Mob 3 ~Trauma~" },
+          { "ep": 12, "name": "Confession ~The Future~" }
+        ]
+      }
+    ]
   }
 ]
