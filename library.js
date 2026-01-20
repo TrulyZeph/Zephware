@@ -2,6 +2,7 @@
   const moviesUrl = "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/movies.json";
   const showsUrl = "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/shows.json";
   const soundsUrl = "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/sounds.json";
+  const progressUrl = "https://raw.githubusercontent.com/TrulyZeph/Zephware/main/data/progress.json";
 
   if (!document.getElementById('fredoka-font-link')) {
     const link = document.createElement('link');
@@ -25,7 +26,11 @@
       color: white;
       overflow-x: hidden;
     }
-    
+
+    *::-webkit-scrollbar {width: 0;height: 0;}
+    * {scrollbar-width: none;}
+    * {-ms-overflow-style: none;}
+
     #zw-navbar {
       position: fixed;
       top: 0;
@@ -260,7 +265,7 @@
       position: relative;
       overflow: hidden;
       background-size: cover;
-      background-position: 15% 15%;
+      background-position: top center;
     }
     
     .zw-card-thumbnail::before {
@@ -276,7 +281,7 @@
     }
     
     .zw-card-title {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
       margin-bottom: 5px;
       color: white;
@@ -405,34 +410,22 @@
     }
     
     #zw-show-modal {
-      padding: 100px 50px 50px;
-      max-width: 1400px;
+      padding: 50px 50px 50px;
+      max-width: 1600px;
       margin: 0 auto;
-    }
-    
-    #zw-show-header {
-      margin-bottom: 30px;
-    }
-    
-    #zw-show-title {
-      font-size: 42px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: #81c1fdff;
-    }
-    
-    #zw-show-category {
-      font-size: 18px;
-      color: #01AEFD;
-      text-transform: capitalize;
-      margin-bottom: 15px;
     }
     
     #zw-show-layout {
       display: grid;
-      grid-template-columns: 1fr 350px;
+      grid-template-columns: 1fr 450px;
       gap: 30px;
       margin-bottom: 30px;
+    }
+    
+    #zw-show-video-area {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
     
     #zw-show-video-container {
@@ -449,37 +442,61 @@
       height: 100%;
     }
     
+    #zw-show-description {
+      background: linear-gradient(135deg, rgba(1, 174, 253, 0.1) 0%, rgba(1, 90, 253, 0.1) 100%);
+      border-radius: 15px;
+      padding: 25px;
+      border: 2px solid rgba(1, 174, 253, 0.2);
+    }
+    
+    #zw-show-description h3 {
+      font-size: 24px;
+      color: #01AEFD;
+      margin-bottom: 10px;
+    }
+    
+    #zw-show-description .zw-show-meta {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 15px;
+    }
+    
+    #zw-show-description .zw-show-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    #zw-show-description .zw-tag {
+      padding: 5px 12px;
+      background: rgba(1, 174, 253, 0.2);
+      border: 1px solid rgba(1, 174, 253, 0.3);
+      border-radius: 15px;
+      font-size: 12px;
+      color: #01AEFD;
+      text-transform: capitalize;
+    }
+    
     #zw-episode-list {
       background: linear-gradient(135deg, rgba(1, 174, 253, 0.1) 0%, rgba(1, 90, 253, 0.1) 100%);
       border-radius: 15px;
       padding: 20px;
       border: 2px solid rgba(1, 174, 253, 0.2);
-      max-height: 600px;
+      display: flex;
+      flex-direction: column;
+      max-height: 725px;
       overflow-y: auto;
     }
     
-    #zw-episode-list::-webkit-scrollbar {
-      width: 8px;
-    }
-    
-    #zw-episode-list::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 4px;
-    }
-    
-    #zw-episode-list::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #01AEFD 0%, #015AFD 100%);
-      border-radius: 4px;
-    }
-    
-    .zw-season-selector {
+    .zw-episode-controls {
       display: flex;
       gap: 10px;
       margin-bottom: 20px;
-      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
     }
     
-    .zw-season-btn {
+    .zw-season-dropdown, .zw-audio-dropdown {
       padding: 10px 20px;
       background: rgba(255, 255, 255, 0.1);
       border: 2px solid rgba(1, 174, 253, 0.3);
@@ -489,16 +506,37 @@
       transition: all 0.3s;
       font-size: 14px;
       font-weight: 500;
+      outline: none;
+      font-family: 'Fredoka', sans-serif;
     }
     
-    .zw-season-btn:hover {
+    .zw-season-dropdown:hover, .zw-audio-dropdown:hover {
       background: rgba(1, 174, 253, 0.2);
       border-color: #01AEFD;
     }
     
-    .zw-season-btn.active {
-      background: linear-gradient(135deg, #01AEFD 0%, #015AFD 100%);
-      border-color: #01AEFD;
+    .zw-season-dropdown option, .zw-audio-dropdown option {
+      background: #1a1a2e;
+      color: white;
+    }
+    
+    #zw-episodes {
+      flex: 1;
+      overflow-y: auto;
+    }
+    
+    #zw-episodes::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    #zw-episodes::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+    }
+    
+    #zw-episodes::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #01AEFD 0%, #015AFD 100%);
+      border-radius: 4px;
     }
     
     .zw-episode-item {
@@ -534,25 +572,6 @@
       font-weight: 500;
     }
     
-    #zw-show-description {
-      background: linear-gradient(135deg, rgba(1, 174, 253, 0.1) 0%, rgba(1, 90, 253, 0.1) 100%);
-      border-radius: 15px;
-      padding: 25px;
-      border: 2px solid rgba(1, 174, 253, 0.2);
-    }
-    
-    #zw-show-description h3 {
-      font-size: 22px;
-      color: #01AEFD;
-      margin-bottom: 15px;
-    }
-    
-    #zw-show-description p {
-      font-size: 16px;
-      color: #e0e0e0;
-      line-height: 1.6;
-    }
-    
     .zw-empty-state {
       text-align: center;
       padding: 60px 20px;
@@ -568,6 +587,63 @@
     .zw-empty-state-text {
       font-size: 20px;
     }
+    
+    .zw-progress-tabs {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+      justify-content: center;
+    }
+    
+    .zw-progress-tab {
+      padding: 12px 30px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(1, 174, 253, 0.3);
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    
+    .zw-progress-tab:hover {
+      background: rgba(1, 174, 253, 0.2);
+      border-color: #01AEFD;
+    }
+    
+    .zw-progress-tab.active {
+      background: linear-gradient(135deg, #01AEFD 0%, #015AFD 100%);
+      border-color: #01AEFD;
+    }
+    
+    .zw-progress-content {
+      background: linear-gradient(135deg, rgba(1, 174, 253, 0.1) 0%, rgba(1, 90, 253, 0.1) 100%);
+      border-radius: 15px;
+      padding: 30px;
+      border: 2px solid rgba(1, 174, 253, 0.2);
+      min-height: 400px;
+    }
+    
+    .zw-progress-item {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border: 2px solid rgba(1, 174, 253, 0.2);
+    }
+    
+    .zw-progress-item h4 {
+      font-size: 18px;
+      color: #01AEFD;
+      margin-bottom: 8px;
+    }
+    
+    .zw-progress-item p {
+      font-size: 14px;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
   `;
   document.head.appendChild(style);
 
@@ -580,6 +656,7 @@
       <a class="zw-nav-link" data-page="movies">Movies</a>
       <a class="zw-nav-link" data-page="shows">Shows</a>
       <a class="zw-nav-link" data-page="sounds">Sounds</a>
+      <a class="zw-nav-link" data-page="progress">Progress</a>
     </div>
     <input type="search" id="zw-search" placeholder="Search..."/>
   `;
@@ -597,21 +674,43 @@
   let movies = [];
   let shows = [];
   let sounds = [];
+  let progressData = { week1: [], week2: [], week3: [], week4: [] };
   let currentPage = 'home';
   let searchQuery = '';
+  let watchProgress = {};
+
+  try {
+    const saved = localStorage.getItem('zw-watch-progress');
+    if (saved) watchProgress = JSON.parse(saved);
+  } catch (e) {}
+
+  function saveWatchProgress() {
+    try {
+      localStorage.setItem('zw-watch-progress', JSON.stringify(watchProgress));
+    } catch (e) {}
+  }
+
+  function updateWatchProgress(id, season, episode, time, isDub = false) {
+    watchProgress[id] = { season, episode, time, isDub, timestamp: Date.now() };
+    saveWatchProgress();
+  }
 
   const navLinks = navbar.querySelectorAll('.zw-nav-link');
   const searchInput = navbar.querySelector('#zw-search');
   const modalClose = overlay.querySelector('#zw-modal-close');
   const logo = navbar.querySelector('#zw-logo');
 
+  function pauseAnyVideo() {
+    const selectors = ['#zw-show-video', '#zw-movie-video', '#zw-video', '#zw-movie-video'];
+    for (const sel of selectors) {
+      const v = document.querySelector(sel) || overlay.querySelector(sel) || content.querySelector(sel);
+      if (v && typeof v.pause === 'function') try { v.pause(); } catch(e) {}
+    }
+  }
+
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
-      if (content.querySelector('#zw-show-modal')) {
-        const video = content.querySelector('#zw-show-video');
-        if (video) video.pause();
-      }
-      
+      pauseAnyVideo();
       navLinks.forEach(l => l.classList.remove('active'));
       link.classList.add('active');
       currentPage = link.dataset.page;
@@ -622,15 +721,7 @@
   });
 
   logo.addEventListener('click', () => {
-    if (content.querySelector('#zw-show-modal')) {
-      currentPage = 'home';
-      navLinks.forEach(l => l.classList.remove('active'));
-      navLinks[0].classList.add('active');
-      searchQuery = '';
-      searchInput.value = '';
-      renderPage();
-      return;
-    }
+    pauseAnyVideo();
     navLinks.forEach(l => l.classList.remove('active'));
     navLinks[0].classList.add('active');
     currentPage = 'home';
@@ -646,25 +737,11 @@
 
   modalClose.addEventListener('click', () => {
     overlay.classList.remove('active');
-    overlay.innerHTML = `<button id="zw-modal-close">×</button>`;
-    const newClose = overlay.querySelector('#zw-modal-close');
-    newClose.addEventListener('click', () => {
-      overlay.classList.remove('active');
-      overlay.innerHTML = `<button id="zw-modal-close">×</button>`;
-      modalClose.addEventListener('click', arguments.callee);
-    });
   });
 
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) {
       overlay.classList.remove('active');
-      overlay.innerHTML = `<button id="zw-modal-close">×</button>`;
-      const newClose = overlay.querySelector('#zw-modal-close');
-      newClose.addEventListener('click', () => {
-        overlay.classList.remove('active');
-        overlay.innerHTML = `<button id="zw-modal-close">×</button>`;
-        modalClose.addEventListener('click', arguments.callee);
-      });
     }
   });
 
@@ -672,13 +749,14 @@
     const card = document.createElement('div');
     card.className = 'zw-card';
     const thumbStyle = movie.cover ? `background-image: url('${movie.cover}');` : '';
+    const tags = Array.isArray(movie.tags) ? movie.tags.join(' • ') : movie.tags || movie.category || '';
     card.innerHTML = `
       <div class="zw-card-thumbnail" style="${thumbStyle}">
         ${!movie.cover ? '🎬' : ''}
       </div>
       <div class="zw-card-info">
         <div class="zw-card-title">${movie.name}</div>
-        <div class="zw-card-category">${movie.category}</div>
+        <div class="zw-card-category">${tags}</div>
       </div>
     `;
     card.addEventListener('click', () => openMovieModal(movie));
@@ -689,14 +767,14 @@
     const card = document.createElement('div');
     card.className = 'zw-card';
     const thumbStyle = show.cover ? `background-image: url('${show.cover}');` : '';
-    const totalEpisodes = show.seasons.reduce((sum, s) => sum + s.episodes, 0);
+    const totalEpisodes = (show.seasons || []).reduce((sum, s) => sum + (s.episodes || 0), 0);
     card.innerHTML = `
       <div class="zw-card-thumbnail" style="${thumbStyle}">
         ${!show.cover ? '📺' : ''}
       </div>
       <div class="zw-card-info">
         <div class="zw-card-title">${show.name}</div>
-        <div class="zw-card-category">${show.category} • ${show.seasons.length} Season${show.seasons.length > 1 ? 's' : ''}</div>
+        <div class="zw-card-category">${(show.seasons||[]).length} Season${(show.seasons||[]).length > 1 ? 's' : ''} • ${totalEpisodes} Episodes</div>
       </div>
     `;
     card.addEventListener('click', () => openShowModal(show));
@@ -718,6 +796,9 @@
   }
 
   function openMovieModal(movie) {
+    const movieId = movie.name.replace(/\s+/g, '-').toLowerCase();
+    const progress = watchProgress[movieId];
+
     overlay.innerHTML = `
       <button id="zw-modal-close">×</button>
       <div id="zw-movie-modal">
@@ -728,79 +809,140 @@
           </video>
         </div>
         <div id="zw-movie-title">${movie.name}</div>
-        <div id="zw-movie-category">${movie.category}</div>
+        <div id="zw-movie-category">${Array.isArray(movie.tags) ? movie.tags.join(' • ') : movie.tags || movie.category || ''}</div>
       </div>
     `;
-    
+
     const newClose = overlay.querySelector('#zw-modal-close');
-    newClose.addEventListener('click', () => {
-      overlay.classList.remove('active');
-      overlay.innerHTML = `<button id="zw-modal-close">×</button>`;
-    });
-    
+    if (newClose) newClose.addEventListener('click', () => overlay.classList.remove('active'));
+
+    const video = overlay.querySelector('#zw-movie-video');
+    if (progress && video && progress.time) {
+      try { video.currentTime = progress.time; } catch(e) {}
+    }
+    if (video) {
+      video.addEventListener('timeupdate', () => {
+        if (video.currentTime > 0) updateWatchProgress(movieId, null, null, video.currentTime);
+      });
+    }
+
     overlay.classList.add('active');
   }
 
   function openShowModal(show) {
-    const firstSeason = show.seasons[0];
-    const firstEpisode = firstSeason.names && firstSeason.names.length > 0 ? firstSeason.names[0] : { ep: 1, name: 'Episode 1' };
-    
-    const returnPage = currentPage;
-    
+    const showId = show.name.replace(/\s+/g, '-').toLowerCase();
+    const progress = watchProgress[showId];
+
+    let initialSeason = (show.seasons && show.seasons[0]) || {};
+    let initialEpisode = 1;
+    let initialTime = 0;
+    let initialIsDub = false;
+
+    if (progress) {
+      const savedSeason = (show.seasons || []).find(s => (typeof s.season === 'string' ? s.season : (s.sname || `Season ${s.season}`)) === progress.season);
+      if (savedSeason) {
+        initialSeason = savedSeason;
+        initialEpisode = progress.episode || 1;
+        initialTime = progress.time || 0;
+        initialIsDub = progress.isDub || false;
+      }
+    }
+
+    const firstEpisode = initialSeason.names && initialSeason.names.length > 0 ?
+      (initialSeason.names.find(e => e.ep === initialEpisode) || { ep: initialEpisode, name: `Episode ${initialEpisode}` }) :
+      { ep: initialEpisode, name: `Episode ${initialEpisode}` };
+
     navLinks.forEach(l => l.classList.remove('active'));
-    
+
+    const tags = Array.isArray(show.tags) ? show.tags : (show.tags ? [show.tags] : []);
+    const tagsHtml = tags.map(tag => `<span class="zw-tag">${tag}</span>`).join('');
+
     content.innerHTML = `
-      <div id="zw-show-modal" style="margin-top: -125px;">
-        <div id="zw-show-header">
-          <div id="zw-show-title">${show.name}</div>
-          <div id="zw-show-category">${show.category}</div>
-        </div>
+      <div id="zw-show-modal">
         <div id="zw-show-layout">
-          <div id="zw-show-video-container">
-            <video id="zw-show-video" controls autoplay>
-              <source src="${firstSeason.url}${firstEpisode.ep}.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
+          <div id="zw-show-video-area">
+            <div id="zw-show-video-container">
+              <video id="zw-show-video" controls autoplay>
+                <source src="${initialSeason.url || ''}${initialIsDub && initialSeason.dub ? 'Dub/' : ''}${firstEpisode.ep}.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div id="zw-show-description">
+              <h3>${show.name}</h3>
+              <div class="zw-show-meta">${(show.seasons||[]).length} Season${(show.seasons||[]).length > 1 ? 's' : ''} • ${(show.seasons||[]).reduce((sum, s) => sum + (s.episodes||0),0)} Episodes</div>
+              <div class="zw-show-tags">${tagsHtml}</div>
+            </div>
           </div>
           <div id="zw-episode-list">
-            <div class="zw-season-selector"></div>
+            <div class="zw-episode-controls">
+              <select class="zw-season-dropdown" id="zw-season-select"></select>
+              <select class="zw-audio-dropdown" id="zw-audio-select" style="display: none;">
+                <option value="sub">Sub</option>
+                <option value="dub">Dub</option>
+              </select>
+            </div>
             <div id="zw-episodes"></div>
           </div>
         </div>
-        <div id="zw-show-description">
-          <h3>About</h3>
-          <p>${show.name} • ${show.seasons.length} Season${show.seasons.length > 1 ? 's' : ''} • ${show.category}</p>
-        </div>
       </div>
     `;
-    
-    const seasonSelector = content.querySelector('.zw-season-selector');
+
+    const seasonSelect = content.querySelector('#zw-season-select');
+    const audioSelect = content.querySelector('#zw-audio-select');
     const episodesContainer = content.querySelector('#zw-episodes');
     const video = content.querySelector('#zw-show-video');
-    
-    let currentSeason = firstSeason;
-    let currentEpisodeNum = firstEpisode.ep;
-    
-    show.seasons.forEach(season => {
-      const btn = document.createElement('button');
-      btn.className = 'zw-season-btn';
-      if (season === firstSeason) btn.classList.add('active');
-      btn.textContent = `Season ${season.season}`;
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.zw-season-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentSeason = season;
-        renderEpisodes(season);
-      });
-      seasonSelector.appendChild(btn);
+
+    let currentSeason = initialSeason;
+    let currentEpisodeNum = initialEpisode;
+    let currentIsDub = initialIsDub;
+
+    (show.seasons || []).forEach((season, idx) => {
+      const option = document.createElement('option');
+      option.value = idx;
+      const seasonName = typeof season.season === 'string' ? season.season : (season.sname || `Season ${season.season}`);
+      option.textContent = seasonName;
+      if (season === initialSeason) option.selected = true;
+      seasonSelect.appendChild(option);
     });
-    
+
+    function updateAudioSelector() {
+      if (currentSeason && currentSeason.dub) {
+        audioSelect.style.display = 'block';
+        audioSelect.value = currentIsDub ? 'dub' : 'sub';
+      } else {
+        audioSelect.style.display = 'none';
+        currentIsDub = false;
+      }
+    }
+
+    updateAudioSelector();
+
+    seasonSelect.addEventListener('change', () => {
+      currentSeason = show.seasons[seasonSelect.value];
+      currentEpisodeNum = null;
+      currentIsDub = false;
+      updateAudioSelector();
+      renderEpisodes(currentSeason);
+    });
+
+    audioSelect.addEventListener('change', () => {
+      currentIsDub = audioSelect.value === 'dub';
+      if (currentEpisodeNum) {
+        const url = `${currentSeason.url}${currentIsDub ? 'Dub/' : ''}${currentEpisodeNum}.mp4`;
+        const currentTime = video.currentTime || 0;
+        video.src = url;
+        video.load();
+        video.currentTime = currentTime;
+        video.play();
+      }
+    });
+
     function renderEpisodes(season) {
       episodesContainer.innerHTML = '';
-      for (let i = 1; i <= season.episodes; i++) {
+      const count = season && season.episodes ? season.episodes : 0;
+      for (let i = 1; i <= count; i++) {
         const episodeInfo = season.names && season.names.find(e => e.ep === i);
         const episodeName = episodeInfo ? episodeInfo.name : `Episode ${i}`;
-        
         const item = document.createElement('div');
         item.className = 'zw-episode-item';
         if (season === currentSeason && i === currentEpisodeNum) item.classList.add('active');
@@ -809,23 +951,53 @@
           <div class="zw-episode-name">${episodeName}</div>
         `;
         item.addEventListener('click', () => {
-          document.querySelectorAll('.zw-episode-item').forEach(e => e.classList.remove('active'));
+          episodesContainer.querySelectorAll('.zw-episode-item').forEach(e => e.classList.remove('active'));
           item.classList.add('active');
           currentEpisodeNum = i;
-          video.src = `${season.url}${i}.mp4`;
+          const url = `${season.url}${currentIsDub ? 'Dub/' : ''}${i}.mp4`;
+          video.src = url;
           video.load();
           video.play();
         });
         episodesContainer.appendChild(item);
       }
     }
-    
-    renderEpisodes(firstSeason);
+
+    renderEpisodes(initialSeason || { episodes: 0 });
+
+    if (video) {
+      video.addEventListener('loadedmetadata', () => {
+        if (initialTime > 0 && Math.abs(video.currentTime - initialTime) > 1) {
+          try { video.currentTime = initialTime; } catch(e) {}
+        }
+      }, { once: true });
+
+      video.addEventListener('timeupdate', () => {
+        if (currentEpisodeNum && video.currentTime > 0) {
+          const seasonName = typeof currentSeason.season === 'string' ? currentSeason.season : (currentSeason.sname || `Season ${currentSeason.season}`);
+          updateWatchProgress(showId, seasonName, currentEpisodeNum, video.currentTime, currentIsDub);
+        }
+      });
+    }
   }
 
-  function filterContent(items, type) {
-    if (!searchQuery) return items;
-    return items.filter(item => item.name.toLowerCase().includes(searchQuery));
+  function filterContent(items) {
+    if (!searchQuery) return items || [];
+    return (items || []).filter(item => (item.name || '').toLowerCase().includes(searchQuery));
+  }
+
+  function getContinueWatching() {
+    const watching = [];
+    const now = Date.now();
+    const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+    for (const [id, data] of Object.entries(watchProgress)) {
+      if (now - data.timestamp > thirtyDays) continue;
+      const show = shows.find(s => s.name.replace(/\s+/g, '-').toLowerCase() === id);
+      const movie = movies.find(m => m.name.replace(/\s+/g, '-').toLowerCase() === id);
+      if (show) watching.push({ type: 'show', item: show, progress: data });
+      else if (movie) watching.push({ type: 'movie', item: movie, progress: data });
+    }
+    return watching.sort((a, b) => b.progress.timestamp - a.progress.timestamp);
   }
 
   function renderPage() {
@@ -838,22 +1010,38 @@
           </div>
         </div>
       `;
-      
-      const filteredMovies = filterContent(movies, 'movies');
-      const filteredShows = filterContent(shows, 'shows');
-      const filteredSounds = filterContent(sounds, 'sounds');
-      
+
+      const continueWatching = getContinueWatching();
+      if (continueWatching.length > 0) {
+        const section = document.createElement('div');
+        section.className = 'zw-section';
+        section.innerHTML = `
+          <div class="zw-section-title">Continue Watching</div>
+          <div class="zw-row"></div>
+        `;
+        const row = section.querySelector('.zw-row');
+        continueWatching.forEach(({ type, item }) => {
+          if (type === 'show') row.appendChild(createShowCard(item));
+          else if (type === 'movie') row.appendChild(createMovieCard(item));
+        });
+        content.appendChild(section);
+      }
+
+      const filteredMovies = filterContent(movies);
+      const filteredShows = filterContent(shows);
+      const filteredSounds = filterContent(sounds);
+
       if (filteredMovies.length > 0) renderSection('Movies', filteredMovies, 'movie');
       if (filteredShows.length > 0) renderSection('Shows', filteredShows, 'show');
       if (filteredSounds.length > 0) {
         const homeSounds = filteredSounds.slice(0, 14);
         renderSoundsSection('Sounds', homeSounds);
       }
-      
+
     } else if (currentPage === 'movies') {
-      const filteredMovies = filterContent(movies, 'movies');
+      const filteredMovies = filterContent(movies);
       content.innerHTML = '';
-      
+
       if (filteredMovies.length === 0) {
         content.innerHTML = `
           <div class="zw-empty-state">
@@ -863,17 +1051,23 @@
         `;
         return;
       }
-      
-      const categories = [...new Set(filteredMovies.map(m => m.category))];
+
+      const categories = [...new Set(filteredMovies.map(m => {
+        if (Array.isArray(m.tags)) return m.tags[0];
+        return m.tags || m.category || 'Other';
+      }))];
       categories.forEach(cat => {
-        const catMovies = filteredMovies.filter(m => m.category === cat);
+        const catMovies = filteredMovies.filter(m => {
+          if (Array.isArray(m.tags)) return m.tags.includes(cat);
+          return (m.tags || m.category) === cat;
+        });
         renderSection(cat, catMovies, 'movie');
       });
-      
+
     } else if (currentPage === 'shows') {
-      const filteredShows = filterContent(shows, 'shows');
+      const filteredShows = filterContent(shows);
       content.innerHTML = '';
-      
+
       if (filteredShows.length === 0) {
         content.innerHTML = `
           <div class="zw-empty-state">
@@ -883,17 +1077,23 @@
         `;
         return;
       }
-      
-      const categories = [...new Set(filteredShows.map(s => s.category))];
+
+      const categories = [...new Set(filteredShows.map(s => {
+        if (Array.isArray(s.tags)) return s.tags[0];
+        return s.tags || s.category || 'Other';
+      }))];
       categories.forEach(cat => {
-        const catShows = filteredShows.filter(s => s.category === cat);
+        const catShows = filteredShows.filter(s => {
+          if (Array.isArray(s.tags)) return s.tags.includes(cat);
+          return (s.tags || s.category) === cat;
+        });
         renderSection(cat, catShows, 'show');
       });
-      
+
     } else if (currentPage === 'sounds') {
-      const filteredSounds = filterContent(sounds, 'sounds');
+      const filteredSounds = filterContent(sounds);
       content.innerHTML = '';
-      
+
       if (filteredSounds.length === 0) {
         content.innerHTML = `
           <div class="zw-empty-state">
@@ -903,8 +1103,47 @@
         `;
         return;
       }
-      
+
       renderSoundsSection('All Sounds', filteredSounds);
+
+    } else if (currentPage === 'progress') {
+      content.innerHTML = `
+        <div class="zw-progress-tabs">
+          <button class="zw-progress-tab active" data-week="week1">Week 1</button>
+          <button class="zw-progress-tab" data-week="week2">Week 2</button>
+          <button class="zw-progress-tab" data-week="week3">Week 3</button>
+          <button class="zw-progress-tab" data-week="week4">Week 4</button>
+        </div>
+        <div class="zw-progress-content" id="zw-progress-display"></div>
+      `;
+
+      const tabs = content.querySelectorAll('.zw-progress-tab');
+      const display = content.querySelector('#zw-progress-display');
+
+      function showWeek(week) {
+        const items = progressData[week] || [];
+        display.innerHTML = '';
+        if (items.length === 0) {
+          display.innerHTML = '<div class="zw-empty-state"><div class="zw-empty-state-icon">📅</div><div class="zw-empty-state-text">No updates scheduled for this week</div></div>';
+          return;
+        }
+        items.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'zw-progress-item';
+          div.innerHTML = `<h4>${item.title}</h4><p>${item.description}</p>`;
+          display.appendChild(div);
+        });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          showWeek(tab.dataset.week);
+        });
+      });
+
+      showWeek('week1');
     }
   }
 
@@ -931,20 +1170,32 @@
       <div class="zw-sound-grid"></div>
     `;
     const grid = section.querySelector('.zw-sound-grid');
-    items.forEach(item => {
-      grid.appendChild(createSoundCard(item));
-    });
+    items.forEach(item => grid.appendChild(createSoundCard(item)));
     content.appendChild(section);
   }
 
   Promise.all([
     fetch(moviesUrl).then(r => r.json()).catch(() => []),
     fetch(showsUrl).then(r => r.json()).catch(() => []),
-    fetch(soundsUrl).then(r => r.json()).catch(() => [])
-  ]).then(([moviesData, showsData, soundsData]) => {
-    movies = moviesData;
-    shows = showsData;
-    sounds = soundsData;
+    fetch(soundsUrl).then(r => r.json()).catch(() => []),
+    fetch(progressUrl).then(r => r.json()).catch(() => ({ week1: [], week2: [], week3: [], week4: [] }))
+  ]).then(([moviesData, showsData, soundsData, progressJson]) => {
+    movies = Array.isArray(moviesData) ? moviesData : [];
+    shows = Array.isArray(showsData) ? showsData : [];
+    sounds = Array.isArray(soundsData) ? soundsData : [];
+    progressData = progressJson || { week1: [], week2: [], week3: [], week4: [] };
+
+    if (!movies.length && !shows.length && !sounds.length) {
+      movies = [{ name: "Demo Movie", category: "Action", url: "" }];
+      shows = [{ name: "Demo Show", category: "Drama", url: "" }];
+      sounds = [{ name: "Demo Sound", url: "https://www.myinstants.com/media/sounds/getfromytcom-the-angriest-scamme-1.mp3" }];
+    }
+
+    renderPage();
+  }).catch(() => {
+    movies = [{ name: "Demo Movie", category: "Action", url: "" }];
+    shows = [{ name: "Demo Show", category: "Drama", url: "" }];
+    sounds = [{ name: "Demo Sound", url: "https://www.myinstants.com/media/sounds/getfromytcom-the-angriest-scamme-1.mp3" }];
     renderPage();
   });
 })();
