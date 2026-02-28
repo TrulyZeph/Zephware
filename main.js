@@ -1,1 +1,1 @@
-javascript:window.location.href='https://zephware.up.railway.app/';
+javascript:window.location.href='https://storage.googleapis.com/zephware/index.html';
