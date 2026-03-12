@@ -13,7 +13,8 @@ This project is intended to primarly bypass GoGuardian, if you have another bloc
 
 ## Contributors
 
-This is currently a one-man project, so updates DO take time. However, we are ALWAYS looking for new, dedicated people to join us!
+We are currently only two people, so updates DO take a lil bit of time. However, we are ALWAYS looking for new, dedicated people to join us!
 
-[![Contributors](https://contrib.rocks/image?repo=trulyzeph/zephware)](https://github.com/TrulyZeph/Zephware/graphs/contributors)
-[![Contributors](https://contrib.rocks/image?repo=eternallyhyper/zephware)](https://github.com/EternallyHyper/Zephware/graphs/contributors)
+TrulyZeph[https://github.com/TrulyZeph]
+ETernallyHyper[https://github.com/EternallyHyper]
+
