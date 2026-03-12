@@ -15,6 +15,7 @@ This project is intended to primarly bypass GoGuardian, if you have another bloc
 
 We are currently only two people, so updates DO take a lil bit of time. However, we are ALWAYS looking for new, dedicated people to join us!
 
-TrulyZeph[https://github.com/TrulyZeph]
-ETernallyHyper[https://github.com/EternallyHyper]
+Owner & Founder: [TrulyZeph](https://github.com/TrulyZeph)
+<br>
+Co-Owner: [EternallyHyper](https://github.com/EternallyHyper)
 
